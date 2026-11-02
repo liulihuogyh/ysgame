@@ -208,6 +208,78 @@
 
         confirm_new: 'Start a new game? This board will be lost.'
       }
+    },
+
+    gmines: {
+      zh: {
+        page_title: '扫雷 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线扫雷：入门 9×9、进阶 16×16 两种棋盘，第一次点击永不踩雷，支持右键插旗、手机长按、计时与最佳成绩。无需注册登录，打开就能玩。',
+        game_title: '扫雷',
+        tagline: '翻开每一格，用数字推掉剩下的可能',
+
+        board_aria: '扫雷棋盘',
+        level_group_aria: '选择难度',
+        label_mines: '剩余雷数',
+        label_time: '用时',
+        label_best: '最佳',
+
+        level_easy: '入门 9×9',
+        level_hard: '进阶 16×16',
+
+        btn_flag: '🚩 插旗',
+        btn_new: '新游戏',
+        btn_again: '再来一局',
+
+        hint_controls: '轻点翻开，长按插旗；电脑上左键翻开、右键插旗。',
+
+        lose_title: '踩到雷了',
+        lose_sub: '重开一局，先把确定的格子插上旗。',
+        win_title: '全部扫清了',
+        win_sub: '雷区清空，用时记在下面。',
+
+        confirm_new: '要重新开一局吗？当前进度会丢失。',
+
+        cell_pos: '第 {r} 行第 {c} 列',
+        cell_empty: '空',
+        cell_flag: '插了旗',
+        cell_covered: '未翻开',
+        cell_mine: '地雷'
+      },
+
+      en: {
+        page_title: 'Minesweeper, free to play | YSGame',
+        page_desc: 'A quiet online Minesweeper with 9×9 and 16×16 boards. The first click never hits a mine, right-click or long-press to flag, and your best time is kept. No account needed.',
+        game_title: 'Minesweeper',
+        tagline: 'Turn over a square, let the numbers do the reasoning',
+
+        board_aria: 'Minesweeper board',
+        level_group_aria: 'Choose a board size',
+        label_mines: 'Mines left',
+        label_time: 'Time',
+        label_best: 'Best',
+
+        level_easy: '9×9',
+        level_hard: '16×16',
+
+        btn_flag: '🚩 Flag',
+        btn_new: 'New game',
+        btn_again: 'Play again',
+
+        hint_controls: 'Tap to open, press and hold to flag. On a computer, left-click opens and right-click flags.',
+
+        lose_title: 'That one was a mine',
+        lose_sub: 'Start again and flag what you are sure of first.',
+        win_title: 'Clear field',
+        win_sub: 'Every mine accounted for. Your time is below.',
+
+        confirm_new: 'Start a new board? This one will be lost.',
+
+        cell_pos: 'Row {r}, column {c}',
+        cell_empty: 'empty',
+        cell_flag: 'flagged',
+        cell_covered: 'covered',
+        cell_mine: 'mine'
+      }
     }
   };
 

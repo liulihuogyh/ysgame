@@ -163,6 +163,47 @@
         </article>
 
         <article class="ys-card">
+          <h2>Minesweeper: the rules</h2>
+          <p>
+            A patch of ground with mines hidden under some of the squares. Open a safe square and the number
+            on it tells you <strong>how many mines touch it, counting all eight neighbours</strong>.
+            Open every safe square to win. Open a mine and the round is over.
+          </p>
+          <p>
+            Your first click is never a mine, and the 5×5 area around it is cleared for you, so you always
+            start with a little open ground instead of guessing blind.
+          </p>
+
+          <h3>Two boards</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Board</th><th>Mines</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Beginner</td><td>9 × 9</td><td>10</td><td>A few quiet minutes</td></tr>
+              <tr><td>🌳 Advanced</td><td>16 × 16</td><td>40</td><td>Sitting down to reason it out</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Controls</h3>
+          <p><strong>Mouse:</strong> left-click to open, right-click to flag. Click an open number again and, if the flags around it match the number, the rest of its neighbours open at once — that is the chord, and it saves a lot of clicking.</p>
+          <p><strong>Phone or tablet:</strong> tap to open, press and hold to flag. You can also tap <strong>🚩 Flag</strong> to stay in flag mode, plant a few flags, then tap it again to come out.</p>
+          <p><strong>Keyboard:</strong> <kbd>F</kbd> toggles flag mode, <kbd>Tab</kbd> moves between squares, <kbd>Enter</kbd> opens one.</p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> you do not need a flag on every mine. What matters is counting how many
+            covered squares a number still touches. If that count equals the number, all of them are mines.
+            If it is already zero, all of them are safe.
+          </div>
+
+          <p>
+            The timer starts on your first click and stops when the last safe square is open. Each board size
+            keeps its own best time, and a new game does not clear it. Close the tab whenever you like — the
+            board is saved.
+          </p>
+        </article>
+
+        <article class="ys-card">
           <h2>Questions</h2>
 
           <div class="ys-faq">
