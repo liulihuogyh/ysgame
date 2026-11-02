@@ -275,22 +275,20 @@
     '<path d="M5 14.5V18a1.6 1.6 0 0 0 1.6 1.6h10.8A1.6 1.6 0 0 0 19 18v-3.5"/></svg>';
 
   function mountTrigger() {
-    var links = document.getElementById('ysNavLinks');
-    if (!links || document.getElementById('ysShareBtn')) return;
+    // 快捷操作组在导航一级，和汉堡按钮同级，不用展开菜单就能点
+    var host = document.querySelector('.ys-nav__utility');
+    if (!host || document.getElementById('ysShareBtn')) return;
 
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.id = 'ysShareBtn';
     btn.className = 'ys-share-trigger';
-    btn.innerHTML = ARROW_ICON + '<span class="ys-share-trigger__text"></span>';
+    btn.innerHTML = ARROW_ICON;
 
-    // 放在语言切换前面，跟音效一起归到设置类
-    var langBtn = document.getElementById('ysLangBtn');
-    if (langBtn && langBtn.parentNode === links) links.insertBefore(btn, langBtn);
-    else links.appendChild(btn);
+    host.insertBefore(btn, host.firstChild);
   }
 
-  /** 手机上分享按钮在汉堡菜单里，点完先把菜单收起来 */
+  /** 从展开的菜单或页面里点分享后，顺手把菜单收起来 */
   function collapseNav() {
     var links = document.getElementById('ysNavLinks');
     var toggle = document.getElementById('ysNavToggle');
@@ -305,12 +303,9 @@
     var btn = document.getElementById('ysShareBtn');
     if (!btn) return;
 
-    // 桌面只有图标，靠 aria-label；手机菜单里跟「音效」一样挂两三个字
+    // 一级导航里只有图标，名称靠 aria-label 和 title
     btn.setAttribute('aria-label', t('share_title'));
     btn.setAttribute('title', t('share_title'));
-
-    var text = btn.querySelector('.ys-share-trigger__text');
-    if (text) text.textContent = t('share_btn');
   }
 
   /* ---------------- 启动 ---------------- */

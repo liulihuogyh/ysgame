@@ -45,10 +45,6 @@
         </span>
       </a>
 
-      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
-        <span></span><span></span><span></span>
-      </button>
-
       <nav class="ys-nav__links" id="ysNavLinks">
         <a href="../../index.html" data-nav="home" data-i18n="nav_home"
            data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
@@ -56,9 +52,16 @@
            data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
         <a href="../../help.html" data-nav="help" data-i18n="nav_help"
            data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
         <button class="ys-lang" id="ysLangBtn" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
         <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
-      </nav>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 

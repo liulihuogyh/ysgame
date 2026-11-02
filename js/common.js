@@ -72,7 +72,7 @@
         }
       });
 
-      // 点击页面其它位置收起
+      // 点击页面其它位置收起（快捷按钮也算「其它位置」）
       document.addEventListener('click', function (e) {
         if (!links.classList.contains('is-open')) return;
         if (links.contains(e.target) || toggle.contains(e.target)) return;

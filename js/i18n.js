@@ -39,8 +39,8 @@
 
       share_title: '分享给朋友',
       share_sub: '一局几分钟，随手转发给想一起玩的人。',
-      share_btn: '分享',
       share_close: '关闭',
+      share_btn: '分享',
       share_system: '分享给朋友',
       share_wechat: '微信',
       share_weibo: '微博',
@@ -74,8 +74,8 @@
 
       share_title: 'Share this game',
       share_sub: 'A few quiet minutes. Pass it on to someone who might like it.',
-      share_btn: 'Share',
       share_close: 'Close',
+      share_btn: 'Share',
       share_system: 'Share',
       share_wechat: 'WeChat',
       share_weibo: 'Weibo',

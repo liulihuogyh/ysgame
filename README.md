@@ -127,6 +127,9 @@ npx --yes serve . -l 8000
 4. 复制任意一个内容页的 `<header class="ys-nav">` 和 `<footer class="ys-footer">`，
    把相对路径改成 `../../`；`body` 上写 `data-page`、`data-dict="<游戏名>"` 和
    `data-alt-lang-url=""`（空值表示原地切换语言，`data-dict` 用来挑字典）。
+   导航结构分三层，别再把控件塞回二级菜单：
+   `.ys-brand`（标识）→ `.ys-nav__links`（页面链接，手机上收进汉堡）→
+   `.ys-nav__utility`（分享 / 语言 / 音效，和汉堡按钮同一行，手机上始终可见）。
 5. 界面文案一律写 `data-i18n="键名"`，并在 `js/i18n.js` 的 `dicts.<游戏名>` 里加中英两版；
    JS 里给用户看的文字用 `I18N.t('键名')` 取，不要硬编码中文。
    导航、页脚、广告位这类全站文案在 `common` 里，各游戏不用重复写。
