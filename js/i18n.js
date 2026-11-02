@@ -1,16 +1,23 @@
 /**
  * YSGame 游戏页国际化
  * 游戏页只有一份 HTML，语言在这里原地切换（不像内容页那样跳转 /en/）
- * [gyh 2026-11-02 新增]
+ *
+ * 文案分两层：
+ *   common  —— 导航、页脚、广告位等全站共用
+ *   dicts   —— 每款游戏一份，页面用 <body data-dict="g2048"> 指定
+ * 查找顺序：当前游戏字典 → common → 中文兜底
+ * [gyh 2026-11-02 新增][gyh 2026-11-02 重构：拆分多游戏字典]
  */
 (function () {
   'use strict';
 
   var LANG_KEY = 'ys_lang';
 
-  var dict = {
+  /* ------------------------------------------------------------------
+     全站共用
+     ------------------------------------------------------------------ */
+  var common = {
     zh: {
-      /* 导航 */
       brand_sub: '云舒的小游戏屋',
       nav_home: '游戏大厅',
       nav_about: '关于',
@@ -18,54 +25,8 @@
       lang_btn: 'EN',
       lang_aria: 'Switch to English',
 
-      /* 游戏页 */
-      page_title: '数独 · 在线玩 | YSGame 云舒的小游戏屋',
-      page_desc: '免费在线数独游戏，五种难度（入门到专家），支持撤销、提示、错误检查和断点续玩。无需注册登录，打开就能玩。',
-      game_title: '数独',
-      tagline: '慢慢推理，一格一格把秩序填回来',
-
-      label_level: '难度',
-      label_time: '用时',
-      label_hints: '提示',
-
-      btn_new: '新游戏',
-      btn_menu: '选择难度',
-      btn_undo: '↶ 撤销',
-      btn_erase: '🗑️ 橡皮',
-      btn_hint: '💡 提示',
-      btn_check: '✓ 检查',
-
-      menu_title: '选择难度',
-      menu_sub: '选一个适合当下心情的难度，慢慢来。',
-
-      diff_easy_label: '🌱 入门（54 个已知数）',
-      diff_medium_label: '🌿 简单（36 个已知数）',
-      diff_hard_label: '🌳 中等（29 个已知数）',
-      diff_expert_label: '🔥 困难（23 个已知数）',
-      diff_master_label: '⚡ 专家（17 个已知数）',
-
-      diff_easy: '入门',
-      diff_medium: '简单',
-      diff_hard: '中等',
-      diff_expert: '困难',
-      diff_master: '专家',
-
       ad_placeholder: '广告位（申请 AdSense 后替换）',
 
-      modal_title: '🎉 恭喜完成',
-      modal_time: '用时',
-      modal_level: '难度',
-      modal_hints: '用掉提示',
-      modal_errors: '错误次数',
-      btn_again: '再来一局',
-
-      alert_no_hints: '提示次数用完了。',
-      alert_given: '这是题目给出的数字，不需要提示。',
-      alert_errors: '有几个格子填错了，标红的那些需要再想想。',
-      alert_no_errors: '目前没有发现错误。',
-      confirm_new: '要开始新的一局吗？当前的进度会丢失。',
-
-      /* 页脚 */
       footer_brand: 'YSGame · 云舒的小游戏屋',
       footer_desc: '一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。',
       footer_games: '游戏',
@@ -85,51 +46,7 @@
       lang_btn: '中文',
       lang_aria: '切换到中文',
 
-      page_title: 'Sudoku, free to play | YSGame',
-      page_desc: 'A quiet online Sudoku with five difficulty levels, undo, hints, mistake checking and automatic save. No account, no sign-up.',
-      game_title: 'Sudoku',
-      tagline: 'Slow reasoning, one square at a time',
-
-      label_level: 'Level',
-      label_time: 'Time',
-      label_hints: 'Hints',
-
-      btn_new: 'New game',
-      btn_menu: 'Difficulty',
-      btn_undo: '↶ Undo',
-      btn_erase: '🗑️ Erase',
-      btn_hint: '💡 Hint',
-      btn_check: '✓ Check',
-
-      menu_title: 'Choose a level',
-      menu_sub: 'Pick whichever suits your mood. Nothing here is timed against anyone.',
-
-      diff_easy_label: '🌱 Beginner (54 given)',
-      diff_medium_label: '🌿 Easy (36 given)',
-      diff_hard_label: '🌳 Medium (29 given)',
-      diff_expert_label: '🔥 Hard (23 given)',
-      diff_master_label: '⚡ Expert (17 given)',
-
-      diff_easy: 'Beginner',
-      diff_medium: 'Easy',
-      diff_hard: 'Medium',
-      diff_expert: 'Hard',
-      diff_master: 'Expert',
-
       ad_placeholder: 'Ad space',
-
-      modal_title: '🎉 Solved',
-      modal_time: 'Time',
-      modal_level: 'Level',
-      modal_hints: 'Hints used',
-      modal_errors: 'Mistakes',
-      btn_again: 'Play another',
-
-      alert_no_hints: 'No hints left.',
-      alert_given: 'That number came with the puzzle.',
-      alert_errors: 'A few cells are off. The red ones need another look.',
-      alert_no_errors: 'No mistakes so far.',
-      confirm_new: 'Start a new game? Your current progress will be lost.',
 
       footer_brand: "YSGame · Yunshu's little arcade",
       footer_desc: 'Quiet games, kept by one person. Free, no account, no pop-ups.',
@@ -143,6 +60,161 @@
     }
   };
 
+  /* ------------------------------------------------------------------
+     各游戏字典
+     ------------------------------------------------------------------ */
+  var dicts = {
+    sudoku: {
+      zh: {
+        page_title: '数独 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线数独游戏，五种难度（入门到专家），支持撤销、提示、错误检查和断点续玩。无需注册登录，打开就能玩。',
+        game_title: '数独',
+        tagline: '慢慢推理，一格一格把秩序填回来',
+
+        label_level: '难度',
+        label_time: '用时',
+        label_hints: '提示',
+
+        btn_new: '新游戏',
+        btn_menu: '选择难度',
+        btn_undo: '↶ 撤销',
+        btn_erase: '🗑️ 橡皮',
+        btn_hint: '💡 提示',
+        btn_check: '✓ 检查',
+
+        menu_title: '选择难度',
+        menu_sub: '选一个适合当下心情的难度，慢慢来。',
+
+        diff_easy_label: '🌱 入门（54 个已知数）',
+        diff_medium_label: '🌿 简单（36 个已知数）',
+        diff_hard_label: '🌳 中等（29 个已知数）',
+        diff_expert_label: '🔥 困难（23 个已知数）',
+        diff_master_label: '⚡ 专家（17 个已知数）',
+
+        diff_easy: '入门',
+        diff_medium: '简单',
+        diff_hard: '中等',
+        diff_expert: '困难',
+        diff_master: '专家',
+
+        modal_title: '🎉 恭喜完成',
+        modal_time: '用时',
+        modal_level: '难度',
+        modal_hints: '用掉提示',
+        modal_errors: '错误次数',
+        btn_again: '再来一局',
+
+        alert_no_hints: '提示次数用完了。',
+        alert_given: '这是题目给出的数字，不需要提示。',
+        alert_errors: '有几个格子填错了，标红的那些需要再想想。',
+        alert_no_errors: '目前没有发现错误。',
+        confirm_new: '要开始新的一局吗？当前的进度会丢失。'
+      },
+
+      en: {
+        page_title: 'Sudoku, free to play | YSGame',
+        page_desc: 'A quiet online Sudoku with five difficulty levels, undo, hints, mistake checking and automatic save. No account, no sign-up.',
+        game_title: 'Sudoku',
+        tagline: 'Slow reasoning, one square at a time',
+
+        label_level: 'Level',
+        label_time: 'Time',
+        label_hints: 'Hints',
+
+        btn_new: 'New game',
+        btn_menu: 'Difficulty',
+        btn_undo: '↶ Undo',
+        btn_erase: '🗑️ Erase',
+        btn_hint: '💡 Hint',
+        btn_check: '✓ Check',
+
+        menu_title: 'Choose a level',
+        menu_sub: 'Pick whichever suits your mood. Nothing here is timed against anyone.',
+
+        diff_easy_label: '🌱 Beginner (54 given)',
+        diff_medium_label: '🌿 Easy (36 given)',
+        diff_hard_label: '🌳 Medium (29 given)',
+        diff_expert_label: '🔥 Hard (23 given)',
+        diff_master_label: '⚡ Expert (17 given)',
+
+        diff_easy: 'Beginner',
+        diff_medium: 'Easy',
+        diff_hard: 'Medium',
+        diff_expert: 'Hard',
+        diff_master: 'Expert',
+
+        modal_title: '🎉 Solved',
+        modal_time: 'Time',
+        modal_level: 'Level',
+        modal_hints: 'Hints used',
+        modal_errors: 'Mistakes',
+        btn_again: 'Play another',
+
+        alert_no_hints: 'No hints left.',
+        alert_given: 'That number came with the puzzle.',
+        alert_errors: 'A few cells are off. The red ones need another look.',
+        alert_no_errors: 'No mistakes so far.',
+        confirm_new: 'Start a new game? Your current progress will be lost.'
+      }
+    },
+
+    g2048: {
+      zh: {
+        page_title: '2048 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线 2048：上下左右滑动合并相同的数字，支持撤销、最高分记录和断点续玩。无需注册登录，打开就能玩。',
+        game_title: '2048',
+        tagline: '上下左右，把相同的数字叠在一起',
+
+        board_aria: '2048 棋盘',
+        label_score: '得分',
+        label_best: '最高',
+
+        btn_new: '新游戏',
+        btn_undo: '↶ 撤销',
+        hint_keys: '用方向键或 WASD，手机上直接滑动',
+
+        win_title: '拼到 2048 了',
+        win_sub: '可以接着往上叠，也可以重新开一局。',
+        btn_continue: '继续玩',
+
+        over_title: '这一局到此为止',
+        over_sub: '格子满了，也没有能合并的数字了。',
+        btn_again: '再来一局',
+
+        confirm_new: '要重新开一局吗？这一局的进度会丢掉。'
+      },
+
+      en: {
+        page_title: '2048, free to play | YSGame',
+        page_desc: 'A quiet 2048. Slide the tiles, merge the matching numbers, undo when you change your mind. Saves automatically, no account needed.',
+        game_title: '2048',
+        tagline: 'Slide the tiles, merge the matching numbers',
+
+        board_aria: '2048 board',
+        label_score: 'Score',
+        label_best: 'Best',
+
+        btn_new: 'New game',
+        btn_undo: '↶ Undo',
+        hint_keys: 'Arrow keys or WASD. Swipe on a phone.',
+
+        win_title: 'You reached 2048',
+        win_sub: 'Keep going for 4096, or start a fresh board.',
+        btn_continue: 'Keep playing',
+
+        over_title: 'No moves left',
+        over_sub: 'The board is full, and nothing matches any more.',
+        btn_again: 'Play again',
+
+        confirm_new: 'Start a new game? This board will be lost.'
+      }
+    }
+  };
+
+  /* ------------------------------------------------------------------
+     语言判定与应用
+     ------------------------------------------------------------------ */
+
   function detectLang() {
     var q = new URLSearchParams(window.location.search).get('lang');
     if (q === 'zh' || q === 'en') return q;
@@ -153,14 +225,25 @@
     return 'zh';
   }
 
+  function currentDict() {
+    var name = document.body && document.body.getAttribute('data-dict');
+    return (name && dicts[name]) ? dicts[name] : null;
+  }
+
   var api = {
     lang: detectLang(),
 
     t: function (key) {
-      var table = dict[this.lang] || dict.zh;
-      var val = table[key];
-      if (val !== undefined) return val;
-      return dict.zh[key] !== undefined ? dict.zh[key] : key;
+      var lang = this.lang;
+      var d = currentDict();
+
+      if (d && d[lang] && d[lang][key] !== undefined) return d[lang][key];
+      if (common[lang] && common[lang][key] !== undefined) return common[lang][key];
+
+      // 兜底中文，避免漏翻时页面出现裸 key
+      if (d && d.zh && d.zh[key] !== undefined) return d.zh[key];
+      if (common.zh[key] !== undefined) return common.zh[key];
+      return key;
     },
 
     apply: function () {

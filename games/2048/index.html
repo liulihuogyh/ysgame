@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线 2048：上下左右滑动合并相同的数字，支持撤销、最高分记录和断点续玩。无需注册登录，打开就能玩。">
+  <meta name="keywords" content="2048,2048游戏,在线2048,免费2048,数字合并,解压游戏,YSGame">
+  <title>2048 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/2048/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/2048/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/2048/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/2048/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="2048 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="上下左右滑动，把相同的数字叠在一起。免费、无广告打扰、自动存档。">
+  <meta property="og:url" content="https://ysgame.xyz/games/2048/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%23DCC49B'/><text x='32' y='43' font-size='26' font-family='Helvetica,Arial' font-weight='bold' fill='%23454B59' text-anchor='middle'>2K</text></svg>">
+
+  <!-- 全站设计系统（先加载，游戏专属样式随后覆盖） -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense (替换为你的发布商ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body data-page="home" data-dict="g2048" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+        <button class="ys-lang" id="ysLangBtn" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="g2048">
+
+    <header class="g2048__head">
+      <h1 class="g2048__title">
+        <span class="g2048__mark" aria-hidden="true">🔢</span>
+        <span data-i18n="game_title">2048</span>
+      </h1>
+      <p class="g2048__tagline" data-i18n="tagline">上下左右，把相同的数字叠在一起</p>
+    </header>
+
+    <!-- 分数与操作 -->
+    <div class="g2048__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_score">得分</span>
+        <strong class="hud-box__value" id="score">0</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最高</span>
+        <strong class="hud-box__value" id="best">0</strong>
+      </div>
+      <div class="g2048__actions">
+        <button class="g-btn" id="btn-undo" type="button" data-i18n="btn_undo" disabled>↶ 撤销</button>
+        <button class="g-btn g-btn--primary" id="btn-new" type="button" data-i18n="btn_new">新游戏</button>
+      </div>
+    </div>
+
+    <!-- 棋盘 -->
+    <div class="board" id="board" role="application" data-i18n-aria="board_aria" aria-label="2048 棋盘">
+      <div class="board__inner">
+        <div class="board__cells" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="board__tiles" id="tiles"></div>
+
+        <div class="overlay" id="overlay" hidden>
+          <div class="overlay__card">
+            <h2 class="overlay__title" id="overlay-title">这一局到此为止</h2>
+            <p class="overlay__sub" id="overlay-sub">格子满了，也没有能合并的数字了。</p>
+            <p class="overlay__score">
+              <span data-i18n="label_score">得分</span>
+              <strong id="overlay-score">0</strong>
+            </p>
+            <div class="overlay__actions">
+              <button class="g-btn" id="btn-continue" type="button" data-i18n="btn_continue" hidden>继续玩</button>
+              <button class="g-btn g-btn--primary" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="g2048__hint" data-i18n="hint_keys">用方向键或 WASD，手机上直接滑动</p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">2048</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 游戏脚本（顺序不能反：游戏脚本依赖 I18N 与 YSGame） -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="js/game2048.js"></script>
+</body>
+</html>

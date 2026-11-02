@@ -1384,3 +1384,35 @@ kbd {
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   广告位占位
+   从数独页样式里提上来的，所有游戏共用同一套，视觉才统一
+   [gyh 2026-11-02 新增]
+   -------------------------------------------------------------------------- */
+.ad-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  min-height: 64px;
+  margin: 20px auto;
+  padding: 14px;
+  text-align: center;
+  background: transparent;
+  border: 1px dashed #DED6C8;
+  border-radius: var(--ys-radius);
+}
+
+.ad-placeholder {
+  color: var(--ys-text-faint);
+  font-size: .78rem;
+  letter-spacing: .08em;
+}
+
+@media print {
+  .ad-container {
+    display: none;
+  }
+}

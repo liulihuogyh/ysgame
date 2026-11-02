@@ -25,19 +25,23 @@ YSGame/
 │   └── style.css              # 全站设计系统（莫兰迪配色、导航、卡片、内容页）
 ├── js/
 │   ├── common.js              # 导航交互、语言切换、音效开关、当前页高亮
-│   └── i18n.js                # 游戏页的中英字典与原地切换
+│   └── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
 ├── assets/
 │   ├── fonts/                 # 自托管字体（Instrument Sans + Newsreader）
 │   ├── og-zh.png              # 中文社交分享图 1200×630
 │   └── og-en.png
 ├── docs/                      # 部署/运营文档归档
 └── games/
-    └── sudoku/
-        ├── index.html         # 中英共用一份，靠 i18n.js 切换
-        ├── css/style.css      # 数独专属样式（在全局样式之后加载）
-        ├── js/sudoku.js       # 题目生成与求解
-        ├── js/game.js         # 游戏逻辑与交互
-        └── assets/            # 图片、音效
+    ├── sudoku/
+    │   ├── index.html         # 中英共用一份，靠 i18n.js 切换
+    │   ├── css/style.css      # 数独专属样式（在全局样式之后加载）
+    │   ├── js/sudoku.js       # 题目生成与求解
+    │   ├── js/game.js         # 游戏逻辑与交互
+    │   └── assets/            # 图片、音效
+    └── 2048/
+        ├── index.html
+        ├── css/style.css      # 棋盘、方块配色与动画
+        └── js/game2048.js     # 滑动合并、撤销、存档
 ```
 
 **约定：** 每个游戏一个独立子文件夹，互不干扰；公共样式和脚本放在根 `css/`、`js/`。
@@ -112,9 +116,11 @@ npx --yes serve . -l 8000
    <script src="js/<game>.js"></script>
    ```
 4. 复制任意一个内容页的 `<header class="ys-nav">` 和 `<footer class="ys-footer">`，
-   把相对路径改成 `../../`；`body` 上写 `data-page` 和 `data-alt-lang-url=""`（空值表示原地切换语言）。
-5. 界面文案一律写 `data-i18n="键名"`，并把中英两版加进 `js/i18n.js` 的字典；
-   JS 里给用户看的文字用 `msg('键名')` 取，不要硬编码中文。
+   把相对路径改成 `../../`；`body` 上写 `data-page`、`data-dict="<游戏名>"` 和
+   `data-alt-lang-url=""`（空值表示原地切换语言，`data-dict` 用来挑字典）。
+5. 界面文案一律写 `data-i18n="键名"`，并在 `js/i18n.js` 的 `dicts.<游戏名>` 里加中英两版；
+   JS 里给用户看的文字用 `I18N.t('键名')` 取，不要硬编码中文。
+   导航、页脚、广告位这类全站文案在 `common` 里，各游戏不用重复写。
 6. **两个首页都要加卡片**：
    - `index.html` 里把 `<div class="game-card game-card--locked">` 改成
      `<a class="game-card" href="games/<game-name>/index.html">`，`badge` 改成「已上线」；
@@ -145,7 +151,7 @@ npx --yes serve . -l 8000
 - [x] about / privacy / help 三个内容页
 - [x] 中英双语（`/en/` + 游戏页 i18n）
 - [x] 社交分享图 og-zh / og-en
-- [ ] 2048
+- [x] 2048（滑动合并、撤销、最高分、断点续玩）
 - [ ] 扫雷
 - [ ] 拼图
 - [ ] 消消乐
