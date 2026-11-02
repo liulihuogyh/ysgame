@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线拼图：3×3 与 4×4 两种难度，内置三幅手绘风画面，点两块交换位置就能拼回去，可随时看原图，自动记录最佳用时。无需注册登录，打开就能玩。">
+  <meta name="keywords" content="拼图,在线拼图,免费拼图,拼图游戏,解压游戏,休闲小游戏,YSGame">
+  <title>拼图 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/jigsaw/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/jigsaw/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/jigsaw/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/jigsaw/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="拼图 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="一块一块把画面拼回去，手指在动，脑子可以什么都不想。">
+  <meta property="og:url" content="https://ysgame.xyz/games/jigsaw/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-jigsaw.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-jigsaw.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%23C3A29E'/><g fill='%23FFFDF8'><rect x='15' y='15' width='16' height='16' rx='3'/><rect x='33' y='15' width='16' height='16' rx='3' opacity='.6'/><rect x='15' y='33' width='16' height='16' rx='3' opacity='.6'/><rect x='33' y='33' width='16' height='16' rx='3'/></g></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense (替换为你的发布商ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body data-page="home" data-dict="gjigsaw" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="gjig">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">🎨</span>
+        <span data-i18n="game_title">拼图</span>
+      </h1>
+      <p class="g-tagline" data-i18n="tagline">一块一块，把画面拼回原来的样子</p>
+    </header>
+
+    <!-- 步数 / 用时 / 最佳 -->
+    <div class="g-hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_moves">步数</span>
+        <strong class="hud-box__value" id="moves">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_time">用时</span>
+        <strong class="hud-box__value" id="timer">0:00</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">--:--</strong>
+      </div>
+    </div>
+
+    <!-- 难度与操作 -->
+    <div class="gjig__bar">
+      <div class="seg" role="group" data-i18n-aria="level_group_aria" aria-label="选择难度">
+        <button class="seg__btn is-active" type="button" data-size="3">3 × 3</button>
+        <button class="seg__btn" type="button" data-size="4">4 × 4</button>
+      </div>
+      <div class="gjig__actions">
+        <button class="g-btn" id="btn-preview" type="button" aria-pressed="false" data-i18n="btn_preview">👁 看原图</button>
+        <button class="g-btn g-btn--primary" id="btn-new" type="button" data-i18n="btn_new">新游戏</button>
+      </div>
+    </div>
+
+    <!-- 拼图区 -->
+    <div class="gjig__stage">
+      <div class="puzzle" id="puzzle" role="grid" data-i18n-aria="board_aria" aria-label="拼图棋盘"></div>
+      <div class="puzzle__preview" id="preview" hidden aria-hidden="true"></div>
+    </div>
+
+    <p class="gjig__scene" id="scene-name" data-i18n="scene_1">晨雾山峦</p>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title">拼好了</h2>
+          <p class="result__sub" id="overlay-sub">整幅画面回到原位，慢慢看一会儿。</p>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_moves">步数</span>
+          <strong id="overlay-moves">0</strong>
+        </p>
+        <p class="result__stat">
+          <span data-i18n="label_time">用时</span>
+          <strong id="overlay-time">0:00</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      点一块，再点另一块，两块就换位置。拼的时候可以随时看原图。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">拼图</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/jigsaw.js"></script>
+</body>
+</html>

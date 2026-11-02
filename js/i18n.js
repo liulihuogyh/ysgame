@@ -314,6 +314,220 @@
         cell_covered: 'covered',
         cell_mine: 'mine'
       }
+    },
+
+    gjigsaw: {
+      zh: {
+        page_title: '拼图 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线拼图：3×3 与 4×4 两种难度，内置三幅手绘风画面，点两块交换位置就能拼回去，可随时看原图，自动记录最佳用时。无需注册登录，打开就能玩。',
+        game_title: '拼图',
+        tagline: '一块一块，把画面拼回原来的样子',
+        share_line: '三幅画，慢慢拼。手指在动，脑子可以什么都不想。',
+
+        board_aria: '拼图棋盘',
+        level_group_aria: '选择难度',
+        label_moves: '步数',
+        label_time: '用时',
+        label_best: '最佳',
+
+        btn_preview: '👁 看原图',
+        btn_new: '新游戏',
+        btn_again: '再来一局',
+
+        hint_controls: '点一块，再点另一块，两块就换位置。拼的时候可以随时看原图。',
+
+        win_title: '拼好了',
+        win_sub: '整幅画面回到原位，慢慢看一会儿。',
+
+        confirm_new: '要重新拼一幅吗？当前进度会丢失。',
+
+        scene_1: '晨雾山峦',
+        scene_2: '夜里的海',
+        scene_3: '窗台的午后',
+
+        cell_pos: '第 {r} 行第 {c} 列',
+        cell_selected: '已选中'
+      },
+
+      en: {
+        page_title: 'Jigsaw, free to play | YSGame',
+        page_desc: 'A quiet online jigsaw with 3×3 and 4×4 boards and three hand-drawn pictures. Tap two pieces to swap them, peek at the picture any time. Your best time is kept. No account needed.',
+        game_title: 'Jigsaw',
+        tagline: 'Piece by piece, until the picture comes back',
+        share_line: 'Three little pictures, taken apart. Hands busy, mind quiet.',
+
+        board_aria: 'Jigsaw board',
+        level_group_aria: 'Choose a size',
+        label_moves: 'Moves',
+        label_time: 'Time',
+        label_best: 'Best',
+
+        btn_preview: '👁 Peek',
+        btn_new: 'New game',
+        btn_again: 'Play again',
+
+        hint_controls: 'Tap one piece, then another, and they trade places. You can peek at the picture whenever you like.',
+
+        win_title: 'All put together',
+        win_sub: 'The whole picture is back. Stay with it a moment.',
+
+        confirm_new: 'Start a new picture? This one will be lost.',
+
+        scene_1: 'Morning mist',
+        scene_2: 'Night sea',
+        scene_3: 'Window seat',
+
+        cell_pos: 'Row {r}, column {c}',
+        cell_selected: 'selected'
+      }
+    },
+
+    gmatch3: {
+      zh: {
+        page_title: '消消乐 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线消消乐：8×8 棋盘，点两颗相邻的糖果交换，三颗同色连成一线就会消掉，连锁消除有连击加分。30 步内拿到 1200 分即可过关，无需注册登录。',
+        game_title: '消消乐',
+        tagline: '三颗同色连成一线，看着它们一个个消失',
+        share_line: '点两下，三颗同色就消掉。三十步，一个小目标。',
+
+        board_aria: '消消乐棋盘',
+        label_score: '分数',
+        label_moves: '剩余步数',
+        label_best: '最佳',
+        goal_label: '本局目标',
+        goal_unit: '分',
+
+        btn_hint: '💡 提示',
+        btn_new: '新游戏',
+        btn_again: '再来一局',
+
+        hint_controls: '点一颗，再点它上下左右相邻的一颗，两颗就交换。三颗同色连成一线就会消掉。',
+
+        win_title: '过关了',
+        win_sub: '这一局的分够了，可以再来一局。',
+        over_title: '步数用完了',
+        over_sub: '差一点就到目标了，再来一局试试。',
+
+        combo: '连击 ×{n}',
+        reshuffle: '没有可消的了，重排一下',
+
+        confirm_new: '要重新开一局吗？这一局的进度会丢失。',
+
+        cell_pos: '第 {r} 行第 {c} 列',
+        cell_candy: '糖果',
+        cell_empty: '空'
+      },
+
+      en: {
+        page_title: 'Match three, free to play | YSGame',
+        page_desc: 'A quiet match-three on an 8×8 board. Swap two neighbouring candies, line up three of a kind, and watch the cascade. Thirty moves to reach 1200 points. No account needed.',
+        game_title: 'Match three',
+        tagline: 'Three of a kind, and they disappear',
+        share_line: 'Tap two candies, match three. Thirty moves, one small goal.',
+
+        board_aria: 'Match three board',
+        label_score: 'Score',
+        label_moves: 'Moves left',
+        label_best: 'Best',
+        goal_label: 'Goal',
+        goal_unit: 'pts',
+
+        btn_hint: '💡 Hint',
+        btn_new: 'New game',
+        btn_again: 'Play again',
+
+        hint_controls: 'Tap one candy, then a neighbour, and the two swap. Three in a row clears them.',
+
+        win_title: 'Goal reached',
+        win_sub: 'That is the target. Fancy another round?',
+        over_title: 'Out of moves',
+        over_sub: 'Just short of the goal. One more try?',
+
+        combo: 'Combo ×{n}',
+        reshuffle: 'Nothing left to match — reshuffling',
+
+        confirm_new: 'Start a new board? This one will be lost.',
+
+        cell_pos: 'Row {r}, column {c}',
+        cell_candy: 'candy',
+        cell_empty: 'empty'
+      }
+    },
+
+    gsnake: {
+      zh: {
+        page_title: '贪吃蛇 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线贪吃蛇：17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。',
+        game_title: '贪吃蛇',
+        tagline: '一条线，一个方向，越吃越长',
+        share_line: '小时候在诺基亚上偷偷玩的那个。十七乘十七，看你能长到多长。',
+
+        board_aria: '贪吃蛇棋盘',
+        pad_aria: '方向键',
+        dir_up: '上',
+        dir_down: '下',
+        dir_left: '左',
+        dir_right: '右',
+
+        label_score: '得分',
+        label_len: '长度',
+        label_best: '最高',
+
+        btn_pause: '暂停',
+        btn_resume: '继续',
+        btn_new: '新游戏',
+        btn_again: '再来一局',
+        btn_start: '开始',
+
+        start_title: '准备好了就开始',
+        start_sub: '按方向键，或在屏幕上滑一下',
+        pause_title: '暂停中',
+        pause_sub: '回来接着走，不用重新开始',
+
+        over_title: '撞到了',
+        over_sub: '这一局到这儿，再来一次会长一点。',
+
+        hint_controls: '方向键或 WASD 控制，手机上滑动屏幕，也可以点下面的方向键。空格键暂停。',
+
+        confirm_new: '要重新开一局吗？这一局会丢失。'
+      },
+
+      en: {
+        page_title: 'Snake, free to play | YSGame',
+        page_desc: 'The classic Snake on a 17×17 board. Arrow keys, WASD, or swipe to steer. Every bite makes you longer and a little faster. Your best score is kept. No account needed.',
+        game_title: 'Snake',
+        tagline: 'One line, one direction, longer with every bite',
+        share_line: 'The one you played on a Nokia. Seventeen by seventeen, how long can you get?',
+
+        board_aria: 'Snake board',
+        pad_aria: 'Direction pad',
+        dir_up: 'Up',
+        dir_down: 'Down',
+        dir_left: 'Left',
+        dir_right: 'Right',
+
+        label_score: 'Score',
+        label_len: 'Length',
+        label_best: 'Best',
+
+        btn_pause: 'Pause',
+        btn_resume: 'Resume',
+        btn_new: 'New game',
+        btn_again: 'Play again',
+        btn_start: 'Start',
+
+        start_title: 'Ready when you are',
+        start_sub: 'Use the arrow keys, or swipe on the board',
+        pause_title: 'Paused',
+        pause_sub: 'Pick up where you left off.',
+
+        over_title: 'That was a wall',
+        over_sub: 'This round ends here. The next one will be longer.',
+
+        hint_controls: 'Arrow keys or WASD. On a phone, swipe on the board or use the pad below. Space pauses.',
+
+        confirm_new: 'Start over? This round will be lost.'
+      }
     }
   };
 

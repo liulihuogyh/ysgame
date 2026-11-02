@@ -617,7 +617,7 @@ button:focus-visible {
 }
 
 .ys-shelf__note {
-  margin: -6px 0 14px;
+  margin: 12px 0 0;
   font-size: .78rem;
   color: var(--ys-text-faint);
 }
@@ -1978,5 +1978,335 @@ body.lang-en .ys-share__title {
   .ys-share__primary,
   .ys-share__chip {
     transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   游戏页通用组件
+   拼图 / 消消乐 / 贪吃蛇 三款新游戏共用；数独、2048、扫雷页内的同名样式
+   是各自历史版本，视觉一致，互不干扰。
+   [gyh 2026-11-03 新增]
+   -------------------------------------------------------------------------- */
+.g-head {
+  text-align: center;
+  margin: 6px 0 22px;
+}
+
+.g-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--ys-text);
+}
+
+.g-title__mark {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.lang-en .g-title {
+  font-family: var(--ys-font-en-display);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.g-tagline {
+  margin: 8px 0 0;
+  font-size: .92rem;
+  line-height: 1.65;
+  color: var(--ys-text-soft);
+}
+
+.g-hint {
+  margin: 16px 0 4px;
+  text-align: center;
+  font-size: .8rem;
+  line-height: 1.7;
+  color: var(--ys-text-faint);
+}
+
+/* 记分板 */
+.g-hud {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+
+.hud-box {
+  flex: 1 1 0;
+  padding: 7px 10px 8px;
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-radius: 13px;
+  text-align: center;
+  box-shadow: var(--ys-shadow-sm);
+}
+
+.hud-box__label {
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .12em;
+  color: var(--ys-text-faint);
+  line-height: 1.6;
+}
+
+.hud-box__value {
+  display: block;
+  font-size: 1.28rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ys-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.hud-box--best .hud-box__value {
+  color: var(--ys-primary-deep);
+}
+
+/* 分段按钮 */
+.seg {
+  display: flex;
+  padding: 3px;
+  background: #EFE7D8;
+  border-radius: 12px;
+}
+
+.seg__btn {
+  padding: 7px 13px;
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--ys-text-soft);
+  background: transparent;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color .16s var(--ys-ease), color .16s var(--ys-ease),
+    box-shadow .16s var(--ys-ease);
+}
+
+.seg__btn:hover {
+  color: var(--ys-text);
+}
+
+.seg__btn.is-active {
+  color: var(--ys-text);
+  background: var(--ys-surface);
+  box-shadow: 0 1px 3px rgba(69, 75, 89, .1);
+}
+
+/* 按钮 */
+.g-btn {
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--ys-text);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-radius: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform .16s var(--ys-ease), box-shadow .16s var(--ys-ease),
+    background-color .16s var(--ys-ease), border-color .16s var(--ys-ease),
+    color .16s var(--ys-ease);
+}
+
+.g-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--ys-shadow-sm);
+  border-color: var(--ys-primary-line);
+}
+
+.g-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.g-btn:disabled {
+  opacity: .42;
+  cursor: default;
+}
+
+.g-btn--primary {
+  color: var(--ys-text-invert);
+  background: var(--ys-primary);
+  border-color: var(--ys-primary);
+}
+
+.g-btn--primary:hover:not(:disabled) {
+  background: var(--ys-primary-deep);
+  border-color: var(--ys-primary-deep);
+}
+
+.g-btn[aria-pressed="true"] {
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border-color: var(--ys-primary-line);
+  box-shadow: inset 0 0 0 1px rgba(107, 122, 194, .16);
+}
+
+/* 结算卡片：放在棋盘下方，不盖住棋面 */
+.result {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 540px;
+  margin: 14px auto 0;
+  padding: 14px 18px;
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-radius: var(--ys-radius-md, 16px);
+  box-shadow: var(--ys-shadow-sm);
+  animation: resultIn .22s var(--ys-ease) both;
+}
+
+.result[hidden] {
+  display: none;
+}
+
+@keyframes resultIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.result__top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.result__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.result__title {
+  margin: 0 0 3px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.lang-en .result__title {
+  font-family: var(--ys-font-en-display);
+  letter-spacing: 0;
+}
+
+.result__sub {
+  margin: 0;
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--ys-text-soft);
+}
+
+.result__stat {
+  flex: 0 0 auto;
+  margin: 0;
+  text-align: right;
+  font-size: .66rem;
+  letter-spacing: .1em;
+  color: var(--ys-text-faint);
+}
+
+.result__stat strong {
+  display: block;
+  margin-top: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--ys-primary-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.result__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.result__actions > * {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 430px) {
+  .g-head {
+    margin: 4px 0 16px;
+  }
+
+  .g-title {
+    font-size: 1.7rem;
+  }
+
+  .result {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  /* 手机上先把文案放满一行，步数/用时挪到下一行，别挤成三列 */
+  .result__top {
+    flex-wrap: wrap;
+    gap: 10px 18px;
+  }
+
+  .result__text {
+    flex: 1 1 100%;
+  }
+
+  .result__stat {
+    flex: 0 0 auto;
+    text-align: left;
+  }
+
+  .result__stat strong {
+    margin-top: 0;
+  }
+
+  .result__actions {
+    width: 100%;
+  }
+
+  .result__actions > * {
+    flex: 1 1 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result {
+    animation: none !important;
+  }
+}
+
+@media print {
+  .g-hud,
+  .g-hint,
+  .ad-container {
+    display: none;
+  }
+}
+
+/* 窄屏表格：英文单词长，收紧内边距并允许表头换行，避免 320px 下横向溢出 */
+@media (max-width: 430px) {
+  .ys-table {
+    font-size: .82rem;
+  }
+
+  .ys-table th,
+  .ys-table td {
+    padding: 8px 7px;
+    word-break: break-word;
+  }
+
+  .ys-table th {
+    white-space: normal;
   }
 }

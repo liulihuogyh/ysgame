@@ -33,7 +33,10 @@ YSGame/
 │   ├── og-en.png
 │   ├── og-sudoku.png          # 每款游戏一张，转发时不重样
 │   ├── og-g2048.png
-│   └── og-minesweeper.png
+│   ├── og-minesweeper.png
+│   ├── og-jigsaw.png
+│   ├── og-match3.png
+│   └── og-snake.png
 ├── docs/                      # 部署/运营文档归档
 └── games/
     ├── sudoku/
@@ -46,10 +49,22 @@ YSGame/
     │   ├── index.html
     │   ├── css/style.css      # 棋盘、方块配色与动画
     │   └── js/game2048.js     # 滑动合并、撤销、存档
-    └── minesweeper/
+    ├── minesweeper/
+    │   ├── index.html
+    │   ├── css/style.css      # 方格、数字配色、插旗与布雷图标
+    │   └── js/minesweeper.js  # 首点保护、洪水翻开、和弦、计时与存档
+    ├── jigsaw/
+    │   ├── index.html
+    │   ├── css/style.css      # 切片网格、选中态、原图预览
+    │   └── js/jigsaw.js       # 三幅内置 SVG 画面、洗牌、交换、最佳用时
+    ├── match3/
+    │   ├── index.html
+    │   ├── css/style.css      # 六种糖果形状（mask）、消除与落下动画
+    │   └── js/match3.js       # 三连判定、连锁加分、无解重排、存档
+    └── snake/
         ├── index.html
-        ├── css/style.css      # 方格、数字配色、插旗与布雷图标
-        └── js/minesweeper.js  # 首点保护、洪水翻开、和弦、计时与存档
+        ├── css/style.css      # 画布、开始/暂停卡片、手机方向键
+        └── js/snake.js        # canvas 渲染、转向队列、加速、最高分
 ```
 
 **约定：** 每个游戏一个独立子文件夹，互不干扰；公共样式和脚本放在根 `css/`、`js/`。
@@ -135,9 +150,18 @@ npx --yes serve . -l 8000
    导航、页脚、广告位这类全站文案在 `common` 里，各游戏不用重复写。
 6. **两个首页都要加卡片**：
    - `index.html` 的 `.ys-games--play` 里加一张
-     `<a class="game-card" href="games/<game-name>/index.html">`；
+     `<a class="game-card" href="games/<game-name>/index.html">`，记得填
+     `--card-bg / --card-a / --card-b` 三个色变量；
    - `en/index.html` 同样加一张，链接写 `../games/<game-name>/index.html?lang=en`。
-7. 两边的「N 款游戏，现在能玩 M 款 / M of N ready」数字要一起改。
+7. 两边的货架数量（「现在能玩 6 款 / 6 games」）要一起改。
+8. 分享图：在 `docs/og-cards.html` 的 `CONF` 里加一项，并补对应的 art 分支，
+   访问 `?g=<game-name>` 截一张 1200×630 存成 `assets/og-<game-name>.png`。
+9. 别漏掉这几处：`sitemap.xml` 加一条、`help.html` 与 `en/help.html` 补玩法、
+   `privacy.html` 与 `en/privacy.html` 补新的 localStorage 键、README 的目录树与待办。
+
+游戏页通用组件（`.g-head` / `.g-title` / `.g-tagline` / `.g-hud` / `.hud-box` /
+`.seg` / `.g-btn` / `.result` / `.g-hint`）已经提到根 `css/style.css`，
+新游戏直接复用，游戏自己的 CSS 只写棋盘和专属动效即可。
 
 ---
 
@@ -166,7 +190,7 @@ npx --yes serve . -l 8000
 - [x] 2048（滑动合并、撤销、最高分、断点续玩）
 - [x] 扫雷（9×9 / 16×16、首点保护、右键与长按插旗、和弦、最佳用时）
 - [x] 分享（导航入口 + 结算卡片入口，每款游戏一张分享图）
-- [ ] 拼图
-- [ ] 消消乐
-- [ ] 贪吃蛇
+- [x] 拼图（3×3 / 4×4、三幅内置 SVG 画面、看原图、最佳用时）
+- [x] 消消乐（8×8、三连消除、连锁加分、30 步 1200 分、无解重排）
+- [x] 贪吃蛇（17×17、键盘 / 滑动 / 方向键、随长度加速、暂停）
 - [ ] 申请 AdSense（站点内容充实并运行 1~2 个月后）

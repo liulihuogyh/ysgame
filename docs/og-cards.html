@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   游戏分享图生成模板（1200×630）
-  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper，截整页即可。
+  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper|jigsaw|match3|snake，截整页即可。
   新增游戏时，在 script 里的 CONF 加一项，并在下方追加对应的 art 分支。
 -->
 <html lang="zh-CN">
@@ -232,6 +232,90 @@
   .mine span.n1 { color: #5C7BB0; }
   .mine span.n2 { color: #6E8F7B; }
   .mine span.n3 { color: #A9736A; }
+  /* ---------------- 拼图 ---------------- */
+  .jig {
+    width: 330px;
+    height: 330px;
+    padding: 9px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 6px;
+    background: #FFFDF8;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(195, 162, 158, .22);
+  }
+
+  .jig i {
+    display: block;
+    border-radius: 7px;
+  }
+
+  .jig i.loose {
+    z-index: 2;
+    transform: translate(16%, -10%) rotate(8deg) scale(.94);
+    box-shadow: 0 10px 22px rgba(69, 75, 89, .2);
+  }
+
+  /* ---------------- 消消乐 ---------------- */
+  .m3 {
+    width: 330px;
+    height: 330px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    background: #FFFDF8;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(220, 196, 155, .26);
+  }
+
+  .m3 span {
+    display: grid;
+    place-items: center;
+  }
+
+  .m3 svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---------------- 贪吃蛇 ---------------- */
+  .sn {
+    width: 330px;
+    height: 330px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 2px;
+    background: #E7DCC8;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(126, 155, 132, .24);
+  }
+
+  .sn b {
+    display: block;
+    border-radius: 30%;
+    background: transparent;
+  }
+
+  .sn b.b {
+    background: #7E9B84;
+  }
+
+  .sn b.h {
+    background: #5F7F68;
+  }
+
+  .sn b.f {
+    background: #C0806F;
+    border-radius: 50%;
+    transform: scale(.82);
+  }
+
+
 </style>
 </head>
 <body>
@@ -273,6 +357,21 @@
       glow: 'rgba(159,184,168,.22)',
       title: '扫雷<small>MINESWEEPER</small>',
       sub: '第一次点击，永远不会踩雷'
+    },
+    jigsaw: {
+      glow: 'rgba(195,162,158,.20)',
+      title: '拼图<small>JIGSAW</small>',
+      sub: '一块一块，把画面拼回原来的样子'
+    },
+    match3: {
+      glow: 'rgba(220,196,155,.24)',
+      title: '消消乐<small>MATCH THREE</small>',
+      sub: '三颗同色连成一线，看着它们一个个消失'
+    },
+    snake: {
+      glow: 'rgba(126,155,132,.22)',
+      title: '贪吃蛇<small>SNAKE</small>',
+      sub: '一条线，一个方向，越吃越长'
     }
   };
 
@@ -335,6 +434,74 @@
       box.appendChild(s);
     });
     art.appendChild(box);
+  }
+  if (key === 'jigsaw') {
+    // 上中下三层色阶拼成一幅抽象的远山，中间那块"正在放"
+    var tones = ['#F6E8D7', '#F1DCC7', '#EBD1BA',
+                 '#C2CFC0', '#A8BBA8', '#8FA48F',
+                 '#7E987F', '#6F8774', '#5E7563'];
+    var jig = document.createElement('div');
+    jig.className = 'jig';
+    tones.forEach(function (color, i) {
+      var t = document.createElement('i');
+      t.style.background = color;
+      if (i === 4) t.className = 'loose';
+      jig.appendChild(t);
+    });
+    art.appendChild(jig);
+  }
+
+  if (key === 'match3') {
+    var SHAPES = {
+      circle: '<circle cx="12" cy="12" r="9.2"/>',
+      square: '<rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5.4"/>',
+      tri: '<path d="M12 2.8 21.4 20.4H2.6z"/>',
+      dia: '<path d="M12 2.2 21.8 12 12 21.8 2.2 12z"/>',
+      hex: '<path d="M12 2.4 20.6 7.4v9.2L12 21.6 3.4 16.6V7.4z"/>',
+      star: '<path d="M12 1.8l3.1 6.4 7 .9-5.1 4.9 1.3 6.9L12 17.6 5.7 20.9 7 14 1.9 9.1l7-.9z"/>'
+    };
+    var BLUE = '#6B7AC2', CLAY = '#C3A29E', SAGE = '#9FB8A8',
+        SAND = '#DCC49B', MAUVE = '#A98BA8', STEEL = '#7E9BB0';
+
+    var layout = [
+      [BLUE, 'circle'], [SAND, 'dia'], [SAGE, 'tri'], [MAUVE, 'hex'],
+      [BLUE, 'circle'], [BLUE, 'circle'], [BLUE, 'circle'], [SAND, 'star'],
+      [SAGE, 'hex'], [CLAY, 'square'], [MAUVE, 'star'], [STEEL, 'dia'],
+      [SAND, 'square'], [SAGE, 'circle'], [CLAY, 'dia'], [BLUE, 'star']
+    ];
+
+    var m3 = document.createElement('div');
+    m3.className = 'm3';
+    layout.forEach(function (item) {
+      var span = document.createElement('span');
+      span.innerHTML = '<svg viewBox="0 0 24 24" fill="' + item[0] + '">' +
+        SHAPES[item[1]] + '</svg>';
+      m3.appendChild(span);
+    });
+    art.appendChild(m3);
+  }
+
+  if (key === 'snake') {
+    var body = [[7, 1], [7, 2], [7, 3], [6, 3], [5, 3], [5, 4],
+                [5, 5], [4, 5], [3, 5], [3, 6], [3, 7]];
+
+    var sn = document.createElement('div');
+    sn.className = 'sn';
+
+    // 先铺一层空格，再用定位把蛇和果子放上去
+    for (var s = 0; s < 81; s++) sn.appendChild(document.createElement('b'));
+
+    function place(r, c, cls) {
+      var cell = sn.children[(r - 1) * 9 + (c - 1)];
+      cell.className = cls;
+    }
+
+    body.forEach(function (p, i) {
+      place(p[0], p[1], i === body.length - 1 ? 'h' : 'b');
+    });
+    place(7, 7, 'f');
+
+    art.appendChild(sn);
   }
 </script>
 </body>

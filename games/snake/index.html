@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线贪吃蛇：17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。">
+  <meta name="keywords" content="贪吃蛇,在线贪吃蛇,免费贪吃蛇,经典贪吃蛇,诺基亚游戏,解压游戏,YSGame">
+  <title>贪吃蛇 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/snake/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/snake/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/snake/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/snake/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="贪吃蛇 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="一条线，一个方向，越吃越长。小时候在诺基亚上偷偷玩的那个。">
+  <meta property="og:url" content="https://ysgame.xyz/games/snake/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-snake.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-snake.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%237E9B84'/><path d='M18 20h18a8 8 0 0 1 0 16H28a8 8 0 0 0 0 16h18' stroke='%23FFFDF8' stroke-width='6' fill='none' stroke-linecap='round'/><circle cx='42' cy='20' r='3' fill='%23FFFDF8'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense (替换为你的发布商ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body data-page="home" data-dict="gsnake" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="gsnake">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">🐍</span>
+        <span data-i18n="game_title">贪吃蛇</span>
+      </h1>
+      <p class="g-tagline" data-i18n="tagline">一条线，一个方向，越吃越长</p>
+    </header>
+
+    <!-- 分数 / 长度 / 最高 -->
+    <div class="g-hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_score">得分</span>
+        <strong class="hud-box__value" id="score">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_len">长度</span>
+        <strong class="hud-box__value" id="len">3</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最高</span>
+        <strong class="hud-box__value" id="best">0</strong>
+      </div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="gsnake__bar">
+      <button class="g-btn" id="btn-pause" type="button" data-i18n="btn_pause">暂停</button>
+      <button class="g-btn g-btn--primary" id="btn-new" type="button" data-i18n="btn_new">新游戏</button>
+    </div>
+
+    <!-- 棋盘 -->
+    <div class="gsnake__stage">
+      <canvas id="canvas" role="img" data-i18n-aria="board_aria" aria-label="贪吃蛇棋盘"></canvas>
+
+      <!-- 开始 / 暂停遮罩，同一块卡片换文案 -->
+      <div class="gsnake__card" id="card">
+        <h2 class="gsnake__cardTitle" id="card-title">准备好了就开始</h2>
+        <p class="gsnake__cardSub" id="card-sub">按方向键，或在屏幕上滑一下</p>
+        <button class="g-btn g-btn--primary" id="btn-start" type="button">开始</button>
+      </div>
+    </div>
+
+    <!-- 手机方向键 -->
+    <div class="pad" id="pad" role="group" data-i18n-aria="pad_aria" aria-label="方向键">
+      <button class="pad__btn pad__btn--up" type="button" data-dir="up" data-i18n-aria="dir_up" aria-label="上">↑</button>
+      <button class="pad__btn pad__btn--left" type="button" data-dir="left" data-i18n-aria="dir_left" aria-label="左">←</button>
+      <button class="pad__btn pad__btn--down" type="button" data-dir="down" data-i18n-aria="dir_down" aria-label="下">↓</button>
+      <button class="pad__btn pad__btn--right" type="button" data-dir="right" data-i18n-aria="dir_right" aria-label="右">→</button>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title">撞到了</h2>
+          <p class="result__sub" id="overlay-sub">这一局到这儿，再来一次会长一点。</p>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_score">得分</span>
+          <strong id="overlay-score">0</strong>
+        </p>
+        <p class="result__stat">
+          <span data-i18n="label_len">长度</span>
+          <strong id="overlay-len">3</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      方向键或 WASD 控制，手机上滑动屏幕，也可以点下面的方向键。空格键暂停。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">贪吃蛇</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/snake.js"></script>
+</body>
+</html>
