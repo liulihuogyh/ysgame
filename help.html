@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>玩法说明与帮助 | YSGame 云舒的小游戏屋</title>
+  <meta name="description" content="YSGame 玩法说明：数独规则、鼠标与键盘操作、五档难度区别、提示与检查功能、进度存档原理，以及常见问题解答和联系方式。">
+  <meta name="keywords" content="数独玩法,数独规则,数独怎么玩,在线数独帮助,YSGame 帮助">
+  <link rel="canonical" href="https://ysgame.xyz/help.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/help.html">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/help.html">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/help.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="玩法说明 | YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="数独规则、鼠标与键盘操作、五档难度区别、进度保存原理，以及常见问题解答。">
+  <meta property="og:url" content="https://ysgame.xyz/help.html">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="玩法说明 | YSGame 云舒的小游戏屋">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-zh.png">
+<meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%236B7AC2'/><text x='32' y='44' font-size='32' font-family='Helvetica,Arial' font-weight='bold' fill='%23FFFDF8' text-anchor='middle'>Y</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="help" data-alt-lang-url="en/help.html">
+
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em>云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="index.html" data-nav="home">游戏大厅</a>
+        <a href="about.html" data-nav="about">关于</a>
+        <a href="help.html" data-nav="help">帮助</a>
+        <button class="ys-lang" id="ysLangBtn" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ys-main">
+    <div class="ys-shell">
+      <div class="ys-page">
+
+        <header class="ys-page__header">
+          <h1 class="ys-page__title">玩法说明</h1>
+          <p class="ys-page__sub">
+            每个游戏的规则都尽量做到一句话能讲清楚。这里是最完整的一份说明，遇到卡住的地方可以先翻一翻。
+          </p>
+        </header>
+
+        <article class="ys-card">
+          <h2>开始之前</h2>
+          <ul>
+            <li><strong>不用注册。</strong>打开首页，点任意一张游戏卡片就进去了。</li>
+            <li><strong>进度自动保存。</strong>关掉页面、换一天再打开，还在原来的地方。数据存在你自己的浏览器里。</li>
+            <li><strong>手机 / 平板 / 电脑都能玩。</strong>竖屏横屏都适配，电脑上还可以用键盘。</li>
+            <li><strong>音效可以关。</strong>导航栏右上角的喇叭图标，点一下静音，下次打开会记住。</li>
+          </ul>
+        </article>
+
+        <article class="ys-card">
+          <h2>数独：规则</h2>
+          <p>
+            棋盘是 9×9 的格子，又被粗线分成 9 个 3×3 的小宫。目标很简单：<strong>把空格填满，让每一行、每一列、每个 3×3 小宫里，1 到 9 这九个数字各出现一次，不重复。</strong>
+          </p>
+          <p>
+            题目给出的数字是固定的，不能改；需要你填的只有空格。任何一道合格的数独题，答案都是唯一的——不需要猜，靠推理一定能推出来。
+          </p>
+
+          <h3>一次典型的推理长这样</h3>
+          <p>
+            看某一行，已经出现了 1、3、4、5、7、8、9，那这行剩下两格只可能是 2 和 6；再看这两格所在的列，其中一格所在的列已经有 2 了，那这格只能是 6。就这样一格一格逼出来。
+          </p>
+
+          <div class="ys-note">
+            <strong>小提示：</strong>一开始别急着填，先把数字多的行、列、宫扫一遍，通常能直接确定好几格。数字最密集的地方，往往是突破口。
+          </div>
+
+          <hr class="ys-divider">
+
+          <h3>操作方式</h3>
+          <p><strong>鼠标 / 手指：</strong></p>
+          <ul>
+            <li>点一下空格选中它，再点下方 1–9 的数字按钮填入</li>
+            <li>点「↶ 撤销」回退上一步，点「🗑️ 橡皮」清空当前格</li>
+            <li>点「💡 提示」让系统帮你填一格（每局 3 次）</li>
+            <li>点「✓ 检查」把填错的格子标红 —— 只标错，不告诉你正确答案</li>
+          </ul>
+
+          <p><strong>键盘（电脑上更快）：</strong></p>
+          <ul>
+            <li><kbd>1</kbd> ~ <kbd>9</kbd> 填入数字</li>
+            <li><kbd>Backspace</kbd> 或 <kbd>Delete</kbd> 清空当前格</li>
+            <li><kbd>Ctrl</kbd> + <kbd>Z</kbd> 撤销</li>
+          </ul>
+
+          <hr class="ys-divider">
+
+          <h3>五档难度</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>难度</th><th>已知数字</th><th>适合</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 入门</td><td>54 个</td><td>第一次玩数独，先熟悉规则</td></tr>
+              <tr><td>🌿 简单</td><td>36 个</td><td>想放松一下，随手玩一局</td></tr>
+              <tr><td>🌳 中等</td><td>29 个</td><td>有点手感了，想要点挑战</td></tr>
+              <tr><td>🔥 困难</td><td>23 个</td><td>需要认真做标记、慢慢推</td></tr>
+              <tr><td>⚡ 专家</td><td>17 个</td><td>纯粹的硬推理，一局能坐很久</td></tr>
+            </tbody>
+          </table>
+          <p>
+            难度随时可以在游戏里切换，点「选择难度」即可。切换会开始新的一局，当前进度不会保留。
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>常见问题</h2>
+
+          <div class="ys-faq">
+            <details open>
+              <summary>关掉页面，我的进度会丢吗？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  不会。每一步操作都会自动存进浏览器的本地存储，下次打开自动恢复，连用时都会接着算。
+                </p>
+                <p>
+                  只有两种情况会丢：一是你在浏览器里清除了本站的网站数据，二是换了设备或换了浏览器 —— 数据是跟着浏览器走的，不会同步。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>为什么换个浏览器 / 换台电脑，记录就没了？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  因为本站没有账号系统，进度只存在本机浏览器里，不存在云端。这是「不注册也能玩」的代价，换来的是你不需要交出任何个人信息。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>填错了格子，但我不知道错在哪？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  点「✓ 检查」，填错的地方会标红。它只告诉你哪格不对，不会给答案 —— 留一点自己找出来的空间。
+                </p>
+                <p>
+                  如果实在推不下去，可以点「💡 提示」填一格，每局有 3 次。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>能离线玩吗？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  第一次打开需要联网加载页面。之后只要浏览器缓存还在，断网状态下通常也能重新打开，游戏本身完全不依赖网络。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>站内有广告吗？会不会挡住棋盘？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  会有少量广告，这是站点唯一的收入来源，用来覆盖域名和托管的开销。广告只放在页面内容的上下方，不会弹窗、不会遮挡棋盘，也不会打断游戏。
+                </p>
+                <p>
+                  广告由第三方服务自动投放，我无法决定具体展示什么。相关 Cookie 的说明可以看<a href="privacy.html">隐私政策</a>。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>手机上棋盘显示不全 / 按钮太小？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  先试试把浏览器刷新一次。如果仍然异常，麻烦把手机型号和浏览器名称告诉我，我会针对性地修。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>后面还会加哪些游戏？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  计划中的顺序是：2048 → 扫雷 → 拼图 → 消消乐 → 贪吃蛇。做完一款上线一款，不赶时间。你也可以告诉我你最想要哪个，我会把呼声高的往前排。
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>可以把这个站分享给别人吗？</summary>
+              <div class="ys-faq__body">
+                <p>
+                  当然可以，直接把 <strong>ysgame.xyz</strong> 发给他就行。没有邀请码，也没有「分享解锁」这类东西。
+                </p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="ys-card">
+          <h2>遇到问题 / 想提建议</h2>
+          <p>
+            发现 bug、页面显示异常，或者有想玩的小游戏，都可以写信给我：
+            <a href="mailto:hello@ysgame.xyz">hello@ysgame.xyz</a>
+          </p>
+          <p>如果反馈的是显示问题，麻烦带上这几样，会快很多：</p>
+          <ul>
+            <li>你用的是手机还是电脑，什么型号</li>
+            <li>浏览器名称（Chrome / Safari / 微信内置浏览器 等）</li>
+            <li>哪一款游戏、点了哪个按钮之后出现的</li>
+            <li>如果有截图，直接附上最直观</li>
+          </ul>
+          <p>看到就会回，通常 1–3 天内。</p>
+        </article>
+
+        <a class="ys-back" href="index.html">← 回到游戏大厅</a>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>游戏</h4>
+        <a href="games/sudoku/index.html">数独</a>
+        <a href="index.html#games">更多游戏</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>关于</h4>
+        <a href="about.html">品牌故事</a>
+        <a href="help.html">玩法说明</a>
+        <a href="privacy.html">隐私政策</a>
+        <a href="en/index.html">English</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span>用 <span aria-label="爱">♥</span> 给女儿做的游戏</span>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+</body>
+</html>

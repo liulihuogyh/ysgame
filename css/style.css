@@ -1,0 +1,1386 @@
+/* ==========================================================================
+   YSGame · 云舒的小游戏屋
+   全局样式 / 莫兰迪设计系统
+   所有游戏共用：导航、按钮、卡片、页脚、内容页排版
+   [gyh 2026-11-02 新增]
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. 英文字体（自托管，不依赖 Google Fonts 线上服务）
+   latin 子集，可变字重，共 111KB
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/instrument-sans-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/newsreader-italic-latin.woff2') format('woff2');
+}
+
+/* --------------------------------------------------------------------------
+   1. 设计变量
+   -------------------------------------------------------------------------- */
+:root {
+  /* 底色：淡米色，比纯白柔和，长时间看不刺眼 */
+  --ys-bg: #F7F3EA;
+  --ys-bg-deep: #EDE4D4;
+  --ys-surface: #FFFDF8;
+  --ys-surface-alt: #FBF6EC;
+
+  /* 主色：低饱和蓝紫 */
+  --ys-primary: #6B7AC2;
+  --ys-primary-deep: #55639F;
+  --ys-primary-soft: #ECEEF9;
+  --ys-primary-line: #D8DCF0;
+
+  /* 辅色：莫兰迪陶土粉 / 雾绿 / 沙黄 */
+  --ys-clay: #C3A29E;
+  --ys-clay-soft: #F6EDEA;
+  --ys-sage: #9FB8A8;
+  --ys-sage-soft: #EEF4EF;
+  --ys-sand: #DCC49B;
+  --ys-sand-soft: #F9F2E3;
+
+  /* 文字 */
+  --ys-text: #454B59;
+  --ys-text-soft: #7C8497;
+  --ys-text-faint: #A4ABBA;
+  --ys-text-invert: #FFFDF8;
+
+  /* 线条与阴影 */
+  --ys-line: #EBE3D6;
+  --ys-line-soft: #F2ECE1;
+  --ys-shadow-sm: 0 1px 2px rgba(69, 75, 89, .05), 0 2px 8px rgba(69, 75, 89, .04);
+  --ys-shadow-md: 0 4px 12px rgba(69, 75, 89, .07), 0 12px 28px rgba(69, 75, 89, .06);
+  --ys-shadow-lg: 0 10px 30px rgba(69, 75, 89, .10), 0 24px 60px rgba(69, 75, 89, .07);
+
+  /* 尺寸 */
+  --ys-radius-sm: 10px;
+  --ys-radius: 18px;
+  --ys-radius-lg: 26px;
+  --ys-nav-h: 68px;
+  --ys-shell: 1080px;
+
+  --ys-ease: cubic-bezier(.22, .61, .36, 1);
+
+  /* 字体：中文走系统栈（快、字形正），英文走自托管字体（有辨识度） */
+  --ys-font-cn: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ys-font-en: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ys-font-en-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. 基础重置
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--ys-font-cn);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ys-text);
+  background-color: var(--ys-bg);
+  /* 左上角一层暖光即可。三层径向渐变叠起来会糊成通用模板背景 */
+  background-image: radial-gradient(120% 85% at 82% -12%, rgba(220, 196, 155, .26), transparent 58%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--ys-primary-deep);
+  text-decoration: none;
+  transition: color .2s var(--ys-ease);
+}
+
+a:hover {
+  color: var(--ys-primary);
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul, ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: .4em;
+}
+
+/* --------------------------------------------------------------------------
+   2.1 英文版排版
+   西文不是把中文换掉就行：字距要收紧、行高要松、标题要有衬线的呼吸感
+   -------------------------------------------------------------------------- */
+body.lang-en {
+  font-family: var(--ys-font-en);
+  line-height: 1.72;
+  letter-spacing: -0.004em;
+}
+
+body.lang-en .ys-hero__title,
+body.lang-en .ys-page__title,
+body.lang-en .ys-story__title,
+body.lang-en .ys-section__title {
+  font-family: var(--ys-font-en-display);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1.18;
+}
+
+body.lang-en .ys-hero__title {
+  font-size: clamp(2.3rem, 5.6vw, 3.55rem);
+}
+
+body.lang-en .ys-page__title {
+  font-size: clamp(2rem, 4.2vw, 2.7rem);
+}
+
+body.lang-en .ys-hero__desc {
+  max-width: 580px;
+  font-size: 1.06rem;
+  line-height: 1.75;
+}
+
+body.lang-en .ys-page__sub {
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.78;
+}
+
+body.lang-en .ys-card p,
+body.lang-en .ys-card li {
+  line-height: 1.78;
+  letter-spacing: 0;
+}
+
+/* 英文正文限制在约 68 字符，超过这个宽度读起来会累 */
+body.lang-en .ys-card p {
+  max-width: 68ch;
+}
+
+body.lang-en .ys-hero__eyebrow {
+  letter-spacing: 0.01em;
+}
+
+/* 英文版品牌副标题不需要中文那种紧凑字距 */
+body.lang-en .ys-brand__text em {
+  letter-spacing: 0.02em;
+}
+
+/* 通用容器 */
+.ys-shell {
+  width: 100%;
+  max-width: var(--ys-shell);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 页面主体统一让位给固定导航 */
+.ys-main {
+  padding-top: calc(var(--ys-nav-h) + 32px);
+  padding-bottom: 72px;
+}
+
+/* --------------------------------------------------------------------------
+   3. 顶部导航
+   -------------------------------------------------------------------------- */
+.ys-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--ys-nav-h);
+  background: rgba(247, 243, 234, .82);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ys-ease), box-shadow .3s var(--ys-ease);
+}
+
+.ys-nav.is-scrolled {
+  border-bottom-color: var(--ys-line);
+  box-shadow: 0 2px 16px rgba(69, 75, 89, .05);
+}
+
+.ys-nav__inner {
+  max-width: var(--ys-shell);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 品牌标识 */
+.ys-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ys-text);
+  flex-shrink: 0;
+}
+
+.ys-brand:hover {
+  color: var(--ys-text);
+}
+
+.ys-brand__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--ys-text-invert);
+  background: linear-gradient(140deg, var(--ys-primary) 0%, var(--ys-primary-deep) 100%);
+  box-shadow: 0 4px 12px rgba(107, 122, 194, .28);
+}
+
+.ys-brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.ys-brand__text strong {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.ys-brand__text em {
+  font-style: normal;
+  font-size: .72rem;
+  color: var(--ys-text-faint);
+  letter-spacing: .04em;
+}
+
+/* 导航链接 */
+.ys-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ys-nav__links > a {
+  position: relative;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: .93rem;
+  color: var(--ys-text-soft);
+  white-space: nowrap;
+  transition: background .2s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-nav__links > a:hover {
+  color: var(--ys-primary-deep);
+  background: rgba(107, 122, 194, .08);
+}
+
+.ys-nav__links > a.is-active {
+  color: var(--ys-primary-deep);
+  font-weight: 600;
+  background: var(--ys-primary-soft);
+}
+
+/* 音效开关 */
+.ys-sound {
+  width: 36px;
+  height: 36px;
+  margin-left: 6px;
+  padding: 0;
+  border: 1px solid var(--ys-line);
+  border-radius: 50%;
+  background: var(--ys-surface);
+  color: var(--ys-text-soft);
+  font-size: .92rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all .2s var(--ys-ease);
+}
+
+.ys-sound:hover {
+  border-color: var(--ys-primary-line);
+  color: var(--ys-primary-deep);
+  transform: translateY(-1px);
+}
+
+.ys-sound.is-off {
+  color: var(--ys-text-faint);
+  background: var(--ys-surface-alt);
+}
+
+/* 语言切换：中文页显示 EN，英文页显示「中文」 */
+.ys-lang {
+  height: 36px;
+  margin-left: 4px;
+  padding: 0 13px;
+  border: 1px solid var(--ys-line);
+  border-radius: 999px;
+  background: var(--ys-surface);
+  color: var(--ys-text-soft);
+  font-family: inherit;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color .2s var(--ys-ease), color .2s var(--ys-ease),
+    background .2s var(--ys-ease);
+}
+
+.ys-lang:hover {
+  color: var(--ys-primary-deep);
+  border-color: var(--ys-primary-line);
+  background: var(--ys-primary-soft);
+}
+
+body.lang-en .ys-lang {
+  font-family: var(--ys-font-cn);
+  letter-spacing: 0;
+}
+
+/* 汉堡按钮（窄屏） */
+.ys-nav__toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--ys-line);
+  border-radius: 12px;
+  background: var(--ys-surface);
+  cursor: pointer;
+  position: relative;
+}
+
+.ys-nav__toggle span {
+  position: absolute;
+  left: 50%;
+  width: 17px;
+  height: 1.6px;
+  margin-left: -8.5px;
+  background: var(--ys-text);
+  border-radius: 2px;
+  transition: transform .3s var(--ys-ease), opacity .2s var(--ys-ease), top .3s var(--ys-ease);
+}
+
+.ys-nav__toggle span:nth-child(1) { top: 14px; }
+.ys-nav__toggle span:nth-child(2) { top: 19px; }
+.ys-nav__toggle span:nth-child(3) { top: 24px; }
+
+.ys-nav__toggle.is-open span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.ys-nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+.ys-nav__toggle.is-open span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+/* --------------------------------------------------------------------------
+   4. 按钮
+   -------------------------------------------------------------------------- */
+.ys-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: .96rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform .2s var(--ys-ease), box-shadow .25s var(--ys-ease),
+    background .25s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-btn:active {
+  transform: scale(.98);
+}
+
+.ys-btn--primary {
+  color: var(--ys-text-invert);
+  background: linear-gradient(140deg, var(--ys-primary) 0%, var(--ys-primary-deep) 100%);
+  box-shadow: 0 6px 18px rgba(107, 122, 194, .26);
+}
+
+.ys-btn--primary:hover {
+  color: var(--ys-text-invert);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(107, 122, 194, .32);
+}
+
+.ys-btn--ghost {
+  color: var(--ys-text);
+  background: var(--ys-surface);
+  border-color: var(--ys-line);
+  box-shadow: var(--ys-shadow-sm);
+}
+
+.ys-btn--ghost:hover {
+  color: var(--ys-primary-deep);
+  border-color: var(--ys-primary-line);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   5. 首页 Hero
+   -------------------------------------------------------------------------- */
+.ys-hero {
+  text-align: center;
+  padding: 26px 0 54px;
+}
+
+/* Hero 上方的一行小字：不做成胶囊标签，让它像书页前的一行题记 */
+.ys-hero__eyebrow {
+  margin: 0;
+  font-size: .86rem;
+  font-weight: 400;
+  color: #8F97A8;
+  letter-spacing: .1em;
+}
+
+.ys-hero__title {
+  margin: 26px 0 0;
+  font-size: clamp(2rem, 5.2vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+  color: var(--ys-text);
+}
+
+.ys-hero__title .soft {
+  color: var(--ys-primary);
+}
+
+/* 标题的辨识度交给字重、字距和留白，不再靠给某一个短语刷底色 */
+
+.ys-hero__desc {
+  max-width: 560px;
+  margin: 18px auto 0;
+  font-size: 1.02rem;
+  color: var(--ys-text-soft);
+  line-height: 1.85;
+  /* 均衡折行，避免最后一行只剩一两个字 */
+  text-wrap: balance;
+}
+
+.ys-hero__actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   6. 区块标题
+   -------------------------------------------------------------------------- */
+.ys-section {
+  margin-top: 12px;
+}
+
+.ys-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.ys-section__title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--ys-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ys-section__title::before {
+  content: "";
+  width: 4px;
+  height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--ys-primary), var(--ys-clay));
+}
+
+.ys-section__note {
+  font-size: .85rem;
+  color: var(--ys-text-faint);
+}
+
+/* --------------------------------------------------------------------------
+   7. 游戏卡片网格
+   -------------------------------------------------------------------------- */
+.ys-games {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 22px 20px;
+  border-radius: var(--ys-radius-lg);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line-soft);
+  box-shadow: var(--ys-shadow-sm);
+  overflow: hidden;
+  transition: transform .3s var(--ys-ease), box-shadow .3s var(--ys-ease),
+    border-color .3s var(--ys-ease);
+}
+
+/* 顶部一抹渐变色带，区分每个游戏 */
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--card-a, var(--ys-primary)), var(--card-b, var(--ys-clay)));
+  opacity: .85;
+}
+
+a.game-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--ys-primary-line);
+  box-shadow: var(--ys-shadow-md);
+}
+
+a.game-card:hover .game-card__icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+/* 数独是当前唯一的成品，让它比占位卡更重一点，一眼看出哪里能玩 */
+.game-card--featured {
+  background: linear-gradient(158deg, #FDFCFA 0%, #EDEBF9 100%);
+  border-color: #C4CAEB;
+  box-shadow: 0 5px 16px rgba(107, 122, 194, .13), 0 18px 38px rgba(107, 122, 194, .08);
+}
+
+.game-card--featured .game-card__icon {
+  width: 62px;
+  height: 62px;
+  font-size: 1.85rem;
+}
+
+.game-card--featured .game-card__name {
+  font-size: 1.28rem;
+}
+
+.game-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.game-card__icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  background: var(--card-bg, var(--ys-primary-soft));
+  transition: transform .35s var(--ys-ease);
+}
+
+.game-card__badge {
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: .72rem;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+.game-card__badge--new {
+  color: #7A5B3E;
+  background: var(--ys-sand-soft);
+  border: 1px solid #EBDCBE;
+}
+
+.game-card__badge--soon {
+  color: var(--ys-text-soft);
+  background: var(--ys-surface-alt);
+  border: 1px solid var(--ys-line);
+}
+
+.game-card__name {
+  margin: 18px 0 6px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--ys-text);
+}
+
+.game-card__desc {
+  margin: 0;
+  font-size: .87rem;
+  line-height: 1.7;
+  color: var(--ys-text-soft);
+  min-height: 2.95em;
+}
+
+.game-card__meta {
+  /* auto 让底部信息条始终贴着卡片底部，同行卡片对齐 */
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed var(--ys-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: .78rem;
+  color: var(--ys-text-faint);
+}
+
+.game-card__stars {
+  letter-spacing: .06em;
+  color: #B0867C;
+}
+
+.game-card__level {
+  font-size: .78rem;
+  color: var(--ys-text-soft);
+  letter-spacing: .02em;
+}
+
+.game-card__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ys-primary-deep);
+  font-size: .8rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .25s var(--ys-ease), transform .25s var(--ys-ease);
+}
+
+/* 未上线卡片：去饱和 + 不可点 */
+.game-card--locked {
+  cursor: default;
+  background: var(--ys-surface-alt);
+}
+
+.game-card--locked::before {
+  opacity: .28;
+}
+
+.game-card--locked .game-card__icon {
+  filter: grayscale(.55);
+  opacity: .72;
+}
+
+.game-card--locked .game-card__name {
+  color: var(--ys-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   8. 品牌故事区块
+   -------------------------------------------------------------------------- */
+.ys-story {
+  margin-top: 58px;
+  padding: 44px 40px;
+  border-radius: var(--ys-radius-lg);
+  background:
+    linear-gradient(160deg, rgba(255, 253, 248, .96) 0%, rgba(251, 246, 236, .96) 100%);
+  border: 1px solid var(--ys-line-soft);
+  box-shadow: var(--ys-shadow-sm);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.ys-story__label {
+  font-size: .78rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ys-clay);
+}
+
+.ys-story__title {
+  margin: 12px 0 14px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ys-story__text {
+  margin: 0;
+  color: var(--ys-text-soft);
+  font-size: .95rem;
+  line-height: 1.9;
+}
+
+.ys-story__link {
+  display: inline-block;
+  margin-top: 18px;
+  padding-bottom: 2px;
+  font-size: .9rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(107, 122, 194, .35);
+  transition: border-color .2s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-story__link:hover {
+  border-bottom-color: var(--ys-primary);
+}
+
+/* 右侧"云舒"手卡 */
+.ys-story__card {
+  padding: 26px 24px;
+  border-radius: var(--ys-radius);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  box-shadow: var(--ys-shadow-sm);
+  text-align: center;
+}
+
+.ys-story__initial {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .06em;
+  background: linear-gradient(140deg, var(--ys-primary), var(--ys-clay));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ys-story__pinyin {
+  margin-top: 10px;
+  font-size: .8rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--ys-text-faint);
+}
+
+.ys-story__cn {
+  margin-top: 6px;
+  font-size: 1rem;
+  color: var(--ys-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   9. 广告位
+   -------------------------------------------------------------------------- */
+.ys-ad {
+  margin: 44px auto;
+  max-width: 728px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ys-radius);
+  border: 1px dashed var(--ys-line);
+  background: rgba(255, 253, 248, .55);
+  color: var(--ys-text-faint);
+  font-size: .78rem;
+  letter-spacing: .08em;
+}
+
+/* --------------------------------------------------------------------------
+   10. 页脚
+   -------------------------------------------------------------------------- */
+.ys-footer {
+  border-top: 1px solid var(--ys-line);
+  background: rgba(255, 253, 248, .6);
+  padding: 44px 0 32px;
+}
+
+.ys-footer__inner {
+  max-width: var(--ys-shell);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 32px;
+}
+
+.ys-footer__brand {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ys-text);
+}
+
+.ys-footer__desc {
+  margin: 10px 0 0;
+  max-width: 300px;
+  font-size: .84rem;
+  line-height: 1.8;
+  color: var(--ys-text-faint);
+}
+
+.ys-footer__col h4 {
+  margin: 0 0 12px;
+  font-size: .84rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--ys-text-soft);
+}
+
+.ys-footer__col a {
+  display: block;
+  padding: 5px 0;
+  font-size: .87rem;
+  color: var(--ys-text-soft);
+}
+
+.ys-footer__col a:hover {
+  color: var(--ys-primary-deep);
+}
+
+.ys-footer__bottom {
+  max-width: var(--ys-shell);
+  margin: 32px auto 0;
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--ys-line-soft);
+  font-size: .78rem;
+  color: var(--ys-text-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   11. 内容页（about / privacy / help）
+   -------------------------------------------------------------------------- */
+.ys-page {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.ys-page__header {
+  padding: 18px 0 30px;
+}
+
+.ys-page__eyebrow {
+  font-size: .78rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ys-clay);
+}
+
+.ys-page__title {
+  margin: 12px 0 12px;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.ys-page__sub {
+  margin: 0;
+  max-width: 600px;
+  font-size: .96rem;
+  color: var(--ys-text-soft);
+  line-height: 1.85;
+}
+
+.ys-card {
+  padding: 36px 40px;
+  border-radius: var(--ys-radius-lg);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line-soft);
+  box-shadow: var(--ys-shadow-sm);
+}
+
+.ys-card + .ys-card {
+  margin-top: 20px;
+}
+
+.ys-card h2 {
+  margin: 0 0 14px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ys-card h2::before {
+  content: "";
+  width: 3px;
+  height: 15px;
+  border-radius: 2px;
+  background: var(--ys-primary);
+  flex-shrink: 0;
+}
+
+.ys-card h3 {
+  margin: 22px 0 8px;
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.ys-card p,
+.ys-card li {
+  font-size: .93rem;
+  line-height: 1.9;
+  color: var(--ys-text-soft);
+}
+
+.ys-card strong {
+  color: var(--ys-text);
+  font-weight: 600;
+}
+
+.ys-card a {
+  border-bottom: 1px solid var(--ys-primary-line);
+}
+
+.ys-card > *:last-child {
+  margin-bottom: 0;
+}
+
+.ys-divider {
+  height: 1px;
+  margin: 26px 0;
+  background: var(--ys-line-soft);
+  border: 0;
+}
+
+/* 提示条 */
+.ys-note {
+  padding: 16px 20px;
+  border-radius: var(--ys-radius-sm);
+  background: var(--ys-primary-soft);
+  border-left: 3px solid var(--ys-primary);
+  font-size: .88rem;
+  line-height: 1.8;
+  color: var(--ys-text-soft);
+}
+
+.ys-note strong {
+  color: var(--ys-primary-deep);
+}
+
+/* 时间线（about 用） */
+.ys-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 22px;
+  border-left: 1px solid var(--ys-line);
+}
+
+.ys-timeline li {
+  position: relative;
+  padding: 0 0 22px;
+  margin: 0;
+}
+
+.ys-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.ys-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -27px;
+  top: 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ys-surface);
+  border: 2px solid var(--ys-primary);
+}
+
+.ys-timeline__date {
+  display: block;
+  font-size: .76rem;
+  letter-spacing: .06em;
+  color: var(--ys-clay);
+  margin-bottom: 2px;
+}
+
+.ys-timeline__title {
+  display: block;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.ys-timeline__desc {
+  display: block;
+  font-size: .87rem;
+  color: var(--ys-text-soft);
+  line-height: 1.8;
+}
+
+/* FAQ 折叠 */
+.ys-faq {
+  border-top: 1px solid var(--ys-line-soft);
+}
+
+.ys-faq details {
+  border-bottom: 1px solid var(--ys-line-soft);
+}
+
+.ys-faq summary {
+  padding: 16px 30px 16px 0;
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--ys-text);
+  transition: color .2s var(--ys-ease);
+}
+
+.ys-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.ys-faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ys-text-faint);
+  transition: transform .25s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-faq details[open] summary::after {
+  content: "−";
+  color: var(--ys-primary);
+}
+
+.ys-faq summary:hover {
+  color: var(--ys-primary-deep);
+}
+
+.ys-faq__body {
+  padding: 0 8px 18px 0;
+  font-size: .9rem;
+  line-height: 1.9;
+  color: var(--ys-text-soft);
+}
+
+.ys-faq__body p:last-child {
+  margin-bottom: 0;
+}
+
+/* 行内代码 */
+.ys-card code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--ys-surface-alt);
+  border: 1px solid var(--ys-line-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .86em;
+  color: var(--ys-text);
+}
+
+/* 内容页表格 */
+.ys-table {
+  width: 100%;
+  margin: 18px 0;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+.ys-table th,
+.ys-table td {
+  padding: 11px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--ys-line-soft);
+}
+
+.ys-table th {
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--ys-text-faint);
+  background: var(--ys-surface-alt);
+  white-space: nowrap;
+}
+
+.ys-table th:first-child {
+  border-top-left-radius: var(--ys-radius-sm);
+}
+
+.ys-table th:last-child {
+  border-top-right-radius: var(--ys-radius-sm);
+}
+
+.ys-table td {
+  color: var(--ys-text-soft);
+}
+
+.ys-table td:first-child {
+  color: var(--ys-text);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ys-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* 键位小标签 */
+kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--ys-line);
+  border-bottom-width: 2px;
+  background: var(--ys-surface-alt);
+  font-family: inherit;
+  font-size: .82em;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ys-text);
+}
+
+/* 页内返回 */
+.ys-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: .88rem;
+  color: var(--ys-text-soft);
+}
+
+.ys-back:hover {
+  color: var(--ys-primary-deep);
+}
+
+/* --------------------------------------------------------------------------
+   12. 入场动效
+   -------------------------------------------------------------------------- */
+@keyframes ysFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ys-reveal {
+  animation: ysFadeUp .6s var(--ys-ease) both;
+}
+
+/* 网格内错峰出现：节奏要快，首屏不能让人觉得"还在加载" */
+.ys-games .game-card {
+  animation: ysFadeUp .42s var(--ys-ease) both;
+}
+
+.ys-games .game-card:nth-child(1) { animation-delay: .02s; }
+.ys-games .game-card:nth-child(2) { animation-delay: .05s; }
+.ys-games .game-card:nth-child(3) { animation-delay: .08s; }
+.ys-games .game-card:nth-child(4) { animation-delay: .11s; }
+.ys-games .game-card:nth-child(5) { animation-delay: .14s; }
+.ys-games .game-card:nth-child(6) { animation-delay: .17s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. 响应式
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
+  .ys-games {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ys-story {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 34px 28px;
+  }
+
+  .ys-story__card {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --ys-nav-h: 60px;
+  }
+
+  .ys-shell {
+    padding: 0 18px;
+  }
+
+  .ys-nav__inner {
+    padding: 0 18px;
+  }
+
+  /* 移动端下拉菜单 */
+  .ys-nav__toggle {
+    display: block;
+  }
+
+  .ys-nav__links {
+    position: fixed;
+    top: var(--ys-nav-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 12px 18px 18px;
+    background: rgba(247, 243, 234, .98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--ys-line);
+    box-shadow: 0 12px 24px rgba(69, 75, 89, .07);
+    display: none;
+  }
+
+  .ys-nav__links.is-open {
+    display: flex;
+    animation: ysFadeUp .25s var(--ys-ease) both;
+  }
+
+  .ys-nav__links > a {
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: .98rem;
+  }
+
+  .ys-sound {
+    align-self: flex-start;
+    margin: 8px 0 0;
+    width: auto;
+    padding: 0 14px;
+    height: 38px;
+    border-radius: 12px;
+    gap: 6px;
+    font-size: .86rem;
+  }
+
+  .ys-sound::after {
+    content: " 音效";
+  }
+
+  .ys-main {
+    padding-top: calc(var(--ys-nav-h) + 20px);
+    padding-bottom: 52px;
+  }
+
+  .ys-hero {
+    padding: 12px 0 40px;
+  }
+
+  .ys-hero__desc {
+    font-size: .95rem;
+  }
+
+  .ys-games {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ys-section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .ys-card {
+    padding: 26px 22px;
+    border-radius: var(--ys-radius);
+  }
+
+  .ys-footer {
+    padding: 34px 0 26px;
+  }
+
+  .ys-footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .ys-footer__brand-col {
+    grid-column: 1 / -1;
+  }
+
+  .ys-footer__bottom {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .game-card__desc {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .ys-brand__text em {
+    display: none;
+  }
+}

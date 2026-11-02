@@ -1,0 +1,620 @@
+/**
+ * 数独游戏样式表
+ * 莫兰迪配色方案 + 流畅动效
+ */
+
+:root {
+  /* 莫兰迪配色 */
+  --bg-primary: #F5F1E8;
+  --bg-board: #FFFFFF;
+  --text-primary: #4A5568;
+  --text-user: #667EEA;
+  --text-initial: #2D3748;
+  --border-light: #E2E8F0;
+  --border-dark: #4A5568;
+  --highlight: #FEF5E7;
+  --selected: #EBF4FF;
+  --error: #FC8181;
+  --success: #48BB78;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #E8DFD0 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: var(--text-primary);
+}
+
+/* 头部 */
+.header {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tagline {
+  font-size: 0.9rem;
+  color: #718096;
+  font-weight: 300;
+}
+
+/* 游戏信息栏 */
+.game-info {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  background: var(--bg-board);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.info-label {
+  font-size: 0.75rem;
+  color: #A0AEC0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#timer {
+  font-family: 'Courier New', monospace;
+  color: var(--text-user);
+}
+
+/* 游戏容器 */
+.game-container {
+  background: var(--bg-board);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 20px;
+}
+
+/* 数独棋盘 */
+#sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 1;
+  margin: 0 auto 20px;
+  border: 3px solid var(--border-dark);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+  user-select: none;
+}
+
+/* 宫格粗边框 */
+.cell.border-left {
+  border-left: 2px solid var(--border-dark);
+}
+
+.cell.border-top {
+  border-top: 2px solid var(--border-dark);
+}
+
+/* 初始数字样式 */
+.cell.initial {
+  color: var(--text-initial);
+  font-weight: 700;
+  cursor: not-allowed;
+  background: #F7FAFC;
+}
+
+/* 玩家填入的数字 */
+.cell.user-input {
+  color: var(--text-user);
+  animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 选中状态 */
+.cell.selected {
+  background: var(--selected) !important;
+  border: 2px solid var(--text-user);
+  box-shadow: inset 0 0 0 2px var(--text-user);
+}
+
+/* 高亮同行列宫格 */
+.cell.highlight {
+  background: var(--highlight);
+}
+
+/* 错误标记 */
+.cell.error {
+  background: var(--error);
+  color: white;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* 控制面板 */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* 数字按钮 */
+.number-buttons {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 8px;
+}
+
+.btn-number {
+  aspect-ratio: 1;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: 2px solid var(--border-light);
+  background: white;
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-number:hover {
+  background: var(--text-user);
+  color: white;
+  border-color: var(--text-user);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-number:active {
+  transform: translateY(0);
+}
+
+/* 功能按钮 */
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.btn-action {
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* [gyh 2026-11-02 修改] 功能按钮由高饱和糖果色改为莫兰迪柔和色，
+   保持四档之间可区分，又不抢棋盘视觉重心 */
+#btn-undo {
+  background: #EDEFF3;
+  color: #4E5670;
+}
+
+#btn-erase {
+  background: #F6E7E4;
+  color: #8C5F58;
+}
+
+#btn-hint {
+  background: #EDF4EE;
+  color: #4E6B57;
+}
+
+#btn-check {
+  background: #E8ECF8;
+  color: #46527F;
+}
+
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  opacity: 0.9;
+}
+
+.btn-action:active {
+  transform: translateY(0);
+}
+
+/* 顶部按钮 */
+.top-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn-top {
+  flex: 1;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--text-user);
+  background: white;
+  color: var(--text-user);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-top:hover {
+  background: var(--text-user);
+  color: white;
+}
+
+/* 弹窗 */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* [gyh 2026-11-02 修改] 纯黑 50% 遮罩偏重，改为带蓝灰的浅遮罩，贴合莫兰迪基调 */
+  background: rgba(74, 79, 92, 0.36);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.modal.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--bg-board);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  margin: 15px 0;
+  color: #718096;
+}
+
+.modal-content strong {
+  color: var(--text-user);
+  font-size: 1.3rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #A0AEC0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: var(--text-primary);
+}
+
+/* 主菜单 */
+#main-menu .modal-content {
+  max-width: 500px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.difficulty-btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.difficulty-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* [gyh 2026-11-02 修改] 原先五档难度用的是绿/蓝/橙/红/紫的彩虹色，
+   和全站莫兰迪基调冲突。改为同色系由浅到深：越难颜色越沉，
+   前四档用深色文字保证对比度，专家档用主色配白字。 */
+.difficulty-btn {
+  color: #3F4A5B;
+}
+
+.difficulty-btn[data-difficulty="easy"] {
+  background: linear-gradient(135deg, #CBDBD1 0%, #B2C8BA 100%);
+}
+
+.difficulty-btn[data-difficulty="medium"] {
+  background: linear-gradient(135deg, #C8D3E9 0%, #AFBFDF 100%);
+}
+
+.difficulty-btn[data-difficulty="hard"] {
+  background: linear-gradient(135deg, #EADABB 0%, #DAC39C 100%);
+}
+
+.difficulty-btn[data-difficulty="expert"] {
+  background: linear-gradient(135deg, #DCBFBB 0%, #C6A5A1 100%);
+}
+
+.difficulty-btn[data-difficulty="master"] {
+  background: linear-gradient(135deg, #7E8CD2 0%, #5E6CB2 100%);
+  color: #FFFDF8;
+}
+
+/* 完成弹窗特殊样式 */
+#completion-modal .modal-content {
+  background: linear-gradient(160deg, #FFFDF8 0%, #F9F2E3 100%);
+}
+
+#completion-modal h2 {
+  color: var(--success);
+  font-size: 2.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stat-item {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #A0AEC0;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-user);
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  .game-container {
+    padding: 15px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .cell {
+    font-size: 1.2rem;
+  }
+  
+  .btn-number {
+    font-size: 1.1rem;
+  }
+  
+  .btn-action {
+    font-size: 0.75rem;
+    padding: 10px;
+  }
+  
+  .modal-content {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .cell {
+    font-size: 1rem;
+  }
+  
+  .btn-number {
+    font-size: 1rem;
+  }
+  
+  .action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 加载动画 */
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-primary);
+}
+
+.spinner {
+  border: 4px solid var(--border-light);
+  border-top: 4px solid var(--text-user);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 广告位样式 */
+.ad-container {
+  margin: 20px 0;
+  padding: 15px;
+  background: #F7FAFC;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-placeholder {
+  color: #A0AEC0;
+  font-size: 0.9rem;
+}
+
+/* 打印隐藏 */
+@media print {
+  .controls, .game-info, .top-buttons, .ad-container {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   [gyh 2026-11-02 新增] 接入全站框架后的适配
+   ========================================================================== */
+
+/* 为固定顶部导航让出空间（--ys-nav-h 由全局样式提供，窄屏自动变 60px） */
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 24px);
+}
+
+/* 游戏页 body 是 flex 纵向容器，页脚需撑满整行 */
+.ys-footer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* 游戏页内的广告位沿用全局虚线占位风格，避免和游戏卡片抢视觉 */
+.ad-container {
+  background: transparent;
+  border: 1px dashed #DED6C8;
+  border-radius: var(--ys-radius, 18px);
+  min-height: 64px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.ad-placeholder {
+  color: var(--ys-text-faint, #A4ABBA);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+}
+
+/* 窄屏下顶部标题与导航的间距收紧一点 */
+@media (max-width: 760px) {
+  body {
+    padding-top: calc(var(--ys-nav-h, 60px) + 16px);
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .header {
+    margin-bottom: 14px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+

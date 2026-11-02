@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Play &amp; Help | YSGame</title>
+  <meta name="description" content="Sudoku rules, mouse and keyboard controls, what each difficulty level means, how saving works, and answers to common questions about YSGame.">
+  <meta name="keywords" content="how to play sudoku, sudoku rules, sudoku keyboard shortcuts, YSGame help">
+  <link rel="canonical" href="https://ysgame.xyz/en/help.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/help.html">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/help.html">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/help.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame">
+  <meta property="og:title" content="How to Play &amp; Help | YSGame">
+  <meta property="og:description" content="Rules, controls, difficulty levels and answers to the usual questions.">
+  <meta property="og:url" content="https://ysgame.xyz/en/help.html">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Play & Help | YSGame">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-en.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%236B7AC2'/><text x='32' y='44' font-size='32' font-family='Helvetica,Arial' font-weight='bold' fill='%23FFFDF8' text-anchor='middle'>Y</text></svg>">
+  <link rel="preload" href="../assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="lang-en" data-page="help" data-alt-lang-url="../help.html">
+
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em>Yunshu's little arcade</em>
+        </span>
+      </a>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="Open menu" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="index.html" data-nav="home">Games</a>
+        <a href="about.html" data-nav="about">About</a>
+        <a href="help.html" data-nav="help">Help</a>
+        <button class="ys-lang" id="ysLangBtn" aria-label="切换到中文">中文</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="Sound">🔊</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ys-main">
+    <div class="ys-shell">
+      <div class="ys-page">
+
+        <header class="ys-page__header">
+          <h1 class="ys-page__title">How to play</h1>
+          <p class="ys-page__sub">
+            Every game here should be explainable in a sentence. This page is the longer version, for when something isn't obvious.
+          </p>
+        </header>
+
+        <article class="ys-card">
+          <h2>Before you start</h2>
+          <ul>
+            <li><strong>No sign-up.</strong> Open the front page, pick a game, you're in.</li>
+            <li><strong>Progress saves itself.</strong> Close the tab, come back tomorrow, the board is where you left it. The data lives in your own browser.</li>
+            <li><strong>Phone, tablet or desktop.</strong> Portrait and landscape both work. On a computer you can also use the keyboard.</li>
+            <li><strong>Sound can be turned off.</strong> The speaker icon in the top bar. Your choice is remembered.</li>
+          </ul>
+        </article>
+
+        <article class="ys-card">
+          <h2>Sudoku: the rules</h2>
+          <p>
+            The board is a 9×9 grid, divided by heavier lines into nine 3×3 boxes. The goal: <strong>fill every empty cell so that each row, each column and each 3×3 box contains the digits 1 to 9 exactly once.</strong>
+          </p>
+          <p>
+            The numbers already on the board are fixed. You can't change them, and you don't need to. Every valid puzzle has a single solution — you never have to guess, only reason.
+          </p>
+
+          <h3>What the reasoning actually looks like</h3>
+          <p>
+            Take a row that already shows 1, 3, 4, 5, 7, 8 and 9. Two cells are left, so they must be 2 and 6. Now look at the columns those cells sit in: one of the columns already has a 2, so that cell has to be 6, and the other is 2. That's the whole game — narrowing until only one answer is left.
+          </p>
+
+          <div class="ys-note">
+            <strong>One tip:</strong> don't start filling. First scan the rows, columns and boxes that already have the most numbers — they usually hand you a few cells for free.
+          </div>
+
+          <hr class="ys-divider">
+
+          <h3>Controls</h3>
+          <p><strong>Mouse or finger</strong></p>
+          <ul>
+            <li>Tap an empty cell, then tap a number from 1 to 9</li>
+            <li><strong>Undo</strong> steps back one move, <strong>Erase</strong> clears the selected cell</li>
+            <li><strong>Hint</strong> fills one cell for you — three per game</li>
+            <li><strong>Check</strong> marks wrong cells in red. It tells you where, never what</li>
+          </ul>
+
+          <p><strong>Keyboard</strong></p>
+          <ul>
+            <li><kbd>1</kbd> to <kbd>9</kbd> to enter a number</li>
+            <li><kbd>Backspace</kbd> or <kbd>Delete</kbd> to clear the cell</li>
+            <li><kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo</li>
+          </ul>
+
+          <hr class="ys-divider">
+
+          <h3>The five levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Given numbers</th><th>Best for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Beginner</td><td>54</td><td>Your first grid, or a five-minute break</td></tr>
+              <tr><td>🌿 Easy</td><td>36</td><td>Unwinding without thinking too hard</td></tr>
+              <tr><td>🌳 Medium</td><td>29</td><td>You know the ropes and want a little push</td></tr>
+              <tr><td>🔥 Hard</td><td>23</td><td>Pencil marks, patience, a proper sit-down</td></tr>
+              <tr><td>⚡ Expert</td><td>17</td><td>Pure deduction. A long one</td></tr>
+            </tbody>
+          </table>
+          <p>
+            You can switch level at any time with the Difficulty button. Switching starts a fresh puzzle; the current one isn't kept.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Questions</h2>
+
+          <div class="ys-faq">
+            <details open>
+              <summary>If I close the tab, do I lose my progress?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  No. Every move is saved to your browser's local storage and restored when you come back, timer included.
+                </p>
+                <p>
+                  Two things will lose it: clearing this site's data in your browser, or switching device or browser. The save belongs to one browser, and doesn't sync.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Why are my records gone on another device?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  Because there's no account system. Progress is stored locally, not in the cloud. That's the trade for not asking you for an email address.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>I made a mistake but can't find it</summary>
+              <div class="ys-faq__body">
+                <p>
+                  Press Check. Wrong cells turn red. It tells you which ones, not what the answer should be — that part is still yours.
+                </p>
+                <p>
+                  If you're genuinely stuck, Hint fills one cell. You get three per game.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Does it work offline?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  The first visit needs a connection. After that, as long as your browser cache is intact, the page will usually still open offline — the game itself doesn't need the network at all.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Are there ads? Do they cover the board?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  A few, above and below the content. They're the only income and they pay for the domain and hosting. No pop-ups, nothing over the board, nothing interrupting a game.
+                </p>
+                <p>
+                  Ads are filled by a third party, so I don't choose what appears. See the <a href="privacy.html">privacy policy</a> for how the cookies work.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>The board doesn't fit on my phone</summary>
+              <div class="ys-faq__body">
+                <p>
+                  Try reloading the page first. If it still looks wrong, tell me your phone model and browser and I'll fix it properly.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>What games are coming next?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  The order is 2048, then Minesweeper, then Jigsaw, then a match-three and Snake. One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Can I share this site?</summary>
+              <div class="ys-faq__body">
+                <p>
+                  Please do. Just send <strong>ysgame.xyz</strong>. No invite codes, no "share to unlock" — it's all open.
+                </p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="ys-card">
+          <h2>Something broken, or an idea?</h2>
+          <p>
+            Write to <a href="mailto:hello@ysgame.xyz">hello@ysgame.xyz</a>. Bugs, display problems, games you think belong here — all welcome.
+          </p>
+          <p>If it's a display problem, these four things save a lot of back-and-forth:</p>
+          <ul>
+            <li>Phone or computer, and the model</li>
+            <li>Which browser (Chrome, Safari, the in-app browser of a social app…)</li>
+            <li>Which game, and what you tapped just before it happened</li>
+            <li>A screenshot, if you have one</li>
+          </ul>
+          <p>I read everything. Usually a reply within one to three days.</p>
+        </article>
+
+        <a class="ys-back" href="index.html">← Back to the arcade</a>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand">YSGame · Yunshu's little arcade</div>
+        <p class="ys-footer__desc">
+          Quiet games, kept by one person. Free, no account, no pop-ups.
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>Games</h4>
+        <a href="../games/sudoku/index.html?lang=en">Sudoku</a>
+        <a href="index.html#games">All games</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>About</h4>
+        <a href="about.html">The story</a>
+        <a href="help.html">How to play</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="../index.html">中文</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span>A dad's side project</span>
+    </div>
+  </footer>
+
+  <script src="../js/common.js"></script>
+</body>
+</html>

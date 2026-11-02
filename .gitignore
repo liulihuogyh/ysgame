@@ -1,0 +1,9 @@
+# AI 中间产物
+_temp/
+
+# 项目内部笔记（不随代码发布）
+.workbuddy/
+
+# 系统文件
+.DS_Store
+Thumbs.db

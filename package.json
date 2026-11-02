@@ -1,0 +1,19 @@
+{
+  "name": "ysgame",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YSGame · 云舒的小游戏屋 —— 免费在线休闲解压小游戏合集",
+  "keywords": [
+    "休闲游戏",
+    "解压游戏",
+    "数独",
+    "2048",
+    "static-site"
+  ],
+  "author": "liulihuogyh",
+  "license": "MIT",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "serve": "npx --yes serve . -l 8000"
+  }
+}

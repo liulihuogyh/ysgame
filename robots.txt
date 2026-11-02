@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# 广告抓取机器人需要能访问全站，否则 AdSense 审核可能报「无法抓取」
+User-agent: Mediapartners-Google
+Allow: /
+
+Sitemap: https://ysgame.xyz/sitemap.xml

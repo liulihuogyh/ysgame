@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YSGame · 云舒的小游戏屋 | 免费在线休闲解压小游戏</title>
+  <meta name="description" content="云舒的小游戏屋（YSGame）是一间免费的在线小游戏屋：数独、2048、扫雷、拼图等休闲解压游戏，无需注册登录，打开就能玩。">
+  <meta name="keywords" content="休闲小游戏,在线小游戏,解压游戏,数独,2048,扫雷,拼图,免费游戏,YSGame,云舒">
+  <meta name="author" content="YSGame">
+  <link rel="canonical" href="https://ysgame.xyz/">
+
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="YSGame · 云舒的小游戏屋">
+  <meta property="og:description" content="一间安静的在线小游戏屋。数独、2048、扫雷、拼图，不用登录，打开就能玩。">
+  <meta property="og:url" content="https://ysgame.xyz/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YSGame · 云舒的小游戏屋">
+  <meta name="twitter:description" content="一间安静的在线小游戏屋，不用登录，打开就能玩。">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%236B7AC2'/><text x='32' y='44' font-size='32' font-family='Helvetica,Arial' font-weight='bold' fill='%23FFFDF8' text-anchor='middle'>Y</text></svg>">
+  <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense 验证脚本（申请通过后取消注释，替换 ca-pub-XXXXXXXXXXXXXXXX） -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  -->
+</head>
+
+<body data-page="home" data-alt-lang-url="en/index.html">
+
+  <!-- ===================== 导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em>云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="index.html" data-nav="home">游戏大厅</a>
+        <a href="about.html" data-nav="about">关于</a>
+        <a href="help.html" data-nav="help">帮助</a>
+        <button class="ys-lang" id="ysLangBtn" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="ys-main">
+    <div class="ys-shell">
+
+      <!-- ===================== Hero ===================== -->
+      <section class="ys-hero">
+        <p class="ys-hero__eyebrow">爸爸给女儿做的小游戏屋</p>
+
+        <h1 class="ys-hero__title">
+          给云舒的，<br>一间安静的小游戏屋
+        </h1>
+
+        <p class="ys-hero__desc">
+          这里没有排行榜，没有体力值，也没有「再看一个广告」。都是些慢慢玩的小游戏——打开就能玩，玩累了关掉，它不会催你回来。
+        </p>
+
+        <div class="ys-hero__actions">
+          <a class="ys-btn ys-btn--primary" href="games/sudoku/index.html">开始玩数独</a>
+          <a class="ys-btn ys-btn--ghost" href="about.html">YS 是什么意思</a>
+        </div>
+      </section>
+
+      <!-- ===================== 游戏大厅 ===================== -->
+      <section class="ys-section" id="games">
+        <div class="ys-section__head">
+          <h2 class="ys-section__title">游戏大厅</h2>
+          <span class="ys-section__note">6 款游戏，现在能玩 1 款</span>
+        </div>
+
+        <div class="ys-games">
+
+          <!-- 1. 数独 -->
+          <a class="game-card game-card--featured" href="games/sudoku/index.html"
+             style="--card-bg: #ECEEF9; --card-a: #6B7AC2; --card-b: #9AA6D8;">
+            <div class="game-card__top">
+              <div class="game-card__icon">🧩</div>
+              <span class="game-card__badge game-card__badge--new">已上线</span>
+            </div>
+            <h3 class="game-card__name">数独</h3>
+            <p class="game-card__desc">
+              九宫格里慢慢推理，一格一格把秩序填回来。五种难度，从入门到专家。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 4 星">★★★★</span>
+              <span class="game-card__level">难度 易</span>
+            </div>
+          </a>
+
+          <!-- 2. 2048 -->
+          <div class="game-card game-card--locked"
+               style="--card-bg: #F9F2E3; --card-a: #DCC49B; --card-b: #C3A29E;">
+            <div class="game-card__top">
+              <div class="game-card__icon">🔢</div>
+              <span class="game-card__badge game-card__badge--soon">开发中</span>
+            </div>
+            <h3 class="game-card__name">2048</h3>
+            <p class="game-card__desc">
+              上下左右，把相同的数字叠在一起。越叠越大，也越叠越安静。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 4 星">★★★★</span>
+              <span class="game-card__level">难度 易</span>
+            </div>
+          </div>
+
+          <!-- 3. 扫雷 -->
+          <div class="game-card game-card--locked"
+               style="--card-bg: #EEF4EF; --card-a: #9FB8A8; --card-b: #7C8497;">
+            <div class="game-card__top">
+              <div class="game-card__icon">💣</div>
+              <span class="game-card__badge game-card__badge--soon">开发中</span>
+            </div>
+            <h3 class="game-card__name">扫雷</h3>
+            <p class="game-card__desc">
+              小心翻开每一格，用数字排除所有可能。经典规则，永远不过时。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 3 星">★★★</span>
+              <span class="game-card__level">难度 易</span>
+            </div>
+          </div>
+
+          <!-- 4. 拼图 -->
+          <div class="game-card game-card--locked"
+               style="--card-bg: #F6EDEA; --card-a: #C3A29E; --card-b: #DCC49B;">
+            <div class="game-card__top">
+              <div class="game-card__icon">🎨</div>
+              <span class="game-card__badge game-card__badge--soon">开发中</span>
+            </div>
+            <h3 class="game-card__name">拼图</h3>
+            <p class="game-card__desc">
+              一块一块把画面拼回去。手指在动，脑子可以什么都不想。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 5 星">★★★★★</span>
+              <span class="game-card__level">难度 易</span>
+            </div>
+          </div>
+
+          <!-- 5. 消消乐 -->
+          <div class="game-card game-card--locked"
+               style="--card-bg: #FBF6EC; --card-a: #E1B7A8; --card-b: #A9B9D8;">
+            <div class="game-card__top">
+              <div class="game-card__icon">🍬</div>
+              <span class="game-card__badge game-card__badge--soon">开发中</span>
+            </div>
+            <h3 class="game-card__name">消消乐</h3>
+            <p class="game-card__desc">
+              三颗同色连在一起，看着它们一个个消失。休闲游戏里的王者。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 5 星">★★★★★</span>
+              <span class="game-card__level">难度 中</span>
+            </div>
+          </div>
+
+          <!-- 6. 贪吃蛇 -->
+          <div class="game-card game-card--locked"
+               style="--card-bg: #EDEFF3; --card-a: #8E9AAE; --card-b: #9FB8A8;">
+            <div class="game-card__top">
+              <div class="game-card__icon">🐍</div>
+              <span class="game-card__badge game-card__badge--soon">开发中</span>
+            </div>
+            <h3 class="game-card__name">贪吃蛇</h3>
+            <p class="game-card__desc">
+              一条线，一个方向，越吃越长。小时候在诺基亚上偷偷玩的那个。
+            </p>
+            <div class="game-card__meta">
+              <span class="game-card__stars" title="解压指数 3 星">★★★</span>
+              <span class="game-card__level">难度 中</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================== 品牌故事 ===================== -->
+      <section class="ys-story">
+        <div>
+          <h2 class="ys-story__title">YS，是云舒的名字</h2>
+          <p class="ys-story__text">
+            女儿叫云舒。「云卷云舒」——希望她长大后，遇到什么事都能像天上的云一样，舒展开来。<br>
+            这间小游戏屋就用她的名字命名，当作一份会慢慢长大的礼物。
+          </p>
+          <a class="ys-story__link" href="about.html">读完整的品牌故事</a>
+        </div>
+
+        <div class="ys-story__card">
+          <div class="ys-story__initial">YS</div>
+          <div class="ys-story__pinyin">Yún Shū</div>
+          <div class="ys-story__cn">云 舒</div>
+        </div>
+      </section>
+
+      <!-- ===================== 广告位 ===================== -->
+      <div class="ys-ad">
+        <!-- AdSense 通过后，用广告单元代码替换整块 .ys-ad -->
+        <span>广告位</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===================== 页脚 ===================== -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>游戏</h4>
+        <a href="games/sudoku/index.html">数独</a>
+        <a href="index.html#games">更多游戏</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4>关于</h4>
+        <a href="about.html">品牌故事</a>
+        <a href="help.html">玩法说明</a>
+        <a href="privacy.html">隐私政策</a>
+        <a href="en/index.html">English</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span>一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <script src="js/common.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "YSGame 云舒的小游戏屋",
+    "alternateName": "云舒的小游戏屋",
+    "url": "https://ysgame.xyz/",
+    "description": "免费在线休闲解压小游戏合集，包含数独、2048、扫雷、拼图等，无需注册登录。",
+    "inLanguage": "zh-CN"
+  }
+  </script>
+</body>
+</html>
