@@ -309,7 +309,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: var(--ys-radius-sm);
-  background: rgba(247, 243, 234, .975);
+  background: var(--ys-bg);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   animation: overlayIn .2s var(--ys-ease) both;
