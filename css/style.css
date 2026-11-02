@@ -1309,27 +1309,47 @@ kbd {
     grid-column: 1 / -1;
   }
 
-  /* 铺满的那张改成横排，图标、名字、难度一行说完，不至于变成一张空荡的大卡 */
+  /* 铺满的那张改成横排：图标在左，名字与描述在右，难度贴右边
+     [gyh 2026-11-02 修改：加了一句描述，用网格排，避免名字和描述挤成两行] */
   .ys-games--play > .game-card:last-child:nth-child(odd) {
-    flex-direction: row;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 16px;
-    padding: 14px 18px;
+    column-gap: 14px;
+    row-gap: 1px;
+    padding: 12px 16px;
+  }
+
+  .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__icon {
+    grid-column: 1;
+    grid-row: 1 / span 2;
   }
 
   .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__name {
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
   }
 
   .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__desc {
-    display: none;
+    grid-column: 2 / 4;
+    grid-row: 2;
+    margin: 0;
+    min-height: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__meta {
-    margin: 0 0 0 auto;
+    grid-column: 3;
+    grid-row: 1;
+    margin: 0;
     padding: 0;
     border: 0;
-    gap: 14px;
+    gap: 12px;
   }
 
   .ys-story {
@@ -1500,9 +1520,16 @@ kbd {
     font-size: 1.04rem;
   }
 
-  /* 卡片描述在手机上让位：找游戏靠图标和名字，描述留给桌面 */
+  /* 一句话描述保留，只给一行，多出来的截断 */
   .game-card__desc {
-    display: none;
+    margin: 6px 0 0;
+    min-height: 0;
+    font-size: .76rem;
+    line-height: 1.55;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .game-card__meta {
@@ -1529,9 +1556,12 @@ kbd {
     font-size: .86rem;
   }
 
-  /* 后排条目在手机上只留名字，三款能挤进一屏 */
+  /* 后排也留一句，跟前面统一 */
   .game-card--soon .game-card__desc {
-    display: none;
+    margin-top: 1px;
+    font-size: .74rem;
+    line-height: 1.5;
+    -webkit-line-clamp: 1;
   }
 
   .ys-story {
