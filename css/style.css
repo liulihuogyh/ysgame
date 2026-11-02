@@ -580,46 +580,156 @@ button:focus-visible {
 }
 
 /* --------------------------------------------------------------------------
-   6.5 货架标签
-   能玩的排在前排，还在做的收成后排的小条目。
-   游戏一多，光靠一路排下去会在手机上有四五屏，先按状态把货架分层。
-   [gyh 2026-11-02 新增]
+   6.5 分类标签与待做清单
+   游戏到六款之后，光按状态分层不够用了：想找棋类还得一行行扫。
+   标签只做筛选，不改数据；待做清单只列名字（chip），不用卡片，
+   28 款排下来只占一屏多一点，不把大厅重新拉长。
+   [gyh 2026-11-03 新增：替换原来的「现在能玩 / 还在做」两个货架标签]
    -------------------------------------------------------------------------- */
-.ys-shelf {
+.ys-tabs {
   display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0 0 14px;
+  gap: 5px;
+  margin: 0 0 18px;
+  padding: 4px;
+  background: #EFE7D8;
+  border-radius: 14px;
+  /* 英文标签比中文长，320px 下一行放不下，允许横向滑动 */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.ys-shelf__label {
+.ys-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ys-tab {
+  flex: 0 0 auto;
+  padding: 8px 15px;
+  font-family: inherit;
+  font-size: .86rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ys-text-soft);
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .18s var(--ys-ease), background-color .18s var(--ys-ease),
+    box-shadow .18s var(--ys-ease);
+}
+
+.ys-tab:hover {
+  color: var(--ys-text);
+}
+
+.ys-tab[aria-pressed="true"] {
+  color: var(--ys-text);
+  font-weight: 600;
+  background: var(--ys-surface);
+  box-shadow: 0 1px 3px rgba(69, 75, 89, .12);
+}
+
+.ys-tab:focus-visible {
+  outline: 2px solid var(--ys-primary);
+  outline-offset: 1px;
+}
+
+/* 某一类还没做出能玩的游戏时的空态 */
+.ys-hall__empty {
+  margin: 4px 0 0;
+  padding: 22px 18px;
+  text-align: center;
+  font-size: .86rem;
+  line-height: 1.7;
+  color: var(--ys-text-faint);
+  background: var(--ys-surface-alt);
+  border: 1px dashed var(--ys-line);
+  border-radius: var(--ys-radius);
+}
+
+.ys-soon {
+  margin-top: 26px;
+}
+
+.ys-soon__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 11px;
+}
+
+.ys-soon__label {
   font-size: .84rem;
   font-weight: 600;
   color: var(--ys-text);
 }
 
-.ys-shelf__count {
+.ys-soon__count {
   font-size: .74rem;
   color: var(--ys-text-faint);
   font-variant-numeric: tabular-nums;
 }
 
-/* 标签后面拉一条细线，标出这一格货架到哪里为止 */
-.ys-shelf::after {
-  content: "";
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--ys-line-soft);
+.ys-soon__count b {
+  font-weight: 600;
 }
 
-.ys-shelf--soon {
-  margin-top: 36px;
-}
-
-.ys-shelf__note {
-  margin: 12px 0 0;
-  font-size: .78rem;
+.ys-soon__hint {
+  font-size: .74rem;
   color: var(--ys-text-faint);
+}
+
+.ys-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ys-chip {
+  padding: 5px 12px;
+  font-size: .78rem;
+  line-height: 1.55;
+  color: var(--ys-text-soft);
+  background: var(--ys-surface-alt);
+  border-radius: 999px;
+}
+
+/* 下一批要做的几款：颜色加深一点，和排队的区分开 */
+.ys-chip.is-next {
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  box-shadow: inset 0 0 0 1px var(--ys-primary-line);
+}
+
+/* 桌面上标签条不用拉满整行，收成一小段更像「标签」而不是工具条 */
+@media (min-width: 761px) {
+  .ys-tabs {
+    width: max-content;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .ys-tabs {
+    margin-bottom: 14px;
+  }
+
+  .ys-tab {
+    padding: 7px 13px;
+    font-size: .82rem;
+  }
+
+  .ys-chip {
+    padding: 5px 10px;
+    font-size: .74rem;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1504,19 +1614,6 @@ kbd {
     gap: 12px;
   }
 
-  .ys-games--soon {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .ys-shelf {
-    margin-bottom: 12px;
-  }
-
-  .ys-shelf--soon {
-    margin-top: 26px;
-  }
-
   /* 标题和说明放在同一行，省下一行高度 */
   .ys-section__head {
     flex-wrap: wrap;
@@ -2308,5 +2405,18 @@ body.lang-en .ys-share__title {
 
   .ys-table th {
     white-space: normal;
+  }
+}
+
+/* 320/360 这类窄屏：英文标签比中文宽，先把内边距收一收，尽量让五个标签排成一行 */
+@media (max-width: 380px) {
+  .ys-tabs {
+    gap: 3px;
+    padding: 3px;
+  }
+
+  .ys-tab {
+    padding: 7px 8px;
+    font-size: .79rem;
   }
 }

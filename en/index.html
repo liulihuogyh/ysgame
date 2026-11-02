@@ -94,14 +94,18 @@
           <span class="ys-section__note">All free, no sign-in</span>
         </div>
 
-        <div class="ys-shelf">
-          <span class="ys-shelf__label">Ready to play</span>
-          <span class="ys-shelf__count">6 games</span>
+        <!-- Category tabs: scrolls sideways on narrow phones [gyh 2026-11-03 新增] -->
+        <div class="ys-tabs" role="group" aria-label="Filter games by category">
+          <button class="ys-tab" type="button" data-cat="all" aria-pressed="true">All</button>
+          <button class="ys-tab" type="button" data-cat="puzzle" aria-pressed="false">Puzzle</button>
+          <button class="ys-tab" type="button" data-cat="arcade" aria-pressed="false">Arcade</button>
+          <button class="ys-tab" type="button" data-cat="board" aria-pressed="false">Board</button>
+          <button class="ys-tab" type="button" data-cat="casual" aria-pressed="false">Casual</button>
         </div>
 
-        <div class="ys-games ys-games--play">
+        <div class="ys-games ys-games--play" id="hallGrid">
 
-          <a class="game-card game-card--featured" href="../games/sudoku/index.html?lang=en"
+          <a class="game-card game-card--featured" data-cat="puzzle" href="../games/sudoku/index.html?lang=en"
              style="--card-bg: #ECEEF9; --card-a: #6B7AC2; --card-b: #9AA6D8;">
             <div class="game-card__icon" aria-hidden="true">🧩</div>
             <h3 class="game-card__name">Sudoku</h3>
@@ -114,7 +118,7 @@
             </div>
           </a>
 
-          <a class="game-card" href="../games/2048/index.html?lang=en"
+          <a class="game-card" data-cat="puzzle" href="../games/2048/index.html?lang=en"
              style="--card-bg: #F9F2E3; --card-a: #DCC49B; --card-b: #C3A29E;">
             <div class="game-card__icon" aria-hidden="true">🔢</div>
             <h3 class="game-card__name">2048</h3>
@@ -127,7 +131,7 @@
             </div>
           </a>
 
-          <a class="game-card" href="../games/minesweeper/index.html?lang=en"
+          <a class="game-card" data-cat="puzzle" href="../games/minesweeper/index.html?lang=en"
              style="--card-bg: #EEF4EF; --card-a: #9FB8A8; --card-b: #7C8497;">
             <div class="game-card__icon" aria-hidden="true">💣</div>
             <h3 class="game-card__name">Minesweeper</h3>
@@ -140,7 +144,7 @@
             </div>
           </a>
 
-          <a class="game-card" href="../games/jigsaw/index.html?lang=en"
+          <a class="game-card" data-cat="puzzle" href="../games/jigsaw/index.html?lang=en"
              style="--card-bg: #F6EDEA; --card-a: #C3A29E; --card-b: #D9C0A6;">
             <div class="game-card__icon" aria-hidden="true">🎨</div>
             <h3 class="game-card__name">Jigsaw</h3>
@@ -153,7 +157,7 @@
             </div>
           </a>
 
-          <a class="game-card" href="../games/match3/index.html?lang=en"
+          <a class="game-card" data-cat="casual" href="../games/match3/index.html?lang=en"
              style="--card-bg: #FBF6EC; --card-a: #DCC49B; --card-b: #C3A29E;">
             <div class="game-card__icon" aria-hidden="true">🍬</div>
             <h3 class="game-card__name">Match three</h3>
@@ -166,7 +170,7 @@
             </div>
           </a>
 
-          <a class="game-card" href="../games/snake/index.html?lang=en"
+          <a class="game-card" data-cat="arcade" href="../games/snake/index.html?lang=en"
              style="--card-bg: #EDEFF3; --card-a: #7E9B84; --card-b: #7C8497;">
             <div class="game-card__icon" aria-hidden="true">🐍</div>
             <h3 class="game-card__name">Snake</h3>
@@ -181,7 +185,45 @@
 
         </div>
 
-        <p class="ys-shelf__note">Taking our time. The next one is still being thought about.</p>
+                <p class="ys-hall__empty" id="hallEmpty" hidden>Nothing finished in this category yet — the names are all queued below.</p>
+
+        <div class="ys-soon">
+          <div class="ys-soon__head">
+            <span class="ys-soon__label">In the works</span>
+            <span class="ys-soon__count"><b id="soonCount">28</b> games</span>
+            <span class="ys-soon__hint">Bright ones come next</span>
+          </div>
+          <ul class="ys-chips" id="hallChips">
+            <li class="ys-chip is-next" data-cat="puzzle">Sokoban</li>
+            <li class="ys-chip is-next" data-cat="puzzle">Sliding puzzle</li>
+            <li class="ys-chip is-next" data-cat="arcade">Tetris</li>
+            <li class="ys-chip is-next" data-cat="arcade">Breakout</li>
+            <li class="ys-chip" data-cat="puzzle">Link-up</li>
+            <li class="ys-chip" data-cat="puzzle">Memory match</li>
+            <li class="ys-chip" data-cat="board">Gomoku</li>
+            <li class="ys-chip" data-cat="arcade">Mario</li>
+            <li class="ys-chip" data-cat="arcade">Battle City</li>
+            <li class="ys-chip" data-cat="arcade">Space shooter</li>
+            <li class="ys-chip" data-cat="arcade">Bomberman</li>
+            <li class="ys-chip" data-cat="puzzle">Maze</li>
+            <li class="ys-chip" data-cat="board">Reversi</li>
+            <li class="ys-chip" data-cat="arcade">Flappy bird</li>
+            <li class="ys-chip" data-cat="arcade">Dino run</li>
+            <li class="ys-chip" data-cat="puzzle">Numberlink</li>
+            <li class="ys-chip" data-cat="casual">Jump jump</li>
+            <li class="ys-chip" data-cat="puzzle">Rubik's cube</li>
+            <li class="ys-chip" data-cat="casual">Pool</li>
+            <li class="ys-chip" data-cat="board">Xiangqi</li>
+            <li class="ys-chip" data-cat="board">Chess</li>
+            <li class="ys-chip" data-cat="board">Go</li>
+            <li class="ys-chip" data-cat="board">Chinese checkers</li>
+            <li class="ys-chip" data-cat="board">Ludo</li>
+            <li class="ys-chip" data-cat="casual">Drum kit</li>
+            <li class="ys-chip" data-cat="casual">Solar system</li>
+            <li class="ys-chip" data-cat="board">Go problems</li>
+            <li class="ys-chip" data-cat="board">Xiangqi endgames</li>
+          </ul>
+        </div>
       </section>
 
       <section class="ys-story">
@@ -244,6 +286,7 @@
   </footer>
 
   <script src="../js/common.js"></script>
+  <script src="../js/hall.js"></script>
 
   <script type="application/ld+json">
   {

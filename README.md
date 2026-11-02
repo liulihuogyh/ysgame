@@ -26,7 +26,8 @@ YSGame/
 ├── js/
 │   ├── common.js              # 导航交互、语言切换、音效开关、当前页高亮
 │   ├── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
-│   └── share.js               # 分享面板：系统分享 / 微信 / 微博 / X / 复制链接
+│   ├── share.js               # 分享面板：系统分享 / 微信 / 微博 / X / 复制链接
+│   └── hall.js                # 大厅分类标签：按 data-cat 筛选卡片与待做清单
 ├── assets/
 │   ├── fonts/                 # 自托管字体（Instrument Sans + Newsreader）
 │   ├── og-zh.png              # 全站中文分享图 1200×630
@@ -38,6 +39,8 @@ YSGame/
 │   ├── og-match3.png
 │   └── og-snake.png
 ├── docs/                      # 部署/运营文档归档
+│   ├── ROADMAP.md             # 游戏清单与开发批次（唯一来源）
+│   └── og-cards.html          # 分享图模板
 └── games/
     ├── sudoku/
     │   ├── index.html         # 中英共用一份，靠 i18n.js 切换
@@ -148,12 +151,15 @@ npx --yes serve . -l 8000
 5. 界面文案一律写 `data-i18n="键名"`，并在 `js/i18n.js` 的 `dicts.<游戏名>` 里加中英两版；
    JS 里给用户看的文字用 `I18N.t('键名')` 取，不要硬编码中文。
    导航、页脚、广告位这类全站文案在 `common` 里，各游戏不用重复写。
-6. **两个首页都要加卡片**：
-   - `index.html` 的 `.ys-games--play` 里加一张
-     `<a class="game-card" href="games/<game-name>/index.html">`，记得填
-     `--card-bg / --card-a / --card-b` 三个色变量；
+6. **两个首页都要加卡片，并标好分类**：
+   - `index.html` 的 `#hallGrid` 里加一张
+     `<a class="game-card" data-cat="puzzle" href="games/<game-name>/index.html">`，
+     记得填 `--card-bg / --card-a / --card-b` 三个色变量；
    - `en/index.html` 同样加一张，链接写 `../games/<game-name>/index.html?lang=en`。
-7. 两边的货架数量（「现在能玩 6 款 / 6 games」）要一起改。
+   - `data-cat` 只能是 `puzzle`（益智）/ `arcade`（街机）/ `board`（棋类）/ `casual`（休闲），
+     写错这张卡在任何分类里都不会出现。
+7. **从待做清单里摘掉这款**：删掉 `#hallChips` 里对应的 `<li class="ys-chip">`，
+   把 `<b id="soonCount">` 的数字减一；`docs/ROADMAP.md` 里同步状态与计数。
 8. 分享图：在 `docs/og-cards.html` 的 `CONF` 里加一项，并补对应的 art 分支，
    访问 `?g=<game-name>` 截一张 1200×630 存成 `assets/og-<game-name>.png`。
 9. 别漏掉这几处：`sitemap.xml` 加一条、`help.html` 与 `en/help.html` 补玩法、
@@ -162,6 +168,10 @@ npx --yes serve . -l 8000
 游戏页通用组件（`.g-head` / `.g-title` / `.g-tagline` / `.g-hud` / `.hud-box` /
 `.seg` / `.g-btn` / `.result` / `.g-hint`）已经提到根 `css/style.css`，
 新游戏直接复用，游戏自己的 CSS 只写棋盘和专属动效即可。
+
+大厅的分类筛选不生成任何内容，只读 HTML 上的 `data-cat`，所以关掉 JS 也只是标签点了没反应，
+卡片不会消失。筛选时是把卡片从 DOM 里摘掉再按原顺序 append 回来，而不是 `display:none`——
+网格里「最后一张铺满整行」用的是 `:nth-child(odd)`，隐藏的元素照样参与计数，会让第二行留出半格空位。
 
 ---
 
@@ -193,4 +203,7 @@ npx --yes serve . -l 8000
 - [x] 拼图（3×3 / 4×4、三幅内置 SVG 画面、看原图、最佳用时）
 - [x] 消消乐（8×8、三连消除、连锁加分、30 步 1200 分、无解重排）
 - [x] 贪吃蛇（17×17、键盘 / 滑动 / 方向键、随长度加速、暂停）
+- [x] 大厅分类标签（全部 / 益智 / 街机 / 棋类 / 休闲）+ 待做清单 chip
+- [ ] 剩余 28 款，按批次推进，详见 `docs/ROADMAP.md`
+  （下一批：推箱子、数字华容道、俄罗斯方块、打砖块）
 - [ ] 申请 AdSense（站点内容充实并运行 1~2 个月后）

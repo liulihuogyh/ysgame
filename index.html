@@ -97,15 +97,19 @@
           <span class="ys-section__note">全部免费，不用登录</span>
         </div>
 
-        <div class="ys-shelf">
-          <span class="ys-shelf__label">现在能玩</span>
-          <span class="ys-shelf__count">6 款</span>
+        <!-- 分类标签：手机上一行放不下时可以横向滑动 [gyh 2026-11-03 新增] -->
+        <div class="ys-tabs" role="group" aria-label="按类型筛选游戏">
+          <button class="ys-tab" type="button" data-cat="all" aria-pressed="true">全部</button>
+          <button class="ys-tab" type="button" data-cat="puzzle" aria-pressed="false">益智</button>
+          <button class="ys-tab" type="button" data-cat="arcade" aria-pressed="false">街机</button>
+          <button class="ys-tab" type="button" data-cat="board" aria-pressed="false">棋类</button>
+          <button class="ys-tab" type="button" data-cat="casual" aria-pressed="false">休闲</button>
         </div>
 
-        <div class="ys-games ys-games--play">
+        <div class="ys-games ys-games--play" id="hallGrid">
 
           <!-- 1. 数独 -->
-          <a class="game-card game-card--featured" href="games/sudoku/index.html"
+          <a class="game-card game-card--featured" href="games/sudoku/index.html" data-cat="puzzle"
              style="--card-bg: #ECEEF9; --card-a: #6B7AC2; --card-b: #9AA6D8;">
             <div class="game-card__icon" aria-hidden="true">🧩</div>
             <h3 class="game-card__name">数独</h3>
@@ -119,7 +123,7 @@
           </a>
 
           <!-- 2. 2048 -->
-          <a class="game-card" href="games/2048/index.html"
+          <a class="game-card" href="games/2048/index.html" data-cat="puzzle"
              style="--card-bg: #F9F2E3; --card-a: #DCC49B; --card-b: #C3A29E;">
             <div class="game-card__icon" aria-hidden="true">🔢</div>
             <h3 class="game-card__name">2048</h3>
@@ -133,7 +137,7 @@
           </a>
 
           <!-- 3. 扫雷 -->
-          <a class="game-card" href="games/minesweeper/index.html"
+          <a class="game-card" href="games/minesweeper/index.html" data-cat="puzzle"
              style="--card-bg: #EEF4EF; --card-a: #9FB8A8; --card-b: #7C8497;">
             <div class="game-card__icon" aria-hidden="true">💣</div>
             <h3 class="game-card__name">扫雷</h3>
@@ -147,7 +151,7 @@
           </a>
 
           <!-- 4. 拼图 -->
-          <a class="game-card" href="games/jigsaw/index.html"
+          <a class="game-card" href="games/jigsaw/index.html" data-cat="puzzle"
              style="--card-bg: #F6EDEA; --card-a: #C3A29E; --card-b: #D9C0A6;">
             <div class="game-card__icon" aria-hidden="true">🎨</div>
             <h3 class="game-card__name">拼图</h3>
@@ -161,7 +165,7 @@
           </a>
 
           <!-- 5. 消消乐 -->
-          <a class="game-card" href="games/match3/index.html"
+          <a class="game-card" href="games/match3/index.html" data-cat="casual"
              style="--card-bg: #FBF6EC; --card-a: #DCC49B; --card-b: #C3A29E;">
             <div class="game-card__icon" aria-hidden="true">🍬</div>
             <h3 class="game-card__name">消消乐</h3>
@@ -175,7 +179,7 @@
           </a>
 
           <!-- 6. 贪吃蛇 -->
-          <a class="game-card" href="games/snake/index.html"
+          <a class="game-card" href="games/snake/index.html" data-cat="arcade"
              style="--card-bg: #EDEFF3; --card-a: #7E9B84; --card-b: #7C8497;">
             <div class="game-card__icon" aria-hidden="true">🐍</div>
             <h3 class="game-card__name">贪吃蛇</h3>
@@ -190,7 +194,45 @@
 
         </div>
 
-        <p class="ys-shelf__note">慢慢做，下一款还在想。</p>
+                <p class="ys-hall__empty" id="hallEmpty" hidden>这一类还没做完，名字都在下面排队。</p>
+
+        <div class="ys-soon">
+          <div class="ys-soon__head">
+            <span class="ys-soon__label">还在做</span>
+            <span class="ys-soon__count"><b id="soonCount">28</b> 款</span>
+            <span class="ys-soon__hint">高亮的是下一批</span>
+          </div>
+          <ul class="ys-chips" id="hallChips">
+            <li class="ys-chip is-next" data-cat="puzzle">推箱子</li>
+            <li class="ys-chip is-next" data-cat="puzzle">数字华容道</li>
+            <li class="ys-chip is-next" data-cat="arcade">俄罗斯方块</li>
+            <li class="ys-chip is-next" data-cat="arcade">打砖块</li>
+            <li class="ys-chip" data-cat="puzzle">连连看</li>
+            <li class="ys-chip" data-cat="puzzle">记忆翻牌</li>
+            <li class="ys-chip" data-cat="board">五子棋</li>
+            <li class="ys-chip" data-cat="arcade">经典马里奥</li>
+            <li class="ys-chip" data-cat="arcade">坦克大战</li>
+            <li class="ys-chip" data-cat="arcade">星际飞机大战</li>
+            <li class="ys-chip" data-cat="arcade">炸弹人</li>
+            <li class="ys-chip" data-cat="puzzle">迷宫</li>
+            <li class="ys-chip" data-cat="board">黑白棋</li>
+            <li class="ys-chip" data-cat="arcade">飞扬小鸟</li>
+            <li class="ys-chip" data-cat="arcade">恐龙跳跳</li>
+            <li class="ys-chip" data-cat="puzzle">数字连线</li>
+            <li class="ys-chip" data-cat="casual">跳一跳</li>
+            <li class="ys-chip" data-cat="puzzle">魔方</li>
+            <li class="ys-chip" data-cat="casual">台球</li>
+            <li class="ys-chip" data-cat="board">中国象棋</li>
+            <li class="ys-chip" data-cat="board">国际象棋</li>
+            <li class="ys-chip" data-cat="board">围棋</li>
+            <li class="ys-chip" data-cat="board">跳棋</li>
+            <li class="ys-chip" data-cat="board">飞行棋</li>
+            <li class="ys-chip" data-cat="casual">在线架子鼓</li>
+            <li class="ys-chip" data-cat="casual">掌控太阳系</li>
+            <li class="ys-chip" data-cat="board">围棋死活题</li>
+            <li class="ys-chip" data-cat="board">象棋残局</li>
+          </ul>
+        </div>
       </section>
 
       <!-- ===================== 品牌故事 ===================== -->
@@ -257,6 +299,7 @@
   </footer>
 
   <script src="js/common.js"></script>
+  <script src="js/hall.js"></script>
 
   <script type="application/ld+json">
   {
