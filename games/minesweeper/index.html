@@ -16,11 +16,11 @@
   <meta property="og:title" content="扫雷 · YSGame 云舒的小游戏屋">
   <meta property="og:description" content="翻开每一格，用数字推掉剩下的可能。第一次点击永远不会踩雷。">
   <meta property="og:url" content="https://ysgame.xyz/games/minesweeper/">
-  <meta property="og:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-minesweeper.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-zh.png">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-minesweeper.png">
   <meta name="theme-color" content="#F7F3EA">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%239FB8A8'/><circle cx='32' cy='32' r='12' fill='%23FFFDF8'/><g stroke='%23FFFDF8' stroke-width='4' stroke-linecap='round'><path d='M32 8v8M32 48v8M8 32h8M48 32h8'/></g></svg>">
@@ -117,7 +117,10 @@
           <strong id="overlay-time">0:00</strong>
         </p>
       </div>
-      <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
     </div>
 
     <p class="gmines__hint" data-i18n="hint_controls">
@@ -167,6 +170,7 @@
   <!-- 国际化 → 公共脚本 → 游戏脚本（顺序不能反：游戏脚本依赖 I18N 与 YSGame） -->
   <script src="../../js/i18n.js"></script>
   <script src="../../js/common.js"></script>
+  <script src="../../js/share.js"></script>
   <script src="js/minesweeper.js"></script>
 </body>
 </html>

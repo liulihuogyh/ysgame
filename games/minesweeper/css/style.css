@@ -410,7 +410,7 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  max-width: 460px;
+  max-width: 540px;
   margin: 14px auto 0;
   padding: 14px 18px;
   background: var(--ys-surface);
@@ -480,8 +480,15 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-.result__btn {
+/* 分享 + 再来一局并排，结算时想转发不用滚回顶部 */
+.result__actions {
+  display: flex;
   flex: 0 0 auto;
+  gap: 8px;
+}
+
+.result__actions > * {
+  flex: 1 1 auto;
 }
 
 /* --------------------------------------------------------------------------
@@ -551,8 +558,12 @@ body {
     padding: 14px 16px;
   }
 
-  .result__btn {
+  .result__actions {
     width: 100%;
+  }
+
+  .result__actions > * {
+    flex: 1 1 0;
   }
 }
 

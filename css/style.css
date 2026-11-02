@@ -332,8 +332,9 @@ body.lang-en .ys-brand__text em {
   background: var(--ys-primary-soft);
 }
 
-/* 音效开关 */
-.ys-sound {
+/* 音效开关 / 分享入口：同一种圆形图标按钮 */
+.ys-sound,
+.ys-share-trigger {
   width: 36px;
   height: 36px;
   margin-left: 6px;
@@ -350,7 +351,8 @@ body.lang-en .ys-brand__text em {
   transition: all .2s var(--ys-ease);
 }
 
-.ys-sound:hover {
+.ys-sound:hover,
+.ys-share-trigger:hover {
   border-color: var(--ys-primary-line);
   color: var(--ys-primary-deep);
   transform: translateY(-1px);
@@ -1627,5 +1629,366 @@ kbd {
 @media print {
   .ad-container {
     display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   分享面板
+   游戏页共用：导航里的入口按钮 + 结算卡片里的按钮，都唤起同一块面板
+   [gyh 2026-11-03 新增]
+   -------------------------------------------------------------------------- */
+.ys-share-trigger__text {
+  display: none;
+}
+
+/* 结算卡片里的次要按钮，比主按钮轻一档 */
+.ys-share-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1px solid var(--ys-line);
+  border-radius: 12px;
+  background: var(--ys-surface);
+  color: var(--ys-text-soft);
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color .16s var(--ys-ease), color .16s var(--ys-ease),
+    background-color .16s var(--ys-ease), transform .16s var(--ys-ease);
+}
+
+.ys-share-inline:hover {
+  border-color: var(--ys-primary-line);
+  background: var(--ys-primary-soft);
+  color: var(--ys-primary-deep);
+  transform: translateY(-1px);
+}
+
+.ys-share-inline:active {
+  transform: translateY(0);
+}
+
+body.is-share-open {
+  overflow: hidden;
+}
+
+.ys-share {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .2s var(--ys-ease);
+}
+
+.ys-share[hidden] {
+  display: none;
+}
+
+.ys-share.is-open {
+  opacity: 1;
+}
+
+.ys-share__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(46, 41, 35, .36);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.ys-share__panel {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  background: var(--ys-surface);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -16px 44px rgba(60, 52, 44, .18);
+  transform: translateY(18px);
+  transition: transform .26s var(--ys-ease);
+}
+
+.ys-share.is-open .ys-share__panel {
+  transform: translateY(0);
+}
+
+.ys-share__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ys-text-faint);
+  font-family: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-share__close:hover {
+  background: var(--ys-surface-alt);
+  color: var(--ys-text);
+}
+
+.ys-share__eyebrow {
+  margin: 0 0 6px;
+  font-size: .68rem;
+  letter-spacing: .14em;
+  color: var(--ys-text-faint);
+}
+
+.ys-share__title {
+  margin: 0 0 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+body.lang-en .ys-share__title {
+  font-family: var(--ys-font-en-display);
+  letter-spacing: 0;
+}
+
+.ys-share__sub {
+  margin: 0 0 16px;
+  font-size: .83rem;
+  line-height: 1.65;
+  color: var(--ys-text-soft);
+}
+
+/* 分享预览：让用户知道转出去长什么样 */
+.ys-share__preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 13px 14px;
+  background: var(--ys-surface-alt);
+  border: 1px solid var(--ys-line);
+  border-radius: 14px;
+}
+
+.ys-share__mark {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--ys-primary);
+  color: #FFFDF8;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.ys-share__meta {
+  min-width: 0;
+  display: block;
+}
+
+.ys-share__game {
+  display: block;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.ys-share__tag {
+  margin-top: 2px;
+  font-style: normal;
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--ys-text-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ys-share__primary {
+  display: block;
+  width: 100%;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ys-primary);
+  color: #FFFDF8;
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s var(--ys-ease), transform .15s var(--ys-ease);
+}
+
+.ys-share__primary:hover {
+  background: var(--ys-primary-deep);
+}
+
+.ys-share__primary:active {
+  transform: scale(.99);
+}
+
+.ys-share__primary[hidden] {
+  display: none;
+}
+
+.ys-share__row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ys-share__chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ys-text-soft);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .2s var(--ys-ease), border-color .2s var(--ys-ease);
+}
+
+.ys-share__chip:hover {
+  background: var(--ys-surface-alt);
+  border-color: var(--ys-line);
+}
+
+.ys-share__chipIcon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ys-share__chipIcon--wechat {
+  background: var(--ys-sage-soft);
+  border: 1px solid #D8E4DB;
+  color: #5F7A6C;
+}
+
+.ys-share__chipIcon--weibo {
+  background: var(--ys-clay-soft);
+  border: 1px solid #EBD9D4;
+  color: #93655F;
+}
+
+.ys-share__chipIcon--x {
+  background: #EDEFF3;
+  border: 1px solid #DDE1E8;
+  color: #454B59;
+}
+
+.ys-share__chipIcon--copy {
+  background: var(--ys-sand-soft);
+  border: 1px solid #EBDCBE;
+  color: #8A6B36;
+}
+
+.ys-share__chipText {
+  font-size: .72rem;
+  line-height: 1.3;
+}
+
+.ys-share__hint {
+  min-height: 1.15em;
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: .76rem;
+  line-height: 1.6;
+  color: var(--ys-text-faint);
+  opacity: 0;
+  transition: opacity .2s var(--ys-ease), color .2s var(--ys-ease);
+}
+
+.ys-share__hint.is-on {
+  opacity: 1;
+  color: var(--ys-primary-deep);
+}
+
+@media (min-width: 761px) {
+  .ys-share {
+    align-items: center;
+  }
+
+  .ys-share__panel {
+    padding: 24px 24px 22px;
+    border-radius: 22px;
+    transform: translateY(10px) scale(.985);
+  }
+
+  .ys-share.is-open .ys-share__panel {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 760px) {
+  /* 手机上导航是竖排菜单，按钮展开成「图标 + 文字」 */
+  .ys-share-trigger {
+    align-self: flex-start;
+    width: auto;
+    height: 38px;
+    margin: 8px 0 0;
+    padding: 0 14px;
+    border-radius: 12px;
+    gap: 6px;
+    font-size: .86rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .ys-share-trigger__text {
+    display: inline;
+  }
+
+  /* 语言按钮别被 stretch 拉成整行，三个控件左对齐 */
+  .ys-lang {
+    align-self: flex-start;
+  }
+
+  /* 音效按钮同理，文字改由 data-label 提供，英文页才不会是中文 */
+  .ys-sound {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .ys-sound::after {
+    content: attr(data-label);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ys-share,
+  .ys-share__panel,
+  .ys-share__primary,
+  .ys-share__chip {
+    transition: none !important;
   }
 }

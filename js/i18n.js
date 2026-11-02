@@ -35,7 +35,21 @@
       footer_story: '品牌故事',
       footer_help: '玩法说明',
       footer_privacy: '隐私政策',
-      footer_copy: '一个爸爸的业余作品'
+      footer_copy: '一个爸爸的业余作品',
+
+      share_title: '分享给朋友',
+      share_sub: '一局几分钟，随手转发给想一起玩的人。',
+      share_btn: '分享',
+      share_close: '关闭',
+      share_system: '分享给朋友',
+      share_wechat: '微信',
+      share_weibo: '微博',
+      share_x: 'X',
+      share_copy: '复制链接',
+      share_copied: '链接已复制，粘贴给朋友就行。',
+      share_copy_fail: '没能复制，长按地址栏手动复制吧。',
+      share_wechat_tip: '微信里点右上角 ··· ，选「发送给朋友」。',
+      share_wechat_copy: '链接已复制，打开微信粘贴给朋友。'
     },
 
     en: {
@@ -56,7 +70,21 @@
       footer_story: 'The story',
       footer_help: 'How to play',
       footer_privacy: 'Privacy',
-      footer_copy: "A dad's side project"
+      footer_copy: "A dad's side project",
+
+      share_title: 'Share this game',
+      share_sub: 'A few quiet minutes. Pass it on to someone who might like it.',
+      share_btn: 'Share',
+      share_close: 'Close',
+      share_system: 'Share',
+      share_wechat: 'WeChat',
+      share_weibo: 'Weibo',
+      share_x: 'X',
+      share_copy: 'Copy link',
+      share_copied: 'Link copied. Paste it wherever you like.',
+      share_copy_fail: 'Copy failed. Grab the address bar instead.',
+      share_wechat_tip: 'In WeChat, tap ··· at the top right, then Send to Friend.',
+      share_wechat_copy: 'Link copied. Open WeChat and paste it to a friend.'
     }
   };
 
@@ -70,6 +98,7 @@
         page_desc: '免费在线数独游戏，五种难度（入门到专家），支持撤销、提示、错误检查和断点续玩。无需注册登录，打开就能玩。',
         game_title: '数独',
         tagline: '慢慢推理，一格一格把秩序填回来',
+        share_line: '闲着的时候来一盘数独，五种难度，不用登录。',
 
         label_level: '难度',
         label_time: '用时',
@@ -116,6 +145,7 @@
         page_desc: 'A quiet online Sudoku with five difficulty levels, undo, hints, mistake checking and automatic save. No account, no sign-up.',
         game_title: 'Sudoku',
         tagline: 'Slow reasoning, one square at a time',
+        share_line: 'A slow game of Sudoku for whenever you have a few quiet minutes.',
 
         label_level: 'Level',
         label_time: 'Time',
@@ -164,6 +194,7 @@
         page_desc: '免费在线 2048：上下左右滑动合并相同的数字，支持撤销、最高分记录和断点续玩。无需注册登录，打开就能玩。',
         game_title: '2048',
         tagline: '上下左右，把相同的数字叠在一起',
+        share_line: '滑两下就上手的 2048，看看你能叠到多少。',
 
         board_aria: '2048 棋盘',
         label_score: '得分',
@@ -189,6 +220,7 @@
         page_desc: 'A quiet 2048. Slide the tiles, merge the matching numbers, undo when you change your mind. Saves automatically, no account needed.',
         game_title: '2048',
         tagline: 'Slide the tiles, merge the matching numbers',
+        share_line: '2048: swipe, merge, and see how far you get.',
 
         board_aria: '2048 board',
         label_score: 'Score',
@@ -216,6 +248,7 @@
         page_desc: '免费在线扫雷：入门 9×9、进阶 16×16 两种棋盘，第一次点击永不踩雷，支持右键插旗、手机长按、计时与最佳成绩。无需注册登录，打开就能玩。',
         game_title: '扫雷',
         tagline: '翻开每一格，用数字推掉剩下的可能',
+        share_line: '经典扫雷，第一次点击不会踩雷。',
 
         board_aria: '扫雷棋盘',
         level_group_aria: '选择难度',
@@ -251,6 +284,7 @@
         page_desc: 'A quiet online Minesweeper with 9×9 and 16×16 boards. The first click never hits a mine, right-click or long-press to flag, and your best time is kept. No account needed.',
         game_title: 'Minesweeper',
         tagline: 'Turn over a square, let the numbers do the reasoning',
+        share_line: 'Classic Minesweeper, and the first click never hits a mine.',
 
         board_aria: 'Minesweeper board',
         level_group_aria: 'Choose a board size',

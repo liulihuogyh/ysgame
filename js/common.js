@@ -35,6 +35,8 @@
       on ? '音效已开启，点击关闭' : '音效已关闭，点击开启'
     );
     btn.setAttribute('title', on ? '音效已开启' : '音效已关闭');
+    // 手机导航展开时按钮后面跟着文字，英文页不能还挂个「音效」
+    btn.setAttribute('data-label', document.documentElement.lang === 'en' ? 'Sound' : '音效');
   }
 
   /* ---------------- 导航 ---------------- */
@@ -154,6 +156,9 @@
         setSound(!isSoundOn());
       });
     }
+
+    // 游戏页原地切语言时，音效按钮的文字要跟着换
+    document.addEventListener('ys:langchange', paintSoundButton);
   }
 
   if (document.readyState === 'loading') {

@@ -25,11 +25,15 @@ YSGame/
 │   └── style.css              # 全站设计系统（莫兰迪配色、导航、卡片、内容页）
 ├── js/
 │   ├── common.js              # 导航交互、语言切换、音效开关、当前页高亮
-│   └── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
+│   ├── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
+│   └── share.js               # 分享面板：系统分享 / 微信 / 微博 / X / 复制链接
 ├── assets/
 │   ├── fonts/                 # 自托管字体（Instrument Sans + Newsreader）
-│   ├── og-zh.png              # 中文社交分享图 1200×630
-│   └── og-en.png
+│   ├── og-zh.png              # 全站中文分享图 1200×630
+│   ├── og-en.png
+│   ├── og-sudoku.png          # 每款游戏一张，转发时不重样
+│   ├── og-g2048.png
+│   └── og-minesweeper.png
 ├── docs/                      # 部署/运营文档归档
 └── games/
     ├── sudoku/
@@ -38,10 +42,10 @@ YSGame/
     │   ├── js/sudoku.js       # 题目生成与求解
     │   ├── js/game.js         # 游戏逻辑与交互
     │   └── assets/            # 图片、音效
-    └── 2048/
-        ├── index.html
-        ├── css/style.css      # 棋盘、方块配色与动画
-        └── js/game2048.js     # 滑动合并、撤销、存档
+    ├── 2048/
+    │   ├── index.html
+    │   ├── css/style.css      # 棋盘、方块配色与动画
+    │   └── js/game2048.js     # 滑动合并、撤销、存档
     └── minesweeper/
         ├── index.html
         ├── css/style.css      # 方格、数字配色、插旗与布雷图标
@@ -113,10 +117,11 @@ npx --yes serve . -l 8000
    <link rel="stylesheet" href="../../css/style.css">
    <link rel="stylesheet" href="css/style.css">
    ```
-3. 页面底部按顺序引入三个脚本（顺序不能换）：
+3. 页面底部按顺序引入脚本（前两个顺序不能换，`share.js` 必须排在游戏脚本之前）：
    ```html
    <script src="../../js/i18n.js"></script>
    <script src="../../js/common.js"></script>
+   <script src="../../js/share.js"></script>
    <script src="js/<game>.js"></script>
    ```
 4. 复制任意一个内容页的 `<header class="ys-nav">` 和 `<footer class="ys-footer">`，
@@ -126,9 +131,9 @@ npx --yes serve . -l 8000
    JS 里给用户看的文字用 `I18N.t('键名')` 取，不要硬编码中文。
    导航、页脚、广告位这类全站文案在 `common` 里，各游戏不用重复写。
 6. **两个首页都要加卡片**：
-   - `index.html` 里把 `<div class="game-card game-card--locked">` 改成
-     `<a class="game-card" href="games/<game-name>/index.html">`，`badge` 改成「已上线」；
-   - `en/index.html` 里做同样的改动，链接写 `../games/<game-name>/index.html?lang=en`。
+   - `index.html` 的 `.ys-games--play` 里加一张
+     `<a class="game-card" href="games/<game-name>/index.html">`；
+   - `en/index.html` 同样加一张，链接写 `../games/<game-name>/index.html?lang=en`。
 7. 两边的「N 款游戏，现在能玩 M 款 / M of N ready」数字要一起改。
 
 ---
@@ -157,6 +162,7 @@ npx --yes serve . -l 8000
 - [x] 社交分享图 og-zh / og-en
 - [x] 2048（滑动合并、撤销、最高分、断点续玩）
 - [x] 扫雷（9×9 / 16×16、首点保护、右键与长按插旗、和弦、最佳用时）
+- [x] 分享（导航入口 + 结算卡片入口，每款游戏一张分享图）
 - [ ] 拼图
 - [ ] 消消乐
 - [ ] 贪吃蛇

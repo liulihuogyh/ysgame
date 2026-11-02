@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!--
+  游戏分享图生成模板（1200×630）
+  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper，截整页即可。
+  新增游戏时，在 script 里的 CONF 加一项，并在下方追加对应的 art 分支。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'Instrument Sans';
+    font-style: normal;
+    font-weight: 400 600;
+    src: url('../assets/fonts/instrument-sans-latin.woff2') format('woff2');
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Instrument Sans', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #F7F3EA;
+    color: #454B59;
+  }
+
+  .card {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    padding: 64px 72px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* 右侧柔光斑，颜色跟着游戏走 */
+  .glow {
+    position: absolute;
+    right: -90px;
+    top: 40px;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: var(--glow);
+    filter: blur(4px);
+  }
+
+  .brand {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand__mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #6B7AC2;
+    color: #FFFDF8;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  .brand__text strong {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+
+  .brand__text em {
+    display: block;
+    margin-top: 2px;
+    font-style: normal;
+    font-size: 15px;
+    color: #8E93A0;
+  }
+
+  .body {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  h1 {
+    font-size: 86px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+  }
+
+  h1 small {
+    display: block;
+    margin-top: 8px;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    color: #9AA0AC;
+  }
+
+  .copy p {
+    margin-top: 22px;
+    font-size: 26px;
+    line-height: 1.55;
+    color: #6C727F;
+    max-width: 520px;
+  }
+
+  .art {
+    flex: 0 0 auto;
+    width: 360px;
+    height: 360px;
+    display: grid;
+    place-items: center;
+  }
+
+  .foot {
+    position: relative;
+    font-size: 18px;
+    letter-spacing: .06em;
+    color: #A9AEBA;
+  }
+
+  /* ---------------- 数独 ---------------- */
+  .grid9 {
+    width: 330px;
+    height: 330px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    background: #FFFDF8;
+    border: 3px solid #6B7AC2;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(107, 122, 194, .16);
+  }
+
+  .grid9 span {
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    font-weight: 500;
+    color: #55639F;
+    border-right: 1px solid #E4E7F3;
+    border-bottom: 1px solid #E4E7F3;
+  }
+
+  .grid9 span:nth-child(9n) { border-right: 0; }
+  .grid9 span:nth-child(n+73) { border-bottom: 0; }
+
+  /* 九宫粗线 */
+  .grid9 span:nth-child(3n) { border-right: 2px solid #B9C1E4; }
+  .grid9 span:nth-child(9n) { border-right: 0; }
+  .grid9 span:nth-child(n+19):nth-child(-n+27),
+  .grid9 span:nth-child(n+46):nth-child(-n+54) { border-bottom: 2px solid #B9C1E4; }
+
+  /* ---------------- 2048 ---------------- */
+  .tiles {
+    width: 330px;
+    height: 330px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    background: #EDE4D4;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(160, 140, 110, .16);
+  }
+
+  .tiles span {
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: -.02em;
+  }
+
+  .t0 { background: rgba(255, 253, 248, .55); }
+
+  .t2  { background: #FBF6EC; color: #6B6152; }
+  .t4  { background: #F1E4CE; color: #6B6152; }
+  .t8  { background: #E7CFA8; color: #FFFDF8; }
+  .t16 { background: #D8B87E; color: #FFFDF8; }
+  .t32 { background: #C9A25F; color: #FFFDF8; }
+
+  /* ---------------- 扫雷 ---------------- */
+  .mine {
+    width: 330px;
+    height: 330px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 6px;
+    background: #FFFDF8;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(120, 145, 128, .18);
+  }
+
+  .mine span {
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    font-size: 26px;
+    font-weight: 600;
+    background: #DCE8DF;
+    color: #4F6B5B;
+  }
+
+  .mine span.on {
+    background: #FBF6EC;
+    border: 1px solid #EDE4D4;
+  }
+
+  .mine span.n1 { color: #5C7BB0; }
+  .mine span.n2 { color: #6E8F7B; }
+  .mine span.n3 { color: #A9736A; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="glow" id="glow"></div>
+
+    <div class="brand">
+      <span class="brand__mark">Y</span>
+      <span class="brand__text">
+        <strong>YSGame</strong>
+        <em>云舒的小游戏屋</em>
+      </span>
+    </div>
+
+    <div class="body">
+      <div class="copy">
+        <h1 id="title"></h1>
+        <p id="sub"></p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+
+    <div class="foot">ysgame.xyz</div>
+  </div>
+
+<script>
+  var CONF = {
+    sudoku: {
+      glow: 'rgba(107,122,194,.10)',
+      title: '数独<small>SUDOKU</small>',
+      sub: '五种难度，一格一格把秩序填回来'
+    },
+    g2048: {
+      glow: 'rgba(216,184,126,.20)',
+      title: '2048<small>SLIDE &amp; MERGE</small>',
+      sub: '滑两下就上手，看看你能叠到多少'
+    },
+    minesweeper: {
+      glow: 'rgba(159,184,168,.22)',
+      title: '扫雷<small>MINESWEEPER</small>',
+      sub: '第一次点击，永远不会踩雷'
+    }
+  };
+
+  var key = new URLSearchParams(location.search).get('g') || 'sudoku';
+  var c = CONF[key] || CONF.sudoku;
+
+  document.getElementById('glow').style.background = c.glow;
+  document.getElementById('title').innerHTML = c.title;
+  document.getElementById('sub').textContent = c.sub;
+
+  var art = document.getElementById('art');
+
+  if (key === 'sudoku') {
+    var nums = [5,3,0,0,7,0,0,0,0, 6,0,0,1,9,5,0,0,0, 0,9,8,0,0,0,0,6,0,
+                8,0,0,0,6,0,0,0,3, 4,0,0,8,0,3,0,0,1, 7,0,0,0,2,0,0,0,6,
+                0,6,0,0,0,0,2,8,0, 0,0,0,4,1,9,0,0,5, 0,0,0,0,8,0,0,7,9];
+    var g = document.createElement('div');
+    g.className = 'grid9';
+    nums.forEach(function (n) {
+      var s = document.createElement('span');
+      s.textContent = n ? n : '';
+      g.appendChild(s);
+    });
+    art.appendChild(g);
+  }
+
+  if (key === 'g2048') {
+    art.innerHTML = '<div class="tiles">' +
+      '<span class="t2">2</span><span class="t4">4</span><span class="t8">8</span>' +
+      '<span class="t0"></span><span class="t16">16</span><span class="t32">32</span>' +
+      '<span class="t0"></span><span class="t0"></span><span class="t8">8</span></div>';
+  }
+
+  if (key === 'minesweeper') {
+    // 1 = 已翻开空, 数字直接给, f = 旗, m = 雷, 0 = 未翻开
+    var cells = [0,1,2,1,0,
+                 0,1,'f',1,0,
+                 1,1,1,0,0,
+                 2,'f',1,0,0,
+                 'm',1,0,0,0];
+    var FLAG = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none">' +
+      '<path d="M8.5 21.2V3.2" stroke="#5A5F6B" stroke-width="1.8" stroke-linecap="round"/>' +
+      '<path d="M8.5 4.2h8.8l-2.2 3.3 2.2 3.3H8.5z" fill="#C97B6E"/></svg>';
+    var MINE = '<svg viewBox="0 0 24 24" width="30" height="30">' +
+      '<circle cx="12" cy="12" r="6.4" fill="#4A5060"/>' +
+      '<g stroke="#4A5060" stroke-width="1.9" stroke-linecap="round">' +
+      '<path d="M12 1.6v3.6M12 18.8v3.6M1.6 12h3.6M18.8 12h3.6"/>' +
+      '<path d="M4.8 4.8 7.4 7.4M16.6 16.6l2.6 2.6M19.2 4.8 16.6 7.4M7.4 16.6 4.8 19.2"/></g>' +
+      '<circle cx="10.2" cy="9.9" r="1.6" fill="#FFFDF8" opacity=".55"/></svg>';
+
+    var box = document.createElement('div');
+    box.className = 'mine';
+    cells.forEach(function (v) {
+      var s = document.createElement('span');
+      if (v === 0) { s.textContent = ''; }
+      else if (v === 'f') { s.innerHTML = FLAG; s.className = 'on'; }
+      else if (v === 'm') { s.innerHTML = MINE; s.className = 'on'; }
+      else if (v === 1) { s.className = 'on'; }
+      else { s.className = 'on n' + v; s.textContent = v; }
+      box.appendChild(s);
+    });
+    art.appendChild(box);
+  }
+</script>
+</body>
+</html>
