@@ -91,18 +91,20 @@
       <section class="ys-section" id="games">
         <div class="ys-section__head">
           <h2 class="ys-section__title">游戏大厅</h2>
-          <span class="ys-section__note">6 款游戏，现在能玩 3 款</span>
+          <span class="ys-section__note">全部免费，不用登录</span>
         </div>
 
-        <div class="ys-games">
+        <div class="ys-shelf">
+          <span class="ys-shelf__label">现在能玩</span>
+          <span class="ys-shelf__count">3 款</span>
+        </div>
+
+        <div class="ys-games ys-games--play">
 
           <!-- 1. 数独 -->
           <a class="game-card game-card--featured" href="games/sudoku/index.html"
              style="--card-bg: #ECEEF9; --card-a: #6B7AC2; --card-b: #9AA6D8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🧩</div>
-              <span class="game-card__badge game-card__badge--new">已上线</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">🧩</div>
             <h3 class="game-card__name">数独</h3>
             <p class="game-card__desc">
               九宫格里慢慢推理，一格一格把秩序填回来。五种难度，从入门到专家。
@@ -116,10 +118,7 @@
           <!-- 2. 2048 -->
           <a class="game-card" href="games/2048/index.html"
              style="--card-bg: #F9F2E3; --card-a: #DCC49B; --card-b: #C3A29E;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🔢</div>
-              <span class="game-card__badge game-card__badge--new">已上线</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">🔢</div>
             <h3 class="game-card__name">2048</h3>
             <p class="game-card__desc">
               上下左右，把相同的数字叠在一起。越叠越大，也越叠越安静。
@@ -133,10 +132,7 @@
           <!-- 3. 扫雷 -->
           <a class="game-card" href="games/minesweeper/index.html"
              style="--card-bg: #EEF4EF; --card-a: #9FB8A8; --card-b: #7C8497;">
-            <div class="game-card__top">
-              <div class="game-card__icon">💣</div>
-              <span class="game-card__badge game-card__badge--new">已上线</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">💣</div>
             <h3 class="game-card__name">扫雷</h3>
             <p class="game-card__desc">
               小心翻开每一格，用数字排除所有可能。第一次点永远不会踩雷。
@@ -147,54 +143,40 @@
             </div>
           </a>
 
+        </div>
+
+        <div class="ys-shelf ys-shelf--soon">
+          <span class="ys-shelf__label">还在做</span>
+          <span class="ys-shelf__count">3 款</span>
+        </div>
+        <p class="ys-shelf__note">做好一款，就把它挪到上面去。</p>
+
+        <div class="ys-games ys-games--soon">
+
           <!-- 4. 拼图 -->
-          <div class="game-card game-card--locked"
-               style="--card-bg: #F6EDEA; --card-a: #C3A29E; --card-b: #DCC49B;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🎨</div>
-              <span class="game-card__badge game-card__badge--soon">开发中</span>
-            </div>
-            <h3 class="game-card__name">拼图</h3>
-            <p class="game-card__desc">
-              一块一块把画面拼回去。手指在动，脑子可以什么都不想。
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="解压指数 5 星">★★★★★</span>
-              <span class="game-card__level">难度 易</span>
+          <div class="game-card game-card--soon" style="--card-bg: #F6EDEA;">
+            <div class="game-card__icon" aria-hidden="true">🎨</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">拼图</h3>
+              <p class="game-card__desc">一块一块把画面拼回去，手指在动，脑子可以什么都不想。</p>
             </div>
           </div>
 
           <!-- 5. 消消乐 -->
-          <div class="game-card game-card--locked"
-               style="--card-bg: #FBF6EC; --card-a: #E1B7A8; --card-b: #A9B9D8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🍬</div>
-              <span class="game-card__badge game-card__badge--soon">开发中</span>
-            </div>
-            <h3 class="game-card__name">消消乐</h3>
-            <p class="game-card__desc">
-              三颗同色连在一起，看着它们一个个消失。休闲游戏里的王者。
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="解压指数 5 星">★★★★★</span>
-              <span class="game-card__level">难度 中</span>
+          <div class="game-card game-card--soon" style="--card-bg: #FBF6EC;">
+            <div class="game-card__icon" aria-hidden="true">🍬</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">消消乐</h3>
+              <p class="game-card__desc">三颗同色连在一起，看着它们一个个消失。</p>
             </div>
           </div>
 
           <!-- 6. 贪吃蛇 -->
-          <div class="game-card game-card--locked"
-               style="--card-bg: #EDEFF3; --card-a: #8E9AAE; --card-b: #9FB8A8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🐍</div>
-              <span class="game-card__badge game-card__badge--soon">开发中</span>
-            </div>
-            <h3 class="game-card__name">贪吃蛇</h3>
-            <p class="game-card__desc">
-              一条线，一个方向，越吃越长。小时候在诺基亚上偷偷玩的那个。
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="解压指数 3 星">★★★</span>
-              <span class="game-card__level">难度 中</span>
+          <div class="game-card game-card--soon" style="--card-bg: #EDEFF3;">
+            <div class="game-card__icon" aria-hidden="true">🐍</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">贪吃蛇</h3>
+              <p class="game-card__desc">一条线，一个方向，越吃越长。小时候在诺基亚上偷偷玩的那个。</p>
             </div>
           </div>
 

@@ -473,6 +473,13 @@ body.lang-en .ys-lang {
   transform: translateY(-2px);
 }
 
+/* 键盘操作时给一个能看清的焦点框，鼠标点击不出现 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ys-primary);
+  outline-offset: 3px;
+}
+
 /* --------------------------------------------------------------------------
    5. 首页 Hero
    -------------------------------------------------------------------------- */
@@ -561,12 +568,60 @@ body.lang-en .ys-lang {
 }
 
 /* --------------------------------------------------------------------------
+   6.5 货架标签
+   能玩的排在前排，还在做的收成后排的小条目。
+   游戏一多，光靠一路排下去会在手机上有四五屏，先按状态把货架分层。
+   [gyh 2026-11-02 新增]
+   -------------------------------------------------------------------------- */
+.ys-shelf {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+}
+
+.ys-shelf__label {
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.ys-shelf__count {
+  font-size: .74rem;
+  color: var(--ys-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 标签后面拉一条细线，标出这一格货架到哪里为止 */
+.ys-shelf::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--ys-line-soft);
+}
+
+.ys-shelf--soon {
+  margin-top: 36px;
+}
+
+.ys-shelf__note {
+  margin: -6px 0 14px;
+  font-size: .78rem;
+  color: var(--ys-text-faint);
+}
+
+/* --------------------------------------------------------------------------
    7. 游戏卡片网格
    -------------------------------------------------------------------------- */
 .ys-games {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+}
+
+/* 后排同样三列，只是排得更紧 */
+.ys-games--soon {
+  gap: 12px;
 }
 
 .game-card {
@@ -605,7 +660,7 @@ a.game-card:hover .game-card__icon {
   transform: rotate(-6deg) scale(1.06);
 }
 
-/* 数独是当前唯一的成品，让它比占位卡更重一点，一眼看出哪里能玩 */
+/* 主推的那款（现在是数独）比其它卡更重一点，第一眼知道从哪开始 */
 .game-card--featured {
   background: linear-gradient(158deg, #FDFCFA 0%, #EDEBF9 100%);
   border-color: #C4CAEB;
@@ -622,13 +677,6 @@ a.game-card:hover .game-card__icon {
   font-size: 1.28rem;
 }
 
-.game-card__top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .game-card__icon {
   width: 54px;
   height: 54px;
@@ -639,26 +687,6 @@ a.game-card:hover .game-card__icon {
   font-size: 1.6rem;
   background: var(--card-bg, var(--ys-primary-soft));
   transition: transform .35s var(--ys-ease);
-}
-
-.game-card__badge {
-  padding: 4px 11px;
-  border-radius: 999px;
-  font-size: .72rem;
-  letter-spacing: .03em;
-  white-space: nowrap;
-}
-
-.game-card__badge--new {
-  color: #7A5B3E;
-  background: var(--ys-sand-soft);
-  border: 1px solid #EBDCBE;
-}
-
-.game-card__badge--soon {
-  color: var(--ys-text-soft);
-  background: var(--ys-surface-alt);
-  border: 1px solid var(--ys-line);
 }
 
 .game-card__name {
@@ -674,6 +702,7 @@ a.game-card:hover .game-card__icon {
   line-height: 1.7;
   color: var(--ys-text-soft);
   min-height: 2.95em;
+  text-wrap: pretty;
 }
 
 .game-card__meta {
@@ -700,34 +729,54 @@ a.game-card:hover .game-card__icon {
   letter-spacing: .02em;
 }
 
-.game-card__go {
-  display: inline-flex;
+/* 后排卡片：做成矮条目，不跟能玩的那三张抢视线
+   [gyh 2026-11-02 修改：原来是与前排等大的占位卡，6 款排下来手机要滑四屏]
+   -------------------------------------------------------------------------- */
+.game-card--soon {
+  flex-direction: row;
   align-items: center;
-  gap: 4px;
-  color: var(--ys-primary-deep);
-  font-size: .8rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity .25s var(--ys-ease), transform .25s var(--ys-ease);
-}
-
-/* 未上线卡片：去饱和 + 不可点 */
-.game-card--locked {
-  cursor: default;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
   background: var(--ys-surface-alt);
+  cursor: default;
 }
 
-.game-card--locked::before {
-  opacity: .28;
+.game-card--soon::before {
+  display: none;
 }
 
-.game-card--locked .game-card__icon {
-  filter: grayscale(.55);
-  opacity: .72;
+.game-card--soon .game-card__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  font-size: 1rem;
+  filter: grayscale(.6);
+  opacity: .8;
 }
 
-.game-card--locked .game-card__name {
+.game-card--soon .game-card__text {
+  min-width: 0;
+}
+
+.game-card--soon .game-card__name {
+  margin: 0;
+  font-size: .9rem;
+  font-weight: 600;
   color: var(--ys-text-soft);
+  white-space: nowrap;
+}
+
+.game-card--soon .game-card__desc {
+  margin: 2px 0 0;
+  min-height: 0;
+  font-size: .76rem;
+  line-height: 1.55;
+  color: var(--ys-text-faint);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* --------------------------------------------------------------------------
@@ -1225,16 +1274,16 @@ kbd {
 }
 
 /* 网格内错峰出现：节奏要快，首屏不能让人觉得"还在加载" */
-.ys-games .game-card {
+.ys-games > .game-card {
   animation: ysFadeUp .42s var(--ys-ease) both;
 }
 
-.ys-games .game-card:nth-child(1) { animation-delay: .02s; }
-.ys-games .game-card:nth-child(2) { animation-delay: .05s; }
-.ys-games .game-card:nth-child(3) { animation-delay: .08s; }
-.ys-games .game-card:nth-child(4) { animation-delay: .11s; }
-.ys-games .game-card:nth-child(5) { animation-delay: .14s; }
-.ys-games .game-card:nth-child(6) { animation-delay: .17s; }
+.ys-games > .game-card:nth-child(1) { animation-delay: .02s; }
+.ys-games > .game-card:nth-child(2) { animation-delay: .05s; }
+.ys-games > .game-card:nth-child(3) { animation-delay: .08s; }
+.ys-games > .game-card:nth-child(4) { animation-delay: .11s; }
+.ys-games > .game-card:nth-child(5) { animation-delay: .14s; }
+.ys-games > .game-card:nth-child(6) { animation-delay: .17s; }
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1253,6 +1302,34 @@ kbd {
 @media (max-width: 980px) {
   .ys-games {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* 两列时如果游戏是奇数个，最后一张铺满整行，右边不留半格空位 */
+  .ys-games > .game-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  /* 铺满的那张改成横排，图标、名字、难度一行说完，不至于变成一张空荡的大卡 */
+  .ys-games--play > .game-card:last-child:nth-child(odd) {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+  }
+
+  .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__name {
+    margin: 0;
+  }
+
+  .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__desc {
+    display: none;
+  }
+
+  .ys-games--play > .game-card:last-child:nth-child(odd) .game-card__meta {
+    margin: 0 0 0 auto;
+    padding: 0;
+    border: 0;
+    gap: 14px;
   }
 
   .ys-story {
@@ -1332,23 +1409,133 @@ kbd {
     padding-bottom: 52px;
   }
 
+  /* 手机上是竖向滚动的，先把头图压矮，让游戏货架尽早出现在第一屏 */
   .ys-hero {
-    padding: 12px 0 40px;
+    padding: 4px 0 26px;
+  }
+
+  .ys-hero__eyebrow {
+    font-size: .76rem;
+    letter-spacing: .08em;
+  }
+
+  .ys-hero__title {
+    margin-top: 12px;
+    font-size: 1.62rem;
+    line-height: 1.36;
   }
 
   .ys-hero__desc {
-    font-size: .95rem;
+    margin-top: 12px;
+    font-size: .88rem;
+    line-height: 1.72;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
+  .ys-hero__actions {
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  .ys-hero__actions .ys-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 11px 10px;
+    font-size: .86rem;
+  }
+
+  /* 两列小格子：一屏能扫完所有能玩的游戏 */
   .ys-games {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
+  .ys-games--soon {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .ys-shelf {
+    margin-bottom: 12px;
+  }
+
+  .ys-shelf--soon {
+    margin-top: 26px;
+  }
+
+  /* 标题和说明放在同一行，省下一行高度 */
   .ys-section__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    margin-bottom: 16px;
+  }
+
+  .ys-section__note {
+    font-size: .8rem;
+  }
+
+  .game-card {
+    padding: 14px 14px 12px;
+    border-radius: 16px;
+  }
+
+  .game-card__icon,
+  .game-card--featured .game-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 1.16rem;
+  }
+
+  .game-card__name {
+    margin: 10px 0 0;
+    font-size: 1rem;
+  }
+
+  .game-card--featured .game-card__name {
+    font-size: 1.04rem;
+  }
+
+  /* 卡片描述在手机上让位：找游戏靠图标和名字，描述留给桌面 */
+  .game-card__desc {
+    display: none;
+  }
+
+  .game-card__meta {
+    padding-top: 10px;
+    font-size: .72rem;
+  }
+
+  .game-card__level {
+    font-size: .72rem;
+  }
+
+  .game-card--soon {
+    padding: 9px 12px;
+    border-radius: 12px;
+  }
+
+  .game-card--soon .game-card__icon {
+    width: 30px;
+    height: 30px;
+    font-size: .9rem;
+  }
+
+  .game-card--soon .game-card__name {
+    font-size: .86rem;
+  }
+
+  /* 后排条目在手机上只留名字，三款能挤进一屏 */
+  .game-card--soon .game-card__desc {
+    display: none;
+  }
+
+  .ys-story {
+    margin-top: 40px;
   }
 
   .ys-card {
@@ -1372,10 +1559,6 @@ kbd {
   .ys-footer__bottom {
     flex-direction: column;
     gap: 6px;
-  }
-
-  .game-card__desc {
-    min-height: 0;
   }
 }
 

@@ -76,7 +76,7 @@
         </h1>
 
         <p class="ys-hero__desc">
-          No leaderboards, no energy meters, no "watch an ad to keep playing." Just a few slow games you can open, play for as long as you feel like, and close without being asked to come back.
+          No leaderboards, no energy meters, no "watch an ad to keep playing." Just a few slow games you can open and close whenever you want.
         </p>
 
         <div class="ys-hero__actions">
@@ -88,17 +88,19 @@
       <section class="ys-section" id="games">
         <div class="ys-section__head">
           <h2 class="ys-section__title">Games</h2>
-          <span class="ys-section__note">Six planned, three ready to play</span>
+          <span class="ys-section__note">All free, no sign-in</span>
         </div>
 
-        <div class="ys-games">
+        <div class="ys-shelf">
+          <span class="ys-shelf__label">Ready to play</span>
+          <span class="ys-shelf__count">3 games</span>
+        </div>
+
+        <div class="ys-games ys-games--play">
 
           <a class="game-card game-card--featured" href="../games/sudoku/index.html?lang=en"
              style="--card-bg: #ECEEF9; --card-a: #6B7AC2; --card-b: #9AA6D8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🧩</div>
-              <span class="game-card__badge game-card__badge--new">Ready</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">🧩</div>
             <h3 class="game-card__name">Sudoku</h3>
             <p class="game-card__desc">
               Nine rows, nine columns, one number at a time. Five levels, from your first grid to proper work.
@@ -111,10 +113,7 @@
 
           <a class="game-card" href="../games/2048/index.html?lang=en"
              style="--card-bg: #F9F2E3; --card-a: #DCC49B; --card-b: #C3A29E;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🔢</div>
-              <span class="game-card__badge game-card__badge--new">Ready</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">🔢</div>
             <h3 class="game-card__name">2048</h3>
             <p class="game-card__desc">
               Slide the tiles, merge the matching numbers. Bigger numbers, quieter head.
@@ -127,10 +126,7 @@
 
           <a class="game-card" href="../games/minesweeper/index.html?lang=en"
              style="--card-bg: #EEF4EF; --card-a: #9FB8A8; --card-b: #7C8497;">
-            <div class="game-card__top">
-              <div class="game-card__icon">💣</div>
-              <span class="game-card__badge game-card__badge--new">Ready</span>
-            </div>
+            <div class="game-card__icon" aria-hidden="true">💣</div>
             <h3 class="game-card__name">Minesweeper</h3>
             <p class="game-card__desc">
               Turn over one square at a time and let the numbers do the reasoning. Your first click is always safe.
@@ -141,51 +137,37 @@
             </div>
           </a>
 
-          <div class="game-card game-card--locked"
-               style="--card-bg: #F6EDEA; --card-a: #C3A29E; --card-b: #DCC49B;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🎨</div>
-              <span class="game-card__badge game-card__badge--soon">In progress</span>
-            </div>
-            <h3 class="game-card__name">Jigsaw</h3>
-            <p class="game-card__desc">
-              Put the picture back together, piece by piece. Hands busy, mind empty.
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="Calming: 5 of 5">★★★★★</span>
-              <span class="game-card__level">Easy</span>
+        </div>
+
+        <div class="ys-shelf ys-shelf--soon">
+          <span class="ys-shelf__label">In the works</span>
+          <span class="ys-shelf__count">3 games</span>
+        </div>
+        <p class="ys-shelf__note">Each one moves up to the shelf above when it is done.</p>
+
+        <div class="ys-games ys-games--soon">
+
+          <div class="game-card game-card--soon" style="--card-bg: #F6EDEA;">
+            <div class="game-card__icon" aria-hidden="true">🎨</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">Jigsaw</h3>
+              <p class="game-card__desc">Put the picture back together, piece by piece. Hands busy, mind empty.</p>
             </div>
           </div>
 
-          <div class="game-card game-card--locked"
-               style="--card-bg: #FBF6EC; --card-a: #E1B7A8; --card-b: #A9B9D8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🍬</div>
-              <span class="game-card__badge game-card__badge--soon">In progress</span>
-            </div>
-            <h3 class="game-card__name">Match three</h3>
-            <p class="game-card__desc">
-              Line three of a kind up and watch them go. The comfort food of games.
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="Calming: 5 of 5">★★★★★</span>
-              <span class="game-card__level">Medium</span>
+          <div class="game-card game-card--soon" style="--card-bg: #FBF6EC;">
+            <div class="game-card__icon" aria-hidden="true">🍬</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">Match three</h3>
+              <p class="game-card__desc">Line three of a kind up and watch them go. The comfort food of games.</p>
             </div>
           </div>
 
-          <div class="game-card game-card--locked"
-               style="--card-bg: #EDEFF3; --card-a: #8E9AAE; --card-b: #9FB8A8;">
-            <div class="game-card__top">
-              <div class="game-card__icon">🐍</div>
-              <span class="game-card__badge game-card__badge--soon">In progress</span>
-            </div>
-            <h3 class="game-card__name">Snake</h3>
-            <p class="game-card__desc">
-              One line, one direction, longer with every bite. The one you played on a Nokia.
-            </p>
-            <div class="game-card__meta">
-              <span class="game-card__stars" title="Calming: 3 of 5">★★★</span>
-              <span class="game-card__level">Medium</span>
+          <div class="game-card game-card--soon" style="--card-bg: #EDEFF3;">
+            <div class="game-card__icon" aria-hidden="true">🐍</div>
+            <div class="game-card__text">
+              <h3 class="game-card__name">Snake</h3>
+              <p class="game-card__desc">One line, one direction, longer with every bite. The one you played on a Nokia.</p>
             </div>
           </div>
 
