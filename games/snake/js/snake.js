@@ -297,6 +297,7 @@
     state.acc = 0;
     hideCard();
     syncPauseButton();
+    soundStart();
   }
 
   function pause() {
@@ -414,45 +415,10 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
-  function soundEat() {
-    beep(660, 0.06, 0.035, 0);
-    beep(880, 0.06, 0.025, 0.05);
-  }
-
-  function soundDie() {
-    beep(300, 0.18, 0.05, 0);
-    beep(180, 0.3, 0.045, 0.1);
-  }
+  // [gyh 2026-11-03 修改] 统一走全站音效引擎
+  function soundEat() { if (window.YSound) window.YSound.play('eat'); }
+  function soundDie() { if (window.YSound) window.YSound.play('lose'); }
+  function soundStart() { if (window.YSound) window.YSound.play('start'); }
 
   /* ------------------------------------------------------------------
      存档

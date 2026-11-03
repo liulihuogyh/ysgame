@@ -556,62 +556,18 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
-  function soundPick() { beep(620, 0.04, 0.02, 0); }
-  function soundSwap() { beep(500, 0.05, 0.025, 0); }
+  // [gyh 2026-11-03 修改] 统一走全站音效引擎；连击越高音越高
+  function soundPick() { if (window.YSound) window.YSound.play('pick'); }
+  function soundSwap() { if (window.YSound) window.YSound.play('swap'); }
 
   function soundClear(combo) {
-    var base = 520 + Math.min(combo - 1, 4) * 80;
-    beep(base, 0.08, 0.03, 0);
-    beep(base * 1.25, 0.07, 0.02, 0.05);
+    if (window.YSound) window.YSound.play('pop', { combo: combo });
   }
 
-  function soundBad() { beep(210, 0.1, 0.03, 0); }
-
-  function soundShuffle() {
-    beep(420, 0.08, 0.025, 0);
-    beep(520, 0.08, 0.022, 0.07);
-  }
-
-  function soundWin() {
-    beep(523, 0.2, 0.05, 0);
-    beep(659, 0.2, 0.046, 0.12);
-    beep(784, 0.3, 0.044, 0.24);
-  }
-
-  function soundOver() {
-    beep(392, 0.22, 0.04, 0);
-    beep(311, 0.3, 0.036, 0.14);
-  }
+  function soundBad() { if (window.YSound) window.YSound.play('error'); }
+  function soundShuffle() { if (window.YSound) window.YSound.play('shuffle'); }
+  function soundWin() { if (window.YSound) window.YSound.play('win'); }
+  function soundOver() { if (window.YSound) window.YSound.play('lose'); }
 
   /* ------------------------------------------------------------------
      存档

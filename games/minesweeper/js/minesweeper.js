@@ -472,54 +472,11 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
-  function soundReveal() {
-    beep(520, 0.045, 0.028, 0);
-  }
-
-  function soundFlag() {
-    beep(700, 0.05, 0.04, 0);
-  }
-
-  function soundBoom() {
-    beep(150, 0.32, 0.075, 0);
-    beep(90, 0.42, 0.07, 0.05);
-  }
-
-  function soundWin() {
-    beep(523, 0.2, 0.055, 0);
-    beep(659, 0.2, 0.05, 0.11);
-    beep(784, 0.28, 0.048, 0.22);
-  }
+  // [gyh 2026-11-03 修改] 统一走全站音效引擎；爆炸换成噪声 + 低频，比正弦波像回事
+  function soundReveal() { if (window.YSound) window.YSound.play('reveal'); }
+  function soundFlag() { if (window.YSound) window.YSound.play('flag'); }
+  function soundBoom() { if (window.YSound) window.YSound.play('boom'); }
+  function soundWin() { if (window.YSound) window.YSound.play('win'); }
 
   /* ------------------------------------------------------------------
      存档

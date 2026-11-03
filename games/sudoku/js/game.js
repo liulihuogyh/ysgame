@@ -409,51 +409,9 @@ class SudokuGame {
    * 播放音效
    */
   playSound(type) {
-    // [gyh 2026-11-02 修改] 原实现每次发声都 new AudioContext，浏览器对同时存在的
-    // 音频上下文数量有上限（通常 6 个），连续玩几分钟后音效就会静默失效。
-    // 改为复用同一个上下文，并接入全站统一的音效开关。
-    if (window.YSGame && window.YSGame.isSoundOn && !window.YSGame.isSoundOn()) {
-      return;
-    }
-
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-
-    if (!this._audioCtx) {
-      this._audioCtx = new AudioCtx();
-    }
-    const audioContext = this._audioCtx;
-
-    // 移动端或长时间闲置后上下文会被挂起，需要唤醒
-    if (audioContext.state === 'suspended') {
-      audioContext.resume();
-    }
-
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    const sounds = {
-      'input': { freq: 800, duration: 0.05 },
-      'hint': { freq: 600, duration: 0.1 },
-      'error': { freq: 200, duration: 0.15 },
-      'undo': { freq: 500, duration: 0.05 },
-      'start': { freq: 1000, duration: 0.1 },
-      'complete': { freq: 1200, duration: 0.3 }
-    };
-    
-    const sound = sounds[type] || sounds.input;
-    
-    oscillator.frequency.value = sound.freq;
-    oscillator.type = 'sine';
-    
-    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + sound.duration);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + sound.duration);
+    // [gyh 2026-11-03 修改] 统一走全站音效引擎，音色 / 音量 / 开关都在 js/sound.js 里维护。
+    // 原来的实现是自己 new AudioContext + 正弦波，和另外七款游戏的音色对不上。
+    if (window.YSound) window.YSound.play(type);
   }
 
   /**

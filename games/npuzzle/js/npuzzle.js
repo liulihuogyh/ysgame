@@ -69,6 +69,19 @@
   function rowOf(i) { return Math.floor(i / state.n); }
   function colOf(i) { return i % state.n; }
 
+  /* ---------------- 音效 ----------------
+     [gyh 2026-11-03 新增] 走全站引擎，本页自动用「塑料滑块」主题：
+     高音、清脆、短促。音高跟着滑块所在的行列走，滑不同位置声音不一样。
+     ------------------------------------ */
+
+  function soundSlide(index) {
+    if (window.YSound) window.YSound.play('slide', { step: rowOf(index) + colOf(index) });
+  }
+
+  function soundUndo() {
+    if (window.YSound) window.YSound.play('undo');
+  }
+
   function formatTime(sec) {
     var s = Math.max(0, Math.floor(sec));
     var m = Math.floor(s / 60);
@@ -304,6 +317,7 @@
     place();
     refreshHud();
     saveState();
+    if (!silent) soundSlide(index);
 
     if (!silent && isSolved(state.tiles)) finish();
     return true;
@@ -334,6 +348,7 @@
     place();
     refreshHud();
     saveState();
+    soundUndo();
   }
 
   /* ---------------- 结算 ---------------- */
@@ -355,6 +370,9 @@
     }
 
     refreshHud();
+
+    // 破纪录换一段更长的旋律，比普通的"拼好了"更值钱
+    if (window.YSound) window.YSound.play(isRecord ? 'record' : 'win');
 
     winTimer = window.setTimeout(showOverlay, 480);
 

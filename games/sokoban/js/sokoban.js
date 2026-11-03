@@ -396,6 +396,7 @@
     // 推到角落（不是目标点）就再也推不出来了，提醒一下，不强制打断
     if (bx && !isGoal(bx.r, bx.c) && isCorner(bx.r, bx.c)) {
       showToast(t('deadlock'));
+      soundDeadlock();
     }
 
     save();
@@ -528,45 +529,13 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay, type) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = type || 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
-  function soundStep() { beep(320, 0.035, 0.014, 0, 'triangle'); }
-  function soundPush() { beep(180, 0.07, 0.03, 0, 'triangle'); }
-  function soundUndo() { beep(420, 0.05, 0.02, 0); }
-
-  function soundWin() {
-    beep(523, 0.18, 0.05, 0);
-    beep(659, 0.2, 0.046, 0.11);
-    beep(784, 0.28, 0.044, 0.23);
-  }
+  // [gyh 2026-11-03 修改] 改用全站音效引擎。
+  // 推箱子走自己的主题：低音、闷、带石头重量，和别的游戏一听就能分开。
+  function soundStep() { if (window.YSound) window.YSound.play('step'); }
+  function soundPush() { if (window.YSound) window.YSound.play('push'); }
+  function soundUndo() { if (window.YSound) window.YSound.play('undo'); }
+  function soundWin() { if (window.YSound) window.YSound.play('win'); }
+  function soundDeadlock() { if (window.YSound) window.YSound.play('deadlock'); }
 
   /* ------------------------------------------------------------------
      存档

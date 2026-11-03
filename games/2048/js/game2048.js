@@ -323,56 +323,22 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    // 复用同一个上下文，浏览器对创建数量有上限
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
+  // [gyh 2026-11-03 修改] 改用全站共用的 YSound，音色与音量统一维护在 js/sound.js
   function soundMove() {
-    beep(210, 0.05, 0.035, 0);
+    if (window.YSound) window.YSound.play('move');
   }
 
   function soundMerge(value) {
-    // 数值越大音越高，但用对数压住，别到刺耳
-    var freq = 260 + Math.min(Math.log2(value), 11) * 26;
-    beep(freq, 0.1, 0.05, 0);
+    // 数值越大音越高；引擎那边会按层数压住，不会刺耳
+    if (window.YSound) window.YSound.play('merge', { level: Math.log2(value) });
   }
 
   function soundWin() {
-    beep(392, 0.22, 0.06, 0);
-    beep(494, 0.22, 0.055, 0.12);
-    beep(587, 0.3, 0.05, 0.24);
+    if (window.YSound) window.YSound.play('win');
   }
 
   function soundOver() {
-    beep(330, 0.2, 0.05, 0);
-    beep(247, 0.28, 0.045, 0.14);
+    if (window.YSound) window.YSound.play('lose');
   }
 
   /* ------------------------------------------------------------------

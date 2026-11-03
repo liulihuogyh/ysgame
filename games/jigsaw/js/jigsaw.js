@@ -372,6 +372,11 @@
     refreshHud();
     soundSwap();
 
+    // 有一块落到自己的位置上，补一声音，拼图最爽的就是这一下
+    if (state.pieces[a] === a || state.pieces[b] === b) {
+      window.setTimeout(soundSnap, 60);
+    }
+
     if (isSolved()) {
       win();
       return;
@@ -456,44 +461,11 @@
      音效
      ------------------------------------------------------------------ */
 
-  var audioCtx = null;
-
-  function soundContext() {
-    if (!window.YSGame || !window.YSGame.isSoundOn()) return null;
-    var AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  function beep(freq, duration, volume, delay) {
-    var ac = soundContext();
-    if (!ac) return;
-
-    var start = ac.currentTime + (delay || 0);
-    var osc = ac.createOscillator();
-    var gain = ac.createGain();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, start);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(volume, start + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(gain).connect(ac.destination);
-    osc.start(start);
-    osc.stop(start + duration + 0.02);
-  }
-
-  function soundPick() { beep(660, 0.04, 0.022, 0); }
-  function soundSwap() { beep(470, 0.06, 0.03, 0); }
-
-  function soundWin() {
-    beep(523, 0.2, 0.05, 0);
-    beep(659, 0.2, 0.046, 0.12);
-    beep(784, 0.3, 0.044, 0.24);
-  }
+  // [gyh 2026-11-03 修改] 统一走全站音效引擎
+  function soundPick() { if (window.YSound) window.YSound.play('pick'); }
+  function soundSwap() { if (window.YSound) window.YSound.play('swap'); }
+  function soundSnap() { if (window.YSound) window.YSound.play('snap'); }
+  function soundWin() { if (window.YSound) window.YSound.play('win'); }
 
   /* ------------------------------------------------------------------
      存档
