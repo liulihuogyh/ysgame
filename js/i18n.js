@@ -602,6 +602,58 @@
         deadlock: 'That box is stuck in a corner — undo a step.',
         confirm_restart: 'Restart this level? Your moves so far will be lost.'
       }
+    },
+
+    gnpuzzle: {
+      zh: {
+        page_title: '数字华容道 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线数字华容道：3×3、4×4、5×5 三种规格，点一下空格旁边的数字就能滑动，自动记录每档最少步数。无需注册登录，打开就能玩。',
+        game_title: '数字华容道',
+        tagline: '把数字按顺序排好，只留右下角一个空格',
+        share_line: '3×3 到 5×5，点一下就滑。试试最少几步能拼回去。',
+
+        board_aria: '数字华容道棋盘',
+        size_group_aria: '选择规格',
+
+        label_moves: '步数',
+        label_time: '用时',
+        label_best: '最佳步数',
+
+        btn_undo: '↶ 撤销一步',
+        btn_shuffle: '重新打乱',
+        btn_again: '再来一局',
+
+        hint_controls: '点空格旁边的数字，它就滑过去。也可以在棋盘上滑动，或用方向键（方向 = 数字滑动的方向）。',
+
+        win_title: '拼好了',
+        win_title_record: '破纪录了',
+        win_sub: '{size} · {moves} 步 · {time}'
+      },
+
+      en: {
+        page_title: 'Number Slide, free to play | YSGame',
+        page_desc: 'Free online number slide puzzle in 3x3, 4x4 and 5x5. Tap a tile next to the gap to slide it in; your best move count is saved for each size. No sign-up, no download.',
+        game_title: 'Number Slide',
+        tagline: 'Line the numbers up and leave one gap at the end',
+        share_line: 'From 3x3 up to 5x5 — tap a tile and it slides. How few moves do you need?',
+
+        board_aria: 'Number slide board',
+        size_group_aria: 'Choose a size',
+
+        label_moves: 'Moves',
+        label_time: 'Time',
+        label_best: 'Best moves',
+
+        btn_undo: '↶ Undo',
+        btn_shuffle: 'Shuffle again',
+        btn_again: 'Play again',
+
+        hint_controls: 'Tap a tile next to the gap and it slides in. You can also swipe the board or use the arrow keys.',
+
+        win_title: 'Solved',
+        win_title_record: 'New record',
+        win_sub: '{size} · {moves} moves · {time}'
+      }
     }
   };
 
