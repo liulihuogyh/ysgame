@@ -130,6 +130,67 @@
     place-items: center;
   }
 
+  /* 推箱子：一块小棋盘，一格一格画出来 */
+  .soko {
+    display: grid;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 16px 34px rgba(69, 75, 89, .16);
+  }
+
+  .soko i {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+
+  .soko i.w {
+    background: linear-gradient(158deg, #D3C4A9, #C2B08F);
+    box-shadow: inset 0 1px 0 rgba(255, 253, 248, .28);
+  }
+
+  .soko i.f {
+    background: #F7F0E3;
+    box-shadow: inset 0 0 0 1px rgba(120, 104, 78, .05);
+  }
+
+  .soko u {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+  }
+
+  .soko u.goal {
+    width: 12px;
+    height: 12px;
+    border: 1.5px dashed #B99A8F;
+    border-radius: 50%;
+  }
+
+  .soko u.box {
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: linear-gradient(158deg, #CBA9A2, #B98F86);
+    box-shadow: inset 0 0 0 2px rgba(255, 253, 248, .4), 0 2px 5px rgba(120, 84, 76, .22);
+  }
+
+  .soko u.box.on {
+    background: linear-gradient(158deg, #B2C8B7, #8FA88C);
+    box-shadow: inset 0 0 0 2px rgba(255, 253, 248, .45), 0 2px 5px rgba(95, 127, 104, .2);
+  }
+
+  .soko u.man {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 26%, #909CDB 0%, #6B7AC2 58%, #58659F 100%);
+    box-shadow: 0 2px 5px rgba(60, 70, 110, .28);
+  }
+
   .foot {
     position: relative;
     font-size: 18px;
@@ -372,6 +433,11 @@
       glow: 'rgba(126,155,132,.22)',
       title: '贪吃蛇<small>SNAKE</small>',
       sub: '一条线，一个方向，越吃越长'
+    },
+    sokoban: {
+      glow: 'rgba(198,180,146,.24)',
+      title: '推箱子<small>SOKOBAN</small>',
+      sub: '只能推不能拉，推错了还能撤销一步'
     }
   };
 
@@ -449,6 +515,44 @@
       jig.appendChild(t);
     });
     art.appendChild(jig);
+  }
+
+  if (key === 'sokoban') {
+    var MAP = [
+      '#########',
+      '#  * .  #',
+      '#       #',
+      '#  $    #',
+      '#   @   #',
+      '#########'
+    ];
+    var sb = document.createElement('div');
+    sb.className = 'soko';
+    sb.style.gridTemplateColumns = 'repeat(9, 36px)';
+    MAP.forEach(function (row) {
+      row.split('').forEach(function (ch) {
+        var cell = document.createElement('i');
+        if (ch === '#') {
+          cell.className = 'w';
+        } else {
+          cell.className = 'f';
+          if (ch === '.' || ch === '*') {
+            cell.insertAdjacentHTML('beforeend', '<u class="goal"></u>');
+          }
+          if (ch === '$') {
+            cell.insertAdjacentHTML('beforeend', '<u class="box"></u>');
+          }
+          if (ch === '*') {
+            cell.insertAdjacentHTML('beforeend', '<u class="box on"></u>');
+          }
+          if (ch === '@') {
+            cell.insertAdjacentHTML('beforeend', '<u class="man"></u>');
+          }
+        }
+        sb.appendChild(cell);
+      });
+    });
+    art.appendChild(sb);
   }
 
   if (key === 'match3') {

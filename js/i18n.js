@@ -528,6 +528,80 @@
 
         confirm_new: 'Start over? This round will be lost.'
       }
+    },
+
+    gsokoban: {
+      zh: {
+        page_title: '推箱子 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线推箱子：十关由易到难，方向键、WASD 或手指滑动都能玩，推错了可以撤销一步，自动记录每关最少步数。无需注册登录，打开就能玩。',
+        game_title: '推箱子',
+        tagline: '把箱子推到点上，推不回来就撤销一步',
+        share_line: '十关推箱子，慢慢想。推错了撤销一步，不用重开。',
+
+        board_aria: '推箱子棋盘',
+        level_group_aria: '选择关卡',
+        level_n: '第 {n} 关',
+        pad_aria: '方向键',
+        dir_up: '上',
+        dir_down: '下',
+        dir_left: '左',
+        dir_right: '右',
+
+        label_moves: '步数',
+        label_time: '用时',
+        label_best: '本关最佳',
+
+        btn_undo: '↶ 撤销一步',
+        btn_restart: '重来这一关',
+        btn_next: '下一关',
+        btn_first: '回到第一关',
+
+        hint_controls: '方向键或 WASD 移动，推错了按撤销（U）。手机上滑一下，或按住下面的方向键。',
+
+        win_title: '过关了',
+        win_sub: '第 {n} 关的箱子都归位了。',
+        win_title_all: '十关都过了',
+        win_sub_all: '十关全清。慢慢来，反而更快。',
+
+        deadlock: '这个箱子推进死角了，按撤销退回一步。',
+        confirm_restart: '重来这一关？当前步数会清零。'
+      },
+
+      en: {
+        page_title: 'Sokoban, free to play | YSGame',
+        page_desc: 'Ten hand-made Sokoban levels, easy to hard. Arrow keys, WASD or swipe; undo whenever a push goes wrong. Your best move count is kept for each level. No account needed.',
+        game_title: 'Sokoban',
+        tagline: 'Push every box onto a dot — undo if it goes wrong',
+        share_line: 'Ten little warehouse puzzles. Take your time; undo is always there.',
+
+        board_aria: 'Sokoban board',
+        level_group_aria: 'Choose a level',
+        level_n: 'Level {n}',
+        pad_aria: 'Direction pad',
+        dir_up: 'Up',
+        dir_down: 'Down',
+        dir_left: 'Left',
+        dir_right: 'Right',
+
+        label_moves: 'Moves',
+        label_time: 'Time',
+        label_best: 'Best',
+
+        btn_undo: '↶ Undo',
+        btn_restart: 'Restart level',
+        btn_next: 'Next level',
+        btn_first: 'Back to level 1',
+
+        hint_controls: 'Arrow keys or WASD to move, U to undo. On a phone, swipe the board or hold the arrows below.',
+
+        win_title: 'Cleared',
+        win_sub: 'Every box is home on level {n}.',
+        win_title_all: 'All ten cleared',
+        win_sub_all: 'Ten levels, all solved. Slower is faster.',
+
+        deadlock: 'That box is stuck in a corner — undo a step.',
+        confirm_restart: 'Restart this level? Your moves so far will be lost.'
+      }
     }
   };
 

@@ -1,0 +1,421 @@
+/* ==========================================================================
+   推箱子 · 游戏专属样式
+   通用组件（记分板 / 按钮 / 结算卡片）在根 css/style.css
+   [gyh 2026-11-03 新增]
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.soko {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* --------------------------------------------------------------------------
+   选关
+   十关排成 5×2 的小键盘，一眼看全。
+   早先试过一行十个小格横向滚动，320px 下永远差半格，最后一个总被切掉。
+   -------------------------------------------------------------------------- */
+.soko__levels {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 14px;
+  padding: 0;
+}
+
+.lv {
+  position: relative;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 500;
+  color: var(--ys-text-soft);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: color .16s var(--ys-ease), background-color .16s var(--ys-ease),
+    border-color .16s var(--ys-ease), transform .16s var(--ys-ease);
+}
+
+.lv:hover {
+  color: var(--ys-text);
+  border-color: var(--ys-primary-line);
+}
+
+.lv.is-active {
+  color: var(--ys-text-invert);
+  background: var(--ys-primary);
+  border-color: var(--ys-primary);
+  box-shadow: 0 3px 10px rgba(107, 122, 194, .28);
+}
+
+/* 过关的关卡在数字下面点一颗小点，不用再加一行图例 */
+.lv.is-cleared::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--ys-sage);
+}
+
+.lv.is-active.is-cleared::after {
+  background: rgba(255, 253, 248, .85);
+}
+
+.lv:focus-visible {
+  outline: 2px solid var(--ys-primary);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   棋盘
+   格子按 --cols / --rows 均分；箱子与小人用 translate 百分比定位，
+   这样改窗口大小时不用重算像素，动画也只动 transform。
+   -------------------------------------------------------------------------- */
+.soko__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--cols, 7) * 56px + 16px);
+  padding: 8px;
+  background: #E7DCC8;
+  border-radius: 22px;
+  box-shadow: inset 0 2px 8px rgba(69, 75, 89, .08), var(--ys-shadow-sm);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.board:focus-visible {
+  outline: 2px solid var(--ys-primary);
+  outline-offset: 3px;
+}
+
+.board__field {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--cols, 7) / var(--rows, 5);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #F4ECDD;
+}
+
+.board__cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 7), 1fr);
+  grid-template-rows: repeat(var(--rows, 5), 1fr);
+}
+
+.cell {
+  position: relative;
+  background: #F7F0E3;
+  box-shadow: inset 0 0 0 1px rgba(120, 104, 78, .045);
+}
+
+.cell--wall {
+  background: linear-gradient(158deg, #D3C4A9 0%, #C6B492 55%, #BCA987 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 253, 248, .3), inset 0 -1px 0 rgba(69, 75, 89, .07);
+}
+
+/* 目标点：虚线小圈，箱子盖上去以后被挡住也没关系 */
+.cell--goal::after {
+  content: "";
+  position: absolute;
+  inset: 27%;
+  border: 1.5px dashed #B99A8F;
+  border-radius: 50%;
+  opacity: .85;
+}
+
+.cell--goal.cell--wall::after {
+  display: none;
+}
+
+/* 行动层盖在格子上 */
+.board__actors {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.actor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% / var(--cols, 7));
+  height: calc(100% / var(--rows, 5));
+  transform: translate(calc(var(--c, 0) * 100%), calc(var(--r, 0) * 100%));
+  transition: transform .11s var(--ys-ease);
+  will-change: transform;
+}
+
+.actor__i {
+  position: absolute;
+  inset: 9%;
+  border-radius: 26%;
+}
+
+/* 箱子 */
+.actor--box .actor__i {
+  background: linear-gradient(158deg, #CBA9A2 0%, #BE948C 55%, #AE827A 100%);
+  box-shadow: inset 0 2px 0 rgba(255, 253, 248, .32), 0 2px 6px rgba(120, 84, 76, .24);
+  transition: background-color .18s var(--ys-ease), box-shadow .18s var(--ys-ease);
+}
+
+/* 箱面上一圈内框，像捆好的纸箱 */
+.actor--box .actor__i::after {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border: 1.5px solid rgba(255, 253, 248, .42);
+  border-radius: 18%;
+}
+
+/* 箱子就位：换成雾绿，给一点"放好了"的确认 */
+.actor--box.is-on-goal .actor__i {
+  background: linear-gradient(158deg, #B2C8B7 0%, #9DB9A4 55%, #86A48E 100%);
+  box-shadow: inset 0 2px 0 rgba(255, 253, 248, .4), 0 0 0 2px rgba(159, 184, 168, .35),
+    0 2px 8px rgba(95, 127, 104, .22);
+}
+
+.actor--box.is-on-goal .actor__i::after {
+  border-color: rgba(255, 253, 248, .58);
+}
+
+/* 小人 */
+.actor--player .actor__i {
+  inset: 11%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 26%, #909CDB 0%, #6B7AC2 58%, #58659F 100%);
+  box-shadow: inset 0 -2px 0 rgba(52, 60, 100, .18), 0 2px 6px rgba(60, 70, 110, .26);
+}
+
+/* 两只眼睛，不画嘴：格子小，多一笔就糊了 */
+.actor--player .actor__i::before,
+.actor--player .actor__i::after {
+  content: "";
+  position: absolute;
+  top: 35%;
+  width: 15%;
+  height: 15%;
+  border-radius: 50%;
+  background: #FFFDF8;
+}
+
+.actor--player .actor__i::before { left: 28%; }
+.actor--player .actor__i::after { right: 28%; }
+
+/* 撞墙：只让身体抖一下，不动定位用的 transform */
+.board.is-bump .actor--player .actor__i {
+  animation: sokoBump .16s var(--ys-ease);
+}
+
+@keyframes sokoBump {
+  0%   { transform: translateX(0) scale(1); }
+  45%  { transform: translateX(2px) scale(.96); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* 过关：全员轻轻亮一下 */
+.board.is-done .actor__i {
+  animation: sokoSettle .4s var(--ys-ease);
+}
+
+@keyframes sokoSettle {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* --------------------------------------------------------------------------
+   提示条（推死箱子时出现）
+   -------------------------------------------------------------------------- */
+.soko__toast {
+  margin: 10px 0 0;
+  padding: 6px 14px;
+  font-size: .78rem;
+  line-height: 1.6;
+  color: #8A6B62;
+  background: #F6EDEA;
+  border: 1px solid #E3CFC8;
+  border-radius: 999px;
+  animation: sokoToast .18s var(--ys-ease) both;
+}
+
+.soko__toast[hidden] {
+  display: none;
+}
+
+@keyframes sokoToast {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   方向键
+   3×3 十字排布，按住不放会连续走（见 sokoban.js 的 holdTimer）
+   -------------------------------------------------------------------------- */
+.pad {
+  display: grid;
+  grid-template-columns: repeat(3, 54px);
+  grid-template-rows: repeat(3, 54px);
+  gap: 8px;
+  justify-content: center;
+  margin: 16px auto 0;
+}
+
+.pad__btn {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-family: inherit;
+  font-size: 1.14rem;
+  line-height: 1;
+  color: var(--ys-text-soft);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-radius: 15px;
+  box-shadow: var(--ys-shadow-sm);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background-color .12s var(--ys-ease), color .12s var(--ys-ease),
+    transform .1s var(--ys-ease), border-color .12s var(--ys-ease);
+}
+
+.pad__btn:hover {
+  color: var(--ys-text);
+  border-color: var(--ys-primary-line);
+}
+
+.pad__btn:active,
+.pad__btn.is-pressed {
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border-color: var(--ys-primary-line);
+  transform: scale(.96);
+}
+
+.pad__btn:focus-visible {
+  outline: 2px solid var(--ys-primary);
+  outline-offset: 2px;
+}
+
+.pad__btn--up    { grid-column: 2; grid-row: 1; }
+.pad__btn--left  { grid-column: 1; grid-row: 2; }
+.pad__btn--down  { grid-column: 2; grid-row: 3; }
+.pad__btn--right { grid-column: 3; grid-row: 2; }
+
+/* --------------------------------------------------------------------------
+   撤销 / 重来
+   -------------------------------------------------------------------------- */
+.soko__actions {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 0;
+}
+
+.soko__actions .g-btn {
+  flex: 1;
+  border-color: #E3D8C6;
+}
+
+/* 撤销是最常用的按钮，给它一点主色，和「重来」分开层次 */
+.soko__btn--undo {
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border-color: var(--ys-primary-line);
+}
+
+.soko__btn--undo:hover {
+  background: #E3E6F7;
+  border-color: #C9CFEC;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  body {
+    padding-top: calc(var(--ys-nav-h, 60px) + 14px);
+  }
+
+  .soko {
+    padding: 0 14px 40px;
+  }
+
+  .board {
+    max-width: calc(var(--cols, 7) * 48px + 12px);
+    padding: 6px;
+    border-radius: 18px;
+  }
+
+  .board__field {
+    border-radius: 12px;
+  }
+
+  .pad {
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 48px);
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .soko__levels {
+    max-width: 100%;
+  }
+
+  .lv {
+    height: 34px;
+    font-size: .8rem;
+  }
+
+  .pad__btn {
+    font-size: 1.04rem;
+    border-radius: 13px;
+  }
+
+  .soko__toast {
+    font-size: .74rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actor,
+  .board.is-bump .actor--player .actor__i,
+  .board.is-done .actor__i,
+  .soko__toast {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 桌面有键盘，方向键那块就收起来，页面干净些；
+   平板/手机（粗指针或无 hover）仍然显示，单手能玩 */
+@media (min-width: 761px) and (hover: hover) {
+  .pad {
+    display: none;
+  }
+}
