@@ -573,10 +573,10 @@
     gsokoban: {
       zh: {
         page_title: '推箱子 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线推箱子：简单 / 中等 / 困难三档，每档 10 关，共 30 关，难度逐级上升。方向键、WASD 或手指滑动都能玩，推错了可以撤销一步，自动记录每关最少步数。无需注册登录，打开就能玩。',
+        page_desc: '免费在线推箱子：简单 / 中等 / 困难三档，每档 15 关，共 45 关，难度逐级上升。方向键、WASD 或手指滑动都能玩，推错了可以撤销一步，自动记录每关最少步数。无需注册登录，打开就能玩。',
         game_title: '推箱子',
         tagline: '把箱子推到点上，推不回来就撤销一步',
-        share_line: '十关推箱子，慢慢想。推错了撤销一步，不用重开。',
+        share_line: '三档 45 关推箱子，慢慢想。推错了撤销一步，不用重开。',
 
         board_aria: '推箱子棋盘',
         level_group_aria: '选择关卡',
@@ -605,10 +605,10 @@
 
         win_title: '过关了',
         win_sub: '第 {n} 关的箱子都归位了。',
-        win_tier_all: '本档十关全清！',
+        win_tier_all: '本档十五关全清！',
         win_sub_tier_all: '这一档全通关了，试试更高难度吧。',
-        win_title_all: '十关都过了',
-        win_sub_all: '十关全清。慢慢来，反而更快。',
+        win_title_all: '十五关都过了',
+        win_sub_all: '十五关全清。慢慢来，反而更快。',
 
         deadlock: '这个箱子推进死角了，按撤销退回一步。',
         confirm_restart: '重来这一关？当前步数会清零。',
@@ -617,10 +617,10 @@
 
       en: {
         page_title: 'Sokoban, free to play | YSGame',
-        page_desc: 'Sokoban with three tiers — Easy, Medium, Hard — ten levels each, thirty in total, rising in difficulty. Arrow keys, WASD or swipe; undo whenever a push goes wrong. Your best move count is kept per level. No account needed.',
+        page_desc: 'Sokoban with three tiers — Easy, Medium, Hard — fifteen levels each, forty-five in total, rising in difficulty. Arrow keys, WASD or swipe; undo whenever a push goes wrong. Your best move count is kept per level. No account needed.',
         game_title: 'Sokoban',
         tagline: 'Push every box onto a dot — undo if it goes wrong',
-        share_line: 'Ten little warehouse puzzles. Take your time; undo is always there.',
+        share_line: 'Forty-five warehouse puzzles across three tiers. Take your time; undo is always there.',
 
         board_aria: 'Sokoban board',
         level_group_aria: 'Choose a level',
@@ -650,9 +650,9 @@
         win_title: 'Cleared',
         win_sub: 'Every box is home on level {n}.',
         win_tier_all: 'This tier is complete!',
-        win_sub_tier_all: 'All ten of this tier are done — try a harder one.',
-        win_title_all: 'All ten cleared',
-        win_sub_all: 'Ten levels, all solved. Slower is faster.',
+        win_sub_tier_all: 'All fifteen of this tier are done — try a harder one.',
+        win_title_all: 'All fifteen cleared',
+        win_sub_all: 'Fifteen levels, all solved. Slower is faster.',
 
         deadlock: 'That box is stuck in a corner — undo a step.',
         confirm_restart: 'Restart this level? Your moves so far will be lost.',
