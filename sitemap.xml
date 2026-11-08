@@ -126,6 +126,79 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- [gyh 2026-11-08 新增] 迷宫 / 坦克大战 / 星际飞机大战 / 炸弹人 -->
+  <url>
+    <loc>https://ysgame.xyz/games/maze/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/maze/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/maze/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/maze/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/maze/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/maze/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/maze/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/maze/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/tank/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/tank/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/tank/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/tank/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/tank/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/tank/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/tank/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/tank/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/plane/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/plane/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/plane/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/plane/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/plane/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/plane/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/plane/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/plane/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/bomber/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/bomber/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/bomber/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/bomber/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/bomber/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/bomber/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/bomber/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/bomber/"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://ysgame.xyz/about.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/about.html"/>

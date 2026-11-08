@@ -593,6 +593,146 @@
         </article>
 
         <article class="ys-card">
+          <h2>Maze: the rules</h2>
+          <p>
+            The site generates a "perfect maze" on the spot with a randomised depth-first search — every pair of points is joined by exactly one path, so there are no nested dead ends.
+            You start at the top-left and walk one cell at a time to the exit at the bottom-right. Clear a level and the maze regenerates larger; the deeper you go, the more it winds.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move, <kbd>Space</kbd> to pause and resume; just press a direction to get going.</p>
+          <p><strong>Phone or tablet:</strong> swipe one step in any direction on the maze; a tap also starts you off, and another tap resumes. There is a Hint button at the bottom that lights up the shortest route to the exit.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>11×11 grid, no time limit, unlimited hints, low score base, small step penalty</td><td>A relaxed stroll</td></tr>
+              <tr><td>🌳 Medium</td><td>17×17 grid, 90-second limit, 8 hints, moderate score and step penalty, time bonus</td><td>When you want a little pressure</td></tr>
+              <tr><td>🔥 Hard</td><td>25×25 grid, 120-second limit, only 3 hints, high score base, heavy step penalty, bigger time bonus</td><td>Players happy to get lost</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The three levels set the grid size, time limit, hint count and the scoring formula (level score = score base × level − steps × penalty + time left × bonus). Switch at any time before you start.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> stuck? Tap Hint — the purple glow is the shortest path the game computed. Easy gives unlimited hints; Hard gives only three, so spend them well.
+          </div>
+
+          <p>
+            The maze, level, steps and time left are all saved, so closing the tab keeps your place and pausing holds it as it is. Your best score is kept separately and survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Battle Tank: the rules</h2>
+          <p>
+            You drive a tank that moves in four directions and fires. Brick walls can be blown open, steel walls cannot; at the bottom sits your base (the eagle), and you only get the next level if you keep it standing.
+            Enemy tanks keep spawning from the top in waves — clear the current wave to advance, and later levels bring more of them.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move, <kbd>J</kbd> or <kbd>Space</kbd> to fire, <kbd>P</kbd> to pause and resume.</p>
+          <p><strong>Phone or tablet:</strong> a four-way pad at the bottom-left moves you, a fire button at the bottom-right — workable with one hand or two.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>At most 3 on screen, 8 total, speed 48, slow bullets, long fire gap, AI wanders randomly</td><td>Learning the moves and the trigger</td></tr>
+              <tr><td>🌳 Medium</td><td>4 on screen, 14 total, speed 66, faster bullets, fires more often, AI rushes the base</td><td>Guarding the base steadily</td></tr>
+              <tr><td>🔥 Hard</td><td>6 on screen, 20 total, speed 94, fastest bullets, fires constantly, AI hunts the player</td><td>Fast reactions and footwork</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels widen the gap on enemy count, total waves, movement and bullet speed, fire rate and AI behaviour (random / rush the base / hunt the player); you always have 3 lives. Switch at any time and the current level restarts.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> steel walls stop both bullets and tanks but can corner an enemy — blow the brick walls open to clear a lane rather than charging in. The game ends if the base is hit or your lives run out.
+          </div>
+
+          <p>
+            The level, score, lives left and difficulty are all saved, so closing the tab keeps your place and pausing holds it as it is. Your best score is kept separately and survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Star Fighter: the rules</h2>
+          <p>
+            Your ship sits at the bottom and fires automatically; steer left and right (with a little up and down) using the arrows or your finger, and dodge the enemy squadrons diving from above and the bullets they spray.
+            Destroying a ship scores points, and sometimes drops a power-up: <strong>P</strong> for more firepower, <strong>S</strong> for a shield, <strong>W</strong> for a wingman. Run out of lives and the round ends; clear a wave to reach the next.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move (the ship fires on its own), <kbd>P</kbd> to pause and resume.</p>
+          <p><strong>Phone or tablet:</strong> drag a finger across the screen and the ship follows; it fires automatically, so you only worry about dodging and grabbing drops.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Slow enemies, sparse single-shot fire, frequent drops, strong player bullets, 1-HP enemies, 7 per wave</td><td>Learning the dodging and the drops</td></tr>
+              <tr><td>🌳 Medium</td><td>Mid-speed enemies, occasional double shots, moderate drops, 2-HP enemies, 9 per wave</td><td>When you want some bullet pressure</td></tr>
+              <tr><td>🔥 Hard</td><td>Fast enemies, fanned / crossing barrages, rare drops, 3-HP enemies, 11 per wave, faster each level</td><td>Quick reactions, threading the gaps</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels mainly set enemy speed and count, bullet density, drop rate, enemy HP and your fire rate, and every level speeds things up a notch. Switch at any time and the game restarts.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> grab <strong>P</strong> first to stack firepower; <strong>S</strong> shields one hit, and <strong>W</strong> adds a second gun. You only have 3 lives — a shield expiring or a hit strips your firepower and wingman, so don't get greedy.
+          </div>
+
+          <p>
+            The wave, score, lives left and difficulty are all saved, so closing the tab keeps your place and pausing holds it as it is. Your best score is kept per level and survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Bomber: the rules</h2>
+          <p>
+            On a grid map, steel walls never break and soft walls do. Drop a bomb and, after a few seconds, it bursts in a cross, chain-detonating other bombs and clearing soft walls;
+            behind a soft wall hides the exit that clears the level — reach it and step on to win. Enemies patrol or chase you, and touching one costs a life; you get 3.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> arrow keys or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move, <kbd>Space</kbd> or <kbd>J</kbd> to drop a bomb, <kbd>P</kbd> to pause and resume.</p>
+          <p><strong>Phone or tablet:</strong> a four-way pad at the bottom-left moves you, a bomb button at the bottom-right drops one.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>2 enemies, slow, pure random patrol, few soft walls, blast radius 2, longer fuse, 1 bomb at a time</td><td>Learning to bomb and dodge fire</td></tr>
+              <tr><td>🌳 Medium</td><td>4 enemies, mid speed, some head your way, more soft walls, moderate fuse, 1 bomb at a time</td><td>Finding the exit calmly</td></tr>
+              <tr><td>🔥 Hard</td><td>6 enemies, fast, BFS-chase and dodge bombs, dense soft walls, blast radius 3, short fuse, 2 bombs at a time</td><td>Fast reactions and anticipation</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels mainly set enemy count, enemy speed, AI smarts (random / partly chasing / full chase and bomb-dodging), soft-wall density, blast radius, fuse length and how many bombs you can place at once; later levels bring more and faster enemies. Switch at any time and the game restarts.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> step away the moment you drop a bomb — don't stand on the cross, the flame lingers a moment and costs a life. Soft walls sometimes drop a "fire +1 / bomb +1" pickup; walk over it to grab it.
+          </div>
+
+          <p>
+            The level, map, score, lives left and difficulty are all saved, so closing the tab keeps your place and pausing holds it as it is. Your best score is kept separately and survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
           <h2>Questions</h2>
 
           <div class="ys-faq">
@@ -663,7 +803,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku and Mario are already live. What comes next follows the batches in the list (the next one is Battle City, Space shooter, Bomberman and Maze). One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter and Bomber are already live. The rest still to come, in batches from the list: Number link, Rubik's cube, Flappy bird, Dino jump, Reversi, Chinese chess, Chess, Go, Chinese checkers, Ludo, Go life-and-death, Chess endgames, Jump, Billiards, Online drums and Solar system. One at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
                 </p>
               </div>
             </details>

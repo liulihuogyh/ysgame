@@ -1069,6 +1069,173 @@
         draw_title: 'Draw', draw_sub: 'This one ended level.',
         turn_you: 'Your turn', turn_ai: 'Computer thinking', thinking: 'Thinking'
       }
+    },
+
+    /* ---------------- 批次三：迷宫 / 坦克大战 / 星际飞机大战 / 炸弹人 ----------------
+       [gyh 2026-11-08 新增] */
+
+    gmaze: {
+      zh: {
+        page_title: '迷宫 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线迷宫：随机生成、三档尺寸逐档变大，岔路越来越多。最短路径高亮提示，记步数与用时，简单 / 中等 / 困难三档逐级变难，自动存档、断点续玩，无需注册登录。',
+        game_title: '迷宫',
+        tagline: '在随机生成的迷宫里找到出口',
+        share_line: '看着简单、走起来绕的迷宫，手机上就能玩。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_level: '关卡',
+        label_lives: '生命', label_steps: '步数', label_wave: '波次', label_enemies: '敌人', label_power: '火力',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_pause: '暂停', btn_resume: '继续', btn_next: '下一关',
+        board_aria: '迷宫游戏画面',
+        hint_controls: '方向键 / WASD 或手指滑动控制小球移动，从起点走到出口即过关。卡住了点「提示」会高亮一段最短路径。难度越高，迷宫越大、岔路越多。',
+        win_title: '走出迷宫', win_sub: '第 {level} 关，{steps} 步，用时 {time}，{score} 分。',
+        lose_title: '时间到了', lose_sub: '还没走到出口，再试一次吧。',
+        new_record: '破纪录了', paused_title: '暂停中'
+      },
+      en: {
+        page_title: 'Maze, free to play | YSGame',
+        page_desc: 'A quiet online maze: procedurally generated, three sizes that grow each tier with more branches. Highlight the shortest path when stuck, track steps and time, Easy / Medium / Hard, autosave, no account needed.',
+        game_title: 'Maze',
+        tagline: 'Find your way out of a random maze',
+        share_line: 'Looks easy, gets twisty — playable on a phone.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_level: 'Level',
+        label_lives: 'Lives', label_steps: 'Steps', label_wave: 'Waves', label_enemies: 'Enemies', label_power: 'Power',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_pause: 'Pause', btn_resume: 'Resume', btn_next: 'Next',
+        board_aria: 'Maze playfield',
+        hint_controls: 'Arrow keys / WASD or swipe to move the dot. Reach the exit to clear the level. Tap Hint to highlight a stretch of the shortest path. Higher tiers mean bigger mazes with more turns.',
+        win_title: 'Maze cleared', win_sub: 'Level {level}, {steps} steps, {time}, {score} points.',
+        lose_title: 'Time is up', lose_sub: 'You did not reach the exit. Try again.',
+        new_record: 'New record', paused_title: 'Paused'
+      }
+    },
+
+    gtank: {
+      zh: {
+        page_title: '坦克大战 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线坦克大战：四方向移动射击，砖墙可炸开，守住底部的基地，一波波敌坦冲过来。三档难度敌坦更快更密，自动存档、断点续玩，无需注册登录。',
+        game_title: '坦克大战',
+        tagline: '守住基地，把冲过来的敌坦都打掉',
+        share_line: '小时候守基地打坦克的那个玩法，手机上也能玩。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_level: '关卡',
+        label_lives: '生命', label_steps: '步数', label_wave: '波次', label_enemies: '敌坦', label_power: '火力',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_pause: '暂停', btn_resume: '继续', btn_next: '下一关',
+        board_aria: '坦克大战游戏画面',
+        hint_controls: '方向键 / WASD 移动，J 或空格开炮，P 暂停。砖墙能挡子弹也能被自己炸开，钢墙炸不动。别让敌坦碰到你的基地（底部的鹰）。手机用画面下方的方向盘和开炮键。',
+        win_title: '清光了这一波', win_sub: '第 {level} 关，挡下 {wave} 波，{score} 分。',
+        lose_title: '基地失守', lose_sub: '坚持到第 {level} 关，{score} 分。',
+        new_record: '破纪录了', paused_title: '暂停中'
+      },
+      en: {
+        page_title: 'Battle Tank, free to play | YSGame',
+        page_desc: 'A free online tank battle: drive in four directions and shoot, brick walls break open, defend the base at the bottom while waves of enemy tanks roll in. Three tiers make enemies faster and denser, autosave, no account needed.',
+        game_title: 'Battle Tank',
+        tagline: 'Defend the base, take out every enemy tank',
+        share_line: 'The old defend-the-base tank game, now on a phone.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_level: 'Level',
+        label_lives: 'Lives', label_steps: 'Steps', label_wave: 'Waves', label_enemies: 'Tanks', label_power: 'Power',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_pause: 'Pause', btn_resume: 'Resume', btn_next: 'Next',
+        board_aria: 'Tank battle playfield',
+        hint_controls: 'Arrow keys / WASD to move, J or Space to fire, P to pause. Brick walls block and can be blown open by your own shells; steel walls hold. Keep enemies off your base (the eagle at the bottom). On a phone use the on-screen d-pad and fire button.',
+        win_title: 'Wave cleared', win_sub: 'Level {level}, {wave} waves held, {score} points.',
+        lose_title: 'Base lost', lose_sub: 'Reached level {level}, {score} points.',
+        new_record: 'New record', paused_title: 'Paused'
+      }
+    },
+
+    gplane: {
+      zh: {
+        page_title: '星际飞机大战 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线飞机大战：纵向弹幕，敌机编队俯冲，吃道具升级火力、护盾或召唤僚机。三档难度弹幕更密、敌机更快，自动存档、断点续玩，无需注册登录。',
+        game_title: '星际飞机大战',
+        tagline: '驾着小飞机，把一波波敌机打下去',
+        share_line: '竖屏打飞机，躲弹幕、吃道具，手机上也能爽。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_level: '关卡',
+        label_lives: '生命', label_steps: '步数', label_wave: '波次', label_enemies: '敌机', label_power: '火力',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_pause: '暂停', btn_resume: '继续', btn_next: '下一关',
+        board_aria: '飞机大战游戏画面',
+        hint_controls: '移动鼠标或手指控制飞机，自动开火。躲开敌机和子弹，吃掉掉落的 P（火力）/ S（护盾）/ W（僚机）道具。难度越高，弹幕越密、敌机越凶。',
+        win_title: '这一波清场了', win_sub: '第 {wave} 波，{score} 分。',
+        lose_title: '被击落了', lose_sub: '打到第 {wave} 波，{score} 分。',
+        new_record: '破纪录了', paused_title: '暂停中'
+      },
+      en: {
+        page_title: 'Star Fighter, free to play | YSGame',
+        page_desc: 'A free online shoot-em-up: vertical bullet curtain, enemy squadrons dive in, grab power-ups to upgrade firepower, shield or call a wingman. Three tiers pack denser fire and faster foes, autosave, no account needed.',
+        game_title: 'Star Fighter',
+        tagline: 'Pilot the little ship and shoot down wave after wave',
+        share_line: 'A vertical shmup: dodge bullets, grab power-ups, on a phone too.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_level: 'Level',
+        label_lives: 'Lives', label_steps: 'Steps', label_wave: 'Wave', label_enemies: 'Ships', label_power: 'Power',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_pause: 'Pause', btn_resume: 'Resume', btn_next: 'Next',
+        board_aria: 'Shoot-em-up playfield',
+        hint_controls: 'Move the mouse or finger to steer; the ship fires on its own. Dodge enemies and bullets, and pick up falling P (firepower) / S (shield) / W (wingman) items. Higher tiers mean denser fire and fiercer enemies.',
+        win_title: 'Wave cleared', win_sub: 'Wave {wave}, {score} points.',
+        lose_title: 'Shot down', lose_sub: 'Reached wave {wave}, {score} points.',
+        new_record: 'New record', paused_title: 'Paused'
+      }
+    },
+
+    gbomber: {
+      zh: {
+        page_title: '炸弹人 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线炸弹人：放炸弹、十字爆炸、炸开软墙找出口，小心别被自己的炸弹炸到。三档难度敌人更多更聪明，自动存档、断点续玩，无需注册登录。',
+        game_title: '炸弹人',
+        tagline: '放炸弹清出一条路，找到隐藏的出口',
+        share_line: '放炸弹、躲爆炸，经典玩法手机上也能玩。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_level: '关卡',
+        label_lives: '生命', label_steps: '步数', label_wave: '波次', label_enemies: '敌人', label_power: '火力',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_pause: '暂停', btn_resume: '继续', btn_next: '下一关',
+        board_aria: '炸弹人游戏画面',
+        hint_controls: '方向键 / WASD 移动，空格或 J 放炸弹，P 暂停。炸弹会十字爆炸、能炸开软墙（棕色），钢墙炸不动；爆炸会引爆其他炸弹形成连锁。放完炸弹赶紧跑开，别困在自己炸出的火里。找到隐藏的出口即可过关。手机用画面下方的方向键和炸弹键。',
+        win_title: '找到出口了', win_sub: '第 {level} 关，{score} 分。',
+        lose_title: '被炸到了', lose_sub: '打到第 {level} 关，{score} 分。',
+        new_record: '破纪录了', paused_title: '暂停中'
+      },
+      en: {
+        page_title: 'Bomber, free to play | YSGame',
+        page_desc: 'A free online Bomber: drop bombs, cross-shaped blast, blow open soft walls to find the exit — but do not get caught in your own blast. Three tiers add more and smarter enemies, autosave, no account needed.',
+        game_title: 'Bomber',
+        tagline: 'Drop bombs to clear a path and find the hidden exit',
+        share_line: 'Drop bombs, dodge the blast — classic, on a phone too.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_level: 'Level',
+        label_lives: 'Lives', label_steps: 'Steps', label_wave: 'Waves', label_enemies: 'Enemies', label_power: 'Power',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_pause: 'Pause', btn_resume: 'Resume', btn_next: 'Next',
+        board_aria: 'Bomber playfield',
+        hint_controls: 'Arrow keys / WASD to move, Space or J to drop a bomb, P to pause. Bombs blast in a cross and open soft (brown) walls; steel walls hold. A blast can chain-detonate other bombs. After dropping, run clear — do not get trapped in your own fire. Find the hidden exit to clear the level. On a phone use the on-screen d-pad and bomb button.',
+        win_title: 'Exit found', win_sub: 'Level {level}, {score} points.',
+        lose_title: 'Caught in the blast', lose_sub: 'Reached level {level}, {score} points.',
+        new_record: 'New record', paused_title: 'Paused'
+      }
     }
   };
 

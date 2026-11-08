@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线迷宫：随机生成、三档尺寸逐档变大，岔路越来越多。最短路径高亮提示，记步数与用时，简单 / 中等 / 困难三档逐级变难，自动存档、断点续玩，无需注册登录。">
+  <meta name="keywords" content="迷宫,在线迷宫,免费迷宫,Maze,随机迷宫,休闲小游戏,YSGame">
+  <title>迷宫 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/maze/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/maze/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/maze/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/maze/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="迷宫 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="随机生成的迷宫，三档尺寸逐级变大，走出来就过关。">
+  <meta property="og:url" content="https://ysgame.xyz/games/maze/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-maze.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-maze.png">
+  <meta name="theme-color" content="#EDEFF3">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23EDEFF3'/><g fill='none' stroke='%236B7ACF' stroke-width='4' stroke-linecap='round'><path d='M16 16 H48 V48 H16 Z'/><path d='M16 32 H32 V16'/><path d='M32 48 V32 H48'/></g><circle cx='16' cy='16' r='5' fill='%236B7ACF'/><circle cx='48' cy='48' r='5' fill='%239FB8A8'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense (替换为你的发布商ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body data-page="home" data-dict="gmaze" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" type="button" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" type="button" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="bk">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">🌀</span>
+        <span data-i18n="game_title">迷宫</span>
+      </h1>
+      <p class="g-tagline" data-i18n="tagline">在随机生成的迷宫里找到出口</p>
+    </header>
+
+    <!-- 难度选择 -->
+    <div class="seg bk__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy" aria-pressed="false">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium" aria-pressed="true">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard" aria-pressed="false">困难</button>
+    </div>
+
+    <!-- 关卡 / 步数 / 用时 / 最佳 -->
+    <div class="g-hud bk__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_level">关卡</span>
+        <strong class="hud-box__value" id="level">1</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_steps">步数</span>
+        <strong class="hud-box__value" id="steps">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_time">用时</span>
+        <strong class="hud-box__value" id="time">0:00</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">0</strong>
+      </div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="bk__bar">
+      <button class="g-btn" id="btn-pause" type="button" data-i18n="btn_pause">暂停</button>
+      <button class="g-btn" id="btn-hint" type="button" data-i18n="btn_hint">提示</button>
+      <button class="g-btn g-btn--primary" id="btn-restart" type="button" data-i18n="btn_restart">重开</button>
+    </div>
+
+    <!-- 棋盘 -->
+    <div class="bk__stage">
+      <canvas id="canvas" role="img" data-i18n-aria="board_aria" aria-label="迷宫游戏画面"></canvas>
+
+      <!-- 开始 / 暂停遮罩，同一块卡片换文案 -->
+      <div class="bk__card" id="card">
+        <h2 class="bk__cardTitle" id="card-title">迷宫</h2>
+        <p class="bk__cardSub" id="card-sub">在随机生成的迷宫里找到出口</p>
+        <button class="g-btn g-btn--primary" id="btn-start" type="button">开始</button>
+      </div>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title">走出迷宫</h2>
+          <p class="result__sub" id="overlay-sub">这一局到此为止。</p>
+          <span class="bk__record" id="record-badge" data-i18n="new_record" hidden>破纪录了</span>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_score">得分</span>
+          <strong id="overlay-score">0</strong>
+        </p>
+        <p class="result__stat">
+          <span data-i18n="label_level">关卡</span>
+          <strong id="overlay-level">1</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn result__btn" id="btn-next" type="button" data-i18n="btn_next">下一关</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      方向键 / WASD 或手指滑动控制小球移动，从起点走到出口即过关。卡住了点「提示」会高亮一段最短路径。难度越高，迷宫越大、岔路越多。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">迷宫</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 音效 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/sound.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/maze.js"></script>
+</body>
+</html>

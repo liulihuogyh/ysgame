@@ -720,6 +720,27 @@
       glow: 'rgba(172,126,140,.20)',
       title: '经典马里奥<small>MARIO</small>',
       sub: '一路向右跑，跳过缺口、踩掉小怪、捡起金币，摸到旗杆就过关。'
+    },
+    // [gyh 2026-11-08 新增] 批次三：迷宫 / 坦克大战 / 星际飞机大战 / 炸弹人
+    maze: {
+      glow: 'rgba(143,168,160,.20)',
+      title: '迷宫<small>MAZE</small>',
+      sub: '随机生成一座座迷宫，越往后越大越绕'
+    },
+    tank: {
+      glow: 'rgba(143,166,190,.20)',
+      title: '坦克大战<small>BATTLE TANK</small>',
+      sub: '四向开炮，砖墙炸得开，守住基地'
+    },
+    plane: {
+      glow: 'rgba(107,122,194,.20)',
+      title: '星际飞机大战<small>STAR FIGHTER</small>',
+      sub: '躲弹幕、吃道具，一波波敌机打下去'
+    },
+    bomber: {
+      glow: 'rgba(201,167,159,.20)',
+      title: '炸弹人<small>BOMBER</small>',
+      sub: '放炸弹清路，炸开软墙找出口'
     }
   };
 
@@ -1002,6 +1023,54 @@
       '<div class="hero" style="left:96px;bottom:46px"></div>' +
       '<div class="pole"></div><div class="flag"></div>';
     art.appendChild(mro);
+  }
+
+  // [gyh 2026-11-08 新增] 批次三：迷宫 / 坦克大战 / 星际飞机大战 / 炸弹人
+  if (key === 'maze') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="40" y="40" width="280" height="280" rx="20" fill="#EAF0EC" stroke="#8FA8A0" stroke-width="3"/>' +
+      '<g stroke="#7C9C90" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M76 76 H284 V140 H148 V204 H284 V268 H112"/>' +
+      '<path d="M112 76 V268"/>' +
+      '<path d="M210 140 V204"/>' +
+      '</g>' +
+      '<circle cx="84" cy="84" r="14" fill="#8FA8A0"/>' +
+      '<rect x="250" y="250" width="28" height="28" rx="7" fill="#C89AA6"/>' +
+      '</svg>';
+  }
+
+  if (key === 'tank') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="112" y="236" width="136" height="22" rx="11" fill="#55639F"/>' +
+      '<rect x="120" y="180" width="120" height="62" rx="14" fill="#6E7F9B"/>' +
+      '<rect x="150" y="148" width="60" height="42" rx="9" fill="#8FA6BE"/>' +
+      '<rect x="202" y="160" width="74" height="15" rx="7" fill="#6E7F9B"/>' +
+      '<circle cx="180" cy="200" r="11" fill="#FFFDF8"/>' +
+      '</svg>';
+  }
+
+  if (key === 'plane') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<path d="M180 92 L150 212 L180 192 L210 212 Z" fill="#6B7AC2"/>' +
+      '<rect x="118" y="190" width="124" height="22" rx="11" fill="#9AA6D8"/>' +
+      '<rect x="172" y="210" width="16" height="42" rx="8" fill="#9AA6D8"/>' +
+      '<circle cx="180" cy="70" r="7" fill="#C0897A"/>' +
+      '<circle cx="180" cy="52" r="5" fill="#C0897A" opacity=".6"/>' +
+      '</svg>';
+  }
+
+  if (key === 'bomber') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<circle cx="180" cy="206" r="72" fill="#454B59"/>' +
+      '<rect x="171" y="120" width="18" height="26" rx="5" fill="#454B59"/>' +
+      '<path d="M180 120 q22 -22 38 -6" stroke="#C9A79F" stroke-width="7" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="220" cy="108" r="9" fill="#C0897A"/>' +
+      '<circle cx="180" cy="206" r="24" fill="#FFFDF8"/>' +
+      '</svg>';
   }
 </script>
 </body>
