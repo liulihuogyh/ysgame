@@ -7,3 +7,7 @@ _temp/
 # 系统文件
 .DS_Store
 Thumbs.db
+
+# 仅本地测试用的依赖（_temp 回归/截图脚本），静态站无需 npm 运行时依赖
+node_modules/
+package-lock.json

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   游戏分享图生成模板（1200×630）
-  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper|jigsaw|match3|snake|sokoban|npuzzle|tetris|breakout，截整页即可。
+  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper|jigsaw|match3|snake|sokoban|npuzzle|tetris|breakout|linkup|memory|gomoku|mario，截整页即可。
   新增游戏时，在 script 里的 CONF 加一项，并在下方追加对应的 art 分支。
 -->
 <html lang="zh-CN">
@@ -472,6 +472,156 @@
     background: #C0897A;
   }
 
+  /* ---------------- 连连看 [gyh 2026-11-08 新增] ---------------- */
+  .lk {
+    position: relative;
+    width: 320px;
+    height: 240px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    background: #E6F1EC;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(107, 156, 144, .22);
+  }
+
+  .lk i {
+    display: block;
+    border-radius: 9px;
+    background: #FFFDF8;
+    border: 1px solid #CDE3D8;
+  }
+
+  .lk i.hi {
+    background: #8CB8AC;
+    border-color: #6B9C90;
+  }
+
+  .lk .wire {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  /* ---------------- 记忆翻牌 [gyh 2026-11-08 新增] ---------------- */
+  .mm {
+    width: 300px;
+    height: 300px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    background: #F0EBF5;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(136, 120, 180, .22);
+  }
+
+  .mm i {
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: #8878B4;
+    font-style: normal;
+    font-size: 30px;
+    color: #FFFDF8;
+  }
+
+  .mm i.open {
+    background: #FFFDF8;
+    border: 1px solid #D8CFE8;
+    color: #8878B4;
+  }
+
+  /* ---------------- 五子棋 [gyh 2026-11-08 新增] ---------------- */
+  .gmk {
+    position: relative;
+    width: 310px;
+    height: 310px;
+    border-radius: 14px;
+    background-color: #EDEDE8;
+    background-image:
+      linear-gradient(to right, rgba(127, 123, 110, .32) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(127, 123, 110, .32) 1px, transparent 1px);
+    background-size: 31px 31px;
+    background-position: 15px 15px;
+    box-shadow: 0 18px 40px rgba(127, 123, 110, .2);
+  }
+
+  .gmk u {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .gmk u.b { background: #4A4A46; }
+  .gmk u.w { background: #FFFDF8; border: 1px solid #C9C5BA; }
+
+  /* ---------------- 经典马里奥 [gyh 2026-11-08 新增] ---------------- */
+  .mro {
+    position: relative;
+    width: 330px;
+    height: 260px;
+    border-radius: 18px;
+    background: #F5EAEC;
+    box-shadow: 0 18px 40px rgba(172, 126, 140, .22);
+    overflow: hidden;
+  }
+
+  .mro .ground {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 46px;
+    background: #C89AA6;
+  }
+
+  .mro .block {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 7px;
+    background: #AC7E8C;
+    color: #FFFDF8;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .mro .hero {
+    position: absolute;
+    width: 30px;
+    height: 42px;
+    border-radius: 8px 8px 5px 5px;
+    background: #8CB8AC;
+  }
+
+  .mro .pole {
+    position: absolute;
+    right: 46px;
+    bottom: 46px;
+    width: 6px;
+    height: 150px;
+    background: #A6A296;
+  }
+
+  .mro .flag {
+    position: absolute;
+    right: 52px;
+    bottom: 168px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 26px solid #8CB8AC;
+  }
+
 </style>
 </head>
 <body>
@@ -549,6 +699,27 @@
       glow: 'rgba(216,169,140,.22)',
       title: '打砖块<small>BREAKOUT</small>',
       sub: '一块挡板，一颗球，把砖一块块敲下来'
+    },
+    // [gyh 2026-11-08 新增] 连连看 / 记忆翻牌 / 五子棋 / 经典马里奥
+    linkup: {
+      glow: 'rgba(107,156,144,.20)',
+      title: '连连看<small>LINK-UP</small>',
+      sub: '把相同的两张连起来，中间最多拐两个弯。牌越多越考眼力，卡住了还有提示和洗牌。'
+    },
+    memory: {
+      glow: 'rgba(136,120,180,.20)',
+      title: '记忆翻牌<small>MEMORY MATCH</small>',
+      sub: '翻开两张，记住位置，把一对对找回来。步数越少越漂亮。'
+    },
+    gomoku: {
+      glow: 'rgba(127,123,110,.20)',
+      title: '五子棋<small>GOMOKU</small>',
+      sub: '十五路棋盘，和电脑轮流落子。先连成五子的一方赢。'
+    },
+    mario: {
+      glow: 'rgba(172,126,140,.20)',
+      title: '经典马里奥<small>MARIO</small>',
+      sub: '一路向右跑，跳过缺口、踩掉小怪、捡起金币，摸到旗杆就过关。'
     }
   };
 
@@ -773,6 +944,64 @@
     brk.className = 'brk';
     brk.innerHTML = html;
     art.appendChild(brk);
+  }
+
+  // [gyh 2026-11-08 新增] 连连看：4×3 牌阵，两张相同的牌用一条拐两弯的线连起来
+  if (key === 'linkup') {
+    var lk = document.createElement('div');
+    lk.className = 'lk';
+    for (var li = 0; li < 12; li++) lk.appendChild(document.createElement('i'));
+    lk.children[2].className = 'hi';
+    lk.children[9].className = 'hi';
+    lk.insertAdjacentHTML('beforeend',
+      '<svg class="wire" viewBox="0 0 320 240" fill="none">' +
+      '<path d="M 197 47 V 20 H 123 V 192" stroke="#6B9C90" stroke-width="3" ' +
+      'stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7"/></svg>');
+    art.appendChild(lk);
+  }
+
+  // [gyh 2026-11-08 新增] 记忆翻牌：4×4 牌背，正好翻出一对
+  if (key === 'memory') {
+    var mm = document.createElement('div');
+    mm.className = 'mm';
+    for (var mi = 0; mi < 16; mi++) mm.appendChild(document.createElement('i'));
+    mm.children[5].className = 'open';
+    mm.children[5].textContent = '★';
+    mm.children[10].className = 'open';
+    mm.children[10].textContent = '★';
+    art.appendChild(mm);
+  }
+
+  // [gyh 2026-11-08 新增] 五子棋：黑子先连成五，白子在旁边拦
+  if (key === 'gomoku') {
+    var gmk = document.createElement('div');
+    gmk.className = 'gmk';
+    var stones = [
+      [4, 4, 'b'], [5, 4, 'b'], [6, 4, 'b'], [7, 4, 'b'], [8, 4, 'b'],
+      [4, 5, 'w'], [5, 5, 'w'], [6, 5, 'w'], [7, 5, 'w']
+    ];
+    stones.forEach(function (p) {
+      var u = document.createElement('u');
+      u.className = p[2];
+      u.style.left = (15 + p[0] * 31) + 'px';
+      u.style.top = (15 + p[1] * 31) + 'px';
+      gmk.appendChild(u);
+    });
+    art.appendChild(gmk);
+  }
+
+  // [gyh 2026-11-08 新增] 经典马里奥：地面、问号方块、小人和关底的旗杆
+  if (key === 'mario') {
+    var mro = document.createElement('div');
+    mro.className = 'mro';
+    mro.innerHTML =
+      '<div class="ground"></div>' +
+      '<div class="block" style="left:70px;bottom:130px">?</div>' +
+      '<div class="block" style="left:120px;bottom:130px">?</div>' +
+      '<div class="block" style="left:170px;bottom:180px">?</div>' +
+      '<div class="hero" style="left:96px;bottom:46px"></div>' +
+      '<div class="pole"></div><div class="flag"></div>';
+    art.appendChild(mro);
   }
 </script>
 </body>

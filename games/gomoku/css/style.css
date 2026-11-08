@@ -1,0 +1,115 @@
+/* ==========================================================================
+   五子棋 · 游戏专属样式
+   通用组件（记分板 / 按钮 / 结算卡片 / 分段按钮）在根 css/style.css
+   浅色木纹 / 纸张风：棋盘由 canvas 自己绘制，这里只管尺寸与缩放
+   [gyh 2026-11-08 新增]
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.gk {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* 四格记分板，窄屏自动折行；别设 min-width，320px 下会挤成 3+1 两行 */
+.gk__hud {
+  flex-wrap: wrap;
+}
+
+.gk__hud .hud-box {
+  min-width: 0;
+}
+
+/* 回合是文字，比数字长，收一点字号，窄屏下不挤成三行 */
+.gk__turn {
+  font-size: .88rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.gk__diffs {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 16px;
+}
+
+/* --------------------------------------------------------------------------
+   棋盘：正方形，宽度随容器缩放，320px 下也不会横向溢出
+   -------------------------------------------------------------------------- */
+.gk__stage {
+  display: flex;
+  justify-content: center;
+}
+
+.gk__board {
+  display: block;
+  width: 100%;
+  max-width: 556px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background: #EBD7AE;
+  border: 1px solid #D8C39A;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 10px rgba(120, 90, 50, .14),
+    0 4px 14px rgba(69, 75, 89, .06);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 破纪录徽章 */
+.gk__record {
+  width: max-content;
+  margin: 10px auto 0;
+  padding: 5px 14px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: .78rem;
+  font-weight: 600;
+  color: #7A6A3A;
+  background: #F5EBCF;
+}
+
+.gk__record[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   按钮 / 结算卡片
+   -------------------------------------------------------------------------- */
+.gk__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+#overlay {
+  scroll-margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏
+   -------------------------------------------------------------------------- */
+@media (max-width: 380px) {
+  .gk {
+    padding: 0 14px 40px;
+  }
+
+  .gk__hud .hud-box {
+    padding: 8px 4px;
+  }
+
+  .gk__actions .g-btn {
+    padding: 9px 12px;
+    font-size: .84rem;
+  }
+}

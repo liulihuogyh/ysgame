@@ -315,7 +315,7 @@
           </div>
 
           <p>
-            Three tiers — Easy, Medium, Hard — fifteen levels each, 45 in total, and the minimum move count climbs level by level. Your best move count is kept per level, and cleared levels get a
+            Three tiers — Easy, Medium, Hard — fifteen levels each, 45 in total, getting harder as you go; the hard tier asks you to plan the order of several boxes. Your best move count is kept per level, and cleared levels get a
             small dot under the number.
           </p>
         </article>
@@ -433,6 +433,165 @@
           </p>
         </article>
 
+        <!-- [gyh 2026-11-08 新增] Link-up / Memory match / Gomoku / Mario rules -->
+        <article class="ys-card">
+          <h2>Link-up: the rules</h2>
+          <p>
+            The board is covered in pairs of matching tiles. Tap two alike and, as long as you can join them
+            with a line that <strong>turns no more than twice and crosses no other tile</strong>, the pair clears.
+            The line is allowed to run around the outside of the board, so a tile in the corner isn't necessarily stuck.
+            Clear every tile to finish.
+          </p>
+          <p>
+            There's a countdown and a score on screen — clear quickly and keep the streak going for a better one.
+            If you can't see a move, <strong>Hint</strong> finds a pair for you and <strong>Shuffle</strong> deals the
+            remaining tiles again. Both are limited per round, so save them for when you're truly stuck.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Mouse or finger:</strong> tap one tile, then another of the same kind. If they connect, they clear; if not, the selection drops and you simply try again.</p>
+          <p><strong>Pausing:</strong> the <strong>Pause</strong> button stops the board and the clock together; <strong>Resume</strong> picks up where you left off.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Tiles &amp; time</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Fewer tiles, generous time, more hints and shuffles</td><td>Learning what a valid link looks like</td></tr>
+              <tr><td>🌳 Medium</td><td>More tiles, less time, fewer hints</td><td>You have the feel of it and want a clean clear</td></tr>
+              <tr><td>🔥 Hard</td><td>Most tiles, the tightest clock, the fewest hints</td><td>Sharp eyes and quick hands</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels mainly add tiles, shorten the clock, and cut the number of hints and shuffles. Pick one before you start; you can switch mid-game, though that starts a fresh round.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> sweep the corners and edges first — tiles with only one or two open sides are the ones that get stuck, and clearing them early opens up the middle. Hold off on Hint until you're genuinely stuck.
+          </div>
+
+          <p>
+            The remaining tiles, score, time left and difficulty are all saved, so closing the tab keeps the round and pausing holds the board exactly where it was. Each level keeps its own best result, which survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Memory match: the rules</h2>
+          <p>
+            Every card starts face down. Flip two at a time: a matching pair stays up, a mismatch turns back
+            after a short pause. <strong>Remember where things are and collect all the pairs</strong> to finish.
+            The game counts your moves and your time — fewer moves is the nicer result.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Mouse or finger:</strong> tap any two face-down cards. A match stays face up; a mismatch flips itself back, and you try the next pair.</p>
+          <p><strong>Pausing:</strong> the <strong>Pause</strong> button stops the board and the clock; <strong>Resume</strong> carries on.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Grid &amp; pace</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>4×4, slow flip-back, no clock</td><td>Getting used to remembering positions</td></tr>
+              <tr><td>🌳 Medium</td><td>4×5, more cards, faster flip-back</td><td>You remember well and want fewer moves</td></tr>
+              <tr><td>🔥 Hard</td><td>6×6, fastest flip-back, with a countdown</td><td>Remembering fast and flipping faster</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels mainly grow the grid and shorten how long a mismatch stays visible; Hard adds a countdown too. Pick one before you start, or switch mid-game for a fresh round.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> don't flip at random. Each time you turn a card, quietly note the ones beside it; work one patch of the board at a time and collect the pairs you already know. It saves far more moves than scanning the whole grid.
+          </div>
+
+          <p>
+            The cards, move count, time and difficulty are all saved, so closing the tab keeps the round and pausing holds the board as it is. Each level keeps its own best result, which survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Gomoku: the rules</h2>
+          <p>
+            A 15×15 board. You play black and move first; the computer plays white, and you take turns placing
+            a stone on an intersection. <strong>First to get five in a row — across, down or diagonally — wins.</strong>
+            Stones don't move and nothing gets captured, so it's all about planning ahead.
+          </p>
+          <p>
+            <strong>Undo</strong> takes back one turn, which is two moves — yours and the computer's — returning
+            the board to just before you played. If you're unsure where to go, <strong>Hint</strong> suggests a spot.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Mouse or finger:</strong> tap near an intersection and the stone lands there; you don't have to be precise.</p>
+          <p><strong>Pausing:</strong> the <strong>Pause</strong> button stops the game and <strong>Resume</strong> carries on with the same board.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>The opponent</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Looks only one step ahead, mostly builds its own line</td><td>Learning to spot and block a three</td></tr>
+              <tr><td>🌳 Medium</td><td>Blocks obvious threats and makes its own</td><td>A proper back-and-forth game</td></tr>
+              <tr><td>🔥 Hard</td><td>Looks further ahead, steady on both attack and defence</td><td>When you want to think each move through</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The three levels change how strong the computer is, from short-sighted to looking several moves ahead; the board and the rules are identical. Pick one at the start, or switch mid-game for a fresh round.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> before extending your own line, check whether the other side has an open three or four. A move that blocks them and continues your line at once is the best kind of move.
+          </div>
+
+          <p>
+            The board, whose turn it is, the difficulty and the result are all saved, so closing the tab keeps the game and pausing holds the board as it is. Your record for the level is kept separately and survives a new game.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Mario: the rules</h2>
+          <p>
+            A side-scrolling level that keeps moving right with you. Jump the gaps in the ground, stomp the
+            little creatures from above, pick up coins, and hop over the pipes in the way.
+            <strong>Touch the flagpole at the end to clear the level</strong> — there are three levels, one after another.
+          </p>
+          <p>
+            Falling into a gap or bumping into a creature costs a life; when the lives run out the round is over.
+            Stomping creatures and collecting coins both score, and the lives left and your score are shown on screen.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> arrow keys or <kbd>A</kbd> <kbd>D</kbd> to move, <kbd>Space</kbd> or <kbd>↑</kbd> to jump. The <strong>Pause</strong> button stops and resumes at any time.</p>
+          <p><strong>Phone or tablet:</strong> three on-screen buttons below the level — left, right and jump — so one hand is enough.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Pace &amp; layout</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Slower run, fewer creatures, narrow gaps, more lives</td><td>Getting the timing of a jump</td></tr>
+              <tr><td>🌳 Medium</td><td>Steady pace, more creatures and gaps</td><td>Clearing levels reliably, judging your landings</td></tr>
+              <tr><td>🔥 Hard</td><td>Fast run, dense creatures, wide gaps, fewer lives</td><td>Quick reactions and a feel for the rhythm</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels mainly change the running speed, how crowded the creatures and gaps are, and how many lives you start with; the three levels themselves stay the same. Pick one before you start, or switch mid-game for a fresh round.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> don't just hold right and charge. Ease off before a gap, watch the edge, then jump; drop onto a creature from directly above rather than running into its side.
+          </div>
+
+          <p>
+            The current level, lives left, score and difficulty are all saved, so closing the tab keeps your place and pausing holds the level as it is. Your best score is kept separately and survives a new game.
+          </p>
+        </article>
+
         <article class="ys-card">
           <h2>Questions</h2>
 
@@ -504,7 +663,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  Sudoku, 2048, Minesweeper, Jigsaw, Match Three, Snake, Sokoban, Number Slide, Tetris and Breakout are already live. What comes next follows the batches in the list (the next one is Link-a-Pair, Memory Match, Gomoku and a classic platformer). One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku and Mario are already live. What comes next follows the batches in the list (the next one is Battle City, Space shooter, Bomberman and Maze). One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
                 </p>
               </div>
             </details>

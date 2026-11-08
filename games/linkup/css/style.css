@@ -1,0 +1,234 @@
+/* ==========================================================================
+   连连看 · 游戏专属样式
+   通用组件（记分板 / 按钮 / 结算卡片 / 分段按钮）在根 css/style.css
+   浅色柔和风，全部走 --ys-* 变量；棋盘用 DOM 格子 + 一层 SVG 画连线。
+   [gyh 2026-11-08 新增]
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.lk {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* 四个记分格并排，窄屏允许折行，别设 min-width */
+.lk__hud {
+  flex-wrap: wrap;
+}
+
+.lk__hud .hud-box {
+  min-width: 0;
+}
+
+.lk__diffs {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 16px;
+}
+
+/* --------------------------------------------------------------------------
+   棋盘：外层留一圈空格给「绕棋盘外」的连线
+   格子中心在 SVG 坐标里是 (c + 1.5, r + 1.5)，viewBox 为 (cols+2)x(rows+2)
+   -------------------------------------------------------------------------- */
+.lk__boardwrap {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.lk__board {
+  display: grid;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--ys-surface-alt);
+  border: 1px solid var(--ys-line);
+  border-radius: 14px;
+  box-shadow: inset 0 2px 10px rgba(120, 104, 78, .08);
+  /* 手机按住拖动时不要触发页面滚动 / 长按菜单 */
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lk__cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lk__tile {
+  position: absolute;
+  inset: 7%;
+  display: grid;
+  place-items: center;
+  font-size: var(--lk-fs, 24px);
+  line-height: 1;
+  border-radius: 22%;
+  box-shadow: 0 1px 2px rgba(69, 75, 89, .10), inset 0 1px 0 rgba(255, 255, 255, .45);
+  transition: transform .14s var(--ys-ease), box-shadow .14s var(--ys-ease),
+    opacity .2s var(--ys-ease);
+}
+
+.lk__cell:active .lk__tile {
+  transform: scale(.92);
+}
+
+/* 已消除：格子还占着位，图案淡出 */
+.lk__cell.is-empty {
+  cursor: default;
+}
+
+.lk__cell.is-empty .lk__tile {
+  opacity: 0;
+  box-shadow: none;
+}
+
+/* 选中：一圈主色描边 */
+.lk__cell.is-selected .lk__tile {
+  box-shadow: 0 0 0 3px var(--ys-primary), 0 3px 10px rgba(107, 122, 194, .28);
+  transform: scale(.96);
+}
+
+/* 提示：呼吸式高亮 */
+.lk__cell.is-hint .lk__tile {
+  animation: lkHint .68s var(--ys-ease) infinite alternate;
+}
+
+@keyframes lkHint {
+  from { box-shadow: 0 0 0 2px var(--ys-sand), 0 2px 8px rgba(220, 196, 155, .35); }
+  to   { box-shadow: 0 0 0 4px #D8B25C, 0 3px 14px rgba(216, 178, 92, .55); }
+}
+
+/* 消除：缩一下淡出，和连线动画同步 */
+.lk__cell.is-clearing .lk__tile {
+  animation: lkClear .26s var(--ys-ease) forwards;
+}
+
+@keyframes lkClear {
+  to { transform: scale(.45); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   连线层（SVG）：pointer-events 关掉，点和点之间画折线
+   -------------------------------------------------------------------------- */
+.lk__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.lk__line {
+  fill: none;
+  stroke: var(--ys-primary-deep);
+  stroke-width: .24;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  animation: lkLine .32s var(--ys-ease) forwards;
+}
+
+@keyframes lkLine {
+  0%   { opacity: 0;   stroke-dasharray: 0 200; }
+  18%  { opacity: .95; }
+  55%  { opacity: .95; stroke-dasharray: 200 0; }
+  82%  { opacity: .9; }
+  100% { opacity: 0;   stroke-dasharray: 200 0; }
+}
+
+/* --------------------------------------------------------------------------
+   暂停 / 未开始遮罩
+   -------------------------------------------------------------------------- */
+.lk__veil {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(247, 243, 234, .84);
+  color: var(--ys-primary-deep);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+
+.lk__veil[hidden] {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   操作按钮 / 次数角标 / 破纪录徽章
+   -------------------------------------------------------------------------- */
+.lk__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.lk__count {
+  font-size: .78rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ys-text-faint);
+}
+
+.lk__record {
+  margin: 12px auto 0;
+  padding: 6px 12px;
+  width: max-content;
+  max-width: 100%;
+  border-radius: 999px;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #7A6A3A;
+  background: #F5EBCF;
+}
+
+.lk__record[hidden] {
+  display: none;
+}
+
+#overlay {
+  scroll-margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏：320px 也要稳，不横向溢出
+   -------------------------------------------------------------------------- */
+@media (max-width: 380px) {
+  .lk {
+    padding: 0 12px 40px;
+  }
+
+  .lk__hud {
+    gap: 6px;
+  }
+
+  .lk__hud .hud-box {
+    padding: 7px 4px 8px;
+  }
+
+  .lk__actions {
+    gap: 6px;
+  }
+
+  .lk__actions .g-btn {
+    padding: 8px 10px;
+    font-size: .8rem;
+  }
+}

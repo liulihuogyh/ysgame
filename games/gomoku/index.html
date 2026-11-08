@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线五子棋：15×15 木纹棋盘，你执黑先手，和会思考的电脑对弈。简单 / 中等 / 困难三档 AI 强度分明，支持悔棋、提示、自动存档与断点续玩。无需注册登录，打开就能玩。">
+  <meta name="keywords" content="五子棋,Gomoku,连珠,在线五子棋,人机对弈,经典小游戏,休闲小游戏,YSGame">
+  <title>五子棋 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/gomoku/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/gomoku/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/gomoku/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/gomoku/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="五子棋 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="你执黑先手，在木纹棋盘上和电脑下一盘五子棋。三档难度，慢慢想。">
+  <meta property="og:url" content="https://ysgame.xyz/games/gomoku/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-gomoku.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-gomoku.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%23EBD7AE'/><g stroke='%23926640' stroke-width='1.4' opacity='.55'><path d='M16 16H48M16 26H48M16 36H48M16 46H48M16 16V48M26 16V48M36 16V48M46 16V48'/></g><circle cx='26' cy='26' r='8' fill='%23222'/><circle cx='40' cy='40' r='8' fill='%23FFFDF8' stroke='%23B9AB90'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home" data-dict="ggomoku" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="gk">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">⚫</span>
+        <span data-i18n="game_title">五子棋</span>
+      </h1>
+      <p class="g-tagline" data-i18n="tagline">你执黑先手，在木纹棋盘上和电脑慢慢下一盘</p>
+    </header>
+
+    <!-- 回合 / 步数 / 最佳 / 剩余提示 -->
+    <div class="g-hud gk__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_turn">回合</span>
+        <strong class="hud-box__value gk__turn" id="turn">你</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_moves">步数</span>
+        <strong class="hud-box__value" id="moves">0</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">--</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_hints">提示</span>
+        <strong class="hud-box__value" id="hints">3</strong>
+      </div>
+    </div>
+
+    <!-- 三档难度 -->
+    <div class="seg gk__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy" aria-pressed="false">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium" aria-pressed="true">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard" aria-pressed="false">困难</button>
+    </div>
+
+    <!-- 15×15 木纹棋盘 -->
+    <div class="gk__stage">
+      <canvas id="board" class="gk__board" width="556" height="556"
+              role="img" data-i18n-aria="board_aria" aria-label="五子棋棋盘"></canvas>
+    </div>
+
+    <!-- 破纪录提示 -->
+    <p class="gk__record" id="recordBadge" hidden data-i18n="new_record">新纪录</p>
+
+    <!-- 主操作 -->
+    <div class="gk__actions">
+      <button class="g-btn g-btn--primary" id="btn-hint" type="button" data-i18n="btn_hint">提示</button>
+      <button class="g-btn" id="btn-undo" type="button" data-i18n="btn_undo">悔棋</button>
+      <button class="g-btn" id="btn-restart" type="button" data-i18n="btn_restart">重开一局</button>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title">你赢了</h2>
+          <p class="result__sub" id="overlay-sub"></p>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_moves">步数</span>
+          <strong id="overlay-moves">0</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      点棋盘交叉处落子，你执黑先手、电脑执白。悔棋不限次数，提示每局三次，随时可以重开。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">五子棋</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 音效 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/sound.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/gomoku.js"></script>
+</body>
+</html>

@@ -93,6 +93,39 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- [gyh 2026-11-08 新增] 连连看 / 记忆翻牌 / 五子棋 / 经典马里奥 -->
+  <url>
+    <loc>https://ysgame.xyz/games/linkup/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/linkup/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/linkup/?lang=en"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/memory/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/memory/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/memory/?lang=en"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/gomoku/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/gomoku/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/gomoku/?lang=en"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/mario/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/mario/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/mario/?lang=en"/>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://ysgame.xyz/about.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/about.html"/>

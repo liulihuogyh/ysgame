@@ -872,6 +872,203 @@
         win_sub: '{score} points · not a brick left',
         new_record: 'New record'
       }
+    },
+
+    /* ---------------- 批次二：连连看 ----------------
+       [gyh 2026-11-08 新增] */
+    glinkup: {
+      zh: {
+        page_title: '连连看 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线连连看：同类配对，连线最多拐两个弯，还能绕棋盘外一圈。简单 / 中等 / 困难三档牌数与时间逐级收紧，有提示、洗牌、计时与得分，自动存档、断点续玩，无需注册登录。',
+        game_title: '连连看',
+        tagline: '把相同的两张连起来，中间最多拐两个弯',
+        share_line: '找一找哪两张能连上，卡住了就用提示。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最高分', label_time: '剩余时间', label_moves: '步数',
+        label_level: '关卡', label_lives: '生命', label_pairs: '已消对数', label_combo: '连击',
+        label_hints: '提示', label_turn: '回合', label_matched: '已配对', label_remaining: '剩余',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_undo: '撤销', btn_pause: '暂停', btn_resume: '继续', btn_shuffle: '洗牌', btn_next: '下一关',
+        board_aria: '连连看棋盘',
+        hint_controls: '点两张相同的牌，中间的连线最多拐两个弯，也可以绕棋盘外一圈。提示和洗牌都有次数，时间用完这一局就结束了。',
+        win_title: '全部消完了', win_sub: '用时 {time}，拿到 {score} 分。',
+        lose_title: '时间到了', lose_sub: '还剩 {pairs} 对，拿到 {score} 分。',
+        new_record: '破纪录了', paused_title: '暂停中',
+        draw_title: '平局', draw_sub: '这一局打平了。',
+        turn_you: '轮到你', turn_ai: '电脑思考中', thinking: '思考中'
+      },
+      en: {
+        page_title: 'Link-up, free to play | YSGame',
+        page_desc: 'A quiet online Link-up: match identical tiles with a path that turns at most twice, even around the outside of the board. Easy, Medium and Hard add tiles and cut the clock. Hints, shuffle, scoring and autosave, no account needed.',
+        game_title: 'Link-up',
+        tagline: 'Match two tiles with a path that turns at most twice',
+        share_line: 'Spot the pair that connects. There is a hint if you get stuck.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time left', label_moves: 'Moves',
+        label_level: 'Level', label_lives: 'Lives', label_pairs: 'Pairs', label_combo: 'Combo',
+        label_hints: 'Hints', label_turn: 'Turn', label_matched: 'Matched', label_remaining: 'Left',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_undo: 'Undo', btn_pause: 'Pause', btn_resume: 'Resume', btn_shuffle: 'Shuffle', btn_next: 'Next',
+        board_aria: 'Link-up board',
+        hint_controls: 'Pick two identical tiles. The path between them may turn at most twice and can run around the outside of the board. Hints and shuffles are limited, and the round ends when the clock runs out.',
+        win_title: 'Board cleared', win_sub: '{time} on the clock, {score} points.',
+        lose_title: 'Time is up', lose_sub: '{pairs} pairs left, {score} points.',
+        new_record: 'New record', paused_title: 'Paused',
+        draw_title: 'Draw', draw_sub: 'This one ended level.',
+        turn_you: 'Your turn', turn_ai: 'Computer thinking', thinking: 'Thinking'
+      }
+    },
+
+    /* ---------------- 批次二：记忆翻牌 ----------------
+       [gyh 2026-11-08 新增] */
+    gmemory: {
+      zh: {
+        page_title: '记忆翻牌 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线记忆翻牌：翻开两张，记住位置，把一对对找回来。简单 / 中等 / 困难三档牌数递增、翻回更快，记步数与用时，自动存档、断点续玩，无需注册登录。',
+        game_title: '记忆翻牌',
+        tagline: '翻开两张，记住位置，把一对对找回来',
+        share_line: '记性好不好，翻两张就知道。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_moves: '步数',
+        label_level: '关卡', label_lives: '生命', label_pairs: '已配对', label_combo: '连击',
+        label_hints: '提示', label_turn: '回合', label_matched: '已配对', label_remaining: '剩余',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_undo: '撤销', btn_pause: '暂停', btn_resume: '继续', btn_shuffle: '洗牌', btn_next: '下一关',
+        board_aria: '记忆翻牌棋盘',
+        hint_controls: '一次翻开两张，图案一样就配对成功，不一样会翻回去。步数越少越好；难度越高，牌越多、翻回得越快。',
+        win_title: '全部找到了', win_sub: '{moves} 步，用时 {time}，拿到 {score} 分。',
+        lose_title: '时间到了', lose_sub: '还剩 {pairs} 对没找到。',
+        new_record: '破纪录了', paused_title: '暂停中',
+        draw_title: '平局', draw_sub: '这一局打平了。',
+        turn_you: '轮到你', turn_ai: '电脑思考中', thinking: '思考中'
+      },
+      en: {
+        page_title: 'Memory match, free to play | YSGame',
+        page_desc: 'A quiet online memory game: flip two cards, remember where they were, and find every pair. Easy, Medium and Hard add pairs and flip back faster. Move count, timer and autosave, no account needed.',
+        game_title: 'Memory match',
+        tagline: 'Flip two, remember where they were, find every pair',
+        share_line: 'Two cards is all it takes to find out how good your memory is.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_moves: 'Moves',
+        label_level: 'Level', label_lives: 'Lives', label_pairs: 'Pairs', label_combo: 'Combo',
+        label_hints: 'Hints', label_turn: 'Turn', label_matched: 'Matched', label_remaining: 'Left',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_undo: 'Undo', btn_pause: 'Pause', btn_resume: 'Resume', btn_shuffle: 'Shuffle', btn_next: 'Next',
+        board_aria: 'Memory match board',
+        hint_controls: 'Flip two cards. A matching pair stays up; the rest turn back. Fewer moves is better. Higher levels add pairs and flip back sooner.',
+        win_title: 'Every pair found', win_sub: '{moves} moves, {time}, {score} points.',
+        lose_title: 'Time is up', lose_sub: '{pairs} pairs still hidden.',
+        new_record: 'New record', paused_title: 'Paused',
+        draw_title: 'Draw', draw_sub: 'This one ended level.',
+        turn_you: 'Your turn', turn_ai: 'Computer thinking', thinking: 'Thinking'
+      }
+    },
+
+    /* ---------------- 批次二：五子棋 ----------------
+       [gyh 2026-11-08 新增] */
+    ggomoku: {
+      zh: {
+        page_title: '五子棋 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线五子棋人机对弈：15×15 棋盘，你执黑先手，电脑执白。三档 AI 强度，能封堵活三与冲四，支持悔棋、提示与断点续玩，无需注册登录。',
+        game_title: '五子棋',
+        tagline: '十五路棋盘，和电脑轮流落子，先连成五子的一方赢',
+        share_line: '来下一盘五子棋，电脑不会让着你。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最佳', label_time: '用时', label_moves: '手数',
+        label_level: '关卡', label_lives: '生命', label_pairs: '对数', label_combo: '连击',
+        label_hints: '提示', label_turn: '回合', label_matched: '已配对', label_remaining: '剩余',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_undo: '悔棋', btn_pause: '暂停', btn_resume: '继续', btn_shuffle: '洗牌', btn_next: '下一关',
+        board_aria: '五子棋棋盘',
+        hint_controls: '点交叉点落子，横、竖、斜任意方向先连成五子就赢。悔棋一次撤回你和电脑各一手；提示会指一个好点，但次数有限。',
+        win_title: '你赢了', win_sub: '{moves} 手连成五子，漂亮。',
+        lose_title: '这局输了', lose_sub: '电脑先连成了五子，再来一局吧。',
+        new_record: '破纪录了', paused_title: '暂停中',
+        draw_title: '和棋', draw_sub: '棋盘满了，谁也没连成五子。',
+        turn_you: '轮到你落子', turn_ai: '电脑思考中', thinking: '思考中'
+      },
+      en: {
+        page_title: 'Gomoku, free to play | YSGame',
+        page_desc: 'A quiet online Gomoku against the computer: a 15×15 board, you play black and move first. Three AI levels that block open threes and fours, plus undo, hints and autosave. No account needed.',
+        game_title: 'Gomoku',
+        tagline: 'A 15×15 board, take turns, five in a row wins',
+        share_line: 'A game of Gomoku. The computer does not go easy on you.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_moves: 'Moves',
+        label_level: 'Level', label_lives: 'Lives', label_pairs: 'Pairs', label_combo: 'Combo',
+        label_hints: 'Hints', label_turn: 'Turn', label_matched: 'Matched', label_remaining: 'Left',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_undo: 'Undo', btn_pause: 'Pause', btn_resume: 'Resume', btn_shuffle: 'Shuffle', btn_next: 'Next',
+        board_aria: 'Gomoku board',
+        hint_controls: 'Click an intersection to place a stone. Five in a row horizontally, vertically or diagonally wins. Undo takes back your move and the computer reply; hints point out a good spot but are limited.',
+        win_title: 'You win', win_sub: 'Five in a row in {moves} moves.',
+        lose_title: 'You lost', lose_sub: 'The computer got five first. Another round?',
+        new_record: 'New record', paused_title: 'Paused',
+        draw_title: 'Draw', draw_sub: 'The board is full and nobody made five.',
+        turn_you: 'Your move', turn_ai: 'Computer thinking', thinking: 'Thinking'
+      }
+    },
+
+    /* ---------------- 批次二：经典马里奥（原创横版跳跃） ----------------
+       美术与关卡均为原创几何像素，不含任何第三方品牌素材。
+       [gyh 2026-11-08 新增] */
+    gmario: {
+      zh: {
+        page_title: '经典马里奥 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线横版跳跃闯关：一路向右跑，跳过缺口、踩掉小怪、捡起金币，摸到旗杆就过关。三关逐级变难，简单 / 中等 / 困难三档，键盘与触屏都能玩，自动存档、断点续玩，无需注册登录。',
+        game_title: '经典马里奥',
+        tagline: '一路向右跑，跳过缺口，摸到旗杆就过关',
+        share_line: '小时候那种一路往右跑的游戏，手机上也能玩。',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单', diff_medium: '中等', diff_hard: '困难',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+        label_score: '得分', label_best: '最高分', label_time: '用时', label_moves: '步数',
+        label_level: '关卡', label_lives: '生命', label_pairs: '金币', label_combo: '连击',
+        label_hints: '提示', label_turn: '回合', label_matched: '已过关', label_remaining: '剩余',
+        btn_start: '开始', btn_restart: '重开', btn_again: '再来一局', btn_hint: '提示',
+        btn_undo: '撤销', btn_pause: '暂停', btn_resume: '继续', btn_shuffle: '洗牌', btn_next: '下一关',
+        board_aria: '横版跳跃游戏画面',
+        hint_controls: '方向键或 A D 左右移动，空格 / ↑ / W 跳跃，P 暂停。从上方踩掉小怪，侧面碰到会掉一条命；掉进缺口也一样。手机用画面下方的三个按钮。',
+        win_title: '全部通关了', win_sub: '三关全过，一共 {score} 分。',
+        lose_title: '没命了', lose_sub: '走到第 {level} 关，拿到 {score} 分。',
+        new_record: '破纪录了', paused_title: '暂停中',
+        draw_title: '平局', draw_sub: '这一局打平了。',
+        turn_you: '轮到你', turn_ai: '电脑思考中', thinking: '思考中'
+      },
+      en: {
+        page_title: 'Classic platformer, free to play | YSGame',
+        page_desc: 'A quiet online side-scrolling platformer: run right, clear the gaps, stomp the little creatures, collect coins and touch the flag to finish. Three levels, Easy / Medium / Hard, keyboard and touch, autosave, no account needed.',
+        game_title: 'Classic platformer',
+        tagline: 'Run right, clear the gaps, touch the flag to finish',
+        share_line: 'The old run-and-jump kind of game, playable on a phone too.',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy', diff_medium: 'Medium', diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty starts a fresh game. Your progress will be lost.',
+        label_score: 'Score', label_best: 'Best', label_time: 'Time', label_moves: 'Moves',
+        label_level: 'Level', label_lives: 'Lives', label_pairs: 'Coins', label_combo: 'Combo',
+        label_hints: 'Hints', label_turn: 'Turn', label_matched: 'Cleared', label_remaining: 'Left',
+        btn_start: 'Start', btn_restart: 'Restart', btn_again: 'Play again', btn_hint: 'Hint',
+        btn_undo: 'Undo', btn_pause: 'Pause', btn_resume: 'Resume', btn_shuffle: 'Shuffle', btn_next: 'Next',
+        board_aria: 'Platformer playfield',
+        hint_controls: 'Arrow keys or A / D to move, Space / Up / W to jump, P to pause. Stomp a creature from above; touching one from the side, or falling into a gap, costs a life. On a phone use the three buttons below the screen.',
+        win_title: 'All levels cleared', win_sub: 'Three levels done, {score} points.',
+        lose_title: 'Out of lives', lose_sub: 'Reached level {level}, {score} points.',
+        new_record: 'New record', paused_title: 'Paused',
+        draw_title: 'Draw', draw_sub: 'This one ended level.',
+        turn_you: 'Your turn', turn_ai: 'Computer thinking', thinking: 'Thinking'
+      }
     }
   };
 
