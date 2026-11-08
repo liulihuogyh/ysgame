@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="免费在线贪吃蛇：17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。">
+  <meta name="description" content="免费在线贪吃蛇：简单 / 中等 / 困难三档速度，17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。">
   <meta name="keywords" content="贪吃蛇,在线贪吃蛇,免费贪吃蛇,经典贪吃蛇,诺基亚游戏,解压游戏,YSGame">
   <title>贪吃蛇 · 在线玩 | YSGame 云舒的小游戏屋</title>
   <link rel="canonical" href="https://ysgame.xyz/games/snake/">
@@ -73,6 +73,13 @@
       </h1>
       <p class="g-tagline" data-i18n="tagline">一条线，一个方向，越吃越长</p>
     </header>
+
+    <!-- 难度选择 -->
+    <div class="seg gsnake__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard">困难</button>
+    </div>
 
     <!-- 分数 / 长度 / 最高 -->
     <div class="g-hud">

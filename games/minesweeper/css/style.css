@@ -106,6 +106,8 @@ body {
 
 .seg {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 3px;
   background: #EFE7D8;
   border-radius: 12px;

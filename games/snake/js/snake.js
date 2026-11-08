@@ -13,9 +13,15 @@
   'use strict';
 
   var GRID = 17;
-  var BASE_MS = 200;      // 初始每步毫秒
-  var MIN_MS = 92;        // 最快每步毫秒
-  var BEST_KEY = 'ysgame-snake-best';
+
+  // [gyh 2026-11-03 修改] 三档难度：走得越慢越轻松，越难越快越刺激
+  var DIFFS = {
+    easy:   { base: 240, min: 140 },
+    medium: { base: 200, min: 92 },
+    hard:   { base: 150, min: 62 }
+  };
+
+  var DIFF_KEY = 'ysgame-snake-diff';
 
   var DIRS = {
     up: { x: 0, y: -1 },
@@ -31,6 +37,7 @@
     food: { x: 0, y: 0 },
     score: 0,
     best: 0,
+    diff: 'medium',
     status: 'ready',     // ready | running | paused | over
     acc: 0
   };
@@ -55,7 +62,8 @@
     overlayTitle: document.getElementById('overlay-title'),
     overlaySub: document.getElementById('overlay-sub'),
     overlayScore: document.getElementById('overlay-score'),
-    overlayLen: document.getElementById('overlay-len')
+    overlayLen: document.getElementById('overlay-len'),
+    diffs: document.getElementById('diffs')
   };
 
   /* ------------------------------------------------------------------
@@ -66,8 +74,13 @@
     return window.I18N ? window.I18N.t(key) : key;
   }
 
+  function diffDef() { return DIFFS[state.diff] || DIFFS.medium; }
+  function baseMs() { return diffDef().base; }
+  function minMs() { return diffDef().min; }
+  function bestKey() { return 'ysgame-snake-best-' + state.diff; }
+
   function stepMs() {
-    return Math.max(MIN_MS, BASE_MS - (state.snake.length - 3) * 5);
+    return Math.max(minMs(), baseMs() - (state.snake.length - 3) * 5);
   }
 
   function setI18n(el, key) {
@@ -425,14 +438,35 @@
      ------------------------------------------------------------------ */
 
   function saveBest() {
-    try { localStorage.setItem(BEST_KEY, String(state.best)); } catch (e) {}
+    try { localStorage.setItem(bestKey(), String(state.best)); } catch (e) {}
   }
 
   function loadBest() {
     var raw = null;
-    try { raw = localStorage.getItem(BEST_KEY); } catch (e) {}
+    try { raw = localStorage.getItem(bestKey()); } catch (e) {}
     var n = parseInt(raw, 10);
     if (n > 0) state.best = n;
+  }
+
+  function syncDiffs() {
+    if (!dom.diffs) return;
+    var btns = dom.diffs.querySelectorAll('.seg__btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('is-active', btns[i].getAttribute('data-diff') === state.diff);
+    }
+  }
+
+  function switchDiff(diff) {
+    if (!DIFFS[diff] || diff === state.diff) return;
+
+    var inProgress = state.status === 'running' || state.status === 'paused';
+    if (inProgress && state.score > 0 && !window.confirm(t('confirm_diff'))) return;
+
+    state.diff = diff;
+    try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    loadBest();
+    syncDiffs();
+    reset();
   }
 
   /* ------------------------------------------------------------------
@@ -524,6 +558,14 @@
     dom.btnNew.addEventListener('click', function () { newGame(true); });
     dom.btnAgain.addEventListener('click', function () { newGame(false); });
 
+    if (dom.diffs) {
+      dom.diffs.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.seg__btn') : null;
+        if (!btn || !dom.diffs.contains(btn)) return;
+        switchDiff(btn.getAttribute('data-diff'));
+      });
+    }
+
     // 切走标签页自动暂停，回来时不会直接撞上
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) pause();
@@ -562,8 +604,13 @@
      ------------------------------------------------------------------ */
 
   function init() {
+    var savedDiff = null;
+    try { savedDiff = localStorage.getItem(DIFF_KEY); } catch (e) {}
+    if (savedDiff && DIFFS[savedDiff]) state.diff = savedDiff;
+
     loadBest();
     reset();
+    syncDiffs();
     fitCanvas();
     bindInput();
     window.requestAnimationFrame(loop);

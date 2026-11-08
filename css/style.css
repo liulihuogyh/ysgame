@@ -2168,9 +2168,26 @@ body.lang-en .ys-share__title {
 /* 分段按钮 */
 .seg {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 3px;
   background: #EFE7D8;
   border-radius: 12px;
+}
+
+/* 独立成行的难度选择器：宽度随内容、水平居中，窄屏放不下时自动换行
+   [gyh 2026-11-08 新增] */
+.g2048__diffs,
+.gm3__diffs,
+.gsnake__diffs,
+.soko__tiers {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 16px;
+}
+
+.soko__tiers {
+  margin-bottom: 14px;
 }
 
 .seg__btn {

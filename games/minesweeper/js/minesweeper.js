@@ -15,6 +15,7 @@
 
   var LEVELS = {
     easy: { rows: 9, cols: 9, mines: 10 },
+    medium: { rows: 13, cols: 13, mines: 25 },
     hard: { rows: 16, cols: 16, mines: 40 }
   };
 

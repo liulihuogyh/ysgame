@@ -14,16 +14,27 @@
 
   var N = 8;
   var KINDS = 6;
-  var START_MOVES = 30;
-  var TARGET = 1200;
+
+  // [gyh 2026-11-03 修改] 三档难度：步数更紧、目标分更高 → 越难越要精打细算
+  var DIFFS = {
+    easy:   { moves: 35, target: 1000 },
+    medium: { moves: 30, target: 1500 },
+    hard:   { moves: 24, target: 2000 }
+  };
 
   var STATE_KEY = 'ysgame-match3-state';
-  var BEST_KEY = 'ysgame-match3-best';
+  var DIFF_KEY = 'ysgame-match3-diff';
+
+  function diffDef() { return DIFFS[state.diff] || DIFFS.medium; }
+  function movesTotal() { return diffDef().moves; }
+  function targetScore() { return diffDef().target; }
+  function bestKey() { return 'ysgame-match3-best-' + state.diff; }
 
   var state = {
     grid: [],
     score: 0,
-    moves: START_MOVES,
+    moves: 0,
+    diff: 'medium',
     best: 0,
     over: false,
     won: false,
@@ -50,7 +61,8 @@
     overlay: document.getElementById('overlay'),
     overlayTitle: document.getElementById('overlay-title'),
     overlaySub: document.getElementById('overlay-sub'),
-    overlayScore: document.getElementById('overlay-score')
+    overlayScore: document.getElementById('overlay-score'),
+    diffs: document.getElementById('diffs')
   };
 
   /* ------------------------------------------------------------------
@@ -163,11 +175,12 @@
     dom.score.textContent = String(state.score);
     dom.moves.textContent = String(Math.max(0, state.moves));
     dom.best.textContent = String(state.best);
+    if (dom.goal) dom.goal.textContent = String(targetScore());
 
-    var pct = Math.min(100, state.score / TARGET * 100);
+    var pct = Math.min(100, state.score / targetScore() * 100);
     dom.meterFill.style.width = pct + '%';
-    dom.meter.setAttribute('aria-valuenow', String(Math.min(state.score, TARGET)));
-    dom.meter.setAttribute('aria-valuemax', String(TARGET));
+    dom.meter.setAttribute('aria-valuenow', String(Math.min(state.score, targetScore())));
+    dom.meter.setAttribute('aria-valuemax', String(targetScore()));
   }
 
   /* ------------------------------------------------------------------
@@ -361,7 +374,7 @@
     state.busy = false;
     save();
 
-    if (state.score >= TARGET) {
+    if (state.score >= targetScore()) {
       win();
     } else if (state.moves <= 0) {
       gameOver();
@@ -609,18 +622,19 @@
         v: 1,
         grid: packGrid(),
         score: state.score,
-        moves: state.moves
+        moves: state.moves,
+        diff: state.diff
       }));
     } catch (e) {}
   }
 
   function saveBest() {
-    try { localStorage.setItem(BEST_KEY, String(state.best)); } catch (e) {}
+    try { localStorage.setItem(bestKey(), String(state.best)); } catch (e) {}
   }
 
   function loadBest() {
     var raw = null;
-    try { raw = localStorage.getItem(BEST_KEY); } catch (e) {}
+    try { raw = localStorage.getItem(bestKey()); } catch (e) {}
     var n = parseInt(raw, 10);
     if (n > 0) state.best = n;
   }
@@ -639,7 +653,7 @@
 
     var score = parseInt(data.score, 10);
     var moves = parseInt(data.moves, 10);
-    if (!(score >= 0) || !(moves > 0 && moves <= START_MOVES)) return false;
+    if (!(score >= 0) || !(moves > 0 && moves <= movesTotal())) return false;
 
     // 存档里如果已经是三连状态（中途关页面恰好在动画里），直接作废
     if (findMatches(g).length) return false;
@@ -647,6 +661,7 @@
     state.grid = g;
     state.score = score;
     state.moves = moves;
+    if (data.diff && DIFFS[data.diff]) state.diff = data.diff;
     state.over = false;
     state.won = false;
 
@@ -662,7 +677,7 @@
   function newGame(ask) {
     if (state.busy) return;
 
-    var inProgress = !state.over && state.moves < START_MOVES;
+    var inProgress = !state.over && state.moves < movesTotal();
     if (ask && inProgress) {
       if (!window.confirm(t('confirm_new'))) return;
     }
@@ -671,7 +686,7 @@
     selected = null;
     state.grid = freshGrid();
     state.score = 0;
-    state.moves = START_MOVES;
+    state.moves = movesTotal();
     state.over = false;
     state.won = false;
     state.busy = false;
@@ -680,6 +695,32 @@
     renderAll();
     refreshHud();
     save();
+  }
+
+  /* ------------------------------------------------------------------
+     难度切换
+     ------------------------------------------------------------------ */
+
+  function syncDiffs() {
+    if (!dom.diffs) return;
+    var btns = dom.diffs.querySelectorAll('.seg__btn');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle('is-active', btns[i].getAttribute('data-diff') === state.diff);
+    }
+  }
+
+  function switchDiff(diff) {
+    if (!DIFFS[diff] || diff === state.diff) return;
+    if (state.busy) return;
+
+    var inProgress = !state.over && state.moves < movesTotal();
+    if (inProgress && !window.confirm(t('confirm_diff'))) return;
+
+    state.diff = diff;
+    try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    loadBest();
+    newGame(false);
+    syncDiffs();
   }
 
   /* ------------------------------------------------------------------
@@ -697,6 +738,14 @@
 
     dom.btnNew.addEventListener('click', function () { newGame(true); });
     dom.btnAgain.addEventListener('click', function () { newGame(false); });
+
+    if (dom.diffs) {
+      dom.diffs.addEventListener('click', function (e) {
+        var btn = e.target && e.target.closest ? e.target.closest('.seg__btn') : null;
+        if (!btn || !dom.diffs.contains(btn)) return;
+        switchDiff(btn.getAttribute('data-diff'));
+      });
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -704,6 +753,10 @@
      ------------------------------------------------------------------ */
 
   function init() {
+    var savedDiff = null;
+    try { savedDiff = localStorage.getItem(DIFF_KEY); } catch (e) {}
+    if (savedDiff && DIFFS[savedDiff]) state.diff = savedDiff;
+
     loadBest();
     buildBoard();
 
@@ -714,6 +767,7 @@
       refreshHud();
     }
 
+    syncDiffs();
     bindInput();
 
     document.addEventListener('ys:langchange', function () {

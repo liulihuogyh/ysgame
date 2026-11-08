@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="免费在线消消乐：8×8 棋盘，点两颗相邻的糖果交换，三颗同色连成一线就会消掉，连锁消除有连击加分。30 步内拿到 1200 分即可过关，无需注册登录。">
+  <meta name="description" content="免费在线消消乐：8×8 棋盘，点两颗相邻的糖果交换，三颗同色连成一线就会消掉，连锁消除有连击加分。简单 / 中等 / 困难三档，在有限步数内拿到目标分即可过关，无需注册登录。">
   <meta name="keywords" content="消消乐,三消游戏,在线消消乐,免费消消乐,解压游戏,休闲小游戏,YSGame">
   <title>消消乐 · 在线玩 | YSGame 云舒的小游戏屋</title>
   <link rel="canonical" href="https://ysgame.xyz/games/match3/">
@@ -73,6 +73,13 @@
       </h1>
       <p class="g-tagline" data-i18n="tagline">三颗同色连成一线，看着它们一个个消失</p>
     </header>
+
+    <!-- 难度选择 -->
+    <div class="seg gm3__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard">困难</button>
+    </div>
 
     <!-- 分数 / 步数 / 最佳 -->
     <div class="g-hud">

@@ -11,104 +11,333 @@
 
   var STATE_KEY = 'ysgame-soko-state';
   var BEST_KEY = 'ysgame-soko-best';
-  var LEVEL_KEY = 'ysgame-soko-level';
+  var TIER_KEY = 'ysgame-soko-tier';
+  var LAST_KEY = 'ysgame-soko-last';
   var MAX_HISTORY = 400;
 
   /* ------------------------------------------------------------------
-     十关
-     # 墙   空格 地面   . 目标   $ 箱子   @ 小人
-     难度按「最少步数」排：2 / 2 / 3 / 5 / 6 / 7 / 9 / 14 / 16 / 19
+     三档难度（每档 10 关，共 30 关），全部用 BFS 求解器验证过可解。
+     难度按「最少步数 par」逐级递增：
+       简单   6 → 15   步
+       中等  18 → 27   步
+       困难  36 → 61   步
+     # 墙   . 目标   $ 箱子   @ 小人   * 箱在目标上
+     [gyh 2026-11-03 修改]
      ------------------------------------------------------------------ */
-  var LEVELS = [
-    [
-      '#######',
-      '#     #',
-      '# @$ .#',
-      '#     #',
-      '#######'
+  var TIERS = {
+    'easy': [
+      [
+        '#######',
+        '#   $.#',
+        '#.@$  #',
+        '#     #',
+        '#     #',
+        '##  ###',
+        '#######'
+      ],
+      [
+        '########',
+        '###    #',
+        '##     #',
+        '#  # $ #',
+        '##*# @ #',
+        '# # .  #',
+        '########'
+      ],
+      [
+        '#######',
+        '# .$  #',
+        '#  # .#',
+        '#  @$ #',
+        '# #   #',
+        '#    ##',
+        '#######'
+      ],
+      [
+        '########',
+        '#      #',
+        '## .   #',
+        '##@$   #',
+        '#    # #',
+        '# # .$ #',
+        '########'
+      ],
+      [
+        '#########',
+        '##     ##',
+        '#. @$   #',
+        '#  $ .  #',
+        '# #     #',
+        '#    #  #',
+        '#########'
+      ],
+      [
+        '########',
+        '#      #',
+        '#    $ #',
+        '## @.  #',
+        '# .$   #',
+        '#    # #',
+        '########'
+      ],
+      [
+        '#######',
+        '# #  .#',
+        '#    $#',
+        '# #   #',
+        '#   # #',
+        '## $@.#',
+        '#######'
+      ],
+      [
+        '########',
+        '#      #',
+        '#$     #',
+        '#.    ##',
+        '#      #',
+        '# .@$  #',
+        '########'
+      ],
+      [
+        '#######',
+        '#    ##',
+        '# .#  #',
+        '# $# ##',
+        '#.$   #',
+        '# @# ##',
+        '#######'
+      ],
+      [
+        '#########',
+        '##     .#',
+        '#   # $@#',
+        '#       #',
+        '# $.    #',
+        '#     # #',
+        '#########'
+      ],
     ],
-    [
-      '#######',
-      '#  .  #',
-      '#     #',
-      '#  $  #',
-      '#  @  #',
-      '#######'
+    'medium': [
+      [
+        '#########',
+        '# $. #  #',
+        '#    $  #',
+        '#    @  #',
+        '#    #  #',
+        '#   .   #',
+        '#   #   #',
+        '#########'
+      ],
+      [
+        '#########',
+        '#       #',
+        '#  #    #',
+        '#  #    #',
+        '#  #   ##',
+        '#  $. # #',
+        '#. @$ # #',
+        '#########'
+      ],
+      [
+        '##########',
+        '# @. .   #',
+        '# $ #  $ #',
+        '#        #',
+        '#        #',
+        '#    #$  #',
+        '#     .# #',
+        '##########'
+      ],
+      [
+        '##########',
+        '#        #',
+        '#  ##$ # #',
+        '#     . ##',
+        '# $@# #  #',
+        '#.     # #',
+        '#        #',
+        '##########'
+      ],
+      [
+        '##########',
+        '##  #    #',
+        '#       .#',
+        '#    # $ #',
+        '# # # .@##',
+        '#  $     #',
+        '# #   #  #',
+        '##########'
+      ],
+      [
+        '##########',
+        '## .$    #',
+        '##@$     #',
+        '#  .    ##',
+        '#.       #',
+        '# $      #',
+        '# #      #',
+        '##########'
+      ],
+      [
+        '#########',
+        '#  $.  .#',
+        '## #    #',
+        '#       #',
+        '#.      #',
+        '#@$   $ #',
+        '##      #',
+        '#########'
+      ],
+      [
+        '#########',
+        '##      #',
+        '#    # @#',
+        '#   .##$#',
+        '# $   #.#',
+        '#   #   #',
+        '#    .$ #',
+        '#########'
+      ],
+      [
+        '#########',
+        '#.   $  #',
+        '#  @.  .#',
+        '#  $##  #',
+        '#     $ #',
+        '#     # #',
+        '# #     #',
+        '#########'
+      ],
+      [
+        '#########',
+        '##  @ . #',
+        '## #$ $ #',
+        '#  # .  #',
+        '##   #. #',
+        '####  $ #',
+        '#       #',
+        '#########'
+      ],
     ],
-    [
-      '#########',
-      '#   .   #',
-      '#   $   #',
-      '#   @   #',
-      '#   $   #',
-      '#   .   #',
-      '#########'
+    'hard': [
+      [
+        '##########',
+        '##       #',
+        '# #    # #',
+        '#  $     #',
+        '#.  ##   #',
+        '#    @$#$#',
+        '# #  #  .#',
+        '#     .  #',
+        '##########'
+      ],
+      [
+        '###########',
+        '# #    #  #',
+        '#  @ ##   #',
+        '#  $ $    #',
+        '#     . $##',
+        '#    #    #',
+        '##     .# #',
+        '#   .#    #',
+        '###########'
+      ],
+      [
+        '##########',
+        '# #      #',
+        '#  $     #',
+        '##.#  #  #',
+        '##  #$   #',
+        '#    @   #',
+        '#.       #',
+        '#  $.#   #',
+        '##########'
+      ],
+      [
+        '##########',
+        '#.@#     #',
+        '# $   #  #',
+        '#  #     #',
+        '#.#   $  #',
+        '#   $  # #',
+        '#        #',
+        '# #.     #',
+        '##########'
+      ],
+      [
+        '###########',
+        '##   #  # #',
+        '# #$ $@   #',
+        '#      #  #',
+        '#.        #',
+        '#  #    .##',
+        '#.$ #    ##',
+        '# #       #',
+        '###########'
+      ],
+      [
+        '###########',
+        '#  .      #',
+        '#         #',
+        '# . $#    #',
+        '#      ## #',
+        '##  #  #  #',
+        '# . @$$   #',
+        '##  #   # #',
+        '###########'
+      ],
+      [
+        '###########',
+        '#         #',
+        '#    . # ##',
+        '#      $  #',
+        '#    # @  #',
+        '#    .    #',
+        '##  # $#$ #',
+        '# #    # .#',
+        '###########'
+      ],
+      [
+        '###########',
+        '#      # .#',
+        '# $#      #',
+        '#    #    #',
+        '# @ $   ###',
+        '#.$#      #',
+        '##        #',
+        '##     #. #',
+        '###########'
+      ],
+      [
+        '###########',
+        '#   .    .#',
+        '#   @     #',
+        '# $ $ #   #',
+        '## ###    #',
+        '#.     #  #',
+        '# $ #     #',
+        '#  #      #',
+        '###########'
+      ],
+      [
+        '###########',
+        '#.        #',
+        '# #       #',
+        '# $@ $#  .#',
+        '#       # #',
+        '#$## #    #',
+        '#   #  #  #',
+        '#  .      #',
+        '###########'
+      ],
     ],
-    [
-      '##########',
-      '#        #',
-      '#  $  .  #',
-      '#  @     #',
-      '#        #',
-      '##########'
-    ],
-    [
-      '###########',
-      '#         #',
-      '#  #####  #',
-      '#  $   .  #',
-      '#  @      #',
-      '#         #',
-      '###########'
-    ],
-    [
-      '########',
-      '#      #',
-      '#  .   #',
-      '#      #',
-      '#  @$  #',
-      '#      #',
-      '########'
-    ],
-    [
-      '#########',
-      '#  . .  #',
-      '#       #',
-      '#  $ $  #',
-      '#   @   #',
-      '#       #',
-      '#########'
-    ],
-    [
-      '##########',
-      '#  .  .  #',
-      '#        #',
-      '#  $  $  #',
-      '#   @    #',
-      '#  $  $  #',
-      '#  .  .  #',
-      '##########'
-    ],
-    [
-      '###########',
-      '#  . . .  #',
-      '#         #',
-      '#  $ $ $  #',
-      '#    @    #',
-      '#         #',
-      '###########'
-    ],
-    [
-      '###########',
-      '# .     . #',
-      '#   $ $   #',
-      '#  $   $  #',
-      '#    @    #',
-      '#  .   .  #',
-      '#         #',
-      '###########'
-    ]
-  ];
+  };
+
+  var TIER_ORDER = ['easy', 'medium', 'hard'];
+
+  function levelsOf(tier) {
+    return TIERS[tier] || TIERS.easy;
+  }
 
   var DIRS = {
     up: [-1, 0],
@@ -121,6 +350,7 @@
      状态
      ------------------------------------------------------------------ */
   var state = {
+    tier: 'easy',
     level: 0,
     w: 0,
     h: 0,
@@ -135,7 +365,7 @@
     elapsed: 0,
     done: false,
     history: [],
-    best: {}
+    best: { easy: {}, medium: {}, hard: {} }
   };
 
   var toastTimer = 0;
@@ -245,7 +475,7 @@
      ------------------------------------------------------------------ */
 
   function buildBoard() {
-    var parsed = parseLevel(LEVELS[state.level]);
+    var parsed = parseLevel(levelsOf(state.tier)[state.level]);
 
     state.w = parsed.w;
     state.h = parsed.h;
@@ -311,7 +541,7 @@
   function refreshHud() {
     dom.moves.textContent = String(state.moves);
     dom.timer.textContent = fmtTime(elapsedSec());
-    var best = state.best[state.level];
+    var best = state.best[state.tier][state.level];
     dom.best.textContent = best ? String(best) : '--';
     dom.board.setAttribute('aria-label', t('board_aria') + ' · ' + progressText());
   }
@@ -322,14 +552,14 @@
       var el = items[i];
       var lv = parseInt(el.dataset.level, 10);
       el.classList.toggle('is-active', lv === state.level);
-      el.classList.toggle('is-cleared', typeof state.best[lv] === 'number');
+      el.classList.toggle('is-cleared', typeof state.best[state.tier][lv] === 'number');
       el.setAttribute('aria-pressed', lv === state.level ? 'true' : 'false');
     }
   }
 
   function buildLevelBar() {
     dom.levels.innerHTML = '';
-    for (var i = 0; i < LEVELS.length; i++) {
+    for (var i = 0; i < levelsOf(state.tier).length; i++) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'lv';
@@ -461,9 +691,9 @@
     hideToast();
     soundWin();
 
-    var prev = state.best[state.level];
+    var prev = state.best[state.tier][state.level];
     if (typeof prev !== 'number' || state.moves < prev) {
-      state.best[state.level] = state.moves;
+      state.best[state.tier][state.level] = state.moves;
       saveBest();
     }
 
@@ -476,18 +706,21 @@
   }
 
   function allCleared() {
-    for (var i = 0; i < LEVELS.length; i++) {
-      if (typeof state.best[i] !== 'number') return false;
+    for (var i = 0; i < levelsOf(state.tier).length; i++) {
+      if (typeof state.best[state.tier][i] !== 'number') return false;
     }
     return true;
   }
 
   function showOverlay() {
-    var last = state.level === LEVELS.length - 1;
-    // 只有十关都过了才说「十关都过了」，否则只是这一关过了
-    var all = allCleared();
-    var titleKey = all ? 'win_title_all' : 'win_title';
-    var subKey = all ? 'win_sub_all' : 'win_sub';
+    var tierLen = levelsOf(state.tier).length;
+    var last = state.level === tierLen - 1;
+    var hasNextTier = TIER_ORDER.indexOf(state.tier) < TIER_ORDER.length - 1;
+
+    // 当前难度十关全清才说「本档通关」，否则只是这一关过了
+    var allTier = allCleared();
+    var titleKey = allTier ? 'win_tier_all' : 'win_title';
+    var subKey = allTier ? 'win_sub_tier_all' : 'win_sub';
 
     dom.overlayTitle.setAttribute('data-i18n', titleKey);
     dom.overlaySub.setAttribute('data-i18n', subKey);
@@ -497,8 +730,12 @@
     dom.overlayMoves.textContent = String(state.moves);
     dom.overlayTime.textContent = fmtTime(state.elapsed);
 
-    dom.btnNext.setAttribute('data-i18n', last ? 'btn_first' : 'btn_next');
-    dom.btnNext.textContent = t(last ? 'btn_first' : 'btn_next');
+    var nextKey;
+    if (last && hasNextTier) nextKey = 'btn_next_tier';
+    else if (last) nextKey = 'btn_first';
+    else nextKey = 'btn_next';
+    dom.btnNext.setAttribute('data-i18n', nextKey);
+    dom.btnNext.textContent = t(nextKey);
 
     dom.overlay.hidden = false;
   }
@@ -546,6 +783,7 @@
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify({
         v: 1,
+        tier: state.tier,
         level: state.level,
         boxes: state.boxes.map(function (b) { return [b.r, b.c]; }),
         player: [state.player.r, state.player.c],
@@ -554,7 +792,8 @@
         started: state.started,
         elapsed: elapsedSec()
       }));
-      localStorage.setItem(LEVEL_KEY, String(state.level));
+      setLast(state.tier, state.level);
+      try { localStorage.setItem(TIER_KEY, state.tier); } catch (e) {}
     } catch (e) {}
   }
 
@@ -571,20 +810,46 @@
     try { data = JSON.parse(raw); } catch (e) { return; }
     if (!data || typeof data !== 'object') return;
 
-    for (var k in data) {
-      if (!Object.prototype.hasOwnProperty.call(data, k)) continue;
-      var n = parseInt(k, 10);
-      if (n >= 0 && n < LEVELS.length && typeof data[k] === 'number' && data[k] > 0) {
-        state.best[n] = data[k];
+    // 新格式：{ easy:{...}, medium:{...}, hard:{...} }
+    for (var ti = 0; ti < TIER_ORDER.length; ti++) {
+      var tk = TIER_ORDER[ti];
+      if (data[tk] && typeof data[tk] === 'object') {
+        for (var k in data[tk]) {
+          if (!Object.prototype.hasOwnProperty.call(data[tk], k)) continue;
+          var n = parseInt(k, 10);
+          if (n >= 0 && n < 30 && typeof data[tk][k] === 'number' && data[tk][k] > 0) {
+            state.best[tk][n] = data[tk][k];
+          }
+        }
+      }
+    }
+
+    // 旧格式兼容：顶层直接是 { 关卡索引: 步数 }（老版本的 10 关），并入 easy
+    for (var lk in data) {
+      if (!Object.prototype.hasOwnProperty.call(data, lk)) continue;
+      if (TIER_ORDER.indexOf(lk) !== -1) continue;
+      var ln = parseInt(lk, 10);
+      if (!isNaN(ln) && typeof data[lk] === 'number' && data[lk] > 0) {
+        state.best.easy[ln] = data[lk];
       }
     }
   }
 
-  function lastLevel() {
+  function getLast(tier) {
     var raw = null;
-    try { raw = localStorage.getItem(LEVEL_KEY); } catch (e) {}
-    var n = parseInt(raw, 10);
-    return n >= 0 && n < LEVELS.length ? n : 0;
+    try { raw = localStorage.getItem(LAST_KEY); } catch (e) {}
+    if (!raw) return 0;
+    var map;
+    try { map = JSON.parse(raw); } catch (e) { return 0; }
+    if (map && typeof map[tier] === 'number') return map[tier];
+    return 0;
+  }
+
+  function setLast(tier, level) {
+    var map = {};
+    try { map = JSON.parse(localStorage.getItem(LAST_KEY)) || {}; } catch (e) { map = {}; }
+    map[tier] = level;
+    try { localStorage.setItem(LAST_KEY, JSON.stringify(map)); } catch (e) {}
   }
 
   function loadState() {
@@ -596,10 +861,11 @@
     try { data = JSON.parse(raw); } catch (e) { return false; }
     if (!data || data.v !== 1) return false;
 
+    var tier = (data.tier && TIERS[data.tier]) ? data.tier : 'easy';
     var level = parseInt(data.level, 10);
-    if (!(level >= 0 && level < LEVELS.length)) return false;
+    if (!(level >= 0 && level < levelsOf(tier).length)) return false;
 
-    var base = parseLevel(LEVELS[level]);
+    var base = parseLevel(levelsOf(tier)[level]);
     if (!Array.isArray(data.boxes) || data.boxes.length !== base.boxes.length) return false;
     if (!Array.isArray(data.player) || data.player.length !== 2) return false;
 
@@ -621,7 +887,12 @@
     if (pr < 0 || pr >= base.h || pc < 0 || pc >= base.w) return false;
     if (base.walls[key(pr, pc)]) return false;
 
+    state.tier = tier;
     state.level = level;
+    // 存档里的档位可能和 TIER_KEY 不一致（旧存档 / 手动清理过），
+    // 这里按最终档位重建选关栏与高亮，避免 UI 和实际关卡错位
+    buildLevelBar();
+    syncTiers();
     state.moves = typeof data.moves === 'number' ? data.moves : 0;
     state.pushes = typeof data.pushes === 'number' ? data.pushes : 0;
     state.started = !!data.started;
@@ -651,7 +922,7 @@
 
   function loadLevel(index) {
     var i = parseInt(index, 10);
-    if (!(i >= 0 && i < LEVELS.length)) return;
+    if (!(i >= 0 && i < levelsOf(state.tier).length)) return;
 
     state.level = i;
     state.moves = 0;
@@ -667,6 +938,7 @@
     buildBoard();
     refreshHud();
     syncLevelBar();
+    setLast(state.tier, i);
     save();
   }
 
@@ -716,12 +988,61 @@
     dom.btnUndo.addEventListener('click', undo);
     dom.btnRestart.addEventListener('click', restart);
     dom.btnNext.addEventListener('click', function () {
-      if (state.level === LEVELS.length - 1) loadLevel(0);
-      else loadLevel(state.level + 1);
+      var tierLen = levelsOf(state.tier).length;
+      var last = state.level === tierLen - 1;
+      var hasNextTier = TIER_ORDER.indexOf(state.tier) < TIER_ORDER.length - 1;
+      if (last && hasNextTier) {
+        switchTier(TIER_ORDER[TIER_ORDER.indexOf(state.tier) + 1]);
+      } else if (last) {
+        loadLevel(0);
+      } else {
+        loadLevel(state.level + 1);
+      }
     });
+
+    if (dom.tiers) {
+      dom.tiers.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.seg__btn') : null;
+        if (!btn || !dom.tiers.contains(btn)) return;
+        switchTier(btn.getAttribute('data-diff'));
+      });
+    }
 
     bindPad();
     bindSwipe();
+  }
+
+  /* ------------------------------------------------------------------
+     难度切换
+     ------------------------------------------------------------------ */
+
+  function syncTiers() {
+    if (!dom.tiers) return;
+    var btns = dom.tiers.querySelectorAll('.seg__btn');
+    for (var i = 0; i < btns.length; i++) {
+      var tk = btns[i].getAttribute('data-diff');
+      btns[i].classList.toggle('is-active', tk === state.tier);
+      // 该难度已通关则打个勾标记
+      var cleared = true;
+      var len = levelsOf(tk).length;
+      for (var j = 0; j < len; j++) {
+        if (typeof state.best[tk][j] !== 'number') { cleared = false; break; }
+      }
+      btns[i].classList.toggle('is-done', cleared);
+    }
+  }
+
+  function switchTier(tier) {
+    if (!TIERS[tier] || tier === state.tier) return;
+    if (state.moves > 0 && !state.done) {
+      if (!window.confirm(t('confirm_diff'))) return;
+    }
+
+    state.tier = tier;
+    try { localStorage.setItem(TIER_KEY, tier); } catch (e) {}
+    syncTiers();
+    buildLevelBar();
+    loadLevel(getLast(tier));
   }
 
   /* 按住方向键连续走：先等 240ms，之后每 130ms 一步 */
@@ -822,6 +1143,7 @@
       cells: document.getElementById('cells'),
       actors: document.getElementById('actors'),
       levels: document.getElementById('levels'),
+      tiers: document.getElementById('tiers'),
       moves: document.getElementById('moves'),
       timer: document.getElementById('timer'),
       best: document.getElementById('best'),
@@ -837,10 +1159,15 @@
       overlayTime: document.getElementById('overlay-time')
     };
 
+    var savedTier = null;
+    try { savedTier = localStorage.getItem(TIER_KEY); } catch (e) {}
+    if (savedTier && TIERS[savedTier]) state.tier = savedTier;
+
     loadBest();
     buildLevelBar();
+    syncTiers();
 
-    if (!loadState()) loadLevel(lastLevel());
+    if (!loadState()) loadLevel(getLast(state.tier));
 
     bindInput();
     window.setInterval(tick, 250);
@@ -861,6 +1188,7 @@
       for (var i = 0; i < items.length; i++) {
         items[i].setAttribute('aria-label', t('level_n').replace('{n}', i + 1));
       }
+      syncTiers();
       refreshHud();
       if (!dom.overlay.hidden) showOverlay();
       if (toastKey) dom.toast.textContent = t(toastKey);

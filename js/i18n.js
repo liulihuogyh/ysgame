@@ -191,12 +191,16 @@
     g2048: {
       zh: {
         page_title: '2048 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线 2048：上下左右滑动合并相同的数字，支持撤销、最高分记录和断点续玩。无需注册登录，打开就能玩。',
+        page_desc: '免费在线 2048：简单 1024 / 中等 2048 / 困难 4096 三档目标，上下左右滑动合并相同的数字，支持撤销、最高分记录和断点续玩。无需注册登录，打开就能玩。',
         game_title: '2048',
         tagline: '上下左右，把相同的数字叠在一起',
         share_line: '滑两下就上手的 2048，看看你能叠到多少。',
 
         board_aria: '2048 棋盘',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单 1024',
+        diff_medium: '中等 2048',
+        diff_hard: '困难 4096',
         label_score: '得分',
         label_best: '最高',
 
@@ -204,7 +208,7 @@
         btn_undo: '↶ 撤销',
         hint_keys: '用方向键或 WASD，手机上直接滑动',
 
-        win_title: '拼到 2048 了',
+        win_title: '拼到 {target} 了',
         win_sub: '可以接着往上叠，也可以重新开一局。',
         btn_continue: '继续玩',
 
@@ -212,17 +216,22 @@
         over_sub: '格子满了，也没有能合并的数字了。',
         btn_again: '再来一局',
 
-        confirm_new: '要重新开一局吗？这一局的进度会丢掉。'
+        confirm_new: '要重新开一局吗？这一局的进度会丢掉。',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。'
       },
 
       en: {
         page_title: '2048, free to play | YSGame',
-        page_desc: 'A quiet 2048. Slide the tiles, merge the matching numbers, undo when you change your mind. Saves automatically, no account needed.',
+        page_desc: 'A quiet 2048 with three goals: Easy 1024, Medium 2048, Hard 4096. Slide the tiles, merge the matching numbers, undo when you change your mind. Saves automatically, no account needed.',
         game_title: '2048',
         tagline: 'Slide the tiles, merge the matching numbers',
         share_line: '2048: swipe, merge, and see how far you get.',
 
         board_aria: '2048 board',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy 1024',
+        diff_medium: 'Medium 2048',
+        diff_hard: 'Hard 4096',
         label_score: 'Score',
         label_best: 'Best',
 
@@ -230,7 +239,7 @@
         btn_undo: '↶ Undo',
         hint_keys: 'Arrow keys or WASD. Swipe on a phone.',
 
-        win_title: 'You reached 2048',
+        win_title: 'You reached {target}',
         win_sub: 'Keep going for 4096, or start a fresh board.',
         btn_continue: 'Keep playing',
 
@@ -238,14 +247,15 @@
         over_sub: 'The board is full, and nothing matches any more.',
         btn_again: 'Play again',
 
-        confirm_new: 'Start a new game? This board will be lost.'
+        confirm_new: 'Start a new game? This board will be lost.',
+        confirm_diff: 'Switching difficulty starts a fresh board. Your progress will be lost.'
       }
     },
 
     gmines: {
       zh: {
         page_title: '扫雷 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线扫雷：入门 9×9、进阶 16×16 两种棋盘，第一次点击永不踩雷，支持右键插旗、手机长按、计时与最佳成绩。无需注册登录，打开就能玩。',
+        page_desc: '免费在线扫雷：简单 9×9、中等 13×13、困难 16×16 三种棋盘，第一次点击永不踩雷，支持右键插旗、手机长按、计时与最佳成绩。无需注册登录，打开就能玩。',
         game_title: '扫雷',
         tagline: '翻开每一格，用数字推掉剩下的可能',
         share_line: '经典扫雷，第一次点击不会踩雷。',
@@ -256,8 +266,9 @@
         label_time: '用时',
         label_best: '最佳',
 
-        level_easy: '入门 9×9',
-        level_hard: '进阶 16×16',
+        level_easy: '简单 9×9',
+        level_medium: '中等 13×13',
+        level_hard: '困难 16×16',
 
         btn_flag: '🚩 插旗',
         btn_new: '新游戏',
@@ -281,7 +292,7 @@
 
       en: {
         page_title: 'Minesweeper, free to play | YSGame',
-        page_desc: 'A quiet online Minesweeper with 9×9 and 16×16 boards. The first click never hits a mine, right-click or long-press to flag, and your best time is kept. No account needed.',
+        page_desc: 'A quiet online Minesweeper with Easy 9×9, Medium 13×13 and Hard 16×16 boards. The first click never hits a mine, right-click or long-press to flag, and your best time is kept. No account needed.',
         game_title: 'Minesweeper',
         tagline: 'Turn over a square, let the numbers do the reasoning',
         share_line: 'Classic Minesweeper, and the first click never hits a mine.',
@@ -292,8 +303,9 @@
         label_time: 'Time',
         label_best: 'Best',
 
-        level_easy: '9×9',
-        level_hard: '16×16',
+        level_easy: 'Easy 9×9',
+        level_medium: 'Medium 13×13',
+        level_hard: 'Hard 16×16',
 
         btn_flag: '🚩 Flag',
         btn_new: 'New game',
@@ -319,13 +331,16 @@
     gjigsaw: {
       zh: {
         page_title: '拼图 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线拼图：3×3 与 4×4 两种难度，内置三幅手绘风画面，点两块交换位置就能拼回去，可随时看原图，自动记录最佳用时。无需注册登录，打开就能玩。',
+        page_desc: '免费在线拼图：简单 3×3、中等 4×4、困难 5×5 三档难度，内置三幅手绘风画面，点两块交换位置就能拼回去，可随时看原图，自动记录最佳用时。无需注册登录，打开就能玩。',
         game_title: '拼图',
         tagline: '一块一块，把画面拼回原来的样子',
         share_line: '三幅画，慢慢拼。手指在动，脑子可以什么都不想。',
 
         board_aria: '拼图棋盘',
         level_group_aria: '选择难度',
+        size_easy: '简单 3×3',
+        size_medium: '中等 4×4',
+        size_hard: '困难 5×5',
         label_moves: '步数',
         label_time: '用时',
         label_best: '最佳',
@@ -351,13 +366,16 @@
 
       en: {
         page_title: 'Jigsaw, free to play | YSGame',
-        page_desc: 'A quiet online jigsaw with 3×3 and 4×4 boards and three hand-drawn pictures. Tap two pieces to swap them, peek at the picture any time. Your best time is kept. No account needed.',
+        page_desc: 'A quiet online jigsaw with Easy 3×3, Medium 4×4 and Hard 5×5 boards and three hand-drawn pictures. Tap two pieces to swap them, peek at the picture any time. Your best time is kept. No account needed.',
         game_title: 'Jigsaw',
         tagline: 'Piece by piece, until the picture comes back',
         share_line: 'Three little pictures, taken apart. Hands busy, mind quiet.',
 
         board_aria: 'Jigsaw board',
-        level_group_aria: 'Choose a size',
+        level_group_aria: 'Choose a difficulty',
+        size_easy: 'Easy 3×3',
+        size_medium: 'Medium 4×4',
+        size_hard: 'Hard 5×5',
         label_moves: 'Moves',
         label_time: 'Time',
         label_best: 'Best',
@@ -385,7 +403,7 @@
     gmatch3: {
       zh: {
         page_title: '消消乐 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线消消乐：8×8 棋盘，点两颗相邻的糖果交换，三颗同色连成一线就会消掉，连锁消除有连击加分。30 步内拿到 1200 分即可过关，无需注册登录。',
+        page_desc: '免费在线消消乐：8×8 棋盘，点两颗相邻的糖果交换，三颗同色连成一线就会消掉，连锁消除有连击加分。简单 / 中等 / 困难三档，在有限步数内拿到目标分即可过关，无需注册登录。',
         game_title: '消消乐',
         tagline: '三颗同色连成一线，看着它们一个个消失',
         share_line: '点两下，三颗同色就消掉。三十步，一个小目标。',
@@ -412,6 +430,12 @@
         reshuffle: '没有可消的了，重排一下',
 
         confirm_new: '要重新开一局吗？这一局的进度会丢失。',
+        confirm_diff: '切换难度会重新开一局，当前进度会丢掉。',
+
+        diff_easy: '简单',
+        diff_medium: '中等',
+        diff_hard: '困难',
+        difficulty_group_aria: '选择难度',
 
         cell_pos: '第 {r} 行第 {c} 列',
         cell_candy: '糖果',
@@ -420,7 +444,7 @@
 
       en: {
         page_title: 'Match three, free to play | YSGame',
-        page_desc: 'A quiet match-three on an 8×8 board. Swap two neighbouring candies, line up three of a kind, and watch the cascade. Thirty moves to reach 1200 points. No account needed.',
+        page_desc: 'A quiet match-three on an 8×8 board. Swap two neighbouring candies, line up three of a kind, and watch the cascade. Pick Easy, Medium or Hard — reach the target score before you run out of moves. No account needed.',
         game_title: 'Match three',
         tagline: 'Three of a kind, and they disappear',
         share_line: 'Tap two candies, match three. Thirty moves, one small goal.',
@@ -447,6 +471,12 @@
         reshuffle: 'Nothing left to match — reshuffling',
 
         confirm_new: 'Start a new board? This one will be lost.',
+        confirm_diff: 'Switching difficulty starts a fresh board. Your progress will be lost.',
+
+        diff_easy: 'Easy',
+        diff_medium: 'Medium',
+        diff_hard: 'Hard',
+        difficulty_group_aria: 'Choose a difficulty',
 
         cell_pos: 'Row {r}, column {c}',
         cell_candy: 'candy',
@@ -457,13 +487,17 @@
     gsnake: {
       zh: {
         page_title: '贪吃蛇 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线贪吃蛇：17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。',
+        page_desc: '免费在线贪吃蛇：简单 / 中等 / 困难三档速度，17×17 棋盘，方向键、WASD 或滑动屏幕控制，吃到果子会越来越长、越来越快，撞墙或咬到自己就结束。自动记录最高分，无需注册登录。',
         game_title: '贪吃蛇',
         tagline: '一条线，一个方向，越吃越长',
         share_line: '小时候在诺基亚上偷偷玩的那个。十七乘十七，看你能长到多长。',
 
         board_aria: '贪吃蛇棋盘',
         pad_aria: '方向键',
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单',
+        diff_medium: '中等',
+        diff_hard: '困难',
         dir_up: '上',
         dir_down: '下',
         dir_left: '左',
@@ -489,18 +523,23 @@
 
         hint_controls: '方向键或 WASD 控制，手机上滑动屏幕，也可以点下面的方向键。空格键暂停。',
 
-        confirm_new: '要重新开一局吗？这一局会丢失。'
+        confirm_new: '要重新开一局吗？这一局会丢失。',
+        confirm_diff: '切换难度会重新开始，当前这一局的成绩会丢掉。'
       },
 
       en: {
         page_title: 'Snake, free to play | YSGame',
-        page_desc: 'The classic Snake on a 17×17 board. Arrow keys, WASD, or swipe to steer. Every bite makes you longer and a little faster. Your best score is kept. No account needed.',
+        page_desc: 'The classic Snake on a 17×17 board with Easy, Medium and Hard speeds. Arrow keys, WASD, or swipe to steer. Every bite makes you longer and a little faster. Your best score is kept. No account needed.',
         game_title: 'Snake',
         tagline: 'One line, one direction, longer with every bite',
         share_line: 'The one you played on a Nokia. Seventeen by seventeen, how long can you get?',
 
         board_aria: 'Snake board',
         pad_aria: 'Direction pad',
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy',
+        diff_medium: 'Medium',
+        diff_hard: 'Hard',
         dir_up: 'Up',
         dir_down: 'Down',
         dir_left: 'Left',
@@ -526,20 +565,25 @@
 
         hint_controls: 'Arrow keys or WASD. On a phone, swipe on the board or use the pad below. Space pauses.',
 
-        confirm_new: 'Start over? This round will be lost.'
+        confirm_new: 'Start over? This round will be lost.',
+        confirm_diff: 'Switching difficulty restarts the game; your current score will be lost.'
       }
     },
 
     gsokoban: {
       zh: {
         page_title: '推箱子 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线推箱子：十关由易到难，方向键、WASD 或手指滑动都能玩，推错了可以撤销一步，自动记录每关最少步数。无需注册登录，打开就能玩。',
+        page_desc: '免费在线推箱子：简单 / 中等 / 困难三档，每档 10 关，共 30 关，难度逐级上升。方向键、WASD 或手指滑动都能玩，推错了可以撤销一步，自动记录每关最少步数。无需注册登录，打开就能玩。',
         game_title: '推箱子',
         tagline: '把箱子推到点上，推不回来就撤销一步',
         share_line: '十关推箱子，慢慢想。推错了撤销一步，不用重开。',
 
         board_aria: '推箱子棋盘',
         level_group_aria: '选择关卡',
+        difficulty_group_aria: '选择难度',
+        tier_easy: '简单',
+        tier_medium: '中等',
+        tier_hard: '困难',
         level_n: '第 {n} 关',
         pad_aria: '方向键',
         dir_up: '上',
@@ -554,28 +598,36 @@
         btn_undo: '↶ 撤销一步',
         btn_restart: '重来这一关',
         btn_next: '下一关',
+        btn_next_tier: '挑战下一难度',
         btn_first: '回到第一关',
 
         hint_controls: '方向键或 WASD 移动，推错了按撤销（U）。手机上滑一下，或按住下面的方向键。',
 
         win_title: '过关了',
         win_sub: '第 {n} 关的箱子都归位了。',
+        win_tier_all: '本档十关全清！',
+        win_sub_tier_all: '这一档全通关了，试试更高难度吧。',
         win_title_all: '十关都过了',
         win_sub_all: '十关全清。慢慢来，反而更快。',
 
         deadlock: '这个箱子推进死角了，按撤销退回一步。',
-        confirm_restart: '重来这一关？当前步数会清零。'
+        confirm_restart: '重来这一关？当前步数会清零。',
+        confirm_diff: '切换难度会回到该难度的选关界面，当前这一关的进度会丢掉。'
       },
 
       en: {
         page_title: 'Sokoban, free to play | YSGame',
-        page_desc: 'Ten hand-made Sokoban levels, easy to hard. Arrow keys, WASD or swipe; undo whenever a push goes wrong. Your best move count is kept for each level. No account needed.',
+        page_desc: 'Sokoban with three tiers — Easy, Medium, Hard — ten levels each, thirty in total, rising in difficulty. Arrow keys, WASD or swipe; undo whenever a push goes wrong. Your best move count is kept per level. No account needed.',
         game_title: 'Sokoban',
         tagline: 'Push every box onto a dot — undo if it goes wrong',
         share_line: 'Ten little warehouse puzzles. Take your time; undo is always there.',
 
         board_aria: 'Sokoban board',
         level_group_aria: 'Choose a level',
+        difficulty_group_aria: 'Choose a difficulty',
+        tier_easy: 'Easy',
+        tier_medium: 'Medium',
+        tier_hard: 'Hard',
         level_n: 'Level {n}',
         pad_aria: 'Direction pad',
         dir_up: 'Up',
@@ -590,30 +642,37 @@
         btn_undo: '↶ Undo',
         btn_restart: 'Restart level',
         btn_next: 'Next level',
+        btn_next_tier: 'Next difficulty',
         btn_first: 'Back to level 1',
 
         hint_controls: 'Arrow keys or WASD to move, U to undo. On a phone, swipe the board or hold the arrows below.',
 
         win_title: 'Cleared',
         win_sub: 'Every box is home on level {n}.',
+        win_tier_all: 'This tier is complete!',
+        win_sub_tier_all: 'All ten of this tier are done — try a harder one.',
         win_title_all: 'All ten cleared',
         win_sub_all: 'Ten levels, all solved. Slower is faster.',
 
         deadlock: 'That box is stuck in a corner — undo a step.',
-        confirm_restart: 'Restart this level? Your moves so far will be lost.'
+        confirm_restart: 'Restart this level? Your moves so far will be lost.',
+        confirm_diff: 'Switching difficulty returns you to that tier’s level picker; progress on this level will be lost.'
       }
     },
 
     gnpuzzle: {
       zh: {
         page_title: '数字华容道 · 在线玩 | YSGame 云舒的小游戏屋',
-        page_desc: '免费在线数字华容道：3×3、4×4、5×5 三种规格，点一下空格旁边的数字就能滑动，自动记录每档最少步数。无需注册登录，打开就能玩。',
+        page_desc: '免费在线数字华容道：简单 3×3、中等 4×4、困难 5×5 三档难度，点一下空格旁边的数字就能滑动，自动记录每档最少步数。无需注册登录，打开就能玩。',
         game_title: '数字华容道',
         tagline: '把数字按顺序排好，只留右下角一个空格',
         share_line: '3×3 到 5×5，点一下就滑。试试最少几步能拼回去。',
 
         board_aria: '数字华容道棋盘',
-        size_group_aria: '选择规格',
+        size_group_aria: '选择难度',
+        size_easy: '简单 3×3',
+        size_medium: '中等 4×4',
+        size_hard: '困难 5×5',
 
         label_moves: '步数',
         label_time: '用时',
@@ -632,13 +691,16 @@
 
       en: {
         page_title: 'Number Slide, free to play | YSGame',
-        page_desc: 'Free online number slide puzzle in 3x3, 4x4 and 5x5. Tap a tile next to the gap to slide it in; your best move count is saved for each size. No sign-up, no download.',
+        page_desc: 'Free online number slide puzzle with Easy 3×3, Medium 4×4 and Hard 5×5 tiers. Tap a tile next to the gap to slide it in; your best move count is saved for each tier. No sign-up, no download.',
         game_title: 'Number Slide',
         tagline: 'Line the numbers up and leave one gap at the end',
         share_line: 'From 3x3 up to 5x5 — tap a tile and it slides. How few moves do you need?',
 
         board_aria: 'Number slide board',
-        size_group_aria: 'Choose a size',
+        size_group_aria: 'Choose a difficulty',
+        size_easy: 'Easy 3×3',
+        size_medium: 'Medium 4×4',
+        size_hard: 'Hard 5×5',
 
         label_moves: 'Moves',
         label_time: 'Time',

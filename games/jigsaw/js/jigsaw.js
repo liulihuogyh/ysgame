@@ -14,9 +14,13 @@
   var BEST_KEY = 'ysgame-jigsaw-best';
   var PREVIEW_MS = 4000;   // 看原图 4 秒后自动收起，免得一直盖着
 
+  // [gyh 2026-11-08 修改] 三档难度：3×3 简单 / 4×4 中等 / 5×5 困难
+  var SIZES = [3, 4, 5];
+  function validSize(n) { return SIZES.indexOf(n) !== -1; }
+
   /* ------------------------------------------------------------------
      三幅画
-     都是矢量图，缩放到 4×4 也不会糊；配色跟着站内的莫兰迪色走
+     都是矢量图，缩放到 5×5 也不会糊；配色跟着站内的莫兰迪色走
      ------------------------------------------------------------------ */
 
   function sceneDawn() {
@@ -525,7 +529,7 @@
     if (!data) return false;
 
     var size = parseInt(data.size, 10);
-    if (size !== 3 && size !== 4) return false;
+    if (!validSize(size)) return false;
     if (!validPieces(data.pieces, size * size)) return false;
 
     var scene = parseInt(data.scene, 10);
@@ -557,7 +561,7 @@
       if (!window.confirm(t('confirm_new'))) return;
     }
 
-    if (size === 3 || size === 4) state.size = size;
+    if (validSize(size)) state.size = size;
 
     // 换一幅画，尽量不和上一局重复
     var next = state.scene;

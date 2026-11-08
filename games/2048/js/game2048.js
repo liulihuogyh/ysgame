@@ -10,6 +10,14 @@
   'use strict';
 
   var SIZE = 4;
+
+  // [gyh 2026-11-03 新增] 三档难度：目标数字越大、出 4 的概率越高，越难。
+  var DIFFS = {
+    easy: { target: 1024, four: 0.06 },
+    medium: { target: 2048, four: 0.10 },
+    hard: { target: 4096, four: 0.18 }
+  };
+  var DIFF_KEY = 'ysgame-2048-diff';
   var STORAGE_KEY = 'ysgame-2048-state';
   var BEST_KEY = 'ysgame-2048-best';
   var MAX_UNDO = 20;
@@ -33,6 +41,7 @@
     tiles: document.getElementById('tiles'),
     score: document.getElementById('score'),
     best: document.getElementById('best'),
+    diffs: document.getElementById('diffs'),
     btnNew: document.getElementById('btn-new'),
     btnUndo: document.getElementById('btn-undo'),
     overlay: document.getElementById('overlay'),
@@ -44,6 +53,7 @@
   };
 
   var state = {
+    diff: 'medium',
     cells: [],
     score: 0,
     best: 0,
@@ -143,8 +153,9 @@
     if (!free.length) return null;
 
     var spot = free[Math.floor(Math.random() * free.length)];
-    // 2 占九成，4 占一成，和原版一致
-    var value = Math.random() < 0.9 ? 2 : 4;
+    // 原版是 2 占九成、4 占一成；这里按难度调，困难档出 4 明显更多
+    var four = (DIFFS[state.diff] || DIFFS.medium).four;
+    var value = Math.random() < four ? 4 : 2;
     var tile = createTile(value, spot[0], spot[1], true);
     state.cells[spot[0]][spot[1]] = tile;
     return tile;
@@ -226,6 +237,7 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         grid: gridValues(),
+        diff: state.diff,
         score: state.score,
         won: state.won,
         over: state.over
@@ -249,6 +261,8 @@
 
     var data;
     try { data = JSON.parse(raw); } catch (e) { return false; }
+    if (DIFFS[data.diff]) state.diff = data.diff;
+
     if (!data || !Array.isArray(data.grid) || data.grid.length !== SIZE) return false;
 
     // 先校验再落盘，避免读一半把界面弄脏
@@ -306,8 +320,9 @@
     // data-i18n 留着，切语言时 I18N 会自动重绘
     dom.overlayTitle.setAttribute('data-i18n', titleKey);
     dom.overlaySub.setAttribute('data-i18n', subKey);
-    dom.overlayTitle.textContent = t(titleKey);
-    dom.overlaySub.textContent = t(subKey);
+    var winTarget = (DIFFS[state.diff] || DIFFS.medium).target;
+    dom.overlayTitle.textContent = t(titleKey).replace('{target}', winTarget);
+    dom.overlaySub.textContent = t(subKey).replace('{target}', winTarget);
 
     dom.overlayScore.textContent = state.score;
     dom.btnContinue.hidden = kind !== 'win';
@@ -463,7 +478,8 @@
     if (gained === 0) soundMove();
     if (gained > 0) soundMerge(mergedTop);
 
-    if (!state.won && hasValue(2048)) {
+    var WIN_TARGET = (DIFFS[state.diff] || DIFFS.medium).target;
+    if (!state.won && hasValue(WIN_TARGET)) {
       state.won = true;
       save();
       soundWin();
@@ -479,6 +495,29 @@
   /* ------------------------------------------------------------------
      开局 / 撤销
      ------------------------------------------------------------------ */
+
+  function syncDiffs() {
+    var btns = dom.diffs.querySelectorAll('[data-diff]');
+    for (var i = 0; i < btns.length; i++) {
+      var on = btns[i].dataset.diff === state.diff;
+      btns[i].classList.toggle('is-active', on);
+      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+  }
+
+  function switchDiff(diff) {
+    if (!DIFFS[diff] || diff === state.diff) return;
+    // 这一局已经有进度就问一句，别让人手一滑丢掉整盘
+    var inProgress = state.undo.length > 0 || state.score > 0;
+    if (inProgress && !window.confirm(t('confirm_diff'))) {
+      syncDiffs();
+      return;
+    }
+    state.diff = diff;
+    try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    syncDiffs();
+    newGame(false);
+  }
 
   function newGame(ask) {
     // 只要动过手（哪怕还没合并出分）就问一句，别让人白玩一局
@@ -590,8 +629,22 @@
   function init() {
     loadBest();
 
+    // 恢复上次玩的难度
+    try {
+      var savedDiff = localStorage.getItem(DIFF_KEY);
+      if (DIFFS[savedDiff]) state.diff = savedDiff;
+    } catch (e) {}
+
+    syncDiffs();
+
     if (!load()) newGame(false);
     refreshUndo();
+
+    dom.diffs.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('[data-diff]') : null;
+      if (!btn || !dom.diffs.contains(btn)) return;
+      switchDiff(btn.dataset.diff);
+    });
 
     dom.btnNew.addEventListener('click', function () { newGame(true); });
     dom.btnUndo.addEventListener('click', undo);
