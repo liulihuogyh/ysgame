@@ -367,6 +367,8 @@
 
     state.moves--;
     refreshHud();
+    // [gyh 2026-11-08 新增] 进入最后 5 步时提醒一次（不每步都响，避免吵）
+    if (state.moves === 5) sfx('warn');
     soundSwap();
 
     await resolve();
@@ -392,12 +394,19 @@
       state.score += cells.length * 10 * combo;
 
       if (state.score > state.best) {
+        // [gyh 2026-11-08 新增] 本局首次刷新最高分，每局只响一次
+        if (state.best > 0 && !recordAnnounced) {
+          recordAnnounced = true;
+          sfx('perfect');
+        }
         state.best = state.score;
         saveBest();
       }
       refreshHud();
 
       if (combo > 1) showCombo(combo);
+      // [gyh 2026-11-08 新增] 三连以上连锁给一声 combo
+      if (combo >= 3) sfx('combo', { combo: combo });
       soundClear(combo);
 
       var i;
@@ -496,6 +505,8 @@
 
     tiles[move[0].r][move[0].c].classList.add('is-hint');
     tiles[move[1].r][move[1].c].classList.add('is-hint');
+    // [gyh 2026-11-08 新增] 提示按钮
+    sfx('hint');
 
     hintTimer = window.setTimeout(clearHint, 2400);
   }
@@ -570,6 +581,10 @@
      ------------------------------------------------------------------ */
 
   // [gyh 2026-11-03 修改] 统一走全站音效引擎；连击越高音越高
+  // [gyh 2026-11-08 新增] 通用音效包装；破纪录提示每局只响一次
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+  var recordAnnounced = false;
+
   function soundPick() { if (window.YSound) window.YSound.play('pick'); }
   function soundSwap() { if (window.YSound) window.YSound.play('swap'); }
 
@@ -690,6 +705,8 @@
     state.over = false;
     state.won = false;
     state.busy = false;
+    // [gyh 2026-11-08 新增] 重置破纪录标记
+    recordAnnounced = false;
 
     hideOverlay();
     renderAll();
@@ -718,6 +735,8 @@
 
     state.diff = diff;
     try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    // [gyh 2026-11-08 新增] 切换难度
+    sfx('toggle');
     loadBest();
     newGame(false);
     syncDiffs();

@@ -296,6 +296,8 @@
     state.status = 'ready';
     state.acc = 0;
     state.food = placeFood();
+    // [gyh 2026-11-08 新增] 重置破纪录标记
+    recordAnnounced = false;
 
     dom.overlay.hidden = true;
     showCard('ready');
@@ -318,6 +320,8 @@
     state.status = 'paused';
     showCard('pause');
     syncPauseButton();
+    // [gyh 2026-11-08 新增] 暂停 / 继续确认音
+    sfx('click');
   }
 
   function resume() {
@@ -326,6 +330,8 @@
     state.acc = 0;
     hideCard();
     syncPauseButton();
+    // [gyh 2026-11-08 新增] 暂停 / 继续确认音
+    sfx('click');
   }
 
   function die() {
@@ -383,9 +389,16 @@
       state.score++;
       state.food = placeFood();
       if (state.score > state.best) {
+        // [gyh 2026-11-08 新增] 本局首次刷新最高分，每局只响一次
+        if (state.best > 0 && !recordAnnounced) {
+          recordAnnounced = true;
+          sfx('perfect');
+        }
         state.best = state.score;
         saveBest();
       }
+      // [gyh 2026-11-08 新增] 长度每到 5 的倍数升一档
+      if (state.snake.length % 5 === 0) sfx('levelup');
       soundEat();
     } else {
       state.snake.pop();
@@ -422,6 +435,12 @@
     if (state.queue.length >= 2) return;
 
     state.queue.push(d);
+    // [gyh 2026-11-08 新增] 真正改变方向才响，且 >80ms 节流
+    var now = Date.now();
+    if (now - lastTurnSfx > 80) {
+      lastTurnSfx = now;
+      sfx('turn');
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -429,6 +448,11 @@
      ------------------------------------------------------------------ */
 
   // [gyh 2026-11-03 修改] 统一走全站音效引擎
+  // [gyh 2026-11-08 新增] 通用音效包装；破纪录 / 转向节流用的状态
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+  var recordAnnounced = false;
+  var lastTurnSfx = 0;
+
   function soundEat() { if (window.YSound) window.YSound.play('eat'); }
   function soundDie() { if (window.YSound) window.YSound.play('lose'); }
   function soundStart() { if (window.YSound) window.YSound.play('start'); }
@@ -464,6 +488,8 @@
 
     state.diff = diff;
     try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    // [gyh 2026-11-08 新增] 切换难度
+    sfx('toggle');
     loadBest();
     syncDiffs();
     reset();

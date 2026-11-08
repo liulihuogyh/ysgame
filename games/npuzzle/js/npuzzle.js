@@ -74,6 +74,9 @@
      高音、清脆、短促。音高跟着滑块所在的行列走，滑不同位置声音不一样。
      ------------------------------------ */
 
+  // [gyh 2026-11-08 新增] 通用音效包装
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+
   function soundSlide(index) {
     if (window.YSound) window.YSound.play('slide', { step: rowOf(index) + colOf(index) });
   }
@@ -305,7 +308,8 @@
     if (state.won) return false;
 
     var blank = state.tiles.indexOf(0);
-    if (!adjacent(index, blank, state.n)) return false;
+    // [gyh 2026-11-08 修改] 无效点击（点了不相邻的块）给一声 error
+    if (!adjacent(index, blank, state.n)) { sfx('error'); return false; }
     if (index === blank) return false;
 
     pushHistory();
@@ -424,6 +428,8 @@
     markSizes();
     refreshHud();
     saveState();
+    // [gyh 2026-11-08 新增] 开局 / 打乱后新局
+    sfx('start');
   }
 
   function resize() {
@@ -552,12 +558,16 @@
       if (!btn) return;
       var n = Number(btn.dataset.size);
       if (SIZES.indexOf(n) < 0 || n === state.n && !state.won) return;
+      // [gyh 2026-11-08 新增] 切换尺寸（同尺寸重开不算）
+      if (n !== state.n) sfx('toggle');
       startGame(n, null);
     });
 
     dom.btnUndo.addEventListener('click', undo);
 
     dom.btnShuffle.addEventListener('click', function () {
+      // [gyh 2026-11-08 新增] 重新打乱
+      sfx('shuffle');
       startGame(state.n, null);
     });
 

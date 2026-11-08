@@ -761,6 +761,8 @@
       state.player.c = nc;
       state.pushes++;
       soundPush();
+      // [gyh 2026-11-08 新增] 箱子推上目标点给一声 coin
+      if (isGoal(bx.r, bx.c)) sfx('coin');
     } else {
       pushHistory({ pr: state.player.r, pc: state.player.c, box: null });
       state.player.r = nr;
@@ -831,6 +833,12 @@
     window.setTimeout(function () {
       dom.board.classList.remove('is-bump');
     }, 200);
+    // [gyh 2026-11-08 新增] 撞墙 / 无效移动提示，按住键连撞时节流
+    var now = Date.now();
+    if (now - lastBumpSfx > 220) {
+      lastBumpSfx = now;
+      sfx('error');
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -851,6 +859,8 @@
       state.best[state.tier][state.level] = state.moves;
       saveBest();
     }
+    // [gyh 2026-11-08 新增] 本档十五关全清给一声 levelup
+    if (allCleared()) sfx('levelup');
 
     refreshHud();
     syncLevelBar();
@@ -923,6 +933,10 @@
 
   // [gyh 2026-11-03 修改] 改用全站音效引擎。
   // 推箱子走自己的主题：低音、闷、带石头重量，和别的游戏一听就能分开。
+  // [gyh 2026-11-08 新增] 通用音效包装；撞墙音节流用的时间戳
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+  var lastBumpSfx = 0;
+
   function soundStep() { if (window.YSound) window.YSound.play('step'); }
   function soundPush() { if (window.YSound) window.YSound.play('push'); }
   function soundUndo() { if (window.YSound) window.YSound.play('undo'); }
@@ -1099,6 +1113,8 @@
     if (state.moves > 0 && !state.done) {
       if (!window.confirm(t('confirm_restart'))) return;
     }
+    // [gyh 2026-11-08 新增] 重开本关
+    sfx('click');
     loadLevel(state.level);
   }
 
@@ -1135,6 +1151,8 @@
     dom.levels.addEventListener('click', function (e) {
       var btn = e.target.closest ? e.target.closest('.lv') : null;
       if (!btn || !dom.levels.contains(btn)) return;
+      // [gyh 2026-11-08 新增] 选关
+      sfx('select');
       loadLevel(btn.dataset.level);
     });
 
@@ -1193,6 +1211,8 @@
 
     state.tier = tier;
     try { localStorage.setItem(TIER_KEY, tier); } catch (e) {}
+    // [gyh 2026-11-08 新增] 切换档位
+    sfx('toggle');
     syncTiers();
     buildLevelBar();
     loadLevel(getLast(tier));

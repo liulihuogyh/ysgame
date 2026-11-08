@@ -435,6 +435,8 @@
     soundWin();
 
     var prev = state.best[state.size];
+    // [gyh 2026-11-08 新增] 打破已有最佳时间才给破纪录音
+    if (prev !== null && state.elapsed < prev) sfx('perfect');
     if (prev === null || state.elapsed < prev) {
       state.best[state.size] = state.elapsed;
       saveBest();
@@ -466,6 +468,9 @@
      ------------------------------------------------------------------ */
 
   // [gyh 2026-11-03 修改] 统一走全站音效引擎
+  // [gyh 2026-11-08 新增] 通用音效包装
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+
   function soundPick() { if (window.YSound) window.YSound.play('pick'); }
   function soundSwap() { if (window.YSound) window.YSound.play('swap'); }
   function soundSnap() { if (window.YSound) window.YSound.play('snap'); }
@@ -583,6 +588,8 @@
     buildTiles();
     paintAll();
     syncSizeButtons();
+    // [gyh 2026-11-08 新增] 重开即换图并重新洗牌，给一声 shuffle
+    sfx('shuffle');
     save();
   }
 
@@ -605,6 +612,8 @@
     });
 
     dom.btnPreview.addEventListener('click', function () {
+      // [gyh 2026-11-08 新增] 看原图
+      sfx('click');
       if (dom.preview.hidden) showPreview();
       else hidePreview();
     });
@@ -624,6 +633,8 @@
           newGame(size, true);
           return;
         }
+        // [gyh 2026-11-08 新增] 切换尺寸
+        sfx('toggle');
         newGame(size, true);
       });
     }

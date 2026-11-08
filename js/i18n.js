@@ -716,6 +716,162 @@
         win_title_record: 'New record',
         win_sub: '{size} · {moves} moves · {time}'
       }
+    },
+
+    /* 俄罗斯方块 [gyh 2026-11-08 新增] */
+    gtetris: {
+      zh: {
+        page_title: '俄罗斯方块 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线俄罗斯方块：简单 / 中等 / 困难三档速度，七种方块、旋转墙踢、硬降与下一个预览，消行连消有加成。支持键盘与触屏，自动存档、断点续玩，无需注册登录。',
+        game_title: '俄罗斯方块',
+        tagline: '转一转，填满一行，让它安安静静消失',
+        share_line: '七种方块，三档速度，看看这次能消掉多少行。',
+
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单',
+        diff_medium: '中等',
+        diff_hard: '困难',
+        confirm_diff: '切换难度会重新开始本局，确定吗？',
+
+        label_score: '分数',
+        label_lines: '消行',
+        label_level: '等级',
+        label_best: '最高分',
+        label_next: '下一个',
+        board_aria: '俄罗斯方块棋盘',
+
+        btn_start: '开始',
+        btn_pause: '暂停',
+        btn_resume: '继续',
+        btn_restart: '重开一局',
+        btn_again: '再来一局',
+        btn_left: '左移',
+        btn_right: '右移',
+        btn_rotate: '旋转',
+        btn_drop: '直接落下',
+
+        hint_controls: '方向键左右移动，上键旋转，下键软降，空格直接落下。手机上用下面的按钮，也可以在棋盘上左右滑动。',
+        paused_title: '暂停中',
+        gameover_title: '堆到顶了',
+        gameover_sub: '{score} 分 · 消了 {lines} 行 · 到第 {level} 级',
+        win_title: '这一局结束',
+        win_sub: '{score} 分',
+        new_record: '新纪录'
+      },
+
+      en: {
+        page_title: 'Tetris, free to play | YSGame',
+        page_desc: 'A free online Tetris with Easy, Medium and Hard speeds. Seven tetrominoes, rotation with wall kicks, hard drop and a next-piece preview. Keyboard and touch, autosave, no account needed.',
+        game_title: 'Tetris',
+        tagline: 'Turn it, fill a row, and let it quietly disappear',
+        share_line: 'Seven shapes, three speeds. How many lines can you clear this time?',
+
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy',
+        diff_medium: 'Medium',
+        diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty restarts this round. Continue?',
+
+        label_score: 'Score',
+        label_lines: 'Lines',
+        label_level: 'Level',
+        label_best: 'Best',
+        label_next: 'Next',
+        board_aria: 'Tetris board',
+
+        btn_start: 'Start',
+        btn_pause: 'Pause',
+        btn_resume: 'Resume',
+        btn_restart: 'Restart',
+        btn_again: 'Play again',
+        btn_left: 'Left',
+        btn_right: 'Right',
+        btn_rotate: 'Rotate',
+        btn_drop: 'Hard drop',
+
+        hint_controls: 'Arrow keys to move and rotate, Down to soft drop, Space for a hard drop. On a phone use the buttons below, or swipe across the board.',
+        paused_title: 'Paused',
+        gameover_title: 'Stacked to the top',
+        gameover_sub: '{score} points · {lines} lines · level {level}',
+        win_title: 'Round over',
+        win_sub: '{score} points',
+        new_record: 'New record'
+      }
+    },
+
+    /* 打砖块 [gyh 2026-11-08 新增] */
+    gbreakout: {
+      zh: {
+        page_title: '打砖块 · 在线玩 | YSGame 云舒的小游戏屋',
+        page_desc: '免费在线打砖块：一块挡板、一颗球，把砖一块块敲下来，还有加宽挡板、多球、慢速三种掉落道具。简单 / 中等 / 困难三档、多关卡、自动存档，支持鼠标键盘与触屏，无需注册登录。',
+        game_title: '打砖块',
+        tagline: '接住球，把上面那一整墙慢慢敲空',
+        share_line: '一块挡板，一颗球，看你能撑到第几关。',
+
+        difficulty_group_aria: '选择难度',
+        diff_easy: '简单',
+        diff_medium: '中等',
+        diff_hard: '困难',
+        confirm_diff: '切换难度会重新开始本局，确定吗？',
+
+        label_score: '分数',
+        label_lives: '生命',
+        label_level: '关卡',
+        label_best: '最高分',
+        board_aria: '打砖块游戏区',
+
+        btn_start: '开始',
+        btn_pause: '暂停',
+        btn_resume: '继续',
+        btn_restart: '重开一局',
+        btn_again: '再来一局',
+
+        hint_controls: '移动鼠标或手指控制挡板，方向键 ←→ / A D 也行。空格发球或暂停，P 暂停。接住掉落的道具会帮上忙。',
+        paused_title: '已暂停',
+        gameover_title: '球掉了',
+        gameover_sub: '{score} 分 · 打到第 {level} 关',
+        level_clear_title: '这一关清空了',
+        level_clear_sub: '第 {level} 关完成 · {score} 分',
+        win_title: '全部通关',
+        win_sub: '{score} 分 · 砖块一块不剩',
+        new_record: '新纪录'
+      },
+
+      en: {
+        page_title: 'Breakout, free to play | YSGame',
+        page_desc: 'A free online Breakout: one paddle, one ball, a wall of bricks and three falling power-ups (wider paddle, multiball, slow ball). Easy, Medium and Hard tiers, several levels, autosave, mouse, keyboard and touch. No account needed.',
+        game_title: 'Breakout',
+        tagline: 'Keep the ball up and chip the whole wall away',
+        share_line: 'One paddle, one ball. See how far you can get.',
+
+        difficulty_group_aria: 'Choose a difficulty',
+        diff_easy: 'Easy',
+        diff_medium: 'Medium',
+        diff_hard: 'Hard',
+        confirm_diff: 'Switching difficulty restarts this round. Continue?',
+
+        label_score: 'Score',
+        label_lives: 'Lives',
+        label_level: 'Level',
+        label_best: 'Best',
+        board_aria: 'Breakout play area',
+
+        btn_start: 'Start',
+        btn_pause: 'Pause',
+        btn_resume: 'Resume',
+        btn_restart: 'Restart',
+        btn_again: 'Play again',
+
+        hint_controls: 'Move the mouse or your finger to steer the paddle, or use the arrow keys / A and D. Space launches or pauses, P pauses. Catch falling power-ups for a hand.',
+        paused_title: 'Paused',
+        gameover_title: 'Ball lost',
+        gameover_sub: '{score} points · reached level {level}',
+        level_clear_title: 'Level cleared',
+        level_clear_sub: 'Level {level} done · {score} points',
+        win_title: 'All levels cleared',
+        win_sub: '{score} points · not a brick left',
+        new_record: 'New record'
+      }
     }
   };
 

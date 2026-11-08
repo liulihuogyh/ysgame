@@ -287,6 +287,8 @@
     if (!state.planted) {
       plant(r, c);
       state.started = true;
+      // [gyh 2026-11-08 新增] 首次点击保护触发
+      sfx('powerup');
     }
 
     if (!state.started) state.started = true;
@@ -298,7 +300,10 @@
       return;
     }
 
+    // [gyh 2026-11-08 新增] 一次翻出一片（连锁空白）时补一声 clear
+    var openedBefore = state.opened;
     openFlood(r, c);
+    if (state.opened - openedBefore >= 4) sfx('clear');
     soundReveal();
     refreshHud();
 
@@ -349,9 +354,12 @@
       return;
     }
 
+    // [gyh 2026-11-08 新增] 和弦一次翻开多格时补一声 clear
+    var openedBefore = state.opened;
     for (var j = 0; j < targets.length; j++) {
       openFlood(targets[j][0], targets[j][1]);
     }
+    if (state.opened - openedBefore >= 4) sfx('clear');
 
     soundReveal();
     refreshHud();
@@ -374,6 +382,8 @@
     paintCell(r, c);
     refreshHud();
     soundFlag();
+    // [gyh 2026-11-08 新增] 取消插旗给一声 UI 确认音
+    if (!state.flag[r][c]) sfx('click');
     save();
   }
 
@@ -436,6 +446,8 @@
 
     var time = state.elapsed;
     var prev = state.best[state.level];
+    // [gyh 2026-11-08 新增] 打破已有最佳时间才给破纪录音
+    if (prev !== null && time < prev) sfx('perfect');
     if (prev === null || time < prev) {
       state.best[state.level] = time;
       saveBest();
@@ -474,6 +486,9 @@
      ------------------------------------------------------------------ */
 
   // [gyh 2026-11-03 修改] 统一走全站音效引擎；爆炸换成噪声 + 低频，比正弦波像回事
+  // [gyh 2026-11-08 新增] 通用音效包装
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+
   function soundReveal() { if (window.YSound) window.YSound.play('reveal'); }
   function soundFlag() { if (window.YSound) window.YSound.play('flag'); }
   function soundBoom() { if (window.YSound) window.YSound.play('boom'); }
@@ -658,6 +673,8 @@
     buildBoard();
     paintAll();
     syncLevelButtons();
+    // [gyh 2026-11-08 新增] 开局提示音
+    sfx('start');
     save();
   }
 
@@ -774,6 +791,8 @@
           newGame(level, true);
           return;
         }
+        // [gyh 2026-11-08 新增] 切换难度
+        sfx('toggle');
         newGame(level, true);
       });
     }

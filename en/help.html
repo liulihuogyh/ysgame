@@ -142,7 +142,7 @@
             doubling the value.</strong> Each slide adds a new 2 (sometimes a 4) to an empty square.
           </p>
           <p>
-            The goal is 2048. You can keep going afterwards — 4096, 8192, whatever you like.
+            Each tier has its own goal: Easy 1024, Medium 2048, Hard 4096. Reach it and the round is won, but you can keep going — 8192, whatever you like. Harder tiers also spawn 4s more often.
             Nothing here is timed. The game ends only when the board is full and no direction changes anything.
           </p>
 
@@ -177,14 +177,15 @@
             start with a little open ground instead of guessing blind.
           </p>
 
-          <h3>Two boards</h3>
+          <h3>Three boards</h3>
           <table class="ys-table">
             <thead>
               <tr><th>Level</th><th>Board</th><th>Mines</th><th>Good for</th></tr>
             </thead>
             <tbody>
-              <tr><td>🌱 Beginner</td><td>9 × 9</td><td>10</td><td>A few quiet minutes</td></tr>
-              <tr><td>🌳 Advanced</td><td>16 × 16</td><td>40</td><td>Sitting down to reason it out</td></tr>
+              <tr><td>🌱 Easy</td><td>9 × 9</td><td>10</td><td>A few quiet minutes</td></tr>
+              <tr><td>🌳 Medium</td><td>13 × 13</td><td>25</td><td>A little more to think about</td></tr>
+              <tr><td>🔥 Hard</td><td>16 × 16</td><td>40</td><td>Sitting down to reason it out</td></tr>
             </tbody>
           </table>
 
@@ -213,14 +214,15 @@
             two at a time, until the picture joins up again. There is no clock and no penalty — take your time.
           </p>
 
-          <h3>Two sizes</h3>
+          <h3>Three sizes</h3>
           <table class="ys-table">
             <thead>
               <tr><th>Size</th><th>Pieces</th><th>Good for</th></tr>
             </thead>
             <tbody>
-              <tr><td>🌱 3 × 3</td><td>9</td><td>Two or three quiet minutes</td></tr>
-              <tr><td>🌳 4 × 4</td><td>16</td><td>Sitting down with the picture for a while</td></tr>
+              <tr><td>🌱 Easy 3 × 3</td><td>9</td><td>Two or three quiet minutes</td></tr>
+              <tr><td>🌳 Medium 4 × 4</td><td>16</td><td>Sitting down with the picture for a while</td></tr>
+              <tr><td>🔥 Hard 5 × 5</td><td>25</td><td>When you want a proper sit-down</td></tr>
             </tbody>
           </table>
 
@@ -234,7 +236,7 @@
           </div>
 
           <p>
-            The clock starts on your first swap and stops when the last piece lands. 3×3 and 4×4 keep separate best
+            The clock starts on your first swap and stops when the last piece lands. All three sizes keep separate best
             times. The board is saved if you close the tab; once a picture is finished, opening the page starts a new one.
           </p>
         </article>
@@ -247,9 +249,9 @@
             above falls down and new candies drop in at the top.
           </p>
           <p>
-            You get 30 moves to reach 1200 points. Each candy cleared is 10 points. If the falling candies make a new
-            line, that clears too, and each extra cascade doubles the points. Run out of moves before the goal and the
-            round ends.
+            Each tier sets its own limit and goal: Easy 35 moves / 1000 points, Medium 30 / 1500, Hard 24 / 2000.
+            Each candy cleared is 10 points. If the falling candies make a new line, that clears too, and each extra
+            cascade doubles the points. Run out of moves before the goal and the round ends.
           </p>
 
           <h3>Controls</h3>
@@ -274,7 +276,8 @@
           <h2>Snake: the rules</h2>
           <p>
             A 17×17 board. The snake never stops moving in its current direction. Every fruit it eats makes it one
-            segment longer, adds a point, and nudges the speed up. Hit a wall, or bite your own body, and the round ends.
+            segment longer, adds a point, and nudges the speed up. Easy, Medium and Hard change the starting speed,
+            and each tier keeps its own best score. Hit a wall, or bite your own body, and the round ends.
           </p>
 
           <h3>Controls</h3>
@@ -339,6 +342,94 @@
           <p>
             Every round starts from a solved board and is shuffled by hundreds of random legal moves, so it is always
             solvable — you will never meet a dead position. Close the tab halfway through and it picks up where you left off.
+          </p>
+        </article>
+
+        <!-- [gyh 2026-11-08 新增] Tetris / Breakout rules -->
+        <article class="ys-card">
+          <h2>Tetris: the rules</h2>
+          <p>
+            Seven shapes drop from the top of the board, one at a time. Move them left and right, turn them, and let
+            them settle neatly at the bottom. <strong>Fill a whole row and it clears</strong>, everything above drops
+            down a line, and clearing several rows at once scores more. When the stack reaches the top and a new piece
+            won't fit, the round is over.
+          </p>
+          <p>
+            The next piece is shown beside the board, so you can plan where it goes. There is no clock — take as long as you like.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> <kbd>←</kbd> <kbd>→</kbd> to move, <kbd>↑</kbd> to rotate, <kbd>↓</kbd> to soft-drop, <kbd>Space</kbd> to hard-drop straight to the bottom. The <strong>Pause</strong> button stops and resumes at any time.</p>
+          <p><strong>Phone or tablet:</strong> use the buttons below the board — left, rotate, right and hard-drop — or swipe across the board to slide a piece.</p>
+          <p><strong>Mouse:</strong> the same on-screen buttons work with a click.</p>
+
+          <h3>Three speeds</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Drop speed</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Slow</td><td>Getting to know the seven shapes</td></tr>
+              <tr><td>🌳 Medium</td><td>Steady</td><td>You have the feel of it and want longer clears</td></tr>
+              <tr><td>🔥 Hard</td><td>Fast</td><td>Little time to think — decide as it falls</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The three levels only change how fast pieces start out falling. Pick one before you begin.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> keep the stack flat instead of building upwards too soon. Leave a vertical
+            well open and wait for the long bar — four rows at once is worth far more than four separate singles.
+          </div>
+
+          <p>
+            Score adds up per cleared row, with more for bigger clears. Your best score is kept separately and survives
+            a new game. Close the tab and the board is saved, so you can pick it up later; pausing leaves it exactly where it was.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Breakout: the rules</h2>
+          <p>
+            A paddle sits at the bottom and a ball bounces around the screen. Slide the paddle to catch the ball and
+            send it back up; <strong>every brick it hits breaks</strong>. Clear all the bricks to finish the level and
+            move to the next. Let the ball slip past the paddle and you lose a life; run out of lives and the round ends.
+          </p>
+          <p>
+            Some bricks drop a power-up when they break. Catch it with the paddle and it kicks in for a while: a wider
+            paddle, extra balls, or a slower ball.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> <kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd> to move the paddle, or just move the mouse across the board. <kbd>Space</kbd> or a click launches the ball; the <strong>Pause</strong> button stops and resumes at any time.</p>
+          <p><strong>Phone or tablet:</strong> slide a finger across the board and the paddle follows; tap the board to launch the ball.</p>
+          <p><strong>Mouse:</strong> move the mouse inside the board and the paddle follows.</p>
+
+          <h3>Three levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>Ball &amp; paddle</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Slow ball, wide paddle</td><td>Learning the bounce angles</td></tr>
+              <tr><td>🌳 Medium</td><td>Moderate ball and paddle</td><td>Catching it reliably, aiming your shots</td></tr>
+              <tr><td>🔥 Hard</td><td>Fast ball, narrow paddle</td><td>Quick reactions and a bit of anticipation</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The levels change the ball's starting speed and the width of the paddle. Clear a level's bricks and the next one begins.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> watch where the ball lands on the paddle, not just the ball itself. Hitting
+            off-centre changes the rebound angle — that's how you reach the bricks tucked in the corners.
+          </div>
+
+          <p>
+            Every brick is worth points, and the score carries on into the next level. Your best score is kept separately.
+            The current level, lives left and difficulty are saved automatically, so closing the tab keeps your place;
+            pausing holds the board as it is.
           </p>
         </article>
 
@@ -413,7 +504,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  The order is 2048, then Minesweeper, then Jigsaw, then a match-three and Snake. One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match Three, Snake, Sokoban, Number Slide, Tetris and Breakout are already live. What comes next follows the batches in the list (the next one is Link-a-Pair, Memory Match, Gomoku and a classic platformer). One at a time, and each one goes live when it's finished. If you want something sooner, say so — loud requests move up the list.
                 </p>
               </div>
             </details>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   游戏分享图生成模板（1200×630）
-  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper|jigsaw|match3|snake|sokoban|npuzzle，截整页即可。
+  用法：本地起服务后访问 /docs/og-cards.html?g=sudoku|g2048|minesweeper|jigsaw|match3|snake|sokoban|npuzzle|tetris|breakout，截整页即可。
   新增游戏时，在 script 里的 CONF 加一项，并在下方追加对应的 art 分支。
 -->
 <html lang="zh-CN">
@@ -409,6 +409,68 @@
     transform: scale(.82);
   }
 
+  /* ---------------- 俄罗斯方块 [gyh 2026-11-08 新增] ---------------- */
+  .tet {
+    width: 240px;
+    height: 320px;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    gap: 2px;
+    background: #EDF1F4;
+    border: 2px solid #C9D3DE;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(110, 127, 155, .2);
+  }
+
+  .tet i { display: block; border-radius: 3px; }
+  .tet i.a { background: #8FA6BE; }
+  .tet i.b { background: #C0897A; }
+  .tet i.c { background: #D8A98C; }
+  .tet i.d { background: #9FB8A8; }
+
+  /* ---------------- 打砖块 [gyh 2026-11-08 新增] ---------------- */
+  .brk {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 18px;
+    background: #FBF5EE;
+    box-shadow: 0 18px 40px rgba(192, 137, 122, .2);
+    overflow: hidden;
+  }
+
+  .brk .row {
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px;
+  }
+
+  .brk .row i { display: block; height: 16px; border-radius: 4px; }
+
+  .brk .paddle {
+    position: absolute;
+    left: 118px;
+    bottom: 26px;
+    width: 84px;
+    height: 12px;
+    border-radius: 7px;
+    background: #8FA6BE;
+  }
+
+  .brk .ball {
+    position: absolute;
+    left: 152px;
+    bottom: 74px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #C0897A;
+  }
 
 </style>
 </head>
@@ -476,6 +538,17 @@
       glow: 'rgba(169,183,160,.26)',
       title: '数字华容道<small>NUMBER SLIDE</small>',
       sub: '把数字排回去，只留一个空格'
+    },
+    // [gyh 2026-11-08 新增] 俄罗斯方块 / 打砖块
+    tetris: {
+      glow: 'rgba(143,166,190,.22)',
+      title: '俄罗斯方块<small>TETRIS</small>',
+      sub: '七种方块落下来，转一转，填满一行就消掉'
+    },
+    breakout: {
+      glow: 'rgba(216,169,140,.22)',
+      title: '打砖块<small>BREAKOUT</small>',
+      sub: '一块挡板，一颗球，把砖一块块敲下来'
     }
   };
 
@@ -662,6 +735,44 @@
     place(7, 7, 'f');
 
     art.appendChild(sn);
+  }
+
+  // [gyh 2026-11-08 新增] 俄罗斯方块：底部码好几行，留一条竖槽，上面一块 T 正在下落
+  if (key === 'tetris') {
+    var tet = document.createElement('div');
+    tet.className = 'tet';
+    for (var ti = 0; ti < 160; ti++) tet.appendChild(document.createElement('i'));
+
+    function fill(r, c, cls) {
+      tet.children[(r - 1) * 10 + (c - 1)].className = cls;
+    }
+
+    var stack = [
+      [16,1,'a'],[16,2,'a'],[16,3,'b'],[16,4,'b'],[16,6,'c'],[16,7,'c'],[16,8,'d'],[16,9,'d'],[16,10,'a'],
+      [15,1,'b'],[15,2,'b'],[15,4,'c'],[15,6,'d'],[15,7,'a'],[15,8,'a'],[15,9,'c'],[15,10,'b'],
+      [14,1,'c'],[14,4,'d'],[14,6,'a'],[14,9,'b'],[14,10,'c']
+    ];
+    stack.forEach(function (p) { fill(p[0], p[1], p[2]); });
+    fill(4, 5, 'd'); fill(5, 4, 'd'); fill(5, 5, 'd'); fill(5, 6, 'd');
+    art.appendChild(tet);
+  }
+
+  // [gyh 2026-11-08 新增] 打砖块：四行砖、挡板、球
+  if (key === 'breakout') {
+    var colors = ['#C0897A', '#D8A98C', '#9FB8A8', '#8FA6BE', '#C9A79F'];
+    var html = '';
+    for (var bi = 0; bi < 4; bi++) {
+      html += '<div class="row" style="top:' + (34 + bi * 23) + 'px">';
+      for (var bj = 0; bj < 8; bj++) {
+        html += '<i style="background:' + colors[(bi + bj) % colors.length] + '"></i>';
+      }
+      html += '</div>';
+    }
+    html += '<div class="paddle"></div><div class="ball"></div>';
+    var brk = document.createElement('div');
+    brk.className = 'brk';
+    brk.innerHTML = html;
+    art.appendChild(brk);
   }
 </script>
 </body>

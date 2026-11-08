@@ -179,6 +179,11 @@ class SudokuGame {
     }
     
     this.playSound('input');
+    // [gyh 2026-11-08 新增] 刚补上最后一格、填满一行/一列/一宫时给一声 coin
+    const prev = this.history[this.history.length - 1];
+    if (prev && prev.oldValue === 0 && num !== 0 && this.lineCompleted(row, col)) {
+      this.playSound('coin');
+    }
   }
 
   /**
@@ -200,6 +205,8 @@ class SudokuGame {
    */
   erase() {
     if (!this.selectedCell) return;
+    // [gyh 2026-11-08 新增] 清除格子
+    this.playSound('click');
     this.inputNumber(0);
   }
 
@@ -250,6 +257,8 @@ class SudokuGame {
       this.errors++;
       this.updateStats();
       this.playSound('error');
+      // [gyh 2026-11-08 新增] 累计错误每满 3 次给一次危险提醒
+      if (this.errors % 3 === 0) this.playSound('warn');
       alert(msg('alert_errors'));
     } else {
       alert(msg('alert_no_errors'));
@@ -406,6 +415,27 @@ class SudokuGame {
   }
 
   /**
+   * [gyh 2026-11-08 新增] 判断刚填入的格子所在行/列/宫是否恰好填满
+   */
+  lineCompleted(row, col) {
+    const full = vals => vals.every(v => v !== 0);
+    if (full(this.playerBoard[row])) return true;
+
+    const colVals = [];
+    for (let i = 0; i < 9; i++) colVals.push(this.playerBoard[i][col]);
+    if (full(colVals)) return true;
+
+    const br = Math.floor(row / 3) * 3;
+    const bc = Math.floor(col / 3) * 3;
+    for (let r = br; r < br + 3; r++) {
+      for (let c = bc; c < bc + 3; c++) {
+        if (this.playerBoard[r][c] === 0) return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * 播放音效
    */
   playSound(type) {
@@ -446,6 +476,8 @@ class SudokuGame {
     document.querySelectorAll('.difficulty-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const difficulty = e.target.dataset.difficulty;
+        // [gyh 2026-11-08 新增] 切换难度
+        this.playSound('toggle');
         this.startNewGame(difficulty);
         document.getElementById('main-menu').classList.remove('show');
       });

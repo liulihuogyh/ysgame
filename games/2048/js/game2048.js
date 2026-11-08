@@ -339,6 +339,10 @@
      ------------------------------------------------------------------ */
 
   // [gyh 2026-11-03 修改] 改用全站共用的 YSound，音色与音量统一维护在 js/sound.js
+  // [gyh 2026-11-08 新增] 通用音效包装；破纪录提示每局只响一次
+  function sfx(n, o) { if (window.YSound) window.YSound.play(n, o); }
+  var recordAnnounced = false;
+
   function soundMove() {
     if (window.YSound) window.YSound.play('move');
   }
@@ -432,6 +436,8 @@
     }
 
     if (!moved) {
+      // [gyh 2026-11-08 新增] 无效滑动（撞墙）提示
+      sfx('error');
       // 方向撞墙，格子没动。顺便确认是不是已经无路可走
       // （读档进来就是死局时，靠这一步补上结算）
       if (!state.over && !canMove()) {
@@ -462,6 +468,11 @@
 
     state.score += gained;
     if (state.score > state.best) {
+      // [gyh 2026-11-08 新增] 本局首次刷新最高分（更新前 best>0），每局只响一次
+      if (state.best > 0 && !recordAnnounced) {
+        recordAnnounced = true;
+        sfx('perfect');
+      }
       state.best = state.score;
       try { localStorage.setItem(BEST_KEY, String(state.best)); } catch (e) {}
     }
@@ -515,6 +526,8 @@
     }
     state.diff = diff;
     try { localStorage.setItem(DIFF_KEY, diff); } catch (e) {}
+    // [gyh 2026-11-08 新增] 切换难度
+    sfx('toggle');
     syncDiffs();
     newGame(false);
   }
@@ -534,6 +547,9 @@
     state.over = false;
     state.undo = [];
     state.overlay = null;
+    // [gyh 2026-11-08 新增] 开新局提示音，并重置破纪录标记
+    recordAnnounced = false;
+    sfx('start');
 
     hideOverlay();
     spawnRandom();
@@ -545,7 +561,8 @@
   }
 
   function undo() {
-    if (!state.undo.length) return;
+    // [gyh 2026-11-08 修改] 无可撤销时给一声 error
+    if (!state.undo.length) { sfx('error'); return; }
 
     var snap = state.undo.pop();
     clearTiles();
@@ -567,6 +584,8 @@
     renderScore(0);
     refreshUndo();
     save();
+    // [gyh 2026-11-08 新增] 撤销成功
+    sfx('undo');
   }
 
   /* ------------------------------------------------------------------

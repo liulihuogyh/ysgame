@@ -16,8 +16,18 @@
   }
 
   function setSound(on) {
+    var before = isSoundOn();
+    // 关闭前先留一声，写进 localStorage 之后就彻底静音了
+    // [gyh 2026-11-08 新增]
+    if (before && !on && window.YSound) window.YSound.play('click');
+
     localStorage.setItem(SOUND_KEY, on ? 'on' : 'off');
     paintSoundButton();
+
+    // 开启后补一声上行，明确告诉玩家「有声了」
+    // [gyh 2026-11-08 新增]
+    if (!before && on && window.YSound) window.YSound.play('toggle');
+
     // 广播给页面内其它模块（游戏脚本可监听）
     document.dispatchEvent(
       new CustomEvent('ys:soundchange', { detail: { on: on } })
@@ -141,6 +151,36 @@
     if (year) year.textContent = new Date().getFullYear();
   }
 
+  /* ---------------- 全局 UI 音效 ----------------
+     只管导航、语言切换和大厅分类标签。游戏内的按钮 / 难度切换
+     由各款游戏自己配音，这里统一加会变成一声操作响两遍。
+     [gyh 2026-11-08 新增]
+     ------------------------------------------------ */
+
+  function ui(name) {
+    if (window.YSound) window.YSound.play(name);
+  }
+
+  function initUiSound() {
+    var lang = document.getElementById('ysLangBtn');
+    if (lang) lang.addEventListener('click', function () { ui('click'); });
+
+    var toggle = document.getElementById('ysNavToggle');
+    if (toggle) toggle.addEventListener('click', function () { ui('click'); });
+
+    // 大厅的分类标签；内容页没有 .ys-tab，querySelectorAll 空跑即可
+    var tabs = document.querySelectorAll('.ys-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () { ui('toggle'); });
+    }
+
+    // 点卡片进游戏时给一声轻确认，跳转由浏览器接着处理
+    var cards = document.querySelectorAll('#hallGrid .game-card');
+    for (var j = 0; j < cards.length; j++) {
+      cards[j].addEventListener('click', function () { ui('select'); });
+    }
+  }
+
   /* ---------------- 启动 ---------------- */
 
   function boot() {
@@ -148,6 +188,7 @@
     initLang();
     syncLangFromPage();
     initFooter();
+    initUiSound(); // [gyh 2026-11-08 新增]
     paintSoundButton();
 
     var btn = document.getElementById('ysSoundBtn');

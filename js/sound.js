@@ -8,9 +8,9 @@
      YSound.theme('snake')                   // 手动锁一个主题
 
    为什么要分主题：
-   共用引擎是为了不重复写代码，但**八款游戏不能共用一套音色**——
+   共用引擎是为了不重复写代码，但**每款游戏不能共用一套音色**——
    否则玩三个游戏听感一模一样，像同一个游戏换了张皮。
-   所以这里一个引擎带八套「乐器」，按 body[data-dict] 自动选：
+   所以这里一个引擎带十套「乐器」，按 body[data-dict] 自动选：
 
      2048     马林巴木琴   低音、长余音、强八度泛音
      数独      钢琴铃      中高音、柔和、衰减长
@@ -20,9 +20,13 @@
      贪吃蛇    8-bit 芯片  方波、窄音域、复古
      推箱子    仓库石头    低音、很闷、沉重
      数字华容道 塑料滑块    高音、清脆、短促
+     俄罗斯方块 小调芯片    低方波、五声音阶、消行扫频
+     打砖块    弹球台 blip  极短电子音、强撞击瞬态
 
    [gyh 2026-11-03 新增]
    [gyh 2026-11-03 修改] 从「一套音色」改为「八套音色族」
+   [gyh 2026-11-08 修改] 补俄罗斯方块 / 打砖块两套主题 + 18 个新音色
+                          （UI 反馈、连击、物理动作、庆祝），全部沿用主题参数
    ========================================================================== */
 (function () {
   'use strict';
@@ -137,6 +141,28 @@
       win: [[0, 0], [4, 0.08], [7, 0.16], [12, 0.24], [14, 0.32], [16, 0.40]],
       lose: [[0, 0], [-2, 0.12], [-7, 0.24]],
       start: [[0, 0], [7, 0.07], [12, 0.14]]
+    },
+
+    /* 俄罗斯方块 · 小调芯片：和贪吃蛇同族但更低、更「方」，五声音阶带一点俄式味道
+       [gyh 2026-11-08 新增] */
+    tetris: {
+      wave: 'triangle', base: 330, dur: 0.62, gain: 0.82,
+      lp: 3200, shine: 0.22, click: 0.16, attack: 0.002,
+      scale: [0, 3, 5, 7, 10],
+      win: [[0, 0], [3, 0.10], [7, 0.20], [10, 0.30], [12, 0.42], [15, 0.54]],
+      lose: [[0, 0], [-3, 0.14], [-5, 0.28], [-12, 0.44]],
+      start: [[0, 0], [7, 0.09], [12, 0.18]]
+    },
+
+    /* 打砖块 · 弹球台：极短的电子 blip + 撞击瞬态，像老街机的 Pong
+       [gyh 2026-11-08 新增] */
+    breakout: {
+      wave: 'square', base: 660, dur: 0.38, gain: 0.58,
+      lp: 4400, shine: 0.06, click: 0.22, attack: 0.001,
+      scale: [0, 4, 7, 12, 16],
+      win: [[0, 0], [4, 0.08], [7, 0.16], [12, 0.26], [16, 0.36], [19, 0.48]],
+      lose: [[0, 0], [-4, 0.10], [-9, 0.22], [-16, 0.36]],
+      start: [[0, 0], [4, 0.06], [7, 0.12]]
     }
   };
 
@@ -149,7 +175,9 @@
     'gjigsaw': 'jigsaw',
     'gsnake': 'snake',
     'gsokoban': 'sokoban',
-    'gnpuzzle': 'npuzzle'
+    'gnpuzzle': 'npuzzle',
+    'gtetris': 'tetris',      // [gyh 2026-11-08 新增]
+    'gbreakout': 'breakout'   // [gyh 2026-11-08 新增]
   };
 
   function detect() {
@@ -388,7 +416,7 @@
   }
 
   /* ---------------- 音色表 ----------------
-     同一批动作名，在八个主题下发出八种声音。
+     同一批动作名，在十个主题下发出十种声音。
      ------------------------------------------ */
 
   var SFX = {
@@ -548,6 +576,134 @@
 
     lose: function () {
       melody(T().lose, 0.11, 0.24);
+    },
+
+    /* ---------------------------------------------------------------
+       第二批：UI 反馈 / 连击 / 物理动作 / 庆祝
+       全部走 T()，所以十套主题会自动长出十种音色，不用逐个配。
+       高频动作（bounce / brick / turn）都带随机音高或由调用方节流，
+       免得连打时听成一条平铺的机关枪。
+       [gyh 2026-11-08 新增]
+       --------------------------------------------------------------- */
+
+    /* 按钮确认：一声实、一声虚，比原来的 tap 更像「按下去」 */
+    click: function () {
+      var f = T().base * 1.35;
+      v(f, { dur: 0.035, gain: 0.085 });
+      v(f * 1.5, { dur: 0.04, gain: 0.035, delay: 0.02, noShine: true });
+    },
+
+    /* 切换难度 / 规格：两音上行，明确告诉玩家「换了」 */
+    toggle: function () {
+      v(degFreq(0), { dur: 0.05, gain: 0.09 });
+      v(degFreq(2), { dur: 0.075, gain: 0.085, delay: 0.048 });
+    },
+
+    /* 选中某一项（选关、选图片） */
+    select: function () {
+      var f = T().base * 1.6;
+      v(f, { to: f * 1.12, dur: 0.05, gain: 0.09 });
+    },
+
+    /* 倒计时 / 计时滴答：极轻，不抢戏 */
+    tick: function () {
+      v(T().base * 2, { dur: 0.022, gain: 0.05, noShine: true, noClick: true });
+    },
+
+    /* 只剩最后几步 / 最后一条命：两声下行小警报 */
+    warn: function () {
+      var f = T().base * 0.9;
+      v(f, { dur: 0.07, gain: 0.10, noShine: true });
+      v(f * 0.94, { dur: 0.09, gain: 0.09, delay: 0.115, noShine: true });
+    },
+
+    /* 大连击：从连击数对应的音级往上弹三个音，越连越高 */
+    combo: function (o) {
+      var c = Math.min(Math.max(((o && o.combo) || 2) - 2, 0), 6);
+      for (var i = 0; i < 3; i++) {
+        v(degFreq(c + i * 2), { dur: 0.07, gain: 0.11 - i * 0.015, delay: i * 0.045 });
+      }
+    },
+
+    /* 整行 / 整片清除：一道噪声扫频 + 上行短琶音；rows 越多音越多 */
+    clear: function (o) {
+      var rows = Math.min(Math.max((o && o.rows) || 1, 1), 4);
+      noise({ freq: 2600, to: 420, dur: 0.2, gain: 0.10, filter: 'bandpass', q: 0.8 });
+      for (var i = 0; i < rows + 1; i++) {
+        v(degFreq(i * 2 + 2), { dur: 0.1, gain: 0.12, delay: i * 0.035 });
+      }
+    },
+
+    /* 落地 / 硬降：低音撞击 + 一点摩擦噪声 */
+    drop: function () {
+      var f = T().base * 0.5;
+      noise({ freq: 900, to: 180, dur: 0.09, gain: 0.11 });
+      v(f, { to: f * 0.7, dur: 0.11, gain: 0.15, noShine: true });
+    },
+
+    /* 旋转：短促上滑 */
+    rotate: function () {
+      var f = T().base * 1.25;
+      v(f, { to: f * 1.45, dur: 0.045, gain: 0.085, noShine: true });
+    },
+
+    /* 锁定落定：比 drop 轻，不带下坠感 */
+    lock: function () {
+      v(T().base * 0.75, { dur: 0.06, gain: 0.11 });
+      noise({ freq: 700, to: 260, dur: 0.05, gain: 0.06 });
+    },
+
+    /* 弹跳：随机音高，连续撞墙不会像节拍器 */
+    bounce: function (o) {
+      var k = 0.92 + Math.random() * 0.16;
+      var f = T().base * ((o && o.high) ? 1.6 : 1.15) * k;
+      v(f, { to: f * 0.82, dur: 0.03, gain: 0.075, noShine: true });
+    },
+
+    /* 砖块破碎：噪声碎片 + 随连击升高的音 */
+    brick: function (o) {
+      var c = Math.min(Math.max(((o && o.combo) || 1) - 1, 0), 6);
+      noise({ freq: 2200, to: 700, dur: 0.05, gain: 0.075, filter: 'bandpass', q: 1.1 });
+      v(degFreq(c), { dur: 0.055, gain: 0.10, noShine: true });
+    },
+
+    /* 拿到道具 / 奖励：四音上行 */
+    powerup: function () {
+      for (var i = 0; i < 4; i++) {
+        v(degFreq(i + 2), { dur: 0.08, gain: 0.10, delay: i * 0.055 });
+      }
+    },
+
+    /* 得分 / 入袋：经典两音「叮」 */
+    coin: function () {
+      var f = T().base * 2;
+      v(f, { dur: 0.055, gain: 0.10, noShine: true, noClick: true });
+      v(f * 1.5, { dur: 0.09, gain: 0.085, delay: 0.055, noShine: true, noClick: true });
+    },
+
+    /* 破纪录 / 完美：比 win 更长，最后挂一颗高音 */
+    perfect: function () {
+      melody([[0, 0], [4, 0.07], [7, 0.14], [12, 0.22], [16, 0.31], [19, 0.42]], 0.11, 0.16);
+      v(T().base * 4, { dur: 0.32, gain: 0.045, delay: 0.5, noShine: true });
+    },
+
+    /* 快速甩动 / 硬降的风声 */
+    whoosh: function () {
+      noise({ freq: 1800, to: 260, dur: 0.14, gain: 0.09, filter: 'bandpass', q: 0.7 });
+    },
+
+    /* 升关 / 升档：四音爬升后落一颗长音 */
+    levelup: function () {
+      for (var i = 0; i < 4; i++) {
+        v(degFreq(i * 2), { dur: 0.12, gain: 0.11, delay: i * 0.075 });
+      }
+      v(T().base * 2, { dur: 0.22, gain: 0.05, delay: 0.32, noShine: true });
+    },
+
+    /* 转向：极短、极轻，给贪吃蛇这类每步都要反馈的操作用 */
+    turn: function () {
+      var f = T().base * 1.05;
+      v(f, { to: f * 1.18, dur: 0.025, gain: 0.05, noShine: true, noClick: true });
     }
   };
 
