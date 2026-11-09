@@ -1,6 +1,6 @@
 /**
  * 坦克大战 · Battle Tank
- * 原创几何像素坦克防守，绝不使用任何任天堂 / Battle City 商标素材。
+ * 原创几何像素坦克防守，不使用任何第三方商标素材。
  * IIFE + 'use strict' + var，无框架、无外部资源，全 canvas 渲染。
  * [tank-dev 2026-11-08 新增]
  */

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线魔方（Puzzle Cube）：2×2 与 3×3 两种阶数，Canvas 伪三维转层动画，一键打乱与复原，可拖拽旋转视角，键盘与触屏转层，步数计时、三档难度、自动存档，无需注册登录。">
+  <meta name="keywords" content="魔方,Puzzle Cube,三维转层,2x2,3x3,益智拼图,空间思维,休闲小游戏,在线小游戏,免费">
+  <title>Puzzle Cube 魔方 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/cube/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/cube/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/cube/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/cube/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="Puzzle Cube 魔方 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="转一层、看三面，把颜色一块块送回家。2×2 与 3×3 两种阶数，能打乱就能一步步还原。">
+  <meta property="og:url" content="https://ysgame.xyz/games/cube/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-cube.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-cube.png">
+  <meta name="theme-color" content="#F7F3EA">
+
+  <!-- 原创 data-URI 图标：等轴测立方体，三面用本站原创配色，不引用任何外部图片 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%232B3040'/><path d='M32 9 L55 22 L32 35 L9 22 Z' fill='%233EC7B4'/><path d='M9 22 L32 35 L32 58 L9 45 Z' fill='%23F0645C'/><path d='M55 22 L32 35 L32 58 L55 45 Z' fill='%235B6EE1'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home" data-dict="gcube" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" type="button" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" type="button" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="bk">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">◈</span>
+        <span data-i18n="game_title">魔方</span>
+      </h1>
+      <p class="g-tagline" data-i18n="tagline">转一层、看三面，把颜色一块块送回家</p>
+    </header>
+
+    <!-- 三档难度 -->
+    <div class="seg bk__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy" aria-pressed="false">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium" aria-pressed="true">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard" aria-pressed="false">困难</button>
+    </div>
+
+    <!-- 阶数 / 步数 / 用时 / 最佳 -->
+    <div class="g-hud bk__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_size">阶数</span>
+        <strong class="hud-box__value" id="size">3×3</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_steps">步数</span>
+        <strong class="hud-box__value" id="steps">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_time">用时</span>
+        <strong class="hud-box__value" id="time">0:00</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">--</strong>
+      </div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="bk__bar">
+      <button class="g-btn g-btn--primary" id="btn-start" type="button" data-i18n="btn_start">开始</button>
+      <button class="g-btn" id="btn-scramble" type="button" data-i18n="btn_scramble">打乱</button>
+      <button class="g-btn" id="btn-reset" type="button" data-i18n="btn_reset">复原</button>
+      <button class="g-btn" id="btn-undo" type="button" data-i18n="btn_undo">撤销</button>
+      <button class="g-btn" id="btn-hint" type="button" data-i18n="btn_hint">提示</button>
+      <button class="g-btn" id="btn-pause" type="button" data-i18n="btn_pause">暂停</button>
+      <button class="g-btn" id="btn-restart" type="button" data-i18n="btn_restart">重开</button>
+    </div>
+
+    <!-- 棋盘（三维投影画布） -->
+    <div class="bk__stage">
+      <canvas id="canvas" role="img" data-i18n-aria="board_aria" aria-label="魔方三维视图"></canvas>
+
+      <!-- 开始 / 暂停遮罩，同一块卡片换文案 -->
+      <div class="bk__card" id="card">
+        <h2 class="bk__cardTitle" id="card-title" data-i18n="game_title">魔方</h2>
+        <p class="bk__cardSub" id="card-sub" data-i18n="tagline">转一层、看三面，把颜色一块块送回家</p>
+        <button class="g-btn g-btn--primary" id="btn-start-card" type="button" data-i18n="btn_start">开始</button>
+      </div>
+
+      <!-- 临时提示气泡（打乱 / 复原 / 切档确认，切档确认可换行） -->
+      <div class="bk__toast" id="toast" hidden></div>
+    </div>
+
+    <!-- 转层按钮：拖动画布转视角，点这里转某一层；⇄ 为反向开关（触屏用） -->
+    <div class="bk__layers" id="layers" role="group" aria-label="转层">
+      <span class="bk__layers-cap" data-i18n="label_moves">转层</span>
+      <button class="layer-btn" type="button" data-face="U" aria-label="U">U</button>
+      <button class="layer-btn" type="button" data-face="D" aria-label="D">D</button>
+      <button class="layer-btn" type="button" data-face="L" aria-label="L">L</button>
+      <button class="layer-btn" type="button" data-face="R" aria-label="R">R</button>
+      <button class="layer-btn" type="button" data-face="F" aria-label="F">F</button>
+      <button class="layer-btn" type="button" data-face="B" aria-label="B">B</button>
+      <button class="layer-btn layer-btn--rev" id="btn-rev" type="button" aria-pressed="false" aria-label="⇄">⇄</button>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title">还原完成</h2>
+          <p class="result__sub" id="overlay-sub"></p>
+          <span class="bk__record" id="record-badge" data-i18n="new_record" hidden>破纪录了</span>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_moves">转层</span>
+          <strong id="overlay-moves">0</strong>
+        </p>
+        <p class="result__stat">
+          <span data-i18n="label_time">用时</span>
+          <strong id="overlay-time">0:00</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      点住画面拖动可以转动视角，点右侧的层按钮转动对应的一层，按住 Shift 再点就是反向转；键盘用 U / D / L / R / F / B 转层，Shift 反向，P 暂停。把六个面的颜色各归一面即还原成功。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">魔方</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 音效 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/sound.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/cube-core.js"></script>
+  <script src="js/cube.js"></script>
+</body>
+</html>

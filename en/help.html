@@ -880,6 +880,161 @@
           </p>
         </article>
 
+        <!-- [gyh 2026-11-09 added] Batch five how-to articles -->
+        <article class="ys-card">
+          <h2>Stack Jump: the rules</h2>
+          <p>
+            A row of isometric blocks stretches up and to the right, and you stand on one of them. <strong>Hold to charge, release to leap, and land cleanly on the next block to score</strong>;
+            hit the little mark dead centre and it is a perfect landing, and consecutive perfect landings build a combo that is worth more and more. The longer you hold, the farther you fly — overcharge and you sail straight past the block, and <strong>one miss ends the run</strong>. You get a single life.
+          </p>
+          <p>
+            The three levels change the size of the blocks, the gaps between them, whether they slide from side to side, how forgiving a perfect landing is, how fast the charge builds, and — on Hard — a crosswind that nudges you off course.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> hold the left mouse button or <kbd>Space</kbd> to charge and release to jump; a dashed ring shows roughly where you will land while charging. <kbd>P</kbd> pauses and resumes, and <kbd>Space</kbd> also starts or restarts a run.</p>
+          <p><strong>Phone or tablet:</strong> press and hold anywhere on the board to charge, then let go; a tap also starts a run.</p>
+
+          <h3>Three difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Block width 92, gaps 105–155, no moving blocks, perfect window 30%, charge rate 1.0, no wind</td><td>Learning the charge; wide blocks close together</td></tr>
+              <tr><td>🌳 Medium</td><td>Width 72, gaps 130–200, 20% of blocks slide, perfect window 18%, charge 1.35, occasional narrow blocks</td><td>You have the feel of it and must track moving blocks</td></tr>
+              <tr><td>🔥 Hard</td><td>Width 54, gaps 170–250, 45% of blocks slide faster, perfect window 10%, charge 1.75, crosswind drift, more narrow blocks</td><td>A steady hand, plus reading the wind</td></tr>
+            </tbody>
+          </table>
+          <p>
+            Every level gives exactly 1 life; pick one before you begin, or switch mid-game — that starts a fresh run and your progress is not kept.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> watch the dashed landing ring while you charge — don't just hold it down all the way, or you'll overshoot the block. Dead centre is worth far more than a few extra hops once a combo is building.
+          </div>
+
+          <p>
+            The board, score, block positions and combo are saved to ysgame-hop-state, your best score to ysgame-hop-best and the chosen level to ysgame-hop-diff — all in your own browser. Close the tab and pick up the same run later (resume where you left off); a new run never clears your best.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Puzzle Cube: the rules</h2>
+          <p>
+            A 2x2 or 3x3 cube sits on the screen, each of its six faces a different colour. <strong>Turn one layer at a time and walk every colour back onto its own face — one colour per face and the cube is solved.</strong>
+            There is <strong>Scramble</strong> to start fresh, <strong>Undo</strong> to step back, <strong>Hint</strong> to suggest a turn and <strong>Reset</strong> to put it back to solved. There is no countdown, so take as long as you like; Medium and Hard record your time and moves for the score.
+          </p>
+          <p>
+            The three levels change the size, how many scramble turns you get, how many hints you have and how the result is scored: Easy is a 2x2 with unlimited hints, Hard a 3x3 scrambled thoroughly and scored on move count.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> drag the board to rotate the view and see three faces at once; use the layer buttons on the right to turn a layer, and hold <kbd>Shift</kbd> to turn it the other way. Keyboard is quicker: <kbd>U</kbd> <kbd>D</kbd> <kbd>L</kbd> <kbd>R</kbd> <kbd>F</kbd> <kbd>B</kbd> each turn a layer, with <kbd>Shift</kbd> to reverse, and <kbd>P</kbd> pauses and resumes. <kbd>Z</kbd> undoes, <kbd>H</kbd> gives a hint, the arrow keys rotate the view and <kbd>Space</kbd> starts or pauses. The buttons up top undo, scramble, reset and give hints at any time.</p>
+          <p><strong>Phone or tablet:</strong> drag a finger to rotate the view, tap the layer buttons to turn one; undo, scramble and hint are all on-screen buttons.</p>
+
+          <h3>Three difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>2x2, 6 scramble turns, unlimited hints</td><td>Learning the six faces and which way each layer turns</td></tr>
+              <tr><td>🌳 Medium</td><td>3x3, 14 scramble turns, 3 hints, with a timer</td><td>You can solve it and want to get quicker</td></tr>
+              <tr><td>🔥 Hard</td><td>3x3, 25 scramble turns, only 1 hint, scored on move count</td><td>Planning each turn and avoiding wasted moves</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The rules and the turns are identical at every level — only the size and the scramble change. Pick one at the start; switching scrambles a fresh cube.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> finish one face first (the white base is a good start), then keep it intact and build upwards — far fewer moves than twisting at random. Don't force a wrong turn back by hand; <strong>Undo</strong> is cleaner. Hard gives just one hint, so save it for a real dead end.
+          </div>
+
+          <p>
+            The current cube, move count, timer and hints left are saved to ysgame-cube-state, your best result to ysgame-cube-best and the chosen size to ysgame-cube-diff — all in your own browser. Close the tab and carry on with the same cube; a new one never clears your best.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Billiards: the rules</h2>
+          <p>
+            A table with six pockets. <strong>Press on the table and drag away from the shot line to aim — the farther you pull, the harder the shot — then release to strike.</strong>
+            The cue ball hits the object balls, balls bounce off one another and off the cushions, and potting an object ball scores. Pot the cue ball yourself and you lose a point. Wait for everything to stop before the next shot; there is no clock, so line it up properly.
+          </p>
+          <p>
+            The three levels change the number of balls, pocket size, table friction, how much of an aiming guide you get and the shot limit; on Hard, potting the cue ball costs double.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> press on the table and drag opposite to where you want to shoot; a dashed line shows where the cue ball makes first contact, and releasing fires. <kbd>Left</kbd>/<kbd>Right</kbd> swing the angle and <kbd>Up</kbd>/<kbd>Down</kbd> fine-tune it; hold <kbd>Space</kbd> to charge and release to strike, <kbd>P</kbd> pauses and resumes.</p>
+          <p><strong>Phone or tablet:</strong> press a finger on the table and drag away from the shot line to aim and build power, then let go; the dashed line is your guide while dragging.</p>
+
+          <h3>Three difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>4 balls, wide pockets, low friction, full aiming line, no shot limit</td><td>Learning the drag power and rebound angles</td></tr>
+              <tr><td>🌳 Medium</td><td>6 balls, standard pockets, medium friction, first-contact point only, 24 shots</td><td>You can position the cue ball and want to count shots</td></tr>
+              <tr><td>🔥 Hard</td><td>9 balls, narrow pockets, high friction, short guide line, 16 shots, doubled cue-ball foul</td><td>Making every shot count, not over-attacking</td></tr>
+            </tbody>
+          </table>
+          <p>
+            Every level ends when the table is cleared; pick one before you start, or switch mid-game for a fresh rack.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> don't pull back at full power straight away. Look at where the dashed line meets the object ball — where the cue ball comes to rest often matters more than whether this shot goes in. A potted cue ball costs a point, double on Hard, so leave a little in reserve.
+          </div>
+
+          <p>
+            Ball positions, score and shots left are saved to ysgame-billiards-state, your best to ysgame-billiards-best and the chosen level to ysgame-billiards-diff — all in your own browser. Close the tab and pick up the same rack later; a new one never clears your best.
+          </p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Xiangqi: the rules</h2>
+          <p>
+            A 9x10 board, the river and the border between the two sides. You play red and move first, the computer plays black, and you take turns. <strong>Checkmate the opposing general, or leave it with no legal move (stalemate), and you win.</strong>
+            The full movement rules are here: <strong>the rook moves in straight lines</strong>, <strong>the horse moves in an L but can be blocked at the leg</strong>, <strong>the elephant moves two diagonals, can be blocked at the eye and never crosses the river</strong>,
+            <strong>the advisor steps one diagonally and stays inside the palace</strong>, <strong>the two generals may never face each other on an open file</strong>,
+            <strong>the cannon needs a screen between itself and its target to capture</strong>, and <strong>the soldier only moves forward until it crosses the river, after which it may also step sideways</strong>. When in check you must answer it — you can't ignore it.
+          </p>
+          <p>
+            <strong>Undo</strong> takes back one turn, which is two moves — yours and the computer's — returning the board to just before you played. If you're unsure where to go, <strong>Hint</strong> suggests a move. The three levels change the computer's strength; the rules are identical at every level.
+          </p>
+
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> tap one of your pieces, then a highlighted square to move; or use the keyboard: <kbd>Arrow keys</kbd> move the cursor, <kbd>Space</kbd> or <kbd>Enter</kbd> selects and places, <kbd>U</kbd> undoes, <kbd>H</kbd> hints and <kbd>P</kbd> pauses and resumes.</p>
+          <p><strong>Phone or tablet:</strong> tap a piece, then a highlighted square; the buttons below the board undo and give hints.</p>
+
+          <h3>Three difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Search depth 1, material value only, 30% chance of a second-best move</td><td>Learning how each piece moves</td></tr>
+              <tr><td>🌳 Medium</td><td>Search depth 2, positional value and alpha-beta pruning, capped at 4,000 nodes per move</td><td>A proper back-and-forth game</td></tr>
+              <tr><td>🔥 Hard</td><td>Search depth 3, alpha-beta pruning, check and mobility weighting, capped at 20,000 nodes per move</td><td>When you want to think each move through</td></tr>
+            </tbody>
+          </table>
+          <p>
+            The board and rules are identical at every level — only how deeply the computer searches changes. Pick one at the start, or switch mid-game for a fresh round.
+          </p>
+
+          <div class="ys-note">
+            <strong>A small tip:</strong> don't get so busy taking a rook that you forget your own general — the two generals facing each other is illegal, and an unanswered check loses on the spot. Fill out your advisors and elephants and guard the central files early; going out with the rook too soon is far riskier. Save Hint for when you're genuinely stuck.
+          </div>
+
+          <p>
+            The board, whose turn it is, the level and the result are saved to ysgame-xiangqi-state, your win count to ysgame-xiangqi-best and the chosen level to ysgame-xiangqi-diff — all in your own browser. Close the tab and resume the same game later; a new one never clears your wins.
+          </p>
+        </article>
+
         <article class="ys-card">
           <h2>Questions</h2>
 
@@ -951,7 +1106,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter and Bomber are already live, plus this batch's four new ones — Number Link, Sky Bird, Dino Dash and Reversi — 22 games in total. Next up is batch five: Jump, Rubik's cube, Billiards and Chinese chess. The eight after that: Chess, Go, Chinese checkers, Ludo, Go life-and-death, Chess endgames, Online drums and Solar system. That leaves 12 games on the to-do list, worked through in batches — one at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter, Bomber, Number Link, Sky Bird, Dino Dash and Reversi are already live, plus this batch's four new ones — Stack Jump, Puzzle Cube, Billiards and Xiangqi — 26 games in total. Next up is batch six: Chess, Go, Chinese checkers, Ludo, Go life-and-death, Xiangqi endgames, Online drums and Solar system. That leaves 8 games on the to-do list, worked through in batches — one at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
                 </p>
               </div>
             </details>

@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Puzzle Cube 魔方 · 游戏专属样式
+   通用组件（导航 / 记分板 / 按钮 / 分段按钮 / 结算卡片 / 分享面板 / 广告位）
+   全部在根 css/style.css；这里只管容器、三维舞台、开始卡、提示气泡、
+   转层按钮条与窄屏适配。立方体、色块、投影与转层动画由 Canvas 自己绘制。
+   [gyh 2026-11-09 新增] 批次五
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.bk {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* --------------------------------------------------------------------------
+   难度选择：单独成行、水平居中，窄屏自动折行
+   -------------------------------------------------------------------------- */
+.bk__diffs {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 14px;
+}
+
+/* --------------------------------------------------------------------------
+   记分板：阶数 / 步数 / 用时 / 最佳 四格，320px 下也要挤得下
+   -------------------------------------------------------------------------- */
+.bk__hud {
+  gap: 8px;
+}
+
+.bk__hud .hud-box {
+  padding: 6px 4px 7px;
+  min-width: 0;
+}
+
+.bk__hud .hud-box__label {
+  font-size: .66rem;
+  letter-spacing: .06em;
+}
+
+.bk__hud .hud-box__value {
+  font-size: 1.16rem;
+}
+
+/* --------------------------------------------------------------------------
+   操作按钮：七个一排，放不下时自动折行，绝不横向溢出
+   -------------------------------------------------------------------------- */
+.bk__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.bk__bar .g-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   三维舞台：正方形，宽度随容器缩放，脚本按 devicePixelRatio 绘制
+   -------------------------------------------------------------------------- */
+.bk__stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  background: #E4EAF2;
+  border-radius: var(--ys-radius-lg);
+  box-shadow: inset 0 2px 8px rgba(69, 75, 89, .07), var(--ys-shadow-sm);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: grab;
+}
+
+#canvas:active {
+  cursor: grabbing;
+}
+
+/* --------------------------------------------------------------------------
+   转层按钮条：6 个面字母 + 1 个反向开关，居中、自动折行
+   字母是通用记号，不是可翻译文案；左色条用 JS 按面配色内联设置
+   -------------------------------------------------------------------------- */
+.bk__layers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px auto 4px;
+  max-width: 100%;
+}
+
+.bk__layers-cap {
+  font-size: .74rem;
+  letter-spacing: .08em;
+  color: var(--ys-text-faint);
+  margin-right: 2px;
+}
+
+.layer-btn {
+  flex: 0 0 auto;
+  min-width: 38px;
+  padding: 7px 6px;
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ys-text);
+  background: var(--ys-surface);
+  border: 1px solid var(--ys-line);
+  border-left: 4px solid var(--ys-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .12s var(--ys-ease), box-shadow .12s var(--ys-ease),
+    background-color .12s var(--ys-ease);
+}
+
+.layer-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--ys-shadow-sm);
+}
+
+.layer-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.layer-btn--rev {
+  min-width: 40px;
+  border-left-width: 1px;
+  font-size: 1.02rem;
+}
+
+.layer-btn--rev[aria-pressed="true"] {
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border-color: var(--ys-primary-line);
+}
+
+/* --------------------------------------------------------------------------
+   开始 / 暂停卡片（同一块，脚本换文案）
+   -------------------------------------------------------------------------- */
+.bk__card {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(240, 245, 242, .86);
+  border-radius: var(--ys-radius-lg);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: bkCardIn .18s var(--ys-ease) both;
+}
+
+.bk__card[hidden] {
+  display: none;
+}
+
+@keyframes bkCardIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.bk__cardTitle {
+  margin: 0;
+  font-size: 1.16rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.lang-en .bk__cardTitle {
+  font-family: var(--ys-font-en-display);
+  letter-spacing: 0;
+}
+
+.bk__cardSub {
+  margin: 0 0 6px;
+  max-width: 300px;
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--ys-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   临时提示气泡
+   -------------------------------------------------------------------------- */
+.bk__toast {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 4;
+  padding: 6px 14px;
+  max-width: 92%;
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #28483A;
+  background: rgba(251, 246, 236, .95);
+  border: 1px solid #D9CDB6;
+  border-radius: 999px;
+  box-shadow: var(--ys-shadow-sm);
+  animation: bkCardIn .15s var(--ys-ease) both;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.bk__toast[hidden] {
+  display: none;
+}
+
+/* 页面内提示条：切难度确认等长文案可换行，绝不弹原生确认对话框
+   （自动化 / 内嵌浏览器会 dismiss 原生对话框，导致切档失效） */
+.bk__toast--notice {
+  white-space: normal;
+  text-align: center;
+  border-radius: 14px;
+  line-height: 1.55;
+  padding: 8px 14px;
+  color: var(--ys-primary-deep);
+  background: rgba(255, 253, 248, .97);
+  border-color: var(--ys-primary-line);
+}
+
+/* 破纪录徽章 */
+.bk__record {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 9px;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border: 1px solid var(--ys-primary-line);
+  border-radius: 999px;
+}
+
+.bk__record[hidden] {
+  display: none;
+}
+
+/* 结算卡片出现时，底部留一点余量 */
+#overlay {
+  scroll-margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏：320px 下所有横排元素都不设 min-width，字号与内边距一起收
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  body {
+    padding-top: calc(var(--ys-nav-h, 60px) + 14px);
+  }
+
+  .bk {
+    padding: 0 14px 40px;
+  }
+
+  .bk__hud {
+    gap: 5px;
+  }
+
+  .bk__hud .hud-box {
+    padding: 5px 2px 6px;
+    border-radius: 10px;
+  }
+
+  .bk__hud .hud-box__label {
+    font-size: .6rem;
+    letter-spacing: 0;
+  }
+
+  .bk__hud .hud-box__value {
+    font-size: 1.02rem;
+  }
+
+  .bk__bar .g-btn {
+    flex: 1 1 auto;
+    padding: 9px 6px;
+    font-size: .8rem;
+  }
+
+  .bk__stage,
+  #canvas {
+    border-radius: 16px;
+  }
+
+  .bk__layers {
+    gap: 5px;
+  }
+
+  .layer-btn {
+    min-width: 34px;
+    padding: 7px 5px;
+    font-size: .84rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .bk__bar .g-btn {
+    padding: 8px 4px;
+    font-size: .76rem;
+  }
+
+  .bk__toast {
+    font-size: .74rem;
+    white-space: normal;
+  }
+
+  .layer-btn {
+    min-width: 30px;
+    padding: 6px 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk__card,
+  .bk__toast {
+    animation: none;
+  }
+}

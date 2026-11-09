@@ -762,6 +762,27 @@
       glow: 'rgba(133,130,155,.22)',
       title: '黑白棋<small>REVERSI</small>',
       sub: '落一子翻一片，最后看谁占得多'
+    },
+    // [gyh 2026-11-09 新增] 批次五：跳一跳 / 魔方 / 台球 / 中国象棋
+    hop: {
+      glow: 'rgba(126,164,158,.22)',
+      title: '跳一跳<small>STACK JUMP</small>',
+      sub: '按住蓄力，松手一跳，稳稳落在下一块上'
+    },
+    cube: {
+      glow: 'rgba(158,146,186,.22)',
+      title: '魔方<small>PUZZLE CUBE</small>',
+      sub: '转一层、看三面，把颜色一块块送回家'
+    },
+    billiards: {
+      glow: 'rgba(122,158,132,.22)',
+      title: '台球<small>BILLIARDS</small>',
+      sub: '拖杆、瞄准、收力，看白球把场面打开'
+    },
+    xiangqi: {
+      glow: 'rgba(184,144,116,.22)',
+      title: '中国象棋<small>XIANGQI</small>',
+      sub: '楚河汉界摆开，一步一子都算数'
     }
   };
 
@@ -1155,6 +1176,102 @@
       '<circle cx="130" cy="197" r="14" fill="#454B59"/><circle cx="230" cy="163" r="14" fill="#FFFDF8"/>' +
       '<circle cx="130" cy="130" r="7" fill="#6B7AC2" opacity=".55"/>' +
       '<circle cx="230" cy="230" r="7" fill="#6B7AC2" opacity=".55"/>' +
+      '</svg>';
+  }
+
+  /* [gyh 2026-11-09 新增] 批次五分享插画：等轴测方块 / 伪 3D 立方体 / 球桌 / 棋盘，全部原创几何 */
+  if (key === 'hop') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<ellipse cx="180" cy="312" rx="132" ry="16" fill="#7EA49E" opacity=".16"/>' +
+      '<path d="M46 246 L100 218 L154 246 L100 274 Z" fill="#BFD9CD"/>' +
+      '<path d="M46 246 L100 274 L100 308 L46 280 Z" fill="#7FAE9F"/>' +
+      '<path d="M100 274 L154 246 L154 280 L100 308 Z" fill="#6C9B8C"/>' +
+      '<path d="M132 198 L186 170 L240 198 L186 226 Z" fill="#CDE3D7"/>' +
+      '<path d="M132 198 L186 226 L186 260 L132 232 Z" fill="#8CBAAA"/>' +
+      '<path d="M186 226 L240 198 L240 232 L186 260 Z" fill="#74A392"/>' +
+      '<path d="M218 150 L272 122 L326 150 L272 178 Z" fill="#D9EAE0"/>' +
+      '<path d="M218 150 L272 178 L272 212 L218 184 Z" fill="#96C1B1"/>' +
+      '<path d="M272 178 L326 150 L326 184 L272 212 Z" fill="#7CAB9A"/>' +
+      '<path d="M100 210 Q145 92 186 162" stroke="#E0A46B" stroke-width="4" fill="none" stroke-dasharray="7 9" stroke-linecap="round" opacity=".85"/>' +
+      '<ellipse cx="143" cy="130" rx="17" ry="6" fill="#4F7E70" opacity=".22"/>' +
+      '<rect x="130" y="94" width="26" height="30" rx="12" fill="#E8A86C" stroke="#C6854B" stroke-width="2"/>' +
+      '<circle cx="138" cy="107" r="2.6" fill="#6B4B32"/><circle cx="148" cy="107" r="2.6" fill="#6B4B32"/>' +
+      '<circle cx="186" cy="198" r="7" fill="none" stroke="#FFFDF8" stroke-width="3" opacity=".9"/>' +
+      '<rect x="96" y="330" width="168" height="10" rx="5" fill="#D8E6DF"/>' +
+      '<rect x="96" y="330" width="104" height="10" rx="5" fill="#E8A86C"/>' +
+      '</svg>';
+  }
+
+  if (key === 'cube') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<ellipse cx="184" cy="318" rx="120" ry="16" fill="#9E92BA" opacity=".16"/>' +
+      '<path d="M70 112 L112 68 L292 68 L250 112 Z" fill="#D9CFEA" stroke="#8B7EAE" stroke-width="3" stroke-linejoin="round"/>' +
+      '<path d="M130 68 L88 112 M190 68 L148 112 M250 68 L208 112 M91 90 L271 90" stroke="#8B7EAE" stroke-width="2" opacity=".6"/>' +
+      '<rect x="70" y="112" width="180" height="180" fill="#EFE9F6" stroke="#8B7EAE" stroke-width="3"/>' +
+      '<path d="M130 112 V292 M190 112 V292 M70 172 H250 M70 232 H250" stroke="#8B7EAE" stroke-width="2" opacity=".7"/>' +
+      '<rect x="76" y="118" width="48" height="48" rx="5" fill="#D98C7A"/>' +
+      '<rect x="136" y="118" width="48" height="48" rx="5" fill="#E9C97A"/>' +
+      '<rect x="196" y="118" width="48" height="48" rx="5" fill="#8FB5A5"/>' +
+      '<rect x="76" y="178" width="48" height="48" rx="5" fill="#E9C97A"/>' +
+      '<rect x="136" y="178" width="48" height="48" rx="5" fill="#F4F0E6"/>' +
+      '<rect x="196" y="178" width="48" height="48" rx="5" fill="#D98C7A"/>' +
+      '<rect x="76" y="238" width="48" height="48" rx="5" fill="#8FB5A5"/>' +
+      '<rect x="136" y="238" width="48" height="48" rx="5" fill="#7E8FC0"/>' +
+      '<rect x="196" y="238" width="48" height="48" rx="5" fill="#E9C97A"/>' +
+      '<path d="M250 112 L292 68 L292 248 L250 292 Z" fill="#B6A8CF" stroke="#8B7EAE" stroke-width="3" stroke-linejoin="round"/>' +
+      '<path d="M250 172 L292 128 M250 232 L292 188 M271 90 V270" stroke="#6F6391" stroke-width="2" opacity=".6"/>' +
+      '<path d="M44 196 A22 22 0 0 1 66 174" stroke="#8B7EAE" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '<path d="M62 168 L68 176 L58 180 Z" fill="#8B7EAE"/>' +
+      '</svg>';
+  }
+
+  if (key === 'billiards') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="30" y="62" width="300" height="236" rx="26" fill="#8A6A48" stroke="#6E5238" stroke-width="4"/>' +
+      '<rect x="48" y="80" width="264" height="200" rx="16" fill="#4E8C6A" stroke="#3D7357" stroke-width="3"/>' +
+      '<circle cx="48" cy="80" r="15" fill="#2F4138"/><circle cx="312" cy="80" r="15" fill="#2F4138"/>' +
+      '<circle cx="48" cy="280" r="15" fill="#2F4138"/><circle cx="312" cy="280" r="15" fill="#2F4138"/>' +
+      '<circle cx="180" cy="80" r="13" fill="#2F4138"/><circle cx="180" cy="280" r="13" fill="#2F4138"/>' +
+      '<path d="M108 80 V280" stroke="#BFE0CB" stroke-width="1.6" opacity=".45"/>' +
+      '<path d="M120 184 L218 146" stroke="#FFFDF8" stroke-width="2.6" stroke-dasharray="7 7" opacity=".9"/>' +
+      '<circle cx="226" cy="143" r="5" fill="none" stroke="#FFFDF8" stroke-width="2" opacity=".8"/>' +
+      '<path d="M96 206 L20 262" stroke="#C69B63" stroke-width="8" stroke-linecap="round"/>' +
+      '<path d="M96 206 L84 215" stroke="#E8E0CC" stroke-width="8" stroke-linecap="round"/>' +
+      '<circle cx="108" cy="188" r="13" fill="#FFFDF8" stroke="#D8D2C2" stroke-width="2"/>' +
+      '<circle cx="230" cy="150" r="13" fill="#D98C7A"/>' +
+      '<circle cx="258" cy="178" r="13" fill="#E9C97A"/>' +
+      '<circle cx="230" cy="206" r="13" fill="#7E8FC0"/>' +
+      '<circle cx="272" cy="224" r="13" fill="#B48BB4"/>' +
+      '<circle cx="196" cy="236" r="13" fill="#8FB5A5"/>' +
+      '<circle cx="230" cy="150" r="4" fill="#FFFDF8" opacity=".85"/>' +
+      '</svg>';
+  }
+
+  if (key === 'xiangqi') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="34" y="34" width="292" height="292" rx="10" fill="#E8CFA8" stroke="#B2825C" stroke-width="4"/>' +
+      '<rect x="50" y="50" width="260" height="260" fill="none" stroke="#9C7149" stroke-width="1.6"/>' +
+      '<path d="M82 50 V151 M114 50 V151 M147 50 V151 M180 50 V151 M212 50 V151 M245 50 V151 M277 50 V151' +
+        ' M82 209 V310 M114 209 V310 M147 209 V310 M180 209 V310 M212 209 V310 M245 209 V310 M277 209 V310' +
+        ' M50 79 H310 M50 108 H310 M50 137 H310 M50 151 H310 M50 209 H310 M50 223 H310 M50 252 H310 M50 281 H310"' +
+        ' stroke="#9C7149" stroke-width="1.5" opacity=".85"/>' +
+      '<path d="M147 50 L212 108 M212 50 L147 108 M147 252 L212 310 M212 252 L147 310" stroke="#9C7149" stroke-width="1.4" opacity=".7"/>' +
+      '<path d="M62 180 H298" stroke="#9C7149" stroke-width="1" opacity=".25"/>' +
+      '<circle cx="147" cy="137" r="6" fill="#C6854B" opacity=".65"/>' +
+      '<circle cx="212" cy="137" r="6" fill="#C6854B" opacity=".65"/>' +
+      '<circle cx="180" cy="79" r="17" fill="#F6E7CC" stroke="#B2473C" stroke-width="3"/>' +
+      '<circle cx="180" cy="79" r="11" fill="none" stroke="#B2473C" stroke-width="1.4"/>' +
+      '<path d="M174 79 H186 M180 73 V85" stroke="#B2473C" stroke-width="2"/>' +
+      '<circle cx="114" cy="223" r="17" fill="#F6E7CC" stroke="#3F4A57" stroke-width="3"/>' +
+      '<circle cx="114" cy="223" r="11" fill="none" stroke="#3F4A57" stroke-width="1.4"/>' +
+      '<path d="M108 223 H120 M114 217 V229" stroke="#3F4A57" stroke-width="2"/>' +
+      '<circle cx="245" cy="252" r="17" fill="#F6E7CC" stroke="#B2473C" stroke-width="3"/>' +
+      '<circle cx="245" cy="252" r="11" fill="none" stroke="#B2473C" stroke-width="1.4"/>' +
+      '<path d="M240 252 H250" stroke="#B2473C" stroke-width="2"/>' +
       '</svg>';
   }
 </script>

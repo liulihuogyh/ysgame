@@ -272,6 +272,79 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- [gyh 2026-11-09 新增] 跳一跳 / 魔方 / 台球 / 中国象棋 -->
+  <url>
+    <loc>https://ysgame.xyz/games/hop/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/hop/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/hop/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/hop/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/hop/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/hop/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/hop/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/hop/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/cube/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/cube/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/cube/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/cube/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/cube/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/cube/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/cube/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/cube/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/billiards/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/billiards/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/billiards/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/billiards/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/billiards/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/billiards/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/billiards/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/billiards/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/xiangqi/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/xiangqi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/xiangqi/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/xiangqi/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/xiangqi/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/xiangqi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/xiangqi/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/xiangqi/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://ysgame.xyz/about.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/about.html"/>
