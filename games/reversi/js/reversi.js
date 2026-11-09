@@ -118,6 +118,7 @@
     anim: null,               // 翻子补间
     best: 0,                  // 最高分（玩家单局最多黑子数）
     toastKey: null,
+    toastNotice: false,       // 当前 toast 是否为可换行的「页面内提示条」
     resultKind: null
   };
 
@@ -488,11 +489,13 @@
     state.anim = null;
     state.legal = [];
     state.toastKey = null;
+    state.toastNotice = false;
     recount();
     state.resultKind = winnerOf(state.board) === BLACK ? 'win'
       : (winnerOf(state.board) === WHITE ? 'lose' : 'draw');
     $('record-badge').hidden = true;
     toast.hidden = true;
+    toast.classList.remove('bk__toast--notice');
     overlay.hidden = true;
 
     if (state.phase === 'over') {
@@ -613,11 +616,13 @@
     state.legal = [];
     state.cursor = { r: 2, c: 3 };
     state.toastKey = null;
+    state.toastNotice = false;
     state.resultKind = null;
 
     overlay.hidden = true;
     $('record-badge').hidden = true;
     toast.hidden = true;
+    toast.classList.remove('bk__toast--notice');
 
     if (state.phase === 'ready') showCard('ready');
     else hideCard();
@@ -768,16 +773,20 @@
   }
 
   function switchDiff(diff) {
-    if (!DIFFS[diff]) return;
-    /* [gyh 2026-11-09 修改] 同档也幂等落盘；改用非阻塞页面内提示，避免原生 confirm 被 dismiss 时切档失效 */
+    if (!DIFFS[diff]) return;                 // 非法档：直接忽略
+    /* 任一合法档（含当前档）都立即落盘 ysgame-reversi-diff，保证幂等可读 */
     try { localStorage.setItem(DIFF_KEY, diff); } catch (e) { /* ignore */ }
-    if (diff === state.diff) return;
-    if (state.moves > 0 && state.phase !== 'over') showToast('confirm_diff');
+    if (diff === state.diff) { syncDiffs(); return; }
+
+    var hadProgress = (state.moves > 0 && state.phase !== 'over');
     state.diff = diff;
     saveDiff();
     syncDiffs();
     sfx('toggle');
-    newGame('playing', true);   // 切换即重开新局
+    newGame('playing', true);   // 内部清掉未触发的 AI 定时器并重开新局
+    /* 非阻塞确认：提示条必须放在重开之后（newGame 会隐藏 toast），
+       用页面内提示条展示 confirm_diff，不弹原生 confirm、不 return */
+    if (hadProgress) showToast('confirm_diff', true);
   }
 
   /* ---------------- 界面 ---------------- */
@@ -845,13 +854,19 @@
 
   function hideCard() { card.hidden = true; }
 
-  function showToast(key) {
+  /** notice=true 时用可换行的「页面内提示条」样式（切难度确认等长文案），
+      约 2.2 秒后自动消失；全站不弹原生 confirm。 */
+  function showToast(key, notice) {
     state.toastKey = key;
+    state.toastNotice = !!notice;
     toast.textContent = t(key);
     toast.hidden = false;
+    if (notice) toast.classList.add('bk__toast--notice');
+    else toast.classList.remove('bk__toast--notice');
     if (toastTimer) window.clearTimeout(toastTimer);
     toastTimer = window.setTimeout(function () {
       toast.hidden = true;
+      toast.classList.remove('bk__toast--notice');
       toastTimer = null;
     }, 2200);
   }
@@ -879,7 +894,7 @@
     syncButtons();
     updateHud();
     syncDiffs();
-    if (!toast.hidden && state.toastKey) showToast(state.toastKey);
+    if (!toast.hidden && state.toastKey) showToast(state.toastKey, state.toastNotice);
   }
 
   /* ---------------- 绘制 ---------------- */
