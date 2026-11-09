@@ -1,0 +1,289 @@
+/* ==========================================================================
+   数字连线 · 游戏专属样式
+   通用组件（记分板 / 按钮 / 结算卡片 / 分段按钮）在根 css/style.css
+   这里只写棋盘、卡片、气泡、窄屏适配
+   [numberlink-dev 2026-11-09 新增] 批次四
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.bk {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* --------------------------------------------------------------------------
+   难度选择：单独成行、水平居中，窄屏放不下时自动换行
+   -------------------------------------------------------------------------- */
+.bk__diffs {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 14px;
+}
+
+/* --------------------------------------------------------------------------
+   记分板：五格在 320px 下也要挤得下，收紧内边距与字号
+   -------------------------------------------------------------------------- */
+.bk__hud {
+  gap: 6px;
+}
+
+.bk__hud .hud-box {
+  padding: 6px 3px 7px;
+  min-width: 0;
+}
+
+.bk__hud .hud-box__label {
+  font-size: .64rem;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bk__hud .hud-box__value {
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   操作按钮：桌面一行居中，放不下自动换行；窄屏改成整齐三列
+   -------------------------------------------------------------------------- */
+.bk__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.bk__bar .g-btn {
+  flex: 0 1 auto;
+}
+
+/* --------------------------------------------------------------------------
+   棋盘：CSS 宽度 100% + 正方形，脚本按 dpr 缩放逻辑坐标
+   -------------------------------------------------------------------------- */
+.bk__stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #EFE7D8;
+  border-radius: var(--ys-radius-lg);
+  box-shadow: inset 0 2px 8px rgba(69, 75, 89, .07), var(--ys-shadow-sm);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: crosshair;
+}
+
+/* --------------------------------------------------------------------------
+   开始 / 暂停卡片
+   -------------------------------------------------------------------------- */
+.bk__card {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(242, 233, 220, .88);
+  border-radius: var(--ys-radius-lg);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: nlCardIn .18s var(--ys-ease) both;
+}
+
+.bk__card[hidden] {
+  display: none;
+}
+
+@keyframes nlCardIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.bk__cardTitle {
+  margin: 0;
+  font-size: 1.16rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.lang-en .bk__cardTitle {
+  font-family: var(--ys-font-en-display);
+  letter-spacing: 0;
+}
+
+.bk__cardSub {
+  margin: 0 0 6px;
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--ys-text-soft);
+}
+
+/* 破纪录徽章 */
+.bk__record {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 9px;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border: 1px solid var(--ys-primary-line);
+  border-radius: 999px;
+}
+
+.bk__record[hidden] {
+  display: none;
+}
+
+/* 结算卡片出现时，底部留一点余量 */
+#overlay {
+  scroll-margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   临时提示气泡（连线冲突 / 提示用完等）
+   -------------------------------------------------------------------------- */
+.bk__toast {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 4;
+  max-width: 90%;
+  padding: 6px 14px;
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #4A4138;
+  background: rgba(251, 246, 236, .96);
+  border: 1px solid #D9CDB6;
+  border-radius: 999px;
+  box-shadow: var(--ys-shadow-sm);
+  animation: nlCardIn .15s var(--ys-ease) both;
+  pointer-events: none;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bk__toast[hidden] {
+  display: none;
+}
+
+/* 长文案（切换难度提示）允许换行，避免被胶囊 nowrap 截断 */
+.bk__toast.is-wrap {
+  white-space: normal;
+  word-break: break-word;
+  border-radius: 14px;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏：HUD 五格再收紧；按钮排成 3×2 的网格，绝不横向溢出
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  body {
+    padding-top: calc(var(--ys-nav-h, 60px) + 14px);
+  }
+
+  .bk {
+    padding: 0 14px 40px;
+  }
+
+  .bk__hud {
+    gap: 4px;
+  }
+
+  .bk__hud .hud-box {
+    padding: 5px 1px 6px;
+    border-radius: 10px;
+  }
+
+  .bk__hud .hud-box__label {
+    font-size: .56rem;
+    letter-spacing: 0;
+  }
+
+  .bk__hud .hud-box__value {
+    font-size: .96rem;
+  }
+
+  .bk__bar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .bk__bar .g-btn {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    padding: 9px 4px;
+    font-size: .8rem;
+  }
+
+  .bk__stage {
+    border-radius: 16px;
+  }
+
+  #canvas {
+    border-radius: 16px;
+  }
+
+  .bk__toast {
+    font-size: .72rem;
+    padding: 5px 10px;
+  }
+
+  /* 结算卡片三颗按钮在 320px 下也要挤得下，不撑破容器 */
+  .bk .result__actions > * {
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .bk__hud .hud-box__label {
+    font-size: .5rem;
+  }
+
+  .bk__hud .hud-box__value {
+    font-size: .88rem;
+  }
+
+  .bk__bar .g-btn {
+    font-size: .74rem;
+    padding: 8px 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk__card,
+  .bk__toast {
+    animation: none;
+  }
+}

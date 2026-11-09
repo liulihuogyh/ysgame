@@ -199,6 +199,79 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- [gyh 2026-11-09 新增] 数字连线 / 飞扬小鸟 / 恐龙跳跳 / 黑白棋 -->
+  <url>
+    <loc>https://ysgame.xyz/games/numberlink/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/numberlink/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/numberlink/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/numberlink/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/numberlink/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/numberlink/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/numberlink/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/numberlink/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/skybird/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/skybird/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/skybird/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/skybird/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/skybird/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/skybird/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/skybird/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/skybird/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/dino/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/dino/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/dino/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/dino/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/dino/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/dino/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/dino/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/dino/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/reversi/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/reversi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/reversi/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/reversi/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/reversi/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/reversi/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/reversi/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/reversi/"/>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://ysgame.xyz/about.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/en/about.html"/>

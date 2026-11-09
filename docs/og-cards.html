@@ -741,6 +741,27 @@
       glow: 'rgba(201,167,159,.20)',
       title: '炸弹人<small>BOMBER</small>',
       sub: '放炸弹清路，炸开软墙找出口'
+    },
+    // [gyh 2026-11-09 新增] 批次四：数字连线 / 飞扬小鸟 / 恐龙跳跳 / 黑白棋
+    numberlink: {
+      glow: 'rgba(126,156,135,.22)',
+      title: '数字连线<small>NUMBER LINK</small>',
+      sub: '把同号两端连起来，线不交叉，还得铺满整盘'
+    },
+    skybird: {
+      glow: 'rgba(123,163,190,.22)',
+      title: '飞扬小鸟<small>SKY BIRD</small>',
+      sub: '点一下抬一抬翅膀，从管道缝里穿过去'
+    },
+    dino: {
+      glow: 'rgba(185,158,105,.22)',
+      title: '恐龙跳跳<small>DINO DASH</small>',
+      sub: '一跳一跳往前跑，越跑越快，从白天到夜里'
+    },
+    reversi: {
+      glow: 'rgba(133,130,155,.22)',
+      title: '黑白棋<small>REVERSI</small>',
+      sub: '落一子翻一片，最后看谁占得多'
     }
   };
 
@@ -1070,6 +1091,70 @@
       '<path d="M180 120 q22 -22 38 -6" stroke="#C9A79F" stroke-width="7" fill="none" stroke-linecap="round"/>' +
       '<circle cx="220" cy="108" r="9" fill="#C0897A"/>' +
       '<circle cx="180" cy="206" r="24" fill="#FFFDF8"/>' +
+      '</svg>';
+  }
+
+  // [gyh 2026-11-09 新增] 批次四：数字连线 / 飞扬小鸟 / 恐龙跳跳 / 黑白棋
+  if (key === 'numberlink') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="40" y="40" width="280" height="280" rx="18" fill="#EAF0EA" stroke="#A8BFAE" stroke-width="3"/>' +
+      '<path d="M96 40 V320 M152 40 V320 M208 40 V320 M264 40 V320 M40 96 H320 M40 152 H320 M40 208 H320 M40 264 H320" stroke="#CBDCD0" stroke-width="2"/>' +
+      '<path d="M68 68 H124 V180 H236 V124 H292" stroke="#7E9C87" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<path d="M68 236 H180 V292 H292" stroke="#C39A92" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="68" cy="68" r="17" fill="#7E9C87"/><circle cx="292" cy="124" r="17" fill="#7E9C87"/>' +
+      '<circle cx="68" cy="236" r="17" fill="#C39A92"/><circle cx="292" cy="292" r="17" fill="#C39A92"/>' +
+      '<text x="68" y="75" text-anchor="middle" font-size="19" fill="#FFFDF8">1</text>' +
+      '<text x="292" y="131" text-anchor="middle" font-size="19" fill="#FFFDF8">1</text>' +
+      '<text x="68" y="243" text-anchor="middle" font-size="19" fill="#FFFDF8">2</text>' +
+      '<text x="292" y="299" text-anchor="middle" font-size="19" fill="#FFFDF8">2</text>' +
+      '</svg>';
+  }
+
+  if (key === 'skybird') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="222" y="40" width="66" height="122" rx="8" fill="#A9C4D6"/>' +
+      '<rect x="222" y="216" width="66" height="104" rx="8" fill="#A9C4D6"/>' +
+      '<rect x="214" y="34" width="82" height="22" rx="8" fill="#7BA3BE"/>' +
+      '<rect x="214" y="310" width="82" height="22" rx="8" fill="#7BA3BE"/>' +
+      '<path d="M40 322 H320" stroke="#B7C9AE" stroke-width="12" stroke-linecap="round"/>' +
+      '<circle cx="124" cy="178" r="34" fill="#F1DCAC"/>' +
+      '<path d="M104 170 q-32 -14 -38 10 q24 8 38 6 Z" fill="#D9BE86"/>' +
+      '<circle cx="140" cy="166" r="6" fill="#454B59"/>' +
+      '<path d="M156 178 l24 9 l-24 9 Z" fill="#C0897A"/>' +
+      '<circle cx="72" cy="92" r="14" fill="#FFFDF8" opacity=".8"/>' +
+      '<circle cx="94" cy="92" r="18" fill="#FFFDF8" opacity=".8"/>' +
+      '</svg>';
+  }
+
+  if (key === 'dino') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<circle cx="286" cy="78" r="26" fill="#E6C887" opacity=".85"/>' +
+      '<path d="M40 262 L96 212 L146 262 L208 196 L278 262 L320 228 V310 H40 Z" fill="#D8C493" opacity=".5"/>' +
+      '<rect x="40" y="292" width="280" height="11" rx="5" fill="#B99E69"/>' +
+      '<path d="M112 220 q-40 -8 -54 -32 q32 6 56 16 Z" fill="#7E9C87"/>' +
+      '<ellipse cx="150" cy="224" rx="46" ry="30" fill="#7E9C87"/>' +
+      '<rect x="166" y="174" width="44" height="40" rx="14" fill="#7E9C87"/>' +
+      '<rect x="128" y="246" width="14" height="36" rx="6" fill="#6B8A76"/>' +
+      '<rect x="166" y="246" width="14" height="36" rx="6" fill="#6B8A76"/>' +
+      '<circle cx="194" cy="190" r="5" fill="#FFFDF8"/>' +
+      '<rect x="264" y="244" width="16" height="48" rx="8" fill="#9FB8A8"/>' +
+      '<path d="M264 264 h-16 v-14" stroke="#9FB8A8" stroke-width="12" fill="none" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  if (key === 'reversi') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="46" y="46" width="268" height="268" rx="12" fill="#9FB8A8" stroke="#7E9C87" stroke-width="4"/>' +
+      '<path d="M79.5 46 V314 M113 46 V314 M146.5 46 V314 M180 46 V314 M213.5 46 V314 M247 46 V314 M280.5 46 V314 M46 79.5 H314 M46 113 H314 M46 146.5 H314 M46 180 H314 M46 213.5 H314 M46 247 H314 M46 280.5 H314" stroke="#7E9C87" stroke-width="1.5" opacity=".55"/>' +
+      '<circle cx="163" cy="163" r="14" fill="#FFFDF8"/><circle cx="197" cy="163" r="14" fill="#454B59"/>' +
+      '<circle cx="163" cy="197" r="14" fill="#454B59"/><circle cx="197" cy="197" r="14" fill="#FFFDF8"/>' +
+      '<circle cx="130" cy="197" r="14" fill="#454B59"/><circle cx="230" cy="163" r="14" fill="#FFFDF8"/>' +
+      '<circle cx="130" cy="130" r="7" fill="#6B7AC2" opacity=".55"/>' +
+      '<circle cx="230" cy="230" r="7" fill="#6B7AC2" opacity=".55"/>' +
       '</svg>';
   }
 </script>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线飞扬小鸟：单键控制上升，穿过管道之间的缝隙，飞得越远速度越快。三档难度、最高分记录、自动存档，无需注册登录。">
+  <meta name="keywords" content="几何小鸟,穿管道,飞行小游戏,反应力挑战,在线小游戏,免费休闲,轻松解压,YSGame">
+  <title>飞扬小鸟 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/skybird/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/skybird/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/skybird/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/skybird/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="飞扬小鸟 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="一下一下点着飞，穿过管道缝隙，看能飞多远。">
+  <meta property="og:url" content="https://ysgame.xyz/games/skybird/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-skybird.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-skybird.png">
+  <meta name="theme-color" content="#9ED0E8">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%23DCEFF6'/><circle cx='31' cy='33' r='13' fill='%23F4C95D'/><path d='M20 31 L7 27 L14 40 Z' fill='%23E8A94B'/><path d='M43 30 L56 33 L43 37 Z' fill='%23E07A4F'/><circle cx='35' cy='28' r='3.2' fill='%23FFFDF8'/><circle cx='36' cy='28' r='1.5' fill='%23454B59'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense (替换为你的发布商ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body data-page="home" data-dict="gskybird" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" type="button" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" type="button" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="bk">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">🐦</span>
+        <span data-i18n="game_title">飞扬小鸟</span>
+      </h1>
+    </header>
+    <p class="g-tagline" data-i18n="tagline">点一下抬一抬翅膀，别撞上管子</p>
+
+    <!-- 难度选择 -->
+    <div class="seg bk__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy" aria-pressed="false">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium" aria-pressed="true">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard" aria-pressed="false">困难</button>
+    </div>
+
+    <!-- 得分 / 最佳 / 管道 / 距离 -->
+    <div class="g-hud bk__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_score">得分</span>
+        <strong class="hud-box__value" id="score">0</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_wave">管道</span>
+        <strong class="hud-box__value" id="pipes">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_steps">距离</span>
+        <strong class="hud-box__value" id="dist">0</strong>
+      </div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="bk__bar">
+      <button class="g-btn g-btn--primary" id="btn-start" type="button" data-i18n="btn_start">开始</button>
+      <button class="g-btn" id="btn-pause" type="button" data-i18n="btn_pause">暂停</button>
+      <button class="g-btn" id="btn-restart" type="button" data-i18n="btn_restart">重开</button>
+    </div>
+
+    <!-- 画布 -->
+    <div class="bk__stage">
+      <canvas id="canvas" role="img" data-i18n-aria="board_aria" aria-label="小鸟飞行画面"></canvas>
+
+      <!-- 开始 / 暂停遮罩，同一块卡片换文案 -->
+      <div class="bk__card" id="card">
+        <h2 class="bk__cardTitle" id="card-title" data-i18n="game_title">飞扬小鸟</h2>
+        <p class="bk__cardSub" id="card-sub" data-i18n="tagline">点一下抬一抬翅膀，别撞上管子</p>
+        <button class="g-btn g-btn--primary" id="btn-card" type="button" data-i18n="btn_start">开始</button>
+      </div>
+
+      <!-- 临时提示气泡 -->
+      <div class="bk__toast" id="toast" hidden></div>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title" data-i18n="lose_title">撞到了</h2>
+          <p class="result__sub" id="overlay-sub" data-i18n="lose_sub">这一局到此为止。</p>
+          <span class="bk__record" id="record-badge" data-i18n="new_record" hidden>破纪录了</span>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_score">得分</span>
+          <strong id="overlay-score">0</strong>
+        </p>
+        <p class="result__stat">
+          <span data-i18n="label_best">最佳</span>
+          <strong id="overlay-best">0</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      点一下屏幕 / 空格 / ↑ 让小鸟上升，松手就会往下坠；从上下管道之间的缝隙穿过去，碰到管子或地面这局就结束。每穿过一组管道得 1 分，飞得越远速度越快、缝隙越窄。手机上点屏幕任意位置即可。
+    </p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">飞扬小鸟</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 音效 → 分享 → 游戏脚本 -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/sound.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/skybird.js"></script>
+</body>
+</html>
