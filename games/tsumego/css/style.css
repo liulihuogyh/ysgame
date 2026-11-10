@@ -1,0 +1,74 @@
+/* ==========================================================================
+   围棋死活题 · Go Problems 专属样式
+   .seg / .g-hud / .hud-box / .g-btn / .result / .g-hint 由全局提供。
+   [gyh 2026-11-10 新增] 批次七
+   ========================================================================== */
+
+.tsu__diffs { margin: 14px auto 0; }
+.tsu__hud { margin: 14px auto 0; }
+
+.tsu__bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px auto 0;
+  flex-wrap: wrap;
+}
+
+.tsu__stage {
+  position: relative;
+  margin: 18px auto 0;
+  width: 100%;
+  max-width: 460px;
+}
+
+.tsu__canvas-wrap {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(40,60,30,.18);
+}
+
+#canvas { display: block; width: 100%; height: auto; touch-action: manipulation; }
+
+.tsu__feedback {
+  margin: 12px 0 0;
+  min-height: 1.2em;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+.tsu__feedback.is-ok { color: #1d7a47; }
+.tsu__feedback.is-bad { color: #b23a32; }
+
+.tsu__toast {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  background: rgba(12,18,32,.92);
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 13px;
+  max-width: 92%;
+  text-align: center;
+  z-index: 5;
+}
+
+.tsu__record {
+  display: inline-block;
+  margin-left: 8px;
+  background: #ffd27a;
+  color: #6a4a00;
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 360px) {
+  .tsu__bar .g-btn { padding: 9px 12px; font-size: 13px; }
+}

@@ -25,7 +25,7 @@ YSGame/
 │   └── style.css              # 全站设计系统（莫兰迪配色、导航、卡片、内容页）
 ├── js/
 │   ├── common.js              # 导航交互、语言切换、音效开关、当前页高亮
-│   ├── sound.js               # 音效引擎：纯 WebAudio 合成，三十款游戏三十套音色
+│   ├── sound.js               # 音效引擎：纯 WebAudio 合成，三十四款游戏三十四套音色
 │   ├── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
 │   ├── share.js               # 分享面板：系统分享 / 微信 / 微博 / X / 复制链接
 │   └── hall.js                # 大厅分类标签：按 data-cat 筛选卡片与待做清单
@@ -151,6 +151,22 @@ YSGame/
         ├── index.html         # 飞行棋：掷骰起飞、同色跳格、撞子回营、终点判定
         ├── css/style.css
         └── js/flightchess.js
+    ├── drumkit/
+    │   ├── index.html         # 在线架子鼓：多点触控鼓面、合成鼓声、节拍器跟拍、三档
+    │   ├── css/style.css
+    │   └── js/drumkit.js
+    ├── solarsystem/
+    │   ├── index.html         # 掌控太阳系：伪 3D 轨道、缩放、行星资料与闯关
+    │   ├── css/style.css
+    │   └── js/solarsystem.js
+    ├── tsumego/
+    │   ├── index.html         # 围棋死活题：经典题型库、判活判死、逐步提示
+    │   ├── css/style.css
+    │   └── js/tsumego.js
+    └── endgame/
+        ├── index.html         # 象棋残局：经典残局题库、胜负判定、三档 AI
+        ├── css/style.css
+        └── js/endgame.js
 ```
 
 **约定：** 每个游戏一个独立子文件夹，互不干扰；公共样式和脚本放在根 `css/`、`js/`。
@@ -303,6 +319,5 @@ npx --yes serve . -l 8000
 - [x] 魔方（Canvas 2D 伪 3D 转层、打乱与还原、自动存档）
 - [x] 台球（2D 弹性碰撞、瞄准线、进袋判定、自动存档）
 - [x] 中国象棋（完整走子规则、将军判定、简单 AI、自动存档）
-- [ ] 剩余 4 款，按批次推进，详见 `docs/ROADMAP.md`<!-- [gyh 2026-11-10 修改] -->
-  （下一批·批次七：在线架子鼓、掌控太阳系、围棋死活题、象棋残局）
+- [x] 批次七四款（架子鼓 / 太阳系 / 围棋死活题 / 象棋残局）上线<!-- [gyh 2026-11-10 新增] -->
 - [ ] 申请 AdSense（站点内容充实并运行 1~2 个月后）

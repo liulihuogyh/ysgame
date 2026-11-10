@@ -804,6 +804,27 @@
       glow: 'rgba(201,131,118,.22)',
       title: '飞行棋<small>AEROPLANE CHESS</small>',
       sub: '掷骰起飞，把四架飞机挨个送回家'
+    },
+    /* [gyh 2026-11-10 新增] 批次七 */
+    drumkit: {
+      glow: 'rgba(199,126,142,.22)',
+      title: '在线架子鼓<small>DRUM KIT</small>',
+      sub: '点几下，就有了节奏'
+    },
+    solarsystem: {
+      glow: 'rgba(110,137,176,.22)',
+      title: '掌控太阳系<small>SOLAR SYSTEM</small>',
+      sub: '把八大行星握在手心'
+    },
+    tsumego: {
+      glow: 'rgba(176,154,114,.22)',
+      title: '围棋死活题<small>GO PROBLEMS</small>',
+      sub: '一块棋，是活是死'
+    },
+    endgame: {
+      glow: 'rgba(154,124,147,.22)',
+      title: '象棋残局<small>XIANGQI ENDGAMES</small>',
+      sub: '几子之间，定胜负'
     }
   };
 
@@ -1370,6 +1391,62 @@
       '<circle cx="272" cy="68" r="3.5" fill="#C98376"/>' +
       '</svg>';
   }
+
+  /* [gyh 2026-11-10 新增] 批次七：四张原创几何插画（纯 SVG 字符串，ES5 安全） */
+  if (key === 'drumkit') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="24" y="24" width="312" height="312" rx="16" fill="#F2E4E6" stroke="#C77E8E" stroke-width="4"/>' +
+      '<ellipse cx="120" cy="150" rx="56" ry="40" fill="#E2B0BB" stroke="#9A5E6E" stroke-width="4"/>' +
+      '<ellipse cx="120" cy="150" rx="30" ry="20" fill="#F7EDED"/>' +
+      '<rect x="210" y="96" width="96" height="34" rx="17" fill="#F7EDED" stroke="#9A5E6E" stroke-width="3"/>' +
+      '<rect x="210" y="150" width="96" height="34" rx="17" fill="#F7EDED" stroke="#9A5E6E" stroke-width="3"/>' +
+      '<ellipse cx="92" cy="252" rx="38" ry="28" fill="#C77E8E" stroke="#7E4654" stroke-width="4"/>' +
+      '<ellipse cx="180" cy="262" rx="38" ry="28" fill="#E2B0BB" stroke="#7E4654" stroke-width="4"/>' +
+      '<ellipse cx="262" cy="252" rx="30" ry="22" fill="#C77E8E" stroke="#7E4654" stroke-width="4"/>' +
+      '</svg>';
+  }
+  if (key === 'solarsystem') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="24" y="24" width="312" height="312" rx="16" fill="#E6ECF2" stroke="#6E89B0" stroke-width="4"/>' +
+      '<circle cx="180" cy="180" r="26" fill="#F2C879" stroke="#B8912F" stroke-width="3"/>' +
+      '<ellipse cx="180" cy="180" rx="150" ry="58" fill="none" stroke="#9FB6D0" stroke-width="2" transform="rotate(-18 180 180)"/>' +
+      '<ellipse cx="180" cy="180" rx="118" ry="46" fill="none" stroke="#9FB6D0" stroke-width="2" transform="rotate(-18 180 180)"/>' +
+      '<ellipse cx="180" cy="180" rx="86" ry="34" fill="none" stroke="#9FB6D0" stroke-width="2" transform="rotate(-18 180 180)"/>' +
+      '<ellipse cx="180" cy="180" rx="54" ry="22" fill="none" stroke="#9FB6D0" stroke-width="2" transform="rotate(-18 180 180)"/>' +
+      '<circle cx="316" cy="120" r="9" fill="#C77E8E"/>' +
+      '<circle cx="262" cy="232" r="12" fill="#6E89B0"/>' +
+      '<circle cx="74" cy="150" r="7" fill="#B09A72"/>' +
+      '<circle cx="120" cy="270" r="10" fill="#9A7C93"/>' +
+      '</svg>';
+  }
+  if (key === 'tsumego') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="26" y="26" width="308" height="308" rx="8" fill="#EFE9DC" stroke="#B09A72" stroke-width="4"/>' +
+      '<path d="M44 44 H316 M44 100 H316 M44 156 H316 M44 212 H316 M44 268 H316 M44 316 H316" stroke="#C9B48C" stroke-width="1.4"/>' +
+      '<path d="M44 44 V316 M100 44 V316 M156 44 V316 M212 44 V316 M268 44 V316 M316 44 V316" stroke="#C9B48C" stroke-width="1.4"/>' +
+      '<circle cx="156" cy="156" r="15" fill="#2E3238"/>' +
+      '<circle cx="212" cy="156" r="15" fill="#F7F4EC" stroke="#CFC7B4" stroke-width="1.5"/>' +
+      '<circle cx="156" cy="212" r="15" fill="#2E3238"/>' +
+      '<circle cx="212" cy="212" r="15" fill="#F7F4EC" stroke="#CFC7B4" stroke-width="1.5"/>' +
+      '<rect x="120" y="120" width="136" height="136" rx="4" fill="none" stroke="#B09A72" stroke-width="2"/>' +
+      '</svg>';
+  }
+  if (key === 'endgame') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="26" y="26" width="308" height="308" rx="8" fill="#EDE6EA" stroke="#9A7C93" stroke-width="4"/>' +
+      '<path d="M44 44 H316 M44 100 H316 M44 156 H316 M44 212 H316 M44 268 H316 M44 316 H316" stroke="#CBB6C2" stroke-width="1.4"/>' +
+      '<path d="M44 44 V316 M100 44 V316 M156 44 V316 M212 44 V316 M268 44 V316 M316 44 V316" stroke="#CBB6C2" stroke-width="1.4"/>' +
+      '<path d="M150 150 l17 34 38 5 -28 27 7 38 -34 -18 -34 18 7 -38 -28 -27 38 -5 z" fill="#9A7C93" stroke="#5E4554" stroke-width="3"/>' +
+      '<circle cx="186" cy="196" r="8" fill="#F7F4EC" stroke="#5E4554" stroke-width="2"/>' +
+      '<rect x="246" y="246" width="40" height="40" rx="6" fill="#9A7C93" stroke="#5E4554" stroke-width="3"/>' +
+      '<rect x="74" y="74" width="34" height="34" rx="6" fill="#C2A6BB" stroke="#5E4554" stroke-width="3"/>' +
+      '</svg>';
+  }
+
 
 </script>
 </body>

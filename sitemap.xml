@@ -470,5 +470,41 @@
     <lastmod>2026-11-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  <!-- [gyh 2026-11-10 新增] 批次七 8 条 -->
+  <url>
+    <loc>https://ysgame.xyz/games/drumkit/</loc>
+    <xhtml:link rel='alternate' hreflang='zh-CN' href='https://ysgame.xyz/games/drumkit/'/>
+    <xhtml:link rel='alternate' hreflang='en' href='https://ysgame.xyz/games/drumkit/?lang=en'/>
+    <xhtml:link rel='alternate' hreflang='x-default' href='https://ysgame.xyz/games/drumkit/'/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/solarsystem/</loc>
+    <xhtml:link rel='alternate' hreflang='zh-CN' href='https://ysgame.xyz/games/solarsystem/'/>
+    <xhtml:link rel='alternate' hreflang='en' href='https://ysgame.xyz/games/solarsystem/?lang=en'/>
+    <xhtml:link rel='alternate' hreflang='x-default' href='https://ysgame.xyz/games/solarsystem/'/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/tsumego/</loc>
+    <xhtml:link rel='alternate' hreflang='zh-CN' href='https://ysgame.xyz/games/tsumego/'/>
+    <xhtml:link rel='alternate' hreflang='en' href='https://ysgame.xyz/games/tsumego/?lang=en'/>
+    <xhtml:link rel='alternate' hreflang='x-default' href='https://ysgame.xyz/games/tsumego/'/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/endgame/</loc>
+    <xhtml:link rel='alternate' hreflang='zh-CN' href='https://ysgame.xyz/games/endgame/'/>
+    <xhtml:link rel='alternate' hreflang='en' href='https://ysgame.xyz/games/endgame/?lang=en'/>
+    <xhtml:link rel='alternate' hreflang='x-default' href='https://ysgame.xyz/games/endgame/'/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>

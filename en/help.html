@@ -1106,7 +1106,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter, Bomber, Number Link, Sky Bird, Dino Dash, Reversi, Stack Jump, Puzzle Cube, Billiards and Xiangqi are live, plus this batch's four new ones — Chess, Go, Hex Checkers and Aeroplane Chess — 30 games in total. Next up is batch seven: Go life-and-death problems, Xiangqi endgames, an online drum kit and a solar system explorer. That leaves 4 games on the to-do list, worked through in batches — one at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter, Bomber, Number Link, Sky Bird, Dino Dash, Reversi, Stack Jump, Puzzle Cube, Billiards and Xiangqi are live, plus this batch's four new ones — Drum kit, Solar System, Go life-and-death and Xiangqi endgames — 34 games in total. That completes the original plan, so there's no batch after this. Want a brand-new type of game? Just say the word — the ones people ask for most jump to the front of the queue.
                 </p>
               </div>
             </details>
@@ -1244,7 +1244,83 @@
           </div>
 
           <p>The current game lives in <code>ysgame-flightchess-state</code>, your best result in <code>ysgame-flightchess-best</code> and the chosen level in <code>ysgame-flightchess-diff</code>, all inside your own browser. Close the page and pick up where you left off.</p>
+        
+        <article class='ys-card'>
+          <h2>Drum kit: the rules</h2>
+          <p>Tap a pad and it sounds. Pick a beat, then tap each pad as the ring shrinks onto it in time with the metronome; hit the lit ring for a point, and chain hits for combos. Miss and the chain breaks. Free play has no clock — just make noise.</p>
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> click a pad or press its key (<kbd>1</kbd>–<kbd>6</kbd>); use the buttons to switch level, start playing, and watch combo and hits.</p>
+          <p><strong>Phone or tablet:</strong> just tap a pad; multi-touch lets you hit several at once.</p>
+          <h3>Three levels</h3>
+          <table class='ys-table'>
+            <thead><tr><th>Level</th><th>What changes</th><th>Good for</th></tr></thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Free play on 6 basic pads, no score, no clock</td><td>Hearing the kit, finding the feel</td></tr>
+              <tr><td>🌳 Medium</td><td>Slow built-in beats, timed hits for points, 60-second round</td><td>Playing a full groove</td></tr>
+              <tr><td>🔥 Hard</td><td>Fast beats, combo bonus, misses cost points, denser pattern</td><td>A steady, accurate rhythm</td></tr>
+            </tbody>
+          </table>
+          <div class='ys-note'><strong>A small tip:</strong> follow the metronome click and tap as the ring is smallest; get steady on Medium before chasing combos on Hard.</div>
+          <p>The combo, hits and best score are saved, so closing the tab keeps your place. Your best survives a new game.</p>
         </article>
+
+        <article class='ys-card'>
+          <h2>Solar System: the rules</h2>
+          <p>Drag to rotate, scroll or pinch to zoom and watch the orbits; tap a planet for its fact card. Quiz mode asks planet questions with a time limit that tightens by level, and more correct answers mean a higher rank.</p>
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> drag to rotate, scroll to zoom, click a planet to open its card. Buttons switch between Cruise and Quiz.</p>
+          <p><strong>Phone or tablet:</strong> one finger to rotate, pinch to zoom, tap a planet for facts.</p>
+          <h3>Three levels</h3>
+          <table class='ys-table'>
+            <thead><tr><th>Level</th><th>What changes</th><th>Good for</th></tr></thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Free cruise with eight planet fact cards, no quiz</td><td>Showing a child the planets</td></tr>
+              <tr><td>🌳 Medium</td><td>10 planet questions, 15 seconds each</td><td>Learning a bit of astronomy</td></tr>
+              <tr><td>🔥 Hard</td><td>20 questions, 8 seconds each, fewer hints</td><td>An astronomy buff</td></tr>
+            </tbody>
+          </table>
+          <div class='ys-note'><strong>A small tip:</strong> cruise first and memorise the order and traits, then quiz is easier; from the Sun out: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.</div>
+          <p>The selected planet, quiz rank and difficulty are saved, so closing the tab keeps your place.</p>
+        </article>
+
+        <article class='ys-card'>
+          <h2>Go Problems: the rules</h2>
+          <p>Black moves first, it is your turn. Usually the goal is to kill a marked white group or to make your black group live. After you play, the system checks life and death; use a hint if stuck, and Easy even shows the answer.</p>
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> click an intersection to place; arrows move the cursor, <kbd>Space</kbd> plays, <kbd>H</kbd> hints, <kbd>S</kbd> shows the answer, <kbd>U</kbd> undoes.</p>
+          <p><strong>Phone or tablet:</strong> tap an intersection, use buttons for hints and the answer.</p>
+          <h3>Three levels</h3>
+          <table class='ys-table'>
+            <thead><tr><th>Level</th><th>What changes</th><th>Good for</th></tr></thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Basic life-and-death, answer shown, many hints</td><td>Starting tsumego</td></tr>
+              <tr><td>🌳 Medium</td><td>Common tesuji problems, fewer hints</td><td>Solid basics</td></tr>
+              <tr><td>🔥 Hard</td><td>Trickier shapes, timed, scarce hints</td><td>Sharpening skill</td></tr>
+            </tbody>
+          </table>
+          <div class='ys-note'><strong>A small tip:</strong> remember making eyes versus breaking them — two real eyes decide a group's life; killing usually starts by tightening outside liberties and hitting the vital point.</div>
+          <p>The problem number, stones and difficulty are saved, so closing the tab keeps your place.</p>
+        </article>
+
+        <article class='ys-card'>
+          <h2>Xiangqi Endgames: the rules</h2>
+          <p>Play from the position given by the puzzle; the goal is to checkmate the enemy (or hold a draw as stated). You are red and move first — tap a piece then a square. You must answer a check, and the system judges checkmate, stalemate and draw.</p>
+          <h3>Controls</h3>
+          <p><strong>Computer:</strong> click a piece to select, then a highlighted square; arrows move the cursor, <kbd>Space</kbd> plays, <kbd>H</kbd> hints, <kbd>U</kbd> undos.</p>
+          <p><strong>Phone or tablet:</strong> tap a piece, then a highlighted square; use buttons for hints and undo.</p>
+          <h3>Three levels</h3>
+          <table class='ys-table'>
+            <thead><tr><th>Level</th><th>What changes</th><th>Good for</th></tr></thead>
+            <tbody>
+              <tr><td>🌱 Easy</td><td>Basic checkmating endgames, many hints, many undos, weak computer</td><td>Learning basic mates</td></tr>
+              <tr><td>🌳 Medium</td><td>Classic endgames, a by-the-book computer</td><td>Solid endgame skill</td></tr>
+              <tr><td>🔥 Hard</td><td>Harder endgames, tougher computer, tighter move budget</td><td>An endgame expert</td></tr>
+            </tbody>
+          </table>
+          <div class='ys-note'><strong>A small tip:</strong> endgames are about piece coordination — a lone rook needs the king's help, and a rook-and-pawn needs the right stopping square; squeeze the enemy king's space first, then find the mate.</div>
+          <p>The position, move count and difficulty are saved, so closing the tab keeps your place.</p>
+        </article>
+</article>
 
         <a class="ys-back" href="index.html">← Back to the arcade</a>
 

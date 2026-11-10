@@ -1,0 +1,269 @@
+/* ==========================================================================
+   象棋残局 · 游戏专属样式
+   通用组件（导航 / 记分板 / 按钮 / 分段按钮 / 结算卡片 / 分享面板 / 广告位）
+   全部在根 css/style.css；这里只管容器、棋盘舞台、开始卡、提示气泡与窄屏适配。
+   棋盘木纹、楚河汉界、九宫斜线、棋子、合法落点、选子/上一步标记全部由 canvas
+   2D 原创绘制，不引用任何图片、字体或 CDN。
+   canvas 逻辑比例 9:10（9 条竖线 × 10 条横线的交叉点棋盘），随容器宽度重算。
+   [gyh 2026-11-10 新增] 批次七（复用 xiangqi 棋盘绘制范式，前缀 bk→eg）
+   ========================================================================== */
+
+body {
+  padding-top: calc(var(--ys-nav-h, 68px) + 20px);
+}
+
+.eg {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+/* --------------------------------------------------------------------------
+   难度选择：单独成行、水平居中，窄屏自动折行
+   -------------------------------------------------------------------------- */
+.eg__diffs {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 14px;
+}
+
+/* --------------------------------------------------------------------------
+   记分板：执子 / 回合 / 步数 / 胜场 五格，320px 下也要挤得下
+   -------------------------------------------------------------------------- */
+.eg__hud {
+  gap: 8px;
+}
+
+.eg__hud .hud-box {
+  padding: 6px 4px 7px;
+  min-width: 0;
+}
+
+.eg__hud .hud-box__label {
+  font-size: .66rem;
+  letter-spacing: .06em;
+}
+
+.eg__hud .hud-box__value {
+  font-size: 1.16rem;
+}
+
+/* --------------------------------------------------------------------------
+   操作按钮：五个一排，放不下时自动折行，绝不横向溢出
+   -------------------------------------------------------------------------- */
+.eg__bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.eg__bar .g-btn {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   棋盘舞台：9:10 竖长比例，宽度随容器缩放，脚本按 devicePixelRatio 与
+   容器宽度重算内部分辨率，始终保持 9:10 不变形。
+   -------------------------------------------------------------------------- */
+.eg__stage {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 10;
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 10;
+  background: #E3C08A;
+  border-radius: var(--ys-radius-lg);
+  box-shadow: inset 0 2px 8px rgba(69, 75, 89, .07), var(--ys-shadow-sm);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   开始 / 暂停卡片（同一块，脚本换文案）
+   -------------------------------------------------------------------------- */
+.eg__card {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(247, 240, 226, .88);
+  border-radius: var(--ys-radius-lg);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: egCardIn .18s var(--ys-ease) both;
+}
+
+.eg__card[hidden] {
+  display: none;
+}
+
+@keyframes egCardIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.eg__cardTitle {
+  margin: 0;
+  font-size: 1.16rem;
+  font-weight: 600;
+  color: var(--ys-text);
+}
+
+.lang-en .eg__cardTitle {
+  font-family: var(--ys-font-en-display);
+  letter-spacing: 0;
+}
+
+.eg__cardSub {
+  margin: 0 0 6px;
+  max-width: 300px;
+  font-size: .8rem;
+  line-height: 1.6;
+  color: var(--ys-text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   临时提示气泡（将军 / 吃子 / 非法落点 / 切难度确认）
+   -------------------------------------------------------------------------- */
+.eg__toast {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 4;
+  padding: 6px 14px;
+  max-width: 92%;
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #5A3A1B;
+  background: rgba(251, 246, 236, .95);
+  border: 1px solid #D9CDB6;
+  border-radius: 999px;
+  box-shadow: var(--ys-shadow-sm);
+  animation: egCardIn .15s var(--ys-ease) both;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.eg__toast[hidden] {
+  display: none;
+}
+
+/* 页面内提示条：切难度确认等长文案可换行、居中；不弹原生确认弹窗
+   （Playwright / 内嵌浏览器会 dismiss 原生对话框，导致切档失效） */
+.eg__toast--notice {
+  white-space: normal;
+  text-align: center;
+  border-radius: 14px;
+  line-height: 1.55;
+  padding: 8px 14px;
+  color: var(--ys-primary-deep);
+  background: rgba(255, 253, 248, .97);
+  border-color: var(--ys-primary-line);
+}
+
+/* 破纪录徽章 */
+.eg__record {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 9px;
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--ys-primary-deep);
+  background: var(--ys-primary-soft);
+  border: 1px solid var(--ys-primary-line);
+  border-radius: 999px;
+}
+
+.eg__record[hidden] {
+  display: none;
+}
+
+/* 结算卡片出现时，底部留一点余量 */
+#overlay {
+  scroll-margin-bottom: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏：320px 下所有横排元素都不设 min-width，字号与内边距一起收
+   -------------------------------------------------------------------------- */
+@media (max-width: 430px) {
+  body {
+    padding-top: calc(var(--ys-nav-h, 60px) + 14px);
+  }
+
+  .eg {
+    padding: 0 14px 40px;
+  }
+
+  .eg__hud {
+    gap: 5px;
+  }
+
+  .eg__hud .hud-box {
+    padding: 5px 2px 6px;
+    border-radius: 10px;
+  }
+
+  .eg__hud .hud-box__label {
+    font-size: .6rem;
+    letter-spacing: 0;
+  }
+
+  .eg__hud .hud-box__value {
+    font-size: 1.02rem;
+  }
+
+  .eg__bar .g-btn {
+    flex: 1 1 auto;
+    padding: 9px 6px;
+    font-size: .8rem;
+  }
+
+  .eg__stage,
+  #canvas {
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 340px) {
+  .eg__bar .g-btn {
+    padding: 8px 4px;
+    font-size: .76rem;
+  }
+
+  .eg__toast {
+    font-size: .74rem;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eg__card,
+  .eg__toast {
+    animation: none;
+  }
+}

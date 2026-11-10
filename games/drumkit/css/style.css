@@ -1,0 +1,177 @@
+/* ==========================================================================
+   在线架子鼓 · 专属样式（其余通用组件复用根 css/style.css）
+   [gyh 2026-11-10 新增] 批次七
+   ========================================================================== */
+
+.dk {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 0 14px 36px;
+}
+
+.dk__mode {
+  text-align: center;
+  margin: -6px 0 14px;
+  font-size: 13px;
+  color: #a35a6e;
+}
+
+.dk__hud {
+  margin: 14px auto 0;
+}
+
+.dk__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 14px 0 6px;
+}
+
+.dk__stage {
+  position: relative;
+  margin-top: 8px;
+}
+
+.dk__toast {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  max-width: 92%;
+  background: rgba(40, 24, 30, 0.92);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0,0, 0.25);
+  z-index: 5;
+}
+
+.dk__pads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.dk-pad {
+  position: relative;
+  border: 0;
+  border-radius: 16px;
+  padding: 0;
+  height: 86px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 14px rgba(120, 60, 80, 0.18);
+  transition: transform 0.06s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  overflow: hidden;
+}
+
+.dk-pad span {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.dk-pad::after {
+  /* 命中光圈：默认缩到极小，命中时放大并淡出 */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 节奏提示圈：节拍到达前从大缩到鼓面（时长由 JS 经 --cue-dur 控制） */
+.dk-pad::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dk-pad.is-cue::before {
+  animation: dk-cue var(--cue-dur, 700ms) linear forwards;
+}
+
+@keyframes dk-cue {
+  0%   { opacity: 0.9;  transform: scale(1.7); }
+  100% { opacity: 0.15; transform: scale(0.26); }
+}
+
+.dk-pad--kick  { background: linear-gradient(160deg, #C77E8E, #9A4f63); }
+.dk-pad--snare { background: linear-gradient(160deg, #E0A3B0, #B86a7c); }
+.dk-pad--hat   { background: linear-gradient(160deg, #8FB0C9, #5E84A4); }
+.dk-pad--tom1  { background: linear-gradient(160deg, #D7B27A, #A9863f); }
+.dk-pad--tom2  { background: linear-gradient(160deg, #B79A6E, #8a7240); }
+.dk-pad--crash { background: linear-gradient(160deg, #9FB6D0, #6E89B0); }
+
+.dk-pad:active,
+.dk-pad.is-down {
+  transform: translateY(2px) scale(0.97);
+  box-shadow: 0 2px 6px rgba(120, 60, 80, 0.22);
+  filter: brightness(1.08);
+}
+
+/* 命中光圈动画：JS 触发 .is-hit 时播放 */
+.dk-pad.is-hit::after {
+  animation: dk-ring 0.42s ease-out;
+}
+
+@keyframes dk-ring {
+  0%   { opacity: 0.95; width: 18px; height: 18px; margin: -9px 0 0 -9px; }
+  100% { opacity: 0;    width: 120px; height: 120px; margin: -60px 0 0 -60px; }
+}
+
+/* 节奏点：鼓面短暂高亮，提示该落点 */
+.dk-pad.is-cue {
+  filter: brightness(1.16);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.75), 0 6px 14px rgba(120, 60, 80, 0.22);
+}
+
+.dk__beat {
+  text-align: center;
+  min-height: 18px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #8a6a74;
+}
+
+.dk__record {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #FCE8EC;
+  color: #c0392b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 360px) {
+  .dk-pad { height: 76px; font-size: 13px; }
+  .dk__pads { gap: 8px; }
+}
