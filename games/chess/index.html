@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="免费在线国际象棋：王车易位、吃过路兵、兵升变、将军与将死判定、悔棋与提示、三档棋力 AI，自动存档，无需注册登录。">
+  <meta name="keywords" content="国际象棋,Chess,在线国际象棋,人机对弈,王车易位,兵升变,将死,棋类策略,休闲小游戏">
+  <title>国际象棋 · 在线玩 | YSGame 云舒的小游戏屋</title>
+  <link rel="canonical" href="https://ysgame.xyz/games/chess/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/chess/">
+  <link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/chess/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/chess/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YSGame 云舒的小游戏屋">
+  <meta property="og:title" content="国际象棋 · YSGame 云舒的小游戏屋">
+  <meta property="og:description" content="六十四格里，每一步都在改写结局。王车易位、吃过路兵、兵升变，三档棋力 AI 陪你下完。">
+  <meta property="og:url" content="https://ysgame.xyz/games/chess/">
+  <meta property="og:image" content="https://ysgame.xyz/assets/og-chess.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ysgame.xyz/assets/og-chess.png">
+  <meta name="theme-color" content="#20243B">
+
+  <!-- [gyh 2026-11-10 新增] 原创几何 favicon：小棋盘 + 一枚自绘王冠棋子，纯路径，无外链 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2320243B'/><rect x='9' y='9' width='46' height='46' rx='6' fill='%23EFE3C9'/><g fill='%23A9825E'><rect x='9' y='9' width='11.5' height='11.5'/><rect x='32' y='9' width='11.5' height='11.5'/><rect x='9' y='32' width='11.5' height='11.5'/><rect x='32' y='32' width='11.5' height='11.5'/></g><path d='M21 45 L19 27 L27 35 L36 22 L45 41 L43 45 Z' fill='%23FFFDF8' stroke='%23333A5C' stroke-width='1.6'/><circle cx='36' cy='20' r='2.6' fill='%23C3A29E'/></svg>">
+
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home" data-dict="gchess" data-alt-lang-url="">
+
+  <!-- ===================== 全站导航 ===================== -->
+  <header class="ys-nav">
+    <div class="ys-nav__inner">
+      <a class="ys-brand" href="../../index.html">
+        <span class="ys-brand__mark">Y</span>
+        <span class="ys-brand__text">
+          <strong>YSGame</strong>
+          <em data-i18n="brand_sub">云舒的小游戏屋</em>
+        </span>
+      </a>
+
+      <nav class="ys-nav__links" id="ysNavLinks">
+        <a href="../../index.html" data-nav="home" data-i18n="nav_home"
+           data-href-zh="../../index.html" data-href-en="../../en/index.html">游戏大厅</a>
+        <a href="../../about.html" data-nav="about" data-i18n="nav_about"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">关于</a>
+        <a href="../../help.html" data-nav="help" data-i18n="nav_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">帮助</a>
+      </nav>
+
+      <div class="ys-nav__utility" role="group" aria-label="快捷操作">
+        <button class="ys-lang" id="ysLangBtn" type="button" data-i18n="lang_btn" data-i18n-aria="lang_aria" aria-label="Switch to English">EN</button>
+        <button class="ys-sound" id="ysSoundBtn" type="button" aria-label="音效">🔊</button>
+      </div>
+
+      <button class="ys-nav__toggle" id="ysNavToggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="ysNavLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="bk">
+
+    <header class="g-head">
+      <h1 class="g-title">
+        <span class="g-title__mark" aria-hidden="true">♞</span>
+        <span data-i18n="game_title">国际象棋</span>
+      </h1>
+    </header>
+    <p class="g-tagline" data-i18n="tagline">六十四格里，每一步都在改写结局</p>
+
+    <!-- 三档难度 -->
+    <div class="seg bk__diffs" id="diffs" role="group" data-i18n-aria="difficulty_group_aria" aria-label="选择难度">
+      <button class="seg__btn" type="button" data-diff="easy" data-i18n="diff_easy" aria-pressed="false">简单</button>
+      <button class="seg__btn is-active" type="button" data-diff="medium" data-i18n="diff_medium" aria-pressed="true">中等</button>
+      <button class="seg__btn" type="button" data-diff="hard" data-i18n="diff_hard" aria-pressed="false">困难</button>
+    </div>
+
+    <!-- 记分板：得分 / 步数 / 回合 / 用时 / 最佳 -->
+    <div class="g-hud bk__hud">
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_score">得分</span>
+        <strong class="hud-box__value" id="score">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_steps">步数</span>
+        <strong class="hud-box__value" id="steps">0</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_level">回合</span>
+        <strong class="hud-box__value" id="turn">1</strong>
+      </div>
+      <div class="hud-box">
+        <span class="hud-box__label" data-i18n="label_time">用时</span>
+        <strong class="hud-box__value" id="time">00:00</strong>
+      </div>
+      <div class="hud-box hud-box--best">
+        <span class="hud-box__label" data-i18n="label_best">最佳</span>
+        <strong class="hud-box__value" id="best">--</strong>
+      </div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="bk__bar">
+      <button class="g-btn g-btn--primary" id="btn-start" type="button" data-i18n="btn_start">开始</button>
+      <button class="g-btn" id="btn-undo" type="button" data-i18n="btn_undo">悔棋</button>
+      <button class="g-btn" id="btn-hint" type="button" data-i18n="btn_hint">提示</button>
+      <button class="g-btn" id="btn-pause" type="button" data-i18n="btn_pause">暂停</button>
+      <button class="g-btn" id="btn-restart" type="button" data-i18n="btn_restart">重开</button>
+    </div>
+
+    <!-- 画布 -->
+    <div class="bk__stage" id="stage-wrap">
+      <canvas id="canvas" role="img" data-i18n-aria="board_aria" aria-label="国际象棋棋盘"></canvas>
+
+      <!-- 开始 / 暂停遮罩，同一块卡片换文案（内容随状态由 JS 经 I18N.t 写入） -->
+      <div class="bk__card" id="card">
+        <h2 class="bk__cardTitle" id="card-title">国际象棋</h2>
+        <p class="bk__cardSub" id="card-sub">六十四格里，每一步都在改写结局</p>
+        <button class="g-btn g-btn--primary" id="btn-start-card" type="button">开始</button>
+      </div>
+
+      <!-- [gyh 2026-11-10 新增] 页面内 toast：切档提示 / 将军 / 吃子 / 升变 / 易位 -->
+      <div class="bk__toast" id="toast" hidden></div>
+
+      <!-- [gyh 2026-11-10 新增] 兵升变选择：标题由 I18N.t 写入，四个棋符按钮由 JS 生成 -->
+      <div class="bk__promo" id="promo" hidden>
+        <p class="bk__promoTitle" id="promo-title"></p>
+        <div class="bk__promoRow" id="promo-row"></div>
+      </div>
+    </div>
+
+    <!-- 结算卡片 -->
+    <div class="result" id="overlay" hidden>
+      <div class="result__top">
+        <div class="result__text">
+          <h2 class="result__title" id="overlay-title"></h2>
+          <p class="result__sub" id="overlay-sub"></p>
+          <span class="bk__record" id="record-badge" data-i18n="new_record" hidden>破纪录了</span>
+        </div>
+        <p class="result__stat">
+          <span data-i18n="label_moves">走子</span>
+          <strong id="overlay-moves">0</strong>
+        </p>
+      </div>
+      <div class="result__actions">
+        <button class="ys-share-inline" type="button" data-share-open data-i18n="share_btn">分享</button>
+        <button class="g-btn g-btn--primary result__btn" id="btn-again" type="button" data-i18n="btn_again">再来一局</button>
+      </div>
+    </div>
+
+    <p class="g-hint" data-i18n="hint_controls">
+      你执白先走。点选棋子再点高亮格落子：兵直走斜吃、马走日、象走斜线、车走直线、后横竖斜皆可、王每次一格。王车易位、吃过路兵与兵到底升变都已实现，被将军时必须应将，将死或逼和即分胜负。
+    </p>
+
+    <!-- [gyh 2026-11-10 新增] 悔棋 / 提示余量（JS 经 I18N.t 写入，数字与符号，无裸 key） -->
+    <p class="g-hint g-extra" id="extras"></p>
+
+    <!-- 广告位 -->
+    <div class="ad-container">
+      <div class="ad-placeholder" data-i18n="ad_placeholder">广告位（申请 AdSense 后替换）</div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="ys-footer">
+    <div class="ys-footer__inner">
+      <div class="ys-footer__brand-col">
+        <div class="ys-footer__brand" data-i18n="footer_brand">YSGame · 云舒的小游戏屋</div>
+        <p class="ys-footer__desc" data-i18n="footer_desc">
+          一个人维护的休闲小游戏合集。全部免费，不注册、不登录、不弹窗打扰。
+        </p>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_games">游戏</h4>
+        <a href="../../index.html#games" data-i18n="footer_all"
+           data-href-zh="../../index.html#games" data-href-en="../../en/index.html#games">全部游戏</a>
+        <a href="index.html" data-i18n="game_title">国际象棋</a>
+      </div>
+
+      <div class="ys-footer__col">
+        <h4 data-i18n="footer_about">关于</h4>
+        <a href="../../about.html" data-i18n="footer_story"
+           data-href-zh="../../about.html" data-href-en="../../en/about.html">品牌故事</a>
+        <a href="../../help.html" data-i18n="footer_help"
+           data-href-zh="../../help.html" data-href-en="../../en/help.html">玩法说明</a>
+        <a href="../../privacy.html" data-i18n="footer_privacy"
+           data-href-zh="../../privacy.html" data-href-en="../../en/privacy.html">隐私政策</a>
+      </div>
+    </div>
+
+    <div class="ys-footer__bottom">
+      <span>© <span id="ysYear">2026</span> YSGame · ysgame.xyz</span>
+      <span data-i18n="footer_copy">一个爸爸的业余作品</span>
+    </div>
+  </footer>
+
+  <!-- 国际化 → 公共脚本 → 音效 → 分享 → 游戏脚本（严格 5 个） -->
+  <script src="../../js/i18n.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/sound.js"></script>
+  <script src="../../js/share.js"></script>
+  <script src="js/chess.js"></script>
+</body>
+</html>

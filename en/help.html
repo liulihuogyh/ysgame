@@ -1106,7 +1106,7 @@
               <summary>What games are coming next?</summary>
               <div class="ys-faq__body">
                 <p>
-                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter, Bomber, Number Link, Sky Bird, Dino Dash and Reversi are already live, plus this batch's four new ones — Stack Jump, Puzzle Cube, Billiards and Xiangqi — 26 games in total. Next up is batch six: Chess, Go, Chinese checkers, Ludo, Go life-and-death, Xiangqi endgames, Online drums and Solar system. That leaves 8 games on the to-do list, worked through in batches — one at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
+                  Sudoku, 2048, Minesweeper, Jigsaw, Match three, Snake, Sokoban, Number slide, Tetris, Breakout, Link-up, Memory match, Gomoku, Mario, Maze, Battle Tank, Star Fighter, Bomber, Number Link, Sky Bird, Dino Dash, Reversi, Stack Jump, Puzzle Cube, Billiards and Xiangqi are live, plus this batch's four new ones — Chess, Go, Hex Checkers and Aeroplane Chess — 30 games in total. Next up is batch seven: Go life-and-death problems, Xiangqi endgames, an online drum kit and a solar system explorer. That leaves 4 games on the to-do list, worked through in batches — one at a time, each goes live when finished. If you want something sooner, say so — loud requests move up the list.
                 </p>
               </div>
             </details>
@@ -1135,6 +1135,115 @@
             <li>A screenshot, if you have one</li>
           </ul>
           <p>I read everything. Usually a reply within one to three days.</p>
+        </article>
+
+        <!-- [gyh 2026-11-10 新增] 批次六四款玩法说明 -->
+        <article class="ys-card">
+          <h2>Chess: the rules</h2>
+          <p>An 8x8 board. You play white and move first; <strong>checkmate the rival king to win</strong>. Stalemate, threefold repetition, the fifty-move rule and insufficient material are draws. Pawns move straight and capture diagonally (with a two-square first step and promotion on the last rank), knights jump in an L, bishops run on diagonals, rooks on ranks and files, the queen does both, and the king steps one square.</p>
+          <p>The special rules are all in: <strong>castling</strong> (neither piece has moved, the path is clear and the king does not cross an attacked square), <strong>en passant</strong> and <strong>promotion</strong> (you pick the piece). When in check only moves that answer it are legal. Undo rewinds your move and the reply; Hint suggests one.</p>
+
+          <h3>How to play</h3>
+          <p><strong>Computer:</strong> tap one of your pieces, then a highlighted square; pick a piece when promoting. <strong>Phone or tablet:</strong> tap a piece and a highlighted square — the buttons below the board undo, hint, pause and restart.</p>
+
+          <h3>Difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+<tr><td>🌱 Easy</td><td>Depth-1 capture-greedy AI with visible randomness; unlimited undos; all legal moves always highlighted; no timer</td><td>Learning how each piece moves</td></tr>
+<tr><td>🌳 Medium</td><td>Depth-2 alpha-beta with material values; 3 undos; move count and time tracked</td><td>Thinking an exchange or two ahead</td></tr>
+<tr><td>🔥 Hard</td><td>Depth-3 alpha-beta with a piece-square table; 1 undo; moves flash briefly on selection, 3 hints per game</td><td>Trading material for position</td></tr>
+            </tbody>
+          </table>
+
+          <div class="ys-note">
+            <strong>Tip: </strong>Resist bringing the queen out early. Develop knights and bishops and castle the king into safety first; late in the game, watch every pawn nearing the last rank — one promotion can flip the result.
+          </div>
+
+          <p>The current game lives in <code>ysgame-chess-state</code>, your best result in <code>ysgame-chess-best</code> and the chosen level in <code>ysgame-chess-diff</code>, all inside your own browser. Close the page and pick up where you left off.</p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Go: the rules</h2>
+          <p>Black moves first and you play black. Place stones on the intersections: <strong>adjacent same-colour stones form a group, and a group with no liberties is captured</strong>. An immediate recapture of a single stone (ko) is forbidden, and suicide moves with no liberties are illegal.</p>
+          <p>Two passes in a row end the game. Empty regions are counted by flood fill and the score is <strong>territory + captures + komi</strong>. Board size is the main difficulty lever: 9x9 to learn, 19x19 for the full picture.</p>
+
+          <h3>How to play</h3>
+          <p><strong>Computer:</strong> click an intersection to play, or use Pass; Undo rewinds your move and the reply. <strong>Phone or tablet:</strong> tap an intersection — even 19x19 has a tap tolerance on narrow screens. The buttons below pass, undo and hint.</p>
+
+          <h3>Difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+<tr><td>🌱 Easy</td><td>9x9, komi 0.5; local heuristic AI (capture / rescue low-liberty groups) with randomness; unlimited undos; last-move and atari markers</td><td>Learning liberties, captures and ko</td></tr>
+<tr><td>🌳 Medium</td><td>13x13, komi 5.5; one-ply candidate evaluation (liberties, captures, connection, atari, corner value); 3 undos; captures and time tracked</td><td>Weighing corners against thickness</td></tr>
+<tr><td>🔥 Hard</td><td>19x19, komi 6.5; adds territory influence, with capped candidates and a thinking budget so it never stalls; 1 undo; 3 hints per game</td><td>Giving up local fights for the whole board</td></tr>
+            </tbody>
+          </table>
+
+          <div class="ys-note">
+            <strong>Tip: </strong>A group with one liberty left is in atari — deciding whether to save it or counter-attack often decides the game. Count liberties before the endgame, and do not squeeze stones into a living enemy wall.
+          </div>
+
+          <p>The current game lives in <code>ysgame-go-state</code>, your best result in <code>ysgame-go-best</code> and the chosen level in <code>ysgame-go-diff</code>, all inside your own browser. Close the page and pick up where you left off.</p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Hex Checkers: the rules</h2>
+          <p>A six-pointed star with 121 holes. You start in the bottom triangle and <strong>win by moving every piece into the opposite top triangle</strong>. Each turn you may step into one of the six adjacent empty holes, or jump over any single adjacent piece into the empty hole just beyond it — and keep jumping from the new spot.</p>
+          <p>Selecting a piece highlights every hole reachable by a chain of jumps. A chain cannot mix in plain steps; the four side triangles may be crossed but not used as final parking spots, and pieces that reach the target camp are locked so the game always converges.</p>
+
+          <h3>How to play</h3>
+          <p><strong>Computer:</strong> tap one of your marbles, then a highlighted hole. <strong>Phone or tablet:</strong> tap a marble and a highlighted hole; the buttons below undo, hint, pause and restart.</p>
+
+          <h3>Difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+<tr><td>🌱 Easy</td><td>6 pieces per side (1+2+3); greedy AI pushes its rearmost piece forward; unlimited undos; every destination always highlighted; no timer</td><td>Building your first jump chains</td></tr>
+<tr><td>🌳 Medium</td><td>10 pieces per side (1+2+3+4); AI seeks the longest chain plus forward distance; 3 undos; moves and time tracked</td><td>Planning a whole ladder of jumps</td></tr>
+<tr><td>🔥 Hard</td><td>10 pieces; AI also rates camp neatness, blocks your jump boards and predicts your reply; 1 undo; 3 hints per game</td><td>Breaking the rival ladder as well as building your own</td></tr>
+            </tbody>
+          </table>
+
+          <div class="ys-note">
+            <strong>Tip: </strong>Do not leave your rearmost marble behind. A ladder of jump boards beats single steps by a mile — but a badly aimed ladder gives your rival a free ride in the other direction.
+          </div>
+
+          <p>The current game lives in <code>ysgame-hexcheckers-state</code>, your best result in <code>ysgame-hexcheckers-best</code> and the chosen level in <code>ysgame-hexcheckers-diff</code>, all inside your own browser. Close the page and pick up where you left off.</p>
+        </article>
+
+        <article class="ys-card">
+          <h2>Aeroplane Chess: the rules</h2>
+          <p>You and the computer each take a colour. Roll the die and <strong>get every one of your planes into the home stretch to win</strong>. A take-off roll sends a plane from the hangar onto the track; after that it advances around the outer ring, hops forward on a same-colour square, and sends a rival plane back to the hangar if it lands exactly on it. One lap leads into your home lane.</p>
+          <p>The home lane needs an exact roll to land on the finish; too large a roll simply waits. A take-off roll earns another throw. A turn cap decides the winner by progress, so the game always ends. The die is genuinely random — the computer gets no better rolls.</p>
+
+          <h3>How to play</h3>
+          <p><strong>Computer:</strong> press Roll, then tap the plane you want to move; follow the hint when you ask for one. <strong>Phone or tablet:</strong> tap the roll button and a plane; the buttons below undo, hint, pause and restart.</p>
+
+          <h3>Difficulty levels</h3>
+          <table class="ys-table">
+            <thead>
+              <tr><th>Level</th><th>What changes</th><th>Good for</th></tr>
+            </thead>
+            <tbody>
+<tr><td>🌱 Easy</td><td>2 planes per side; a 5 or 6 takes off; AI picks a movable plane at random; unlimited undos; no timer</td><td>Learning take-off, hops and bumps</td></tr>
+<tr><td>🌳 Medium</td><td>3 planes; only a 6 takes off; AI prefers bumps, take-offs and finishing; 3 undos; turns and time tracked</td><td>Choosing which plane deserves the roll</td></tr>
+<tr><td>🔥 Hard</td><td>4 planes; only a 6 takes off; AI scores expected value (bumps, finishing, avoiding a bump, extra rolls); 1 undo; 3 hints per game</td><td>Weighing the risk of every plane on the board</td></tr>
+            </tbody>
+          </table>
+
+          <div class="ys-note">
+            <strong>Tip: </strong>Do not launch a new plane the moment you roll a six. The one already near home is usually worth more, and bumping a rival back to the hangar often beats adding another plane to the track.
+          </div>
+
+          <p>The current game lives in <code>ysgame-flightchess-state</code>, your best result in <code>ysgame-flightchess-best</code> and the chosen level in <code>ysgame-flightchess-diff</code>, all inside your own browser. Close the page and pick up where you left off.</p>
         </article>
 
         <a class="ys-back" href="index.html">← Back to the arcade</a>

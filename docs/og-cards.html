@@ -783,6 +783,27 @@
       glow: 'rgba(184,144,116,.22)',
       title: '中国象棋<small>XIANGQI</small>',
       sub: '楚河汉界摆开，一步一子都算数'
+    },
+    /* [gyh 2026-11-10 新增] 批次六 */
+    chess: {
+      glow: 'rgba(124,135,168,.22)',
+      title: '国际象棋<small>CHESS</small>',
+      sub: '六十四格里，每一步都在改写结局'
+    },
+    go: {
+      glow: 'rgba(176,154,114,.22)',
+      title: '围棋<small>GO</small>',
+      sub: '一手一地，围出自己的边界'
+    },
+    hexcheckers: {
+      glow: 'rgba(110,157,171,.22)',
+      title: '跳棋<small>HEX CHECKERS</small>',
+      sub: '六角星盘上，借力才能跳得最远'
+    },
+    flightchess: {
+      glow: 'rgba(201,131,118,.22)',
+      title: '飞行棋<small>AEROPLANE CHESS</small>',
+      sub: '掷骰起飞，把四架飞机挨个送回家'
     }
   };
 
@@ -1274,6 +1295,82 @@
       '<path d="M240 252 H250" stroke="#B2473C" stroke-width="2"/>' +
       '</svg>';
   }
+
+  /* [gyh 2026-11-10 新增] 批次六：四张原创几何插画 */
+  function rep(n, fn) { var o = ''; for (var i = 0; i < n; i++) o += fn(i); return o; }
+  if (key === 'chess') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="30" y="30" width="300" height="300" rx="8" fill="#E3D8C3" stroke="#7C87A8" stroke-width="4"/>' +
+      rep(8, function (r) {
+        return rep(8, function (c) {
+          return (r + c) % 2 ? '<rect x="' + (30 + c * 37.5) + '" y="' + (30 + r * 37.5) +
+            '" width="37.5" height="37.5" fill="#9AA4BD" opacity=".65"/>' : '';
+        });
+      }) +
+      '<path d="M180 118 L196 152 L232 157 L206 182 L212 218 L180 201 L148 218 L154 182 L128 157 L164 152 Z" fill="#F7F2E6" stroke="#4A5570" stroke-width="4"/>' +
+      '<circle cx="180" cy="175" r="9" fill="#4A5570"/>' +
+      '<rect x="96" y="230" width="34" height="34" rx="4" fill="#F7F2E6" stroke="#4A5570" stroke-width="3"/>' +
+      '<rect x="236" y="96" width="34" height="34" rx="4" fill="#4A5570" stroke="#2F384C" stroke-width="3"/>' +
+      '</svg>';
+  }
+  if (key === 'go') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="26" y="26" width="308" height="308" rx="8" fill="#E3C994" stroke="#B09A72" stroke-width="4"/>' +
+      rep(9, function (i) {
+        var p = 44 + i * 34;
+        return '<path d="M44 ' + p + ' H316 M' + p + ' 44 V316" stroke="#9A7E50" stroke-width="1.6"/>';
+      }) +
+      '<circle cx="180" cy="180" r="3" fill="#9A7E50"/>' +
+      '<circle cx="146" cy="146" r="15" fill="#2E3238"/><circle cx="180" cy="146" r="15" fill="#2E3238"/>' +
+      '<circle cx="146" cy="180" r="15" fill="#F7F4EC" stroke="#CFC7B4" stroke-width="1.5"/>' +
+      '<circle cx="214" cy="180" r="15" fill="#F7F4EC" stroke="#CFC7B4" stroke-width="1.5"/>' +
+      '<circle cx="180" cy="214" r="15" fill="#2E3238"/><circle cx="214" cy="214" r="15" fill="#2E3238"/>' +
+      '<circle cx="112" cy="248" r="15" fill="#F7F4EC" stroke="#CFC7B4" stroke-width="1.5"/>' +
+      '</svg>';
+  }
+  if (key === 'hexcheckers') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<path d="M180 24 L216 88 L290 76 L272 150 L336 180 L272 210 L290 284 L216 272 L180 336 L144 272 L70 284 L88 210 L24 180 L88 150 L70 76 L144 88 Z" fill="#DCEBF0" stroke="#6E9DAB" stroke-width="4"/>' +
+      '<path d="M180 24 L216 88 L144 88 Z" fill="#8FB9C4" opacity=".8"/>' +
+      '<path d="M180 336 L216 272 L144 272 Z" fill="#C98376" opacity=".75"/>' +
+      '<g fill="#6E9DAB">' +
+      rep(4, function (r) {
+        return Array.from({length: r + 1}, function (_, c) {
+          return '<circle cx="' + (180 + (c - r / 2) * 26) + '" cy="' + (70 + r * 22) + '" r="9"/>';
+        });
+      }) + '</g>' +
+      '<g fill="#C98376">' +
+      rep(4, function (r) {
+        return Array.from({length: r + 1}, function (_, c) {
+          return '<circle cx="' + (180 + (c - r / 2) * 26) + '" cy="' + (290 - r * 22) + '" r="9"/>';
+        });
+      }) + '</g>' +
+      '<circle cx="180" cy="180" r="10" fill="#F7F4EC" stroke="#6E9DAB" stroke-width="3"/>' +
+      '</svg>';
+  }
+  if (key === 'flightchess') {
+    art.innerHTML =
+      '<svg viewBox="0 0 360 360" width="360" height="360">' +
+      '<rect x="30" y="30" width="300" height="300" rx="16" fill="#F7ECE7" stroke="#C98376" stroke-width="4"/>' +
+      '<rect x="72" y="72" width="216" height="216" rx="8" fill="none" stroke="#E0B9AC" stroke-width="2"/>' +
+      rep(5, function (r) {
+        return rep(5, function (c) {
+          var cols = ['#C98376', '#6E9DAB', '#B09A72', '#7C87A8'];
+          return '<rect x="' + (78 + c * 42) + '" y="' + (78 + r * 42) + '" width="30" height="30" rx="5" fill="' +
+            cols[(r + c) % 4] + '" opacity=".72"/>';
+        });
+      }) +
+      '<path d="M180 140 L196 178 L238 182 L206 208 L216 250 L180 228 L144 250 L154 208 L122 182 L164 178 Z" fill="#F7F4EC" stroke="#C98376" stroke-width="4"/>' +
+      '<circle cx="180" cy="192" r="8" fill="#C98376"/>' +
+      '<rect x="250" y="46" width="44" height="44" rx="8" fill="#F7F4EC" stroke="#C98376" stroke-width="3"/>' +
+      '<circle cx="264" cy="60" r="3.5" fill="#C98376"/><circle cx="280" cy="76" r="3.5" fill="#C98376"/>' +
+      '<circle cx="272" cy="68" r="3.5" fill="#C98376"/>' +
+      '</svg>';
+  }
+
 </script>
 </body>
 </html>

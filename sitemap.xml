@@ -398,4 +398,77 @@
     <priority>0.2</priority>
   </url>
 
+  <!-- [gyh 2026-11-10 新增] 批次六 8 条 -->
+  <url>
+    <loc>https://ysgame.xyz/games/chess/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/chess/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/chess/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/chess/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/chess/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/chess/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/chess/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/chess/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/go/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/go/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/go/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/go/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/go/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/go/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/go/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/go/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/hexcheckers/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/hexcheckers/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/hexcheckers/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/hexcheckers/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/hexcheckers/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/hexcheckers/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/hexcheckers/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/hexcheckers/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/flightchess/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/flightchess/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/flightchess/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/flightchess/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ysgame.xyz/games/flightchess/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ysgame.xyz/games/flightchess/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ysgame.xyz/games/flightchess/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ysgame.xyz/games/flightchess/"/>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

@@ -25,7 +25,7 @@ YSGame/
 │   └── style.css              # 全站设计系统（莫兰迪配色、导航、卡片、内容页）
 ├── js/
 │   ├── common.js              # 导航交互、语言切换、音效开关、当前页高亮
-│   ├── sound.js               # 音效引擎：纯 WebAudio 合成，二十六款游戏二十六套音色
+│   ├── sound.js               # 音效引擎：纯 WebAudio 合成，三十款游戏三十套音色
 │   ├── i18n.js                # 中英字典（common + 每款游戏一份）与原地切换
 │   ├── share.js               # 分享面板：系统分享 / 微信 / 微博 / X / 复制链接
 │   └── hall.js                # 大厅分类标签：按 data-cat 筛选卡片与待做清单
@@ -130,11 +130,27 @@ YSGame/
     │   ├── index.html         # 台球：2D 弹性碰撞、瞄准线、进袋判定
     │   ├── css/style.css
     │   └── js/billiards.js
-    └── xiangqi/
+    ├── xiangqi/
         ├── index.html         # 中国象棋：完整走子规则、将军判定、简单 AI
         ├── css/style.css
         ├── js/xiangqi-rules.js # 棋盘与走子规则引擎：蹩马腿、塞象眼、将帅照面、将死判定、三档 AI
         └── js/xiangqi.js      # 棋盘绘制、选子与落子、悔棋提示、三档与自动存档
+    ├── chess/
+    │   ├── index.html         # 国际象棋：易位、吃过路兵、升变、将军将死、三档 AI
+    │   ├── css/style.css
+    │   └── js/chess.js
+    ├── go/
+    │   ├── index.html         # 围棋：气与提子、打劫禁着、停一手与点目，9/13/19 路
+    │   ├── css/style.css
+    │   └── js/go.js
+    ├── hexcheckers/
+    │   ├── index.html         # 跳棋：六角星 121 孔、连跳可达集、三档棋盘与 AI
+    │   ├── css/style.css
+    │   └── js/hexcheckers.js
+    └── flightchess/
+        ├── index.html         # 飞行棋：掷骰起飞、同色跳格、撞子回营、终点判定
+        ├── css/style.css
+        └── js/flightchess.js
 ```
 
 **约定：** 每个游戏一个独立子文件夹，互不干扰；公共样式和脚本放在根 `css/`、`js/`。
@@ -287,6 +303,6 @@ npx --yes serve . -l 8000
 - [x] 魔方（Canvas 2D 伪 3D 转层、打乱与还原、自动存档）
 - [x] 台球（2D 弹性碰撞、瞄准线、进袋判定、自动存档）
 - [x] 中国象棋（完整走子规则、将军判定、简单 AI、自动存档）
-- [ ] 剩余 8 款，按批次推进，详见 `docs/ROADMAP.md`<!-- [gyh 2026-11-09 修改] -->
-  （下一批·批次六：国际象棋、围棋、跳棋、飞行棋、架子鼓、太阳系、死活题、残局）
+- [ ] 剩余 4 款，按批次推进，详见 `docs/ROADMAP.md`<!-- [gyh 2026-11-10 修改] -->
+  （下一批·批次七：在线架子鼓、掌控太阳系、围棋死活题、象棋残局）
 - [ ] 申请 AdSense（站点内容充实并运行 1~2 个月后）
